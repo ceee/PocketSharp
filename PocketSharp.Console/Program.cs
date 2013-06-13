@@ -15,18 +15,6 @@ namespace PocketSharp.Console
       // please create your own application and retrieve it's key. It's a 1-step process ;-)
       PocketClient client = new PocketClient("15396-f6f92101d72c8e270a6c9bb3");
 
-      //client.Test();
-      
-      //System.Console.WriteLine(client.Test2());
-
-      //System.Console.WriteLine("---------------------------------");
-
-      //var result = client.Test3();
-
-      //System.Console.WriteLine(string.Format("Code: {0}, Username: {1}", result.Code, result.Username));
-
-      client.Test4("a85134a7-243c-6656-ab82-97c901");
-
       System.Console.ReadKey();
     }
   }

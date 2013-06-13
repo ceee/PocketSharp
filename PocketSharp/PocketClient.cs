@@ -10,12 +10,12 @@ namespace PocketSharp
     /// <summary>
     /// REST client used for the API communication
     /// </summary>
-    private readonly RestClient _restClient;
+    protected readonly RestClient _restClient;
 
     /// <summary>
     /// default base URL for the API, which is used, when no baseURL is delivered
     /// </summary>
-    private static Uri defaultUrl = new Uri("https://getpocket.com/v3/");
+    protected static Uri defaultUrl = new Uri("https://getpocket.com/v3/");
 
     /// <summary>
     /// base URL for the API
@@ -129,47 +129,6 @@ namespace PocketSharp
       {
         throw new APIException("Error retrieving response", response.ErrorException);
       }
-
-      return true;
-    }
-
-
-
-    public void Test()
-    {
-      var request = new RestRequest("oauth/request", Method.POST);
-
-      request.AddParameter("redirect_uri", "http://ceecore.com");
-
-      RequestCode rawResponse = Request<RequestCode>(request);
-
-      RequestCode = rawResponse.Code;
-    }
-
-    public string Test2()
-    {
-      return string.Format("https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}", RequestCode, Uri.EscapeDataString("http://ceecore.com"));
-    }
-
-    public AccessCode Test3()
-    {
-      var request = new RestRequest("oauth/authorize", Method.POST);
-
-      request.AddParameter("code", "fbe15035-d6b1-e4c2-590b-60de6e");
-
-      AccessCode rawResponse = Request<AccessCode>(request);
-
-      return rawResponse;
-    }
-
-    public bool Test4(string code)
-    {
-      var request = new RestRequest("get", Method.POST);
-
-      request.AddParameter("access_toiken", code);
-      request.AddParameter("favorite", "1");
-
-      AccessCode rawResponse = Request<AccessCode>(request);
 
       return true;
     }
