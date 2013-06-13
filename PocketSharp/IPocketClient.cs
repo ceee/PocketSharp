@@ -3,7 +3,7 @@ using System;
 
 namespace PocketSharp
 {
-  class IPocketClient
+  public interface IPocketClient
   {
     /// <summary>
     /// base URL for the API
@@ -15,6 +15,16 @@ namespace PocketSharp
     /// see: http://getpocket.com/developer
     /// </summary>
     string ConsumerKey { get; set; }
+
+    /// <summary>
+    /// Code retrieved on authentification
+    /// </summary>
+    string AuthCode { get; set; }
+
+    /// <summary>
+    /// Code retrieved on authentification-success
+    /// </summary>
+    string AccessCode { get; set; }
 
     /// <summary>
     /// Makes a HTTP REST request to the API
@@ -29,6 +39,6 @@ namespace PocketSharp
     /// <typeparam name="T"></typeparam>
     /// <param name="request">The request.</param>
     /// <returns></returns>
-    T Request<T>(RestRequest request) where T : class, new();
+    T Request<T>(RestRequest request) where T : new();
   }
 }

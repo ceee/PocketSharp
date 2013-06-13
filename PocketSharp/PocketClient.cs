@@ -1,8 +1,6 @@
-﻿using RestSharp;
+﻿using PocketSharp.Models.Authentification;
+using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PocketSharp
 {
@@ -30,6 +28,18 @@ namespace PocketSharp
     public string ConsumerKey { get; set; }
 
     /// <summary>
+    /// Code retrieved on authentification
+    /// </summary>
+    protected string AuthCode { get; set; }
+
+    /// <summary>
+    /// Code retrieved on authentification-success
+    /// </summary>
+    protected string AccessCode { get; set; }
+
+
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="PocketClient"/> class.
     /// </summary>
     /// <param name="consumerKey">The API key.</param>
@@ -55,6 +65,9 @@ namespace PocketSharp
 
       // add default parameters to each request
       _restClient.AddDefaultParameter("consumer_key", ConsumerKey);
+
+      // Pocket needs this specific Accept header :-S
+      _restClient.AddDefaultHeader("Accept", "*/*");
       
       // defines the response format (according to the Pocket docs)
       _restClient.AddDefaultHeader("X-Accept", "application/json");
@@ -74,7 +87,6 @@ namespace PocketSharp
       return _restClient.Execute(request);
     }
 
-
     /// <summary>
     /// Makes a typed HTTP REST request to the API
     /// </summary>
@@ -86,6 +98,19 @@ namespace PocketSharp
       var response = _restClient.Execute<T>(request);
 
       return response.Data;
+    }
+
+
+
+    public bool Test()
+    {
+      var request = new RestRequest("oauth/request", Method.POST);
+
+      request.AddParameter("redirect_uri", "http://ceecore.com");
+
+      RequestCode rawResponse = Request<RequestCode>(request);
+
+      return true;
     }
   }
 }
