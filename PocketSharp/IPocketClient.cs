@@ -17,6 +17,11 @@ namespace PocketSharp
     string ConsumerKey { get; set; }
 
     /// <summary>
+    /// Returns all associated data from the last request
+    /// </summary>
+    IRestResponse LastRequestData { get; }
+
+    /// <summary>
     /// Makes a HTTP REST request to the API
     /// </summary>
     /// <param name="request">The request.</param>

@@ -1,6 +1,7 @@
 ﻿using PocketSharp.Models.Authentification;
 using RestSharp;
 using System;
+using System.Net;
 
 namespace PocketSharp
 {
@@ -28,6 +29,11 @@ namespace PocketSharp
     public string ConsumerKey { get; set; }
 
     /// <summary>
+    /// Returns all associated data from the last request
+    /// </summary>
+    public IRestResponse LastRequestData { get; private set; }
+
+    /// <summary>
     /// Code retrieved on authentification
     /// </summary>
     protected string RequestCode { get; set; }
@@ -36,7 +42,6 @@ namespace PocketSharp
     /// Code retrieved on authentification-success
     /// </summary>
     protected string AccessCode { get; set; }
-
 
 
     /// <summary>
@@ -95,7 +100,18 @@ namespace PocketSharp
     /// <returns></returns>
     public T Request<T>(RestRequest request) where T : new()
     {
-      var response = _restClient.Execute<T>(request);
+      IRestResponse<T> response = _restClient.Execute<T>(request);
+
+      LastRequestData = response;
+
+      if(response.StatusCode != HttpStatusCode.OK)
+      {
+        throw new APIException(response.Content, response.ErrorException);
+      }
+      else if(response.ErrorException != null)
+      {
+        throw new APIException("Error retrieving response", response.ErrorException);
+      }
 
       return response.Data;
     }
@@ -122,11 +138,23 @@ namespace PocketSharp
     {
       var request = new RestRequest("oauth/authorize", Method.POST);
 
-      request.AddParameter("code", RequestCode);
+      request.AddParameter("code", "fbe15035-d6b1-e4c2-590b-60de6e");
 
       AccessCode rawResponse = Request<AccessCode>(request);
 
       return rawResponse;
+    }
+
+    public bool Test4(string code)
+    {
+      var request = new RestRequest("get", Method.POST);
+
+      request.AddParameter("access_toiken", code);
+      request.AddParameter("favorite", "1");
+
+      AccessCode rawResponse = Request<AccessCode>(request);
+
+      return true;
     }
   }
 }
