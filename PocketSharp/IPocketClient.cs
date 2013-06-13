@@ -26,7 +26,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="request">The request.</param>
     /// <returns></returns>
-    IRestResponse Request(RestRequest request);
+    string Request(RestRequest request);
 
     /// <summary>
     /// Makes a typed HTTP REST request to the API

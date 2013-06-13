@@ -87,9 +87,14 @@ namespace PocketSharp
     /// </summary>
     /// <param name="request">The request.</param>
     /// <returns></returns>
-    public IRestResponse Request(RestRequest request)
+    public string Request(RestRequest request)
     {
-      return _restClient.Execute(request);
+      IRestResponse response = _restClient.Execute(request);
+
+      LastRequestData = response;
+      ValidateResponse(response);
+
+      return response.Content;
     }
 
     /// <summary>
@@ -103,17 +108,29 @@ namespace PocketSharp
       IRestResponse<T> response = _restClient.Execute<T>(request);
 
       LastRequestData = response;
+      ValidateResponse(response);
 
-      if(response.StatusCode != HttpStatusCode.OK)
+      return response.Data;
+    }
+
+
+    /// <summary>
+    /// Validates the response.
+    /// </summary>
+    /// <param name="response">The response.</param>
+    /// <returns></returns>
+    protected bool ValidateResponse(IRestResponse response)
+    {
+      if (response.StatusCode != HttpStatusCode.OK)
       {
         throw new APIException(response.Content, response.ErrorException);
       }
-      else if(response.ErrorException != null)
+      else if (response.ErrorException != null)
       {
         throw new APIException("Error retrieving response", response.ErrorException);
       }
 
-      return response.Data;
+      return true;
     }
 
 
