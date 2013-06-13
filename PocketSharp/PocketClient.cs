@@ -30,7 +30,7 @@ namespace PocketSharp
     /// <summary>
     /// Code retrieved on authentification
     /// </summary>
-    protected string AuthCode { get; set; }
+    protected string RequestCode { get; set; }
 
     /// <summary>
     /// Code retrieved on authentification-success
@@ -102,7 +102,7 @@ namespace PocketSharp
 
 
 
-    public bool Test()
+    public void Test()
     {
       var request = new RestRequest("oauth/request", Method.POST);
 
@@ -110,7 +110,23 @@ namespace PocketSharp
 
       RequestCode rawResponse = Request<RequestCode>(request);
 
-      return true;
+      RequestCode = rawResponse.Code;
+    }
+
+    public string Test2()
+    {
+      return string.Format("https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}", RequestCode, Uri.EscapeDataString("http://ceecore.com"));
+    }
+
+    public AccessCode Test3()
+    {
+      var request = new RestRequest("oauth/authorize", Method.POST);
+
+      request.AddParameter("code", RequestCode);
+
+      AccessCode rawResponse = Request<AccessCode>(request);
+
+      return rawResponse;
     }
   }
 }

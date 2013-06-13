@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +49,7 @@
     <Compile Include="APIException.cs" />
     <Compile Include="IPocketClient.cs" />
     <Compile Include="JsonDeserializer.cs" />
+    <Compile Include="Models\Authentification\AcessCode.cs" />
     <Compile Include="Models\Authentification\RequestCode.cs" />
     <Compile Include="PocketClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

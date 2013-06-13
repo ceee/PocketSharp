@@ -1,5 +1,6 @@
 ﻿using System;
 using PocketSharp;
+using PocketSharp.Models.Authentification;
 
 namespace PocketSharp.Console
 {
@@ -15,6 +16,14 @@ namespace PocketSharp.Console
       PocketClient client = new PocketClient("15396-f6f92101d72c8e270a6c9bb3");
 
       client.Test();
+      
+      System.Console.WriteLine(client.Test2());
+
+      System.Console.WriteLine("---------------------------------");
+
+      var result = client.Test3();
+
+      System.Console.WriteLine(string.Format("Code: {0}, Username: {1}", result.Code, result.Username));
 
       System.Console.ReadKey();
     }
