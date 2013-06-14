@@ -7,14 +7,14 @@ using System.Text;
 
 namespace PocketSharp
 {
-  public partial class PocketClient : IPocketClient
+  public partial class PocketClient
   {
-    public bool Get()
+    public bool Retrieve()
     {
-      //var parameters = new List<Parameter>()
-      //{
-      //  new Parameter { Name = "favorite", Value = "1", Type = ParameterType.GetOrPost }
-      //};
+      var parameters = new List<Parameter>()
+      {
+        new Parameter { Name = "favorite", Value = "1", Type = ParameterType.GetOrPost }
+      };
 
       Retrieve result = GetResource<Retrieve>("get", parameters);
 

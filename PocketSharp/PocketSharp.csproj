@@ -48,8 +48,7 @@
   <ItemGroup>
     <Compile Include="APIException.cs" />
     <Compile Include="Components\Authentification.cs" />
-    <Compile Include="Components\Get.cs" />
-    <Compile Include="IPocketClient.cs" />
+    <Compile Include="Components\Retrieve.cs" />
     <Compile Include="JsonDeserializer.cs" />
     <Compile Include="Models\Authentification\AccessCode.cs" />
     <Compile Include="Models\Authentification\RequestCode.cs" />

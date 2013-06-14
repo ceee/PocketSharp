@@ -16,7 +16,7 @@ namespace PocketSharp.Console
       PocketClient client = new PocketClient("15396-f6f92101d72c8e270a6c9bb3");
       client.AccessCode = "a85134a7-243c-6656-ab82-97c901";
 
-      client.Get();
+      client.Retrieve();
 
       System.Console.ReadKey();
     }

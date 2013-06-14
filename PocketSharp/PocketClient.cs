@@ -5,7 +5,7 @@ using System.Net;
 
 namespace PocketSharp
 {
-  public partial class PocketClient : IPocketClient
+  public partial class PocketClient
   {
     /// <summary>
     /// REST client used for the API communication
@@ -87,7 +87,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="request">The request.</param>
     /// <returns></returns>
-    public string Request(RestRequest request)
+    protected string Request(RestRequest request)
     {
       IRestResponse response = _restClient.Execute(request);
 
@@ -103,7 +103,7 @@ namespace PocketSharp
     /// <typeparam name="T"></typeparam>
     /// <param name="request">The request.</param>
     /// <returns></returns>
-    public T Request<T>(RestRequest request) where T : new()
+    protected T Request<T>(RestRequest request) where T : new()
     {
       IRestResponse<T> response = _restClient.Execute<T>(request);
 
@@ -122,7 +122,7 @@ namespace PocketSharp
     /// <param name="parameters">Additional POST parameters</param>
     /// <returns></returns>
     /// <exception cref="APIException">No access token available. Use authentification first.</exception>
-    public T GetResource<T>(string method, List<Parameter> parameters) where T : class, new()
+    protected T GetResource<T>(string method, List<Parameter> parameters) where T : class, new()
     {
       // every single Pocket API endpoint requires HTTP POST data
       var request = new RestRequest(method, Method.POST);
