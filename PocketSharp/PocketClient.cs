@@ -122,7 +122,7 @@ namespace PocketSharp
     /// <exception cref="APIException">
     /// Error retrieving response
     /// </exception>
-    protected bool ValidateResponse(IRestResponse response)
+    protected void ValidateResponse(IRestResponse response)
     {
       if (response.StatusCode != HttpStatusCode.OK)
       {
@@ -132,8 +132,6 @@ namespace PocketSharp
       {
         throw new APIException("Error retrieving response", response.ErrorException);
       }
-
-      return true;
     }
 
 
