@@ -1,6 +1,6 @@
-﻿using PocketSharp.Models.Authentification;
-using RestSharp;
+﻿using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace PocketSharp
@@ -119,6 +119,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="response">The response.</param>
     /// <returns></returns>
+    /// <exception cref="APIException">
+    /// Error retrieving response
+    /// </exception>
     protected bool ValidateResponse(IRestResponse response)
     {
       if (response.StatusCode != HttpStatusCode.OK)
@@ -131,6 +134,39 @@ namespace PocketSharp
       }
 
       return true;
+    }
+
+
+    /// <summary>
+    /// Fetches a typed resource
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="method">Requested method (path after /v3/)</param>
+    /// <param name="parameters">Additional POST parameters</param>
+    /// <returns></returns>
+    /// <exception cref="APIException">No access token available. Use authentification first.</exception>
+    public T GetResource<T>(string method, List<Parameter> parameters) where T : class, new()
+    {
+      // every single Pocket API endpoint requires HTTP POST data
+      var request = new RestRequest(method, Method.POST);
+
+      // check if access token is available
+      if(AccessCode == null)
+      {
+        throw new APIException("No access token available. Use authentification first.");
+      }
+
+      // add access token (necessary for all requests except authentification)
+      request.AddParameter("access_token", AccessCode);
+
+      // enumeration for params
+      parameters.ForEach(delegate(Parameter param)
+      {
+        request.AddParameter(param);
+      });
+
+      // do the request
+      return Request<T>(request);
     }
   }
 }

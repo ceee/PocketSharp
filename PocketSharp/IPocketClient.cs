@@ -1,5 +1,6 @@
 ﻿using RestSharp;
 using System;
+using System.Collections.Generic;
 
 namespace PocketSharp
 {
@@ -35,5 +36,15 @@ namespace PocketSharp
     /// <param name="request">The request.</param>
     /// <returns></returns>
     T Request<T>(RestRequest request) where T : new();
+
+    /// <summary>
+    /// Fetches a typed resource
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="method">Requested method (path after /v3/)</param>
+    /// <param name="parameters">Additional POST parameters</param>
+    /// <returns></returns>
+    /// <exception cref="APIException">No access token available. Use authentification first.</exception>
+    public T GetResource<T>(string method, List<Parameter> parameters) where T : class, new();
   }
 }

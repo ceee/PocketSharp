@@ -47,16 +47,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIException.cs" />
+    <Compile Include="Components\Authentification.cs" />
     <Compile Include="IPocketClient.cs" />
     <Compile Include="JsonDeserializer.cs" />
-    <Compile Include="Models\Authentification\AcessCode.cs" />
+    <Compile Include="Models\Authentification\AccessCode.cs" />
     <Compile Include="Models\Authentification\RequestCode.cs" />
+    <Compile Include="Models\PocketItem.cs" />
     <Compile Include="PocketClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
