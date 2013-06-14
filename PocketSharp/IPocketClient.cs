@@ -45,6 +45,6 @@ namespace PocketSharp
     /// <param name="parameters">Additional POST parameters</param>
     /// <returns></returns>
     /// <exception cref="APIException">No access token available. Use authentification first.</exception>
-    public T GetResource<T>(string method, List<Parameter> parameters) where T : class, new();
+    T GetResource<T>(string method, List<Parameter> parameters) where T : class, new();
   }
 }

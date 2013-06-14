@@ -41,7 +41,7 @@ namespace PocketSharp
     /// <summary>
     /// Code retrieved on authentification-success
     /// </summary>
-    protected string AccessCode { get; set; }
+    public string AccessCode { get; set; }
 
 
     /// <summary>
@@ -115,27 +115,6 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Validates the response.
-    /// </summary>
-    /// <param name="response">The response.</param>
-    /// <returns></returns>
-    /// <exception cref="APIException">
-    /// Error retrieving response
-    /// </exception>
-    protected void ValidateResponse(IRestResponse response)
-    {
-      if (response.StatusCode != HttpStatusCode.OK)
-      {
-        throw new APIException(response.Content, response.ErrorException);
-      }
-      else if (response.ErrorException != null)
-      {
-        throw new APIException("Error retrieving response", response.ErrorException);
-      }
-    }
-
-
-    /// <summary>
     /// Fetches a typed resource
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -165,6 +144,27 @@ namespace PocketSharp
 
       // do the request
       return Request<T>(request);
+    }
+
+
+    /// <summary>
+    /// Validates the response.
+    /// </summary>
+    /// <param name="response">The response.</param>
+    /// <returns></returns>
+    /// <exception cref="APIException">
+    /// Error retrieving response
+    /// </exception>
+    protected void ValidateResponse(IRestResponse response)
+    {
+      if (response.StatusCode != HttpStatusCode.OK)
+      {
+        throw new APIException(response.Content, response.ErrorException);
+      }
+      else if (response.ErrorException != null)
+      {
+        throw new APIException("Error retrieving response", response.ErrorException);
+      }
     }
   }
 }

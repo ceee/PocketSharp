@@ -1,6 +1,4 @@
-﻿using RestSharp.Serializers;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
