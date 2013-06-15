@@ -52,6 +52,8 @@
     <Compile Include="JsonDeserializer.cs" />
     <Compile Include="Models\Authentification\AccessCode.cs" />
     <Compile Include="Models\Authentification\RequestCode.cs" />
+    <Compile Include="Models\Parameters\ParameterBase.cs" />
+    <Compile Include="Models\Parameters\RetrieveParameters.cs" />
     <Compile Include="Models\PocketItem.cs" />
     <Compile Include="Models\ResponseBase.cs" />
     <Compile Include="Models\Retrieve.cs" />
