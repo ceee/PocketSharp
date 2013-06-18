@@ -49,23 +49,29 @@ namespace PocketSharp
     /// </summary>
     /// <param name="consumerKey">The API key.</param>
     public PocketClient(string consumerKey)
-      : this(defaultUrl, consumerKey) { }
+      : this(consumerKey, "") { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PocketClient"/> class.
     /// </summary>
-    /// <param name="baseUrl">The base URL.</param>
     /// <param name="consumerKey">The API key.</param>
-    public PocketClient(Uri baseUrl, string consumerKey)
+    /// <param name="accessCode">Provide an access code if the user is already authenticated</param>
+    public PocketClient(string consumerKey, string accessCode)
     {
       // assign public properties
-      BaseUrl = baseUrl;
+      BaseUrl = defaultUrl;
       ConsumerKey = consumerKey;
+
+      // assign access code if submitted
+      if (accessCode != "")
+      {
+        AccessCode = accessCode.ToString();
+      }
 
       // initialize REST client
       _restClient = new RestClient
       {
-          BaseUrl = baseUrl.ToString()
+        BaseUrl = BaseUrl.ToString()
       };
 
       // add default parameters to each request
@@ -73,7 +79,7 @@ namespace PocketSharp
 
       // Pocket needs this specific Accept header :-S
       _restClient.AddDefaultHeader("Accept", "*/*");
-      
+
       // defines the response format (according to the Pocket docs)
       _restClient.AddDefaultHeader("X-Accept", "application/json");
 
