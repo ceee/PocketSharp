@@ -17,15 +17,15 @@ namespace PocketSharp
       //  new Parameter { Name = "favorite", Value = "1", Type = ParameterType.GetOrPost }
       //};
 
-      var parameters = new RetrieveParameters()
-      {
-        Favorite = true,
-        State = StateEnum.all
-      };
+      //var parameters = new RetrieveParameters()
+      //{
+      //  Favorite = true,
+      //  State = StateEnum.all
+      //};
 
-      var paramss = parameters.Convert();
+      var paramss = para.Convert();
 
-      Retrieve result = GetResource<Retrieve>("get", parameters.Convert());
+      Retrieve result = GetResource<Retrieve>("get", para.Convert());
 
       return true;
     }

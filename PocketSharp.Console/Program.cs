@@ -14,11 +14,13 @@ namespace PocketSharp.Console
 
       // this apiKey is just for demonstration purposes
       // please create your own application and retrieve it's key. It's a 1-step process ;-)
-      PocketClient client = new PocketClient("15396-f6f92101d72c8e270a6c9bb3");
+      PocketClient client = new PocketClient(
+        consumerKey: "15396-f6f92101d72c8e270a6c9bb3"
+      );
 
       client.Retrieve(new RetrieveParameters()
       {
-        Favorite = true
+        
       });
 
       System.Console.ReadKey();
