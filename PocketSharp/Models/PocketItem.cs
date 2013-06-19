@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PocketSharp.Models
 {
   [DataContract]
-  class PocketItem
+  public class PocketItem
   {
     [DataMember(Name = "item_id")]
     public int ID { get; set; }

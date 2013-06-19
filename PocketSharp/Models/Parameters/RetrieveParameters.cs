@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.Serialization;
 
 namespace PocketSharp.Models.Parameters
@@ -17,19 +18,33 @@ namespace PocketSharp.Models.Parameters
 
     public SortEnum? Sort { get; set; }
 
+    public DetailTypeEnum? DetailType { get; set; }
+
+    public string Search { get; set; }
+
+    public string Domain { get; set; }
+
 
     public List<Parameter> Convert()
     {
       List<Parameter> parameters = new List<Parameter>();
 
-      if(State != null)
-      {
+      if (State != null) 
         parameters.Add(CreateParam("state", State.ToString()));
-      }
-      if(Favorite != null)
-      {
+      if (Favorite != null) 
         parameters.Add(CreateParam("favorite", (bool)Favorite ? "1" : "0"));
-      }
+      if (Tag != null) 
+        parameters.Add(CreateParam("tag", Tag));
+      if (ContentType != null) 
+        parameters.Add(CreateParam("contentType", ContentType.ToString()));
+      if (Sort != null) 
+        parameters.Add(CreateParam("sort", Sort.ToString()));
+      if (DetailType != null) 
+        parameters.Add(CreateParam("detailType", DetailType.ToString()));
+      if (Search != null) 
+        parameters.Add(CreateParam("search", Search.ToString()));
+      if (Domain != null) 
+        parameters.Add(CreateParam("domain", Domain.ToString()));
 
       return parameters;
     }
@@ -56,5 +71,11 @@ namespace PocketSharp.Models.Parameters
     article,
     video,
     image
+  }
+
+  public enum DetailTypeEnum
+  {
+    simple,
+    complete
   }
 }

@@ -8,7 +8,7 @@ namespace PocketSharp.Models
   class Retrieve : ResponseBase
   {
     [DataMember(Name = "complete")]
-    public int Complete;
+    public int Complete { get; set; }
 
     [DataMember]
     public int Since { get; set; }
