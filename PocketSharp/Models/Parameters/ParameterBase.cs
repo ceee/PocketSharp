@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PocketSharp.Models.Parameters
+namespace PocketSharp.Models
 {
   public abstract class ParameterBase
   {

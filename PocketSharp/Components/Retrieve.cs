@@ -1,10 +1,5 @@
 ﻿using PocketSharp.Models;
-using RestSharp;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using PocketSharp.Models.Parameters;
 
 namespace PocketSharp
 {

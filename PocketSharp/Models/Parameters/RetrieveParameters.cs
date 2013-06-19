@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace PocketSharp.Models.Parameters
+namespace PocketSharp.Models
 {
   public class RetrieveParameters : ParameterBase
   {
