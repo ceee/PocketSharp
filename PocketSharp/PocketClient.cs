@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using PocketSharp.Utilities;
+using PocketSharp.Models;
 
 namespace PocketSharp
 {

@@ -16,8 +16,7 @@ namespace PocketSharp.Console
       // this apiKey is just for demonstration purposes
       // please create your own application and retrieve it's key. It's a 1-step process ;-)
       PocketClient client = new PocketClient(
-        consumerKey: "15396-f6f92101d72c8e270a6c9bb3",
-        accessCode: "a85134a7-243c-6656-ab82-97c901"
+        consumerKey: "15396-f6f92101d72c8e270a6c9bb3"
       );
 
       System.Console.ReadKey();

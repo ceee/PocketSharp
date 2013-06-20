@@ -24,6 +24,12 @@ namespace PocketSharp.Models
 
     public string Domain { get; set; }
 
+    public DateTime Since { get; set; }
+
+    public int? Count { get; set; }
+
+    public int? Offset { get; set; }
+
 
     public List<Parameter> Convert()
     {
@@ -42,9 +48,15 @@ namespace PocketSharp.Models
       if (DetailType != null) 
         parameters.Add(CreateParam("detailType", DetailType.ToString()));
       if (Search != null) 
-        parameters.Add(CreateParam("search", Search.ToString()));
+        parameters.Add(CreateParam("search", Search));
       if (Domain != null) 
-        parameters.Add(CreateParam("domain", Domain.ToString()));
+        parameters.Add(CreateParam("domain", Domain));
+      if (Since != null)
+        parameters.Add(CreateParam("since", (int)(Since - new DateTime(1970, 1, 1)).TotalSeconds));
+      if (Count != null)
+        parameters.Add(CreateParam("count", Count));
+      if (Offset != null)
+        parameters.Add(CreateParam("offset", Offset));
 
       return parameters;
     }
