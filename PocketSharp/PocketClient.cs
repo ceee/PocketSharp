@@ -18,6 +18,11 @@ namespace PocketSharp
     protected static Uri defaultUrl = new Uri("https://getpocket.com/v3/");
 
     /// <summary>
+    /// The authentification URL
+    /// </summary>
+    protected static string authentificationUrl = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}";
+
+    /// <summary>
     /// base URL for the API
     /// </summary>
     public Uri BaseUrl { get; set; }
@@ -128,7 +133,7 @@ namespace PocketSharp
     /// <param name="parameters">Additional POST parameters</param>
     /// <returns></returns>
     /// <exception cref="APIException">No access token available. Use authentification first.</exception>
-    protected T GetResource<T>(string method, List<Parameter> parameters) where T : class, new()
+    protected T GetResource<T>(string method, List<Parameter> parameters = null) where T : class, new()
     {
       // every single Pocket API endpoint requires HTTP POST data
       var request = new RestRequest(method, Method.POST);
@@ -140,10 +145,13 @@ namespace PocketSharp
       }
 
       // enumeration for params
-      parameters.ForEach(delegate(Parameter param)
+      if (parameters != null)
       {
-        request.AddParameter(param);
-      });
+        parameters.ForEach(delegate(Parameter param)
+        {
+          request.AddParameter(param);
+        });
+      }
 
       // do the request
       return Request<T>(request);
