@@ -20,11 +20,6 @@ namespace PocketSharp.Console
         accessCode: "a85134a7-243c-6656-ab82-97c901"
       );
 
-      foreach(PocketItem item in x)
-      {
-        System.Console.WriteLine(">>> " + item.Title);  
-      }
-
       System.Console.ReadKey();
     }
   }

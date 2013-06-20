@@ -21,13 +21,13 @@ namespace PocketSharp
     /// <summary>
     /// base URL for the API
     /// </summary>
-    protected Uri BaseUrl { get; set; }
+    public Uri BaseUrl { get; set; }
 
     /// <summary>
     /// Accessor for the Pocket API key
     /// see: http://getpocket.com/developer
     /// </summary>
-    protected string ConsumerKey { get; set; }
+    public string ConsumerKey { get; set; }
 
     /// <summary>
     /// Returns all associated data from the last request
@@ -42,7 +42,7 @@ namespace PocketSharp
     /// <summary>
     /// Code retrieved on authentification-success
     /// </summary>
-    protected string AccessCode { get; set; }
+    public string AccessCode { get; set; }
 
 
     /// <summary>
@@ -86,21 +86,6 @@ namespace PocketSharp
 
       // custom JSON deserializer (ServiceStack.Text)
       _restClient.AddHandler("application/json", new JsonDeserializer());
-    }
-
-
-    /// <summary>
-    /// Gets the configuration from the PocketClient.
-    /// </summary>
-    /// <returns></returns>
-    public Dictionary<string, object> GetConfiguration()
-    {
-      return new Dictionary<string, object>()
-      {
-        { "baseUrl", BaseUrl },
-        { "consumerKey", ConsumerKey },
-        { "accessCode", AccessCode }
-      };
     }
 
 
