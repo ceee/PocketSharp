@@ -12,6 +12,7 @@ namespace PocketSharp
     /// <returns></returns>
     public List<PocketItem> Retrieve(RetrieveParameters parameters)
     {
+      ExpectAuthentification();
       return GetResource<Retrieve>("get", parameters.Convert()).Items;
     }
 
@@ -23,6 +24,8 @@ namespace PocketSharp
     /// <returns></returns>
     public List<PocketItem> Retrieve(RetrieveFilter filter = RetrieveFilter.All)
     {
+      ExpectAuthentification();
+
       RetrieveParameters parameters = new RetrieveParameters();
 
       switch(filter)
@@ -58,6 +61,7 @@ namespace PocketSharp
     /// <returns></returns>
     public List<PocketItem> SearchByTag(string tag)
     {
+      ExpectAuthentification();
       RetrieveParameters parameters = new RetrieveParameters()
       {
         Tag = tag
@@ -73,6 +77,7 @@ namespace PocketSharp
     /// <returns></returns>
     public List<PocketItem> Search(string searchString)
     {
+      ExpectAuthentification();
       RetrieveParameters parameters = new RetrieveParameters()
       {
         Search = searchString
@@ -80,6 +85,7 @@ namespace PocketSharp
       return GetResource<Retrieve>("get", parameters.Convert()).Items;
     }
   }
+
 
   /// <summary>
   /// Filter for simple retrieve requests

@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Utilties\APIException.cs" />
+    <Compile Include="APIException.cs" />
     <Compile Include="Components\Authentification.cs" />
     <Compile Include="Components\Retrieve.cs" />
-    <Compile Include="Utilties\JsonDeserializer.cs" />
+    <Compile Include="JsonDeserializer.cs" />
     <Compile Include="Models\Authentification\AccessCode.cs" />
     <Compile Include="Models\Authentification\RequestCode.cs" />
     <Compile Include="Models\Parameters\ParameterBase.cs" />
@@ -60,7 +60,9 @@
     <Compile Include="PocketClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utilties\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

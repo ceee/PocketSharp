@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using PocketSharp.Utilities;
-using PocketSharp.Models;
 
 namespace PocketSharp
 {
@@ -135,14 +133,11 @@ namespace PocketSharp
       // every single Pocket API endpoint requires HTTP POST data
       var request = new RestRequest(method, Method.POST);
 
-      // check if access token is available
-      if(AccessCode == null)
-      {
-        throw new APIException("No access token available. Use authentification first.");
-      }
-
       // add access token (necessary for all requests except authentification)
-      request.AddParameter("access_token", AccessCode);
+      if (AccessCode != null)
+      {
+        request.AddParameter("access_token", AccessCode);
+      }
 
       // enumeration for params
       parameters.ForEach(delegate(Parameter param)
@@ -172,6 +167,19 @@ namespace PocketSharp
       else if (response.ErrorException != null)
       {
         throw new APIException("Error retrieving response", response.ErrorException);
+      }
+    }
+
+
+    /// <summary>
+    /// Throws exception if access code is not available
+    /// </summary>
+    /// <exception cref="APIException">No access token available. Use authentification first.</exception>
+    protected void ExpectAuthentification()
+    {
+      if (AccessCode == null)
+      {
+        throw new APIException("No access token available. Use authentification first.");
       }
     }
   }
