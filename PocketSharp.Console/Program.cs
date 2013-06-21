@@ -19,9 +19,18 @@ namespace PocketSharp.Console
         consumerKey: "15396-f6f92101d72c8e270a6c9bb3"
       );
 
-      var x = client.GetAuthentificationUri(new Uri("http://ceecore.com"));
+      Uri redirect = client.Authenticate(new Uri("http://example.com"));
 
-      System.Console.WriteLine(x.ToString());
+      System.Console.WriteLine(redirect.ToString());
+
+      System.Console.WriteLine("---------------------------------");
+      System.Console.WriteLine("Press Any key after you've authenticated the user via the given URI");
+
+      System.Console.ReadKey();
+
+      System.Console.WriteLine("---------------------------------");
+
+      System.Console.WriteLine(client.GetAccessCode());
       
       System.Console.ReadKey();
     }

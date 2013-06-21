@@ -14,7 +14,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="callbackUri">The callback URI.</param>
     /// <returns></returns>
-    public Uri GetAuthentificationUri(Uri callbackUri)
+    public Uri Authenticate(Uri callbackUri)
     {
       RequestCode response = GetResource<RequestCode>("oauth/request", new List<Parameter>()
       {
@@ -24,16 +24,23 @@ namespace PocketSharp
       // save code to client
       RequestCode = response.Code;
 
+      // generate redirection URI and return
       return new Uri(string.Format(authentificationUrl, RequestCode, Uri.EscapeDataString(callbackUri.ToString())));
     }
 
 
     /// <summary>
-    /// Authenticates the user
+    /// Requests the access code after authentification
     /// </summary>
     /// <returns></returns>
-    public string Authenticate()
+    public string GetAccessCode()
     {
+      // check if request code is available
+      if(RequestCode == null)
+      {
+        throw new APIException("Authenticate the user first to receive a request_code");
+      }
+
       AccessCode response = GetResource<AccessCode>("oauth/authorize", new List<Parameter>()
       {
         new Parameter() { Name = "code", Value = RequestCode, Type = ParameterType.GetOrPost }
