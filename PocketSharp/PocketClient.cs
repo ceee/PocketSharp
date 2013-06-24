@@ -15,12 +15,17 @@ namespace PocketSharp
     /// <summary>
     /// default base URL for the API, which is used, when no baseURL is delivered
     /// </summary>
-    protected static Uri defaultUrl = new Uri("https://getpocket.com/v3/");
+    protected static string defaultBaseUrl = "https://getpocket.com/";
 
     /// <summary>
     /// The authentification URL
     /// </summary>
-    protected static string authentificationUrl = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}";
+    protected static string authentificationUrl = defaultBaseUrl + "auth/authorize?request_token={0}&redirect_uri={1}";
+
+    /// <summary>
+    /// current version of the Pocket API (used in URL)
+    /// </summary>
+    protected static string version = "v3";
 
     /// <summary>
     /// base URL for the API
@@ -64,7 +69,7 @@ namespace PocketSharp
     public PocketClient(string consumerKey, string accessCode)
     {
       // assign public properties
-      BaseUrl = defaultUrl;
+      BaseUrl = new Uri(defaultBaseUrl + version + "/");
       ConsumerKey = consumerKey;
 
       // assign access code if submitted
