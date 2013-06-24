@@ -16,7 +16,7 @@ namespace PocketSharp
     /// <returns></returns>
     public Uri Authenticate(Uri callbackUri)
     {
-      RequestCode response = GetResource<RequestCode>("oauth/request", new List<Parameter>()
+      RequestCode response = Get<RequestCode>("oauth/request", new List<Parameter>()
       {
         new Parameter() { Name = "redirect_uri", Value = callbackUri, Type = ParameterType.GetOrPost }
       });
@@ -41,7 +41,7 @@ namespace PocketSharp
         throw new APIException("Authenticate the user first to receive a request_code");
       }
 
-      AccessCode response = GetResource<AccessCode>("oauth/authorize", new List<Parameter>()
+      AccessCode response = Get<AccessCode>("oauth/authorize", new List<Parameter>()
       {
         new Parameter() { Name = "code", Value = RequestCode, Type = ParameterType.GetOrPost }
       });

@@ -8,7 +8,7 @@ namespace PocketSharp.Models
 {
   public abstract class ParameterBase
   {
-    protected Parameter CreateParam(string name, object value, ParameterType type = ParameterType.GetOrPost)
+    protected static Parameter CreateParam(string name, object value, ParameterType type = ParameterType.GetOrPost)
     {
       return new Parameter()
       {

@@ -1,7 +1,9 @@
-﻿using RestSharp;
+﻿using PocketSharp.Models;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using ServiceStack.Text;
 
 namespace PocketSharp
 {
@@ -131,14 +133,14 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Fetches a typed resource
+    /// Fetches/Updates a typed resource
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="method">Requested method (path after /v3/)</param>
     /// <param name="parameters">Additional POST parameters</param>
     /// <returns></returns>
     /// <exception cref="APIException">No access token available. Use authentification first.</exception>
-    protected T GetResource<T>(string method, List<Parameter> parameters = null) where T : class, new()
+    protected T Get<T>(string method, List<Parameter> parameters = null) where T : class, new()
     {
       // every single Pocket API endpoint requires HTTP POST data
       var request = new RestRequest(method, Method.POST);
@@ -160,6 +162,22 @@ namespace PocketSharp
 
       // do the request
       return Request<T>(request);
+    }
+
+
+    protected T Put<T>(string method, List<ActionParameter> actions) where T : class, new()
+    {
+      // put requests only with authentification
+      ExpectAuthentification();
+
+      ModifyParameters parameters = new ModifyParameters()
+      {
+        Actions = actions
+      };
+
+      //var x = (parameters.Convert());
+
+      return Get<T>(method, parameters.Convert());
     }
 
 

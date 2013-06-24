@@ -13,7 +13,7 @@ namespace PocketSharp
     public List<PocketItem> Retrieve(RetrieveParameters parameters)
     {
       ExpectAuthentification();
-      return GetResource<Retrieve>("get", parameters.Convert()).Items;
+      return Get<Retrieve>("get", parameters.Convert()).Items;
     }
 
 
@@ -50,7 +50,7 @@ namespace PocketSharp
           break;
       }
 
-      return GetResource<Retrieve>("get",  parameters.Convert()).Items;
+      return Get<Retrieve>("get",  parameters.Convert()).Items;
     }
 
 
@@ -66,7 +66,7 @@ namespace PocketSharp
       {
         Tag = tag
       };
-      return GetResource<Retrieve>("get", parameters.Convert()).Items;
+      return Get<Retrieve>("get", parameters.Convert()).Items;
     }
 
 
@@ -82,7 +82,7 @@ namespace PocketSharp
       {
         Search = searchString
       };
-      return GetResource<Retrieve>("get", parameters.Convert()).Items;
+      return Get<Retrieve>("get", parameters.Convert()).Items;
     }
   }
 
