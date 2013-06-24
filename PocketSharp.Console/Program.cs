@@ -41,6 +41,7 @@ namespace PocketSharp.Console
       System.Console.WriteLine("---------------------------------");
 
       client.Archive(330361896);
+      client.Favorite(330361896);
 
       
       System.Console.ReadKey();

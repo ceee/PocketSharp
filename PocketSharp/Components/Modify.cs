@@ -12,13 +12,51 @@ namespace PocketSharp
     /// <returns></returns>
     public bool Archive(int itemID)
     {
-      ActionParameter action = new ActionParameter() 
-      { 
-        Action = "archive", 
-        ID = itemID 
-      };
+      return PutAction(itemID, "archive");
+    }
 
-      return Put<Modify>("send", action).Status == 1;
+
+    /// <summary>
+    /// Un-archives the specified item ID.
+    /// </summary>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    public bool Unarchive(int itemID)
+    {
+      return PutAction(itemID, "readd");
+    }
+
+
+    /// <summary>
+    /// Favorites the specified item ID.
+    /// </summary>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    public bool Favorite(int itemID)
+    {
+      return PutAction(itemID, "favorite");
+    }
+
+
+    /// <summary>
+    /// Un-favorites the specified item ID.
+    /// </summary>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    public bool Unfavorite(int itemID)
+    {
+      return PutAction(itemID, "unfavorite");
+    }
+
+
+    /// <summary>
+    /// Deletes the specified item ID.
+    /// </summary>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    public bool Delete(int itemID)
+    {
+      return PutAction(itemID, "delete");
     }
   }
 }

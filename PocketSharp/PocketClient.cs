@@ -199,6 +199,24 @@ namespace PocketSharp
 
 
     /// <summary>
+    /// Puts an action
+    /// </summary>
+    /// <param name="itemID">The item ID.</param>
+    /// <param name="action">The action.</param>
+    /// <returns></returns>
+    protected bool PutAction(int itemID, string action)
+    {
+      ActionParameter actionParam = new ActionParameter()
+      {
+        Action = action,
+        ID = itemID
+      };
+
+      return Put<Modify>("send", actionParam).Status == 1;
+    }
+
+
+    /// <summary>
     /// Validates the response.
     /// </summary>
     /// <param name="response">The response.</param>
