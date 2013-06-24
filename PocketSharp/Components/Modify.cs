@@ -5,14 +5,20 @@ namespace PocketSharp
 {
   public partial class PocketClient
   {
+    /// <summary>
+    /// Archives the specified item ID.
+    /// </summary>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
     public bool Archive(int itemID)
     {
-      List<ActionParameter> actions = new List<ActionParameter>()
-      {
-        new ActionParameter() { Action = "archive", ID = itemID }
+      ActionParameter action = new ActionParameter() 
+      { 
+        Action = "archive", 
+        ID = itemID 
       };
 
-      return Put<Modify>("send", actions).Status == 1;
+      return Put<Modify>("send", action).Status == 1;
     }
   }
 }

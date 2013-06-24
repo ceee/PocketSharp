@@ -133,7 +133,7 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Fetches/Updates a typed resource
+    /// Fetches a typed resource
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="method">Requested method (path after /v3/)</param>
@@ -165,6 +165,13 @@ namespace PocketSharp
     }
 
 
+    /// <summary>
+    /// Puts/Updates a typed resource
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="method">Requested method (path after /v3/)</param>
+    /// <param name="actions">Additional action parameters</param>
+    /// <returns></returns>
     protected T Put<T>(string method, List<ActionParameter> actions) where T : class, new()
     {
       // put requests only with authentification
@@ -174,10 +181,20 @@ namespace PocketSharp
       {
         Actions = actions
       };
-
-      //var x = (parameters.Convert());
-
       return Get<T>(method, parameters.Convert());
+    }
+
+
+    /// <summary>
+    /// Puts/Updates a typed resource
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="method">Requested method (path after /v3/)</param>
+    /// <param name="action">action parameter</param>
+    /// <returns></returns>
+    protected T Put<T>(string method, ActionParameter action) where T : class, new()
+    {
+      return Put<T>(method, new List<ActionParameter>() { action });
     }
 
 
