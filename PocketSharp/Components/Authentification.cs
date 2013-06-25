@@ -7,6 +7,9 @@ using RestSharp;
 
 namespace PocketSharp
 {
+  /// <summary>
+  /// PocketClient
+  /// </summary>
   public partial class PocketClient
   {
     /// <summary>

@@ -6,10 +6,12 @@ namespace PocketSharp.Models
   [DataContract]
   public class PocketItem
   {
+    private Uri _uri;
+
+
     [DataMember(Name = "item_id")]
     public int ID { get; set; }
 
-    private Uri _uri;
     [DataMember(Name = "resolved_url")]
     public Uri Uri
     {
@@ -25,5 +27,9 @@ namespace PocketSharp.Models
 
     [DataMember]
     public string Excerpt { get; set; }
+
+    [DataMember(Name = "favorite")]
+    public bool IsFavorite { get; set; }
+
   }
 }

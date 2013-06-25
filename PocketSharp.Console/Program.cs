@@ -33,9 +33,9 @@ namespace PocketSharp.Console
 
       //System.Console.WriteLine(client.GetAccessCode());
 
-      client.Search("css").ForEach(delegate(PocketItem item)
+      client.Retrieve(RetrieveFilter.Favorite).ForEach(delegate(PocketItem item)
       {
-        System.Console.WriteLine(item.ID + " ::: " + item.FullTitle);
+        System.Console.WriteLine(" ::: " + " : " + item.Title);
       });
       
       //System.Console.WriteLine("---------------------------------");
