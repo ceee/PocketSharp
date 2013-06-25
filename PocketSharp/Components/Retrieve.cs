@@ -50,6 +50,8 @@ namespace PocketSharp
           break;
       }
 
+      parameters.DetailType = DetailTypeEnum.complete;
+
       return Get<Retrieve>("get",  parameters.Convert()).Items;
     }
 
@@ -64,7 +66,8 @@ namespace PocketSharp
       ExpectAuthentification();
       RetrieveParameters parameters = new RetrieveParameters()
       {
-        Tag = tag
+        Tag = tag,
+        DetailType = DetailTypeEnum.complete
       };
       return Get<Retrieve>("get", parameters.Convert()).Items;
     }
@@ -80,7 +83,8 @@ namespace PocketSharp
       ExpectAuthentification();
       RetrieveParameters parameters = new RetrieveParameters()
       {
-        Search = searchString
+        Search = searchString,
+        DetailType = DetailTypeEnum.complete
       };
       return Get<Retrieve>("get", parameters.Convert()).Items;
     }

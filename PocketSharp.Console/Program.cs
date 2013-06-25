@@ -34,14 +34,14 @@ namespace PocketSharp.Console
       //System.Console.WriteLine(client.GetAccessCode());
 
       client.Search("css").ForEach(delegate(PocketItem item)
-        {
-          System.Console.WriteLine(item.ID + " ::: " + item.FullTitle);
-        });
+      {
+        System.Console.WriteLine(item.ID + " ::: " + item.FullTitle);
+      });
       
-      System.Console.WriteLine("---------------------------------");
+      //System.Console.WriteLine("---------------------------------");
 
-      client.Archive(330361896);
-      client.Favorite(330361896);
+      //client.Archive(330361896);
+      //client.Favorite(330361896);
 
       
       System.Console.ReadKey();
