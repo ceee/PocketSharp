@@ -18,19 +18,14 @@ namespace PocketSharp
     protected readonly RestClient _restClient;
 
     /// <summary>
-    /// default base URL for the API, which is used, when no baseURL is delivered
+    /// default base URL for the API
     /// </summary>
-    protected static string defaultBaseUrl = "https://getpocket.com/";
+    protected static Uri defaultBaseUrl = new Uri("https://getpocket.com/v3/");
 
     /// <summary>
     /// The authentification URL
     /// </summary>
     protected static string authentificationUrl = defaultBaseUrl + "auth/authorize?request_token={0}&redirect_uri={1}";
-
-    /// <summary>
-    /// current version of the Pocket API (used in URL)
-    /// </summary>
-    protected static string version = "v3";
 
     /// <summary>
     /// base URL for the API
@@ -64,17 +59,34 @@ namespace PocketSharp
     /// </summary>
     /// <param name="consumerKey">The API key.</param>
     public PocketClient(string consumerKey)
-      : this(consumerKey, "") { }
+      : this(consumerKey, "", defaultBaseUrl) { }
+
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PocketClient"/> class.
+    /// </summary>
+    /// <param name="consumerKey">The API key.</param>
+    public PocketClient(string consumerKey, string accessCode)
+      : this(consumerKey, accessCode, defaultBaseUrl) { }
+
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PocketClient"/> class.
+    /// </summary>
+    /// <param name="consumerKey">The API key.</param>
+    public PocketClient(string consumerKey, Uri baseUrl)
+      : this(consumerKey, "", baseUrl) { }
+
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PocketClient"/> class.
     /// </summary>
     /// <param name="consumerKey">The API key.</param>
     /// <param name="accessCode">Provide an access code if the user is already authenticated</param>
-    public PocketClient(string consumerKey, string accessCode)
+    public PocketClient(string consumerKey, string accessCode, Uri baseUrl)
     {
       // assign public properties
-      BaseUrl = new Uri(defaultBaseUrl + version + "/");
+      BaseUrl = baseUrl;
       ConsumerKey = consumerKey;
 
       // assign access code if submitted
