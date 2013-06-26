@@ -193,20 +193,13 @@ namespace PocketSharp
     /// Puts an action
     /// </summary>
     /// <param name="itemID">The item ID.</param>
-    /// <param name="action">The action.</param>
+    /// <param name="actionParameter">The action parameter.</param>
     /// <returns></returns>
-    protected bool PutSendAction(int itemID, string action)
+    protected bool PutSendAction(ActionParameter actionParameter)
     {
       ModifyParameters parameters = new ModifyParameters()
       {
-        Actions = new List<ActionParameter>()
-        {
-          new ActionParameter()
-          {
-            Action = action,
-            ID = itemID
-          }
-        }
+        Actions = new List<ActionParameter>() { actionParameter }
       };
 
       return Get<Modify>("send", parameters.Convert(), true).Status;

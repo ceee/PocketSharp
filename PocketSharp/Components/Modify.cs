@@ -15,7 +15,7 @@ namespace PocketSharp
     /// <returns></returns>
     public bool Archive(int itemID)
     {
-      return PutSendAction(itemID, "archive");
+      return PutSendActionDefault(itemID, "archive");
     }
 
 
@@ -37,7 +37,7 @@ namespace PocketSharp
     /// <returns></returns>
     public bool Unarchive(int itemID)
     {
-      return PutSendAction(itemID, "readd");
+      return PutSendActionDefault(itemID, "readd");
     }
 
 
@@ -59,7 +59,7 @@ namespace PocketSharp
     /// <returns></returns>
     public bool Favorite(int itemID)
     {
-      return PutSendAction(itemID, "favorite");
+      return PutSendActionDefault(itemID, "favorite");
     }
 
 
@@ -81,7 +81,7 @@ namespace PocketSharp
     /// <returns></returns>
     public bool Unfavorite(int itemID)
     {
-      return PutSendAction(itemID, "unfavorite");
+      return PutSendActionDefault(itemID, "unfavorite");
     }
 
 
@@ -103,7 +103,7 @@ namespace PocketSharp
     /// <returns></returns>
     public bool Delete(int itemID)
     {
-      return PutSendAction(itemID, "delete");
+      return PutSendActionDefault(itemID, "delete");
     }
 
 
@@ -115,6 +115,22 @@ namespace PocketSharp
     public bool Delete(PocketItem item)
     {
       return Delete(item.ID);
+    }
+
+
+    /// <summary>
+    /// Puts an action
+    /// </summary>
+    /// <param name="itemID">The item ID.</param>
+    /// <param name="action">The action.</param>
+    /// <returns></returns>
+    protected bool PutSendActionDefault(int itemID, string action)
+    {
+      return PutSendAction(new ActionParameter()
+      {
+        Action = action,
+        ID = itemID
+      });
     }
   }
 }
