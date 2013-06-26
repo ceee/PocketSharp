@@ -75,7 +75,7 @@ namespace PocketSharp
     /// <summary>
     /// Retrieves items from pocket which match the specified search string in title or content
     /// </summary>
-    /// <param name="tag">The tag.</param>
+    /// <param name="searchString">The search string.</param>
     /// <returns></returns>
     public List<PocketItem> Search(string searchString)
     {
@@ -94,12 +94,33 @@ namespace PocketSharp
   /// </summary>
   public enum RetrieveFilter
   {
+    /// <summary>
+    /// All types
+    /// </summary>
     All,
+    /// <summary>
+    /// Only unread items
+    /// </summary>
     Unread,
+    /// <summary>
+    /// Archived items
+    /// </summary>
     Archive,
+    /// <summary>
+    /// Favorited items
+    /// </summary>
     Favorite,
+    /// <summary>
+    /// Only articles
+    /// </summary>
     Article,
+    /// <summary>
+    /// Only videos
+    /// </summary>
     Video,
+    /// <summary>
+    /// Only images
+    /// </summary>
     Image
   }
 }

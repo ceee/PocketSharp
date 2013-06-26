@@ -124,7 +124,7 @@ namespace PocketSharp
     /// <summary>
     /// Renames a tag.
     /// </summary>
-    /// <param name="item">The item.<param>
+    /// <param name="item">The item.</param>
     /// <param name="oldTag">The old tag.</param>
     /// <param name="newTag">The new tag name.</param>
     /// <returns></returns>
@@ -139,6 +139,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <param name="action">The action.</param>
+    /// <param name="tags">The tags.</param>
     /// <returns></returns>
     protected bool PutSendActionForTags(int itemID, string action, string[] tags)
     {

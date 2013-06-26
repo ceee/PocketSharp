@@ -63,17 +63,19 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PocketClient"/> class.
+    /// Initializes a new instance of the <see cref="PocketClient" /> class.
     /// </summary>
     /// <param name="consumerKey">The API key.</param>
+    /// <param name="accessCode">The access code.</param>
     public PocketClient(string consumerKey, string accessCode)
       : this(consumerKey, accessCode, defaultBaseUrl) { }
 
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PocketClient"/> class.
+    /// Initializes a new instance of the <see cref="PocketClient" /> class.
     /// </summary>
     /// <param name="consumerKey">The API key.</param>
+    /// <param name="baseUrl">The base URL.</param>
     public PocketClient(string consumerKey, Uri baseUrl)
       : this(consumerKey, "", baseUrl) { }
 
@@ -83,6 +85,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="consumerKey">The API key.</param>
     /// <param name="accessCode">Provide an access code if the user is already authenticated</param>
+    /// <param name="baseUrl">The base URL.</param>
     public PocketClient(string consumerKey, string accessCode, Uri baseUrl)
     {
       // assign public properties
@@ -192,7 +195,6 @@ namespace PocketSharp
     /// <summary>
     /// Puts an action
     /// </summary>
-    /// <param name="itemID">The item ID.</param>
     /// <param name="actionParameter">The action parameter.</param>
     /// <returns></returns>
     protected bool PutSendAction(ActionParameter actionParameter)
