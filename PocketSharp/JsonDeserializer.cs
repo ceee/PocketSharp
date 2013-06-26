@@ -2,6 +2,7 @@
 using RestSharp.Deserializers;
 using ServiceStack.Text;
 using System;
+using System.Collections.Generic;
 
 namespace PocketSharp
 {
@@ -23,6 +24,7 @@ namespace PocketSharp
       return JsonSerializer.DeserializeFromString<T>(response.Content);
     }
 
+
     /// <summary>
     /// Adds custom deserialization for specific types.
     /// </summary>
@@ -30,7 +32,19 @@ namespace PocketSharp
     {
       // generate correct Uri format
       JsConfig<Uri>.DeSerializeFn = value => new Uri(value);
+
+      // create DateTime from UNIX timestamp input
+      JsConfig<DateTime?>.DeSerializeFn = value =>
+      {
+        if(value == "0")
+        {
+          return null;
+        }
+        System.DateTime dateTimeBeginUnixEpoch = new DateTime(1970,1,1,0,0,0,0);
+        return dateTimeBeginUnixEpoch.AddSeconds(Convert.ToDouble(value)).ToLocalTime();
+      };
     }
+
 
     /// <summary>
     /// Gets or sets the date format.

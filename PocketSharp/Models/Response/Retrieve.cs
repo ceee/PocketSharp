@@ -14,24 +14,12 @@ namespace PocketSharp.Models
     public int Since { get; set; }
 
     [DataMember(Name = "list")]
-    public Dictionary<string, PocketItem> ItemDictionary { get; set; }
+    public Dictionary<string, PocketItem> _ItemDictionary { get; set; }
 
     [IgnoreDataMember]
     public List<PocketItem> Items
     {
-      get
-      {
-        var itemEnumerator = ItemDictionary.GetEnumerator();
-        List<PocketItem> result = new List<PocketItem>();
-
-        while (itemEnumerator.MoveNext())
-        {
-          result.Add(itemEnumerator.Current.Value);
-        }
-
-        return result;
-      }
-      private set {}
+      get { return PocketClient.DictionaryToList<PocketItem>(_ItemDictionary); }
     }
   }
 }
