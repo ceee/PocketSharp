@@ -30,7 +30,7 @@ namespace PocketSharp
     /// <summary>
     /// base URL for the API
     /// </summary>
-    public Uri BaseUrl { get; set; }
+    protected Uri BaseUrl { get; set; }
 
     /// <summary>
     /// Accessor for the Pocket API key
@@ -46,7 +46,7 @@ namespace PocketSharp
     /// <summary>
     /// Code retrieved on authentification
     /// </summary>
-    protected string RequestCode { get; set; }
+    public string RequestCode { get; set; }
 
     /// <summary>
     /// Code retrieved on authentification-success
