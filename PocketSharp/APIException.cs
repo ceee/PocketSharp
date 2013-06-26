@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Runtime.Serialization;
 
 namespace PocketSharp
@@ -9,6 +10,23 @@ namespace PocketSharp
   [Serializable]
   public class APIException : Exception
   {
+    /// <summary>
+    /// Gets or sets the pocket error code.
+    /// </summary>
+    /// <value>
+    /// The pocket error code.
+    /// </value>
+    public int? PocketErrorCode { get; set; }
+
+    /// <summary>
+    /// Gets or sets the pocket error.
+    /// </summary>
+    /// <value>
+    /// The pocket error.
+    /// </value>
+    public string PocketError { get; set; }
+
+
     /// <summary>
     /// Initializes a new instance of the <see cref="APIException"/> class.
     /// </summary>

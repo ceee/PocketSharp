@@ -246,7 +246,35 @@ namespace PocketSharp
     {
       if (response.StatusCode != HttpStatusCode.OK)
       {
-        throw new APIException(response.Content, response.ErrorException);
+        // get pocket error headers
+        Parameter error = response.Headers[1];
+        Parameter errorCode = response.Headers[2];
+
+        string exceptionString = response.Content;
+
+        bool isPocketError = error.Name == "X-Error";
+
+        // update message to include pocket response data
+        if (isPocketError)
+        {
+          exceptionString = exceptionString + "\nPocketResponse: (" + errorCode.Value + ") " + error.Value;
+        }
+
+        // create exception
+        APIException exception = new APIException(exceptionString, response.ErrorException);
+
+        if (isPocketError)
+        {
+          // add custom pocket fields
+          exception.PocketError = error.Value.ToString();
+          exception.PocketErrorCode = Convert.ToInt32(errorCode.Value);
+
+          // add to generic exception data
+          exception.Data.Add(error.Name, error.Value);
+          exception.Data.Add(errorCode.Name, errorCode.Value);
+        }
+
+        throw exception;
       }
       else if (response.ErrorException != null)
       {
