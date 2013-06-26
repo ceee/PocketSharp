@@ -36,12 +36,8 @@ namespace PocketSharp
       // create DateTime from UNIX timestamp input
       JsConfig<DateTime?>.DeSerializeFn = value =>
       {
-        if(value == "0")
-        {
-          return null;
-        }
-        System.DateTime dateTimeBeginUnixEpoch = new DateTime(1970,1,1,0,0,0,0);
-        return dateTimeBeginUnixEpoch.AddSeconds(Convert.ToDouble(value)).ToLocalTime();
+        if (value == "0") return null;
+        return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Convert.ToDouble(value)).ToLocalTime();
       };
     }
 
