@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIException.cs" />
+    <Compile Include="Components\Add.cs" />
     <Compile Include="Components\Authentification.cs" />
     <Compile Include="Components\Modify.cs" />
     <Compile Include="Components\ModifyTags.cs" />
@@ -57,9 +58,11 @@
     <Compile Include="JsonDeserializer.cs" />
     <Compile Include="Models\Authentification\AccessCode.cs" />
     <Compile Include="Models\Authentification\RequestCode.cs" />
+    <Compile Include="Models\Parameters\AddParameters.cs" />
     <Compile Include="Models\PocketAuthor.cs" />
     <Compile Include="Models\PocketImage.cs" />
     <Compile Include="Models\PocketVideo.cs" />
+    <Compile Include="Models\Response\Add.cs" />
     <Compile Include="Models\Response\Modify.cs" />
     <Compile Include="Models\Parameters\ActionParameter.cs" />
     <Compile Include="Models\Parameters\ModifyParameters.cs" />

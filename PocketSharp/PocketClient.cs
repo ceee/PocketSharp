@@ -184,53 +184,26 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Puts/Updates a typed resource
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="method">Requested method (path after /v3/)</param>
-    /// <param name="actions">Additional action parameters</param>
-    /// <returns></returns>
-    protected T Put<T>(string method, List<ActionParameter> actions) where T : class, new()
-    {
-      // put requests only with authentification
-      ExpectAuthentification();
-
-      ModifyParameters parameters = new ModifyParameters()
-      {
-        Actions = actions
-      };
-      return Get<T>(method, parameters.Convert());
-    }
-
-
-    /// <summary>
-    /// Puts/Updates a typed resource
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="method">Requested method (path after /v3/)</param>
-    /// <param name="action">action parameter</param>
-    /// <returns></returns>
-    protected T Put<T>(string method, ActionParameter action) where T : class, new()
-    {
-      return Put<T>(method, new List<ActionParameter>() { action });
-    }
-
-
-    /// <summary>
     /// Puts an action
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <param name="action">The action.</param>
     /// <returns></returns>
-    protected bool PutAction(int itemID, string action)
+    protected bool PutSendAction(int itemID, string action)
     {
-      ActionParameter actionParam = new ActionParameter()
+      ModifyParameters parameters = new ModifyParameters()
       {
-        Action = action,
-        ID = itemID
+        Actions = new List<ActionParameter>()
+        {
+          new ActionParameter()
+          {
+            Action = action,
+            ID = itemID
+          }
+        }
       };
 
-      return Put<Modify>("send", actionParam).Status == 1;
+      return Get<Modify>("send", parameters.Convert()).Status;
     }
 
 

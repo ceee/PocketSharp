@@ -15,7 +15,7 @@ namespace PocketSharp
     /// <returns></returns>
     public bool Archive(int itemID)
     {
-      return PutAction(itemID, "archive");
+      return PutSendAction(itemID, "archive");
     }
 
 
@@ -59,7 +59,7 @@ namespace PocketSharp
     /// <returns></returns>
     public bool Unarchive(int itemID)
     {
-      return PutAction(itemID, "readd");
+      return PutSendAction(itemID, "readd");
     }
 
 
@@ -81,7 +81,7 @@ namespace PocketSharp
     /// <returns></returns>
     public bool Favorite(int itemID)
     {
-      return PutAction(itemID, "favorite");
+      return PutSendAction(itemID, "favorite");
     }
 
 
@@ -103,7 +103,7 @@ namespace PocketSharp
     /// <returns></returns>
     public bool Unfavorite(int itemID)
     {
-      return PutAction(itemID, "unfavorite");
+      return PutSendAction(itemID, "unfavorite");
     }
 
 
@@ -125,7 +125,7 @@ namespace PocketSharp
     /// <returns></returns>
     public bool Delete(int itemID)
     {
-      return PutAction(itemID, "delete");
+      return PutSendAction(itemID, "delete");
     }
 
 

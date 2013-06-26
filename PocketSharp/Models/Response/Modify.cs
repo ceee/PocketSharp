@@ -9,8 +9,5 @@ namespace PocketSharp.Models
   {
     [DataMember(Name = "action_results")]
     public bool[] ActionResults { get; set; }
-
-    [DataMember(Name = "status")]
-    public int Status { get; set; }
   }
 }
