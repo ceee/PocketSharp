@@ -2,7 +2,6 @@
 using RestSharp.Deserializers;
 using ServiceStack.Text;
 using System;
-using System.Collections.Generic;
 
 namespace PocketSharp
 {

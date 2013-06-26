@@ -1,6 +1,5 @@
 ﻿using RestSharp;
 using ServiceStack.Text;
-using System;
 using System.Collections.Generic;
 
 namespace PocketSharp.Models

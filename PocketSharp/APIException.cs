@@ -1,5 +1,4 @@
-﻿using RestSharp;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace PocketSharp
@@ -7,7 +6,6 @@ namespace PocketSharp
   /// <summary>
   /// custom Pocket API Exceptions
   /// </summary>
-  [Serializable]
   public class APIException : Exception
   {
     /// <summary>
