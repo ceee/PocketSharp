@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
 {
-  public class RetrieveParameters : ParameterBase
+  public class RetrieveParameters
   {
     public StateEnum? State { get; set; }
 
@@ -33,32 +33,20 @@ namespace PocketSharp.Models
 
     public List<Parameter> Convert()
     {
-      List<Parameter> parameters = new List<Parameter>();
-
-      if (State != null) 
-        parameters.Add(CreateParam("state", State.ToString()));
-      if (Favorite != null) 
-        parameters.Add(CreateParam("favorite", (bool)Favorite ? "1" : "0"));
-      if (Tag != null) 
-        parameters.Add(CreateParam("tag", Tag));
-      if (ContentType != null) 
-        parameters.Add(CreateParam("contentType", ContentType.ToString()));
-      if (Sort != null) 
-        parameters.Add(CreateParam("sort", Sort.ToString()));
-      if (DetailType != null) 
-        parameters.Add(CreateParam("detailType", DetailType.ToString()));
-      if (Search != null) 
-        parameters.Add(CreateParam("search", Search));
-      if (Domain != null) 
-        parameters.Add(CreateParam("domain", Domain));
-      if (Since != null)
-        parameters.Add(CreateParam("since", (int)((DateTime)Since - new DateTime(1970, 1, 1)).TotalSeconds));
-      if (Count != null)
-        parameters.Add(CreateParam("count", Count));
-      if (Offset != null)
-        parameters.Add(CreateParam("offset", Offset));
-
-      return parameters;
+      return new List<Parameter>()
+      {
+        Utilities.CreateParam("state", State != null ? State.ToString() : null ),
+        Utilities.CreateParam("favorite", Favorite != null ? (bool)Favorite ? "1" : "0" : null),
+        Utilities.CreateParam("tag", Tag),
+        Utilities.CreateParam("contentType", ContentType != null ? ContentType.ToString() : null),
+        Utilities.CreateParam("sort", Sort != null ? Sort.ToString() : null),
+        Utilities.CreateParam("detailType", DetailType != null ? DetailType.ToString() : null),
+        Utilities.CreateParam("search", Search),
+        Utilities.CreateParam("domain", Domain),
+        Utilities.CreateParam("since", Utilities.GetUnixTimestamp(Since)),
+        Utilities.CreateParam("count", Count),
+        Utilities.CreateParam("offset", Offset)
+      };
     }
   }
 

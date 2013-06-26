@@ -5,24 +5,21 @@ using System.Collections.Generic;
 
 namespace PocketSharp.Models
 {
-  public class ModifyParameters : ParameterBase
+  public class ModifyParameters
   {
     public List<ActionParameter> Actions { get; set; }
 
 
     public List<Parameter> Convert()
     {
-      List<Parameter> parameters = new List<Parameter>();
       List<object> actions = new List<object>();
 
-      Actions.ForEach(delegate(ActionParameter action)
+      Actions.ForEach(action => actions.Add(action.Convert()));
+
+      return new List<Parameter>()
       {
-        actions.Add(action.Convert());
-      });
-
-      parameters.Add(CreateParam("actions", JsonSerializer.SerializeToString(actions)));
-
-      return parameters;
+        Utilities.CreateParam("actions", JsonSerializer.SerializeToString(actions))
+      };
     }
   }
 }

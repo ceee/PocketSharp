@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
 {
-  public class ActionParameter : ParameterBase
+  public class ActionParameter
   {
     public string Action { get; set; }
 
@@ -31,15 +31,12 @@ namespace PocketSharp.Models
         { "action", Action }
       };
 
-      if(Time != null)
-        parameters.Add("time", (int)((DateTime)Time - new DateTime(1970, 1, 1)).TotalSeconds);
-
+      if (Time != null)
+        parameters.Add("time", Utilities.GetUnixTimestamp(Time));
       if (Tags != null)
         parameters.Add("tags", String.Join(",", Tags));
-
       if (OldTag != null)
         parameters.Add("old_tag", OldTag);
-
       if (NewTag != null)
         parameters.Add("new_tag", NewTag);
 

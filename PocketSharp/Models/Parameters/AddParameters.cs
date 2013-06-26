@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
 {
-  public class AddParameters : ParameterBase
+  public class AddParameters
   {
     public Uri Uri { get; set; }
 
@@ -18,18 +18,13 @@ namespace PocketSharp.Models
 
     public List<Parameter> Convert()
     {
-      List<Parameter> parameters = new List<Parameter>();
-
-      if (Uri != null)
-        parameters.Add(CreateParam("url", Uri.ToString()));
-      if (Title != null)
-        parameters.Add(CreateParam("title", Title));
-      if (Tags != null)
-        parameters.Add(CreateParam("tags", String.Join(",", Tags)));
-      if (TweetID != null)
-        parameters.Add(CreateParam("tweet_id", TweetID));
-
-      return parameters;
+      return new List<Parameter>()
+      {
+        Utilities.CreateParam("url", Uri.ToString() ),
+        Utilities.CreateParam("title", Title),
+        Utilities.CreateParam("tags", String.Join(",", Tags)),
+        Utilities.CreateParam("tweet_id", TweetID)
+      };
     }
   }
 }
