@@ -19,7 +19,7 @@ namespace PocketSharp.Models
     [IgnoreDataMember]
     public List<PocketItem> Items
     {
-      get { return PocketClient.DictionaryToList<PocketItem>(_ItemDictionary); }
+      get { return Utilities.DictionaryToList<PocketItem>(_ItemDictionary); }
     }
   }
 }

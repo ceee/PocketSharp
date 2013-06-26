@@ -79,13 +79,13 @@ namespace PocketSharp.Models
     [IgnoreDataMember]
     public List<PocketTag> Tags
     {
-      get { return PocketClient.DictionaryToList<PocketTag>(_TagDictionary); }
+      get { return Utilities.DictionaryToList<PocketTag>(_TagDictionary); }
     }
 
     [IgnoreDataMember]
     public List<PocketImage> Images
     {
-      get { return PocketClient.DictionaryToList<PocketImage>(_ImageDictionary); }
+      get { return Utilities.DictionaryToList<PocketImage>(_ImageDictionary); }
     }
 
     [IgnoreDataMember]
@@ -97,13 +97,13 @@ namespace PocketSharp.Models
     [IgnoreDataMember]
     public List<PocketVideo> Videos
     {
-      get { return PocketClient.DictionaryToList<PocketVideo>(_VideoDictionary); }
+      get { return Utilities.DictionaryToList<PocketVideo>(_VideoDictionary); }
     }
 
     [IgnoreDataMember]
     public List<PocketAuthor> Authors
     {
-      get { return PocketClient.DictionaryToList<PocketAuthor>(_AuthorDictionary); }
+      get { return Utilities.DictionaryToList<PocketAuthor>(_AuthorDictionary); }
     }
   }
 }

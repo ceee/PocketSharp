@@ -253,30 +253,5 @@ namespace PocketSharp
         throw new APIException("Error retrieving response", response.ErrorException);
       }
     }
-
-
-    /// <summary>
-    /// Convert a dictionary to a list
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="items">The items.</param>
-    /// <returns></returns>
-    internal static List<T> DictionaryToList<T>(Dictionary<string, T> items) where T : new()
-    {
-      if(items == null)
-      {
-        return null;
-      }
-
-      var itemEnumerator = items.GetEnumerator();
-      List<T> list = new List<T>();
-
-      while (itemEnumerator.MoveNext())
-      {
-        list.Add(itemEnumerator.Current.Value);
-      }
-
-      return list;
-    }
   }
 }
