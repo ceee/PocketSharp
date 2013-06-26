@@ -24,7 +24,7 @@ namespace PocketSharp.Models
 
     public string Domain { get; set; }
 
-    public DateTime Since { get; set; }
+    public DateTime? Since { get; set; }
 
     public int? Count { get; set; }
 
@@ -52,7 +52,7 @@ namespace PocketSharp.Models
       if (Domain != null) 
         parameters.Add(CreateParam("domain", Domain));
       if (Since != null)
-        parameters.Add(CreateParam("since", (int)(Since - new DateTime(1970, 1, 1)).TotalSeconds));
+        parameters.Add(CreateParam("since", (int)((DateTime)Since - new DateTime(1970, 1, 1)).TotalSeconds));
       if (Count != null)
         parameters.Add(CreateParam("count", Count));
       if (Offset != null)
