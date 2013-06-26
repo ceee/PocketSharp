@@ -31,28 +31,6 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Un-archives the specified item.
-    /// </summary>
-    /// <param name="itemID">The item ID.</param>
-    /// <returns></returns>
-    public bool Readd(int itemID)
-    {
-      return Unarchive(itemID);
-    }
-
-
-    /// <summary>
-    /// Un-archives the specified item.
-    /// </summary>
-    /// <param name="item">The item.</param>
-    /// <returns></returns>
-    public bool Readd(PocketItem item)
-    {
-      return Unarchive(item.ID);
-    }
-
-
-    /// <summary>
     /// Un-archives the specified item (alias for Readd).
     /// </summary>
     /// <param name="itemID">The item ID.</param>
