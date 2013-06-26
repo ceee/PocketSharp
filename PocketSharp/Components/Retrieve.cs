@@ -15,8 +15,7 @@ namespace PocketSharp
     /// <returns></returns>
     public List<PocketItem> Retrieve(RetrieveParameters parameters)
     {
-      ExpectAuthentification();
-      return Get<Retrieve>("get", parameters.Convert()).Items;
+      return Get<Retrieve>("get", parameters.Convert(), true).Items;
     }
 
 
@@ -27,8 +26,6 @@ namespace PocketSharp
     /// <returns></returns>
     public List<PocketItem> Retrieve(RetrieveFilter filter = RetrieveFilter.All)
     {
-      ExpectAuthentification();
-
       RetrieveParameters parameters = new RetrieveParameters();
 
       switch(filter)
@@ -55,7 +52,7 @@ namespace PocketSharp
 
       //parameters.DetailType = DetailTypeEnum.complete;
 
-      return Get<Retrieve>("get",  parameters.Convert()).Items;
+      return Get<Retrieve>("get",  parameters.Convert(), true).Items;
     }
 
 
@@ -66,13 +63,12 @@ namespace PocketSharp
     /// <returns></returns>
     public List<PocketItem> SearchByTag(string tag)
     {
-      ExpectAuthentification();
       RetrieveParameters parameters = new RetrieveParameters()
       {
         Tag = tag,
         DetailType = DetailTypeEnum.complete
       };
-      return Get<Retrieve>("get", parameters.Convert()).Items;
+      return Get<Retrieve>("get", parameters.Convert(), true).Items;
     }
 
 
@@ -83,13 +79,12 @@ namespace PocketSharp
     /// <returns></returns>
     public List<PocketItem> Search(string searchString)
     {
-      ExpectAuthentification();
       RetrieveParameters parameters = new RetrieveParameters()
       {
         Search = searchString,
         DetailType = DetailTypeEnum.complete
       };
-      return Get<Retrieve>("get", parameters.Convert()).Items;
+      return Get<Retrieve>("get", parameters.Convert(), true).Items;
     }
   }
 

@@ -156,10 +156,16 @@ namespace PocketSharp
     /// <typeparam name="T"></typeparam>
     /// <param name="method">Requested method (path after /v3/)</param>
     /// <param name="parameters">Additional POST parameters</param>
+    /// <param name="requireAuth">if set to <c>true</c> [require auth].</param>
     /// <returns></returns>
     /// <exception cref="APIException">No access token available. Use authentification first.</exception>
-    protected T Get<T>(string method, List<Parameter> parameters = null) where T : class, new()
+    protected T Get<T>(string method, List<Parameter> parameters = null, bool requireAuth = false) where T : class, new()
     {
+      if (requireAuth && AccessCode == null)
+      {
+        throw new APIException("No access token available. Use authentification first.");
+      }
+
       // every single Pocket API endpoint requires HTTP POST data
       var request = new RestRequest(method, Method.POST);
 
@@ -203,7 +209,7 @@ namespace PocketSharp
         }
       };
 
-      return Get<Modify>("send", parameters.Convert()).Status;
+      return Get<Modify>("send", parameters.Convert(), true).Status;
     }
 
 
@@ -252,19 +258,6 @@ namespace PocketSharp
       else if (response.ErrorException != null)
       {
         throw new APIException("Error retrieving response", response.ErrorException);
-      }
-    }
-
-
-    /// <summary>
-    /// Throws exception if access code is not available
-    /// </summary>
-    /// <exception cref="APIException">No access token available. Use authentification first.</exception>
-    protected void ExpectAuthentification()
-    {
-      if (AccessCode == null)
-      {
-        throw new APIException("No access token available. Use authentification first.");
       }
     }
 

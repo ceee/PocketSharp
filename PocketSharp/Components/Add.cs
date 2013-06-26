@@ -19,7 +19,6 @@ namespace PocketSharp
     /// <returns></returns>
     public PocketItem Add(Uri uri, string[] tags = null, string title = null, string tweetID = null)
     {
-      ExpectAuthentification();
       AddParameters parameters = new AddParameters()
       {
         Uri = uri,
@@ -27,7 +26,7 @@ namespace PocketSharp
         Title = title,
         TweetID = tweetID
       };
-      return Get<Add>("add", parameters.Convert()).Item;
+      return Get<Add>("add", parameters.Convert(), true).Item;
     }
 
 
