@@ -112,6 +112,9 @@ namespace PocketSharp
 
       // custom JSON deserializer (ServiceStack.Text)
       _restClient.AddHandler("application/json", new JsonDeserializer());
+
+      // add custom deserialization lambdas
+      JsonDeserializer.AddCustomDeserialization();
     }
 
 

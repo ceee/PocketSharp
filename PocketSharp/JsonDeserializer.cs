@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using RestSharp.Deserializers;
 using ServiceStack.Text;
+using System;
 
 namespace PocketSharp
 {
@@ -20,6 +21,15 @@ namespace PocketSharp
     public T Deserialize<T>(IRestResponse response)
     {
       return JsonSerializer.DeserializeFromString<T>(response.Content);
+    }
+
+    /// <summary>
+    /// Adds custom deserialization for specific types.
+    /// </summary>
+    public static void AddCustomDeserialization()
+    {
+      // generate correct Uri format
+      JsConfig<Uri>.DeSerializeFn = value => new Uri(value);
     }
 
     /// <summary>
