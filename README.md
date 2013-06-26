@@ -19,18 +19,24 @@ Request a Consumer Key on Pocket: [My Applications on Pocket](http://getpocket.c
 
 Include the PocketSharp namespace and it's associated models (you will need them later):
 
-	using PocketSharp;
-	using PocketSharp.Models;
+```csharp
+using PocketSharp;
+using PocketSharp.Models;
+```
 
 Initialize PocketClient with:
 
-	PocketClient _client = new PocketClient("[YOUR_CONSUMER_KEY]", "[YOUR_ACCESS_CODE]");
+```csharp
+PocketClient _client = new PocketClient("[YOUR_CONSUMER_KEY]", "[YOUR_ACCESS_CODE]");
+```
 
 Do a simple request - e.g. a search for `CSS`:
 
-	_client.Search("css").ForEach(
-    	item => Console.WriteLine(item.ID + " | " + item.Title)
-    );
+```csharp
+_client.Search("css").ForEach(
+	item => Console.WriteLine(item.ID + " | " + item.Title)
+);
+```
 
 Which will output:
 
@@ -43,22 +49,26 @@ Which will output:
 ## Create an instance
 
 There are 4 overloads for `PocketClient`:
-	
-	// used for authentication, when no accessCode is available yet
-	PocketClient(string consumerKey)
-	
-	// start the PocketClient with an accessCode
-	PocketClient(string consumerKey, string accessCode)
-	
-	// different base URL
-	PocketClient(string consumerKey, Uri baseUrl)
-	
-	// accessCode and different base URL
-	PocketClient(string consumerKey, string accessCode, Uri baseUrl)
+
+```csharp
+// used for authentication, when no accessCode is available yet
+PocketClient(string consumerKey)
+
+// start the PocketClient with an accessCode
+PocketClient(string consumerKey, string accessCode)
+
+// different base URL
+PocketClient(string consumerKey, Uri baseUrl)
+
+// accessCode and different base URL
+PocketClient(string consumerKey, string accessCode, Uri baseUrl)
+```
 
 You can change the _Access Code_ after initialization:
 
-	_client.AccessCode = "[YOU_ACCESS_CODE]";
+```csharp
+_client.AccessCode = "[YOU_ACCESS_CODE]";
+```
 
 ## Authentication
 
@@ -68,7 +78,9 @@ This is a 3-step process:
 
 1) Receive the authentication URI from the library by calling `Uri Authenticate(Uri callbackUri)`:
 
-	Uri authenticationUri = client.Authenticate(new Uri("http://example.com"));
+```csharp
+Uri authenticationUri = client.Authenticate(new Uri("http://example.com"));
+```
 
 The `callbackUri` is the URI which is triggered after the user successfully (or not) authenticated your application. 
 
@@ -78,7 +90,9 @@ In this step not only the `authenticationUri` is generated, but the PocketSharp 
 
 3) Call `string GetAccessCode()`
 
-	string accessCode = GetAccessCode();
+```csharp
+string accessCode = GetAccessCode();
+```
 
 Again, the received _Access Code_ is stored internally.
 Note that `GetAccessCode` can only be called with an existing _Request Code_. If you need to re-authenticate a user, start again with Step 1).
@@ -87,11 +101,15 @@ Note that `GetAccessCode` can only be called with an existing _Request Code_. If
 
 If you need to re-instantiate PocketClient after the redirect, please provide the _Request Code_:
 
-	_client.RequestCode = "[YOU_REQUEST_CODE]";
+```csharp
+_client.RequestCode = "[YOU_REQUEST_CODE]";
+```
 
 After Step 1) you have public access to the RequestCode property and can store it for later usage.
 
-	string requestCode = _client.RequestCode;
+```csharp
+string requestCode = _client.RequestCode;
+```
 
 #### Important
 
@@ -103,33 +121,43 @@ Without it you would always have to redo the authentication process.
 
 Find items by a tag:
 
-	List<PocketItem> items = _client.SearchByTag("tutorial");
+```csharp
+List<PocketItem> items = _client.SearchByTag("tutorial");
+```
 
 Find items by a search string:
 
-	List<PocketItem> items = _client.Search("css");
+```csharp
+List<PocketItem> items = _client.Search("css");
+```
 
 Find items by a filter:
 
-	List<PocketItem> items = _client.Retrieve(RetrieveFilter.Favorite); // only favorites
+```csharp
+List<PocketItem> items = _client.Retrieve(RetrieveFilter.Favorite); // only favorites
+```
 
 The RetrieveFilter Enum is specified as follows:
 
-	enum RetrieveFilter { All, Unread, Archive, Favorite, Article, Video, Image }
+```csharp
+enum RetrieveFilter { All, Unread, Archive, Favorite, Article, Video, Image }
+```
 
 ### Custom Parameters
 
 You can create a completely custom parameter list for retrieval with the POCO `RetrieveParameters`:
 
-	var parameters = new RetrieveParameters()
-	{
-		Count = 50,
-		Offset = 100,
-		Sort = SortEnum.oldest
-		...
-	};
+```csharp
+var parameters = new RetrieveParameters()
+{
+	Count = 50,
+	Offset = 100,
+	Sort = SortEnum.oldest
+	...
+};
 
-	List<PocketItem> items = _client.Retrieve(parameters);
+List<PocketItem> items = _client.Retrieve(parameters);
+```
 
 ## Add & Modify
 
