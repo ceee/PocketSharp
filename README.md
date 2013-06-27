@@ -1,5 +1,7 @@
 # PocketSharp
 
+> This project is work in progress. Be aware of this!
+
 PocketSharp is a C#.NET class library, that integrates the [Pocket API v3](http://getpocket.com/developer).
 
 _If you don't know Pocket, be sure to check it out [Pocket](http://getpocket.com). It's an awesome service, which lets you save articles, videos, ... in the cloud and access it from all your devices._
@@ -8,14 +10,14 @@ PocketSharp consists of 4 parts:
 
 - Authentication
 - Retrieve
-- Modify _(work in progress)_
-- Add _(work in progress)_
+- Modify
+- Add
 
 ---
 
 ## Usage Example
 
-Request a Consumer Key on Pocket: [My Applications on Pocket](http://getpocket.com/developer/apps/)
+Request a [Consumer Key on Pocket.](http://getpocket.com/developer/apps/)
 
 Include the PocketSharp namespace and it's associated models (you will need them later):
 
@@ -204,6 +206,8 @@ Un-favorites the specified item:
 Deletes the specified item:
 
 	bool isSuccess = _client.Delete(myPocketItem);
+
+#### Modify tags
 
 Add tags to the specified item:
 
