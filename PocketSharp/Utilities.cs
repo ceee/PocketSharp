@@ -16,7 +16,10 @@ namespace PocketSharp
     /// <returns>UNIX timestamp</returns>
     public static int? GetUnixTimestamp(DateTime? dateTime)
     {
-      if(dateTime == null) return null;
+      if (dateTime == null)
+      {
+        return null;
+      }
 
       return (int)((DateTime)dateTime - new DateTime(1970, 1, 1)).TotalSeconds;
     }

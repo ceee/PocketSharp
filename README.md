@@ -143,7 +143,7 @@ The RetrieveFilter Enum is specified as follows:
 enum RetrieveFilter { All, Unread, Archive, Favorite, Article, Video, Image }
 ```
 
-### Custom Parameters
+#### Custom Parameters
 
 You can create a completely custom parameter list for retrieval with the POCO `RetrieveParameters`:
 
@@ -159,9 +159,71 @@ var parameters = new RetrieveParameters()
 List<PocketItem> items = _client.Retrieve(parameters);
 ```
 
-## Add & Modify
+## Add
 
-This is work in progress - don't use these methods!
+Adds a new item to your pocket list.
+Accepts four parameters, with `uri` being required.
+
+```csharp
+PocketItem Add(Uri uri, string[] tags = null, string title = null, string tweetID = null)
+```
+
+Example:
+
+```csharp
+PocketItem newItem = _client.Add(
+	new Uri("http://www.neowin.net/news/full-build-2013-conference-sessions-listing-revealed"),
+	new string[] { "microsoft", "neowin", "build" }
+);
+```
+
+The title can be included for cases where an item does not have a title, which is typical for image or PDF URLs. If Pocket detects a title from the content of the page, this parameter will be ignored.
+
+If you are adding Pocket support to a Twitter client, please send along a reference to the tweet status id (with the tweetID). This allows Pocket to show the original tweet alongside the article.
+
+## Modify
+
+All Modify methods accept either the itemID (as int) or a `PocketItem` as parameter.
+
+Archive the specified item:
+
+	bool isSuccess = _client.Archive(myPocketItem);
+
+Un-archive the specified item:
+
+	bool isSuccess = _client.Unarchive(myPocketItem);
+
+Favorites the specified item:
+
+	bool isSuccess = _client.Favorite(myPocketItem);
+
+Un-favorites the specified item:
+
+	bool isSuccess = _client.Unfavorite(myPocketItem);
+
+Deletes the specified item:
+
+	bool isSuccess = _client.Delete(myPocketItem);
+
+Add tags to the specified item:
+
+	bool isSuccess = _client.AddTags(myPocketItem, new string[] { "css", "2013" });
+
+Remove tags from the specified item:
+
+	bool isSuccess = _client.RemoveTags(myPocketItem, new string[] { "css", "2013" });
+
+Remove all tags from the specified item:
+
+	bool isSuccess = _client.RemoveTags(myPocketItem);
+
+Replaces all existing tags with new ones for the specified item:
+
+	bool isSuccess = _client.ReplaceTags(myPocketItem, new string[] { "css", "2013" });
+
+Renames a tag for the specified item:
+
+	bool isSuccess = _client.RenameTag(myPocketItem, "oldTagName", "newTagName");
 
 ---
 
