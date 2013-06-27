@@ -229,6 +229,7 @@ Renames a tag for the specified item:
 
 ## Release History
 
+- 2013-06-27 v0.2.0 add, modify item & modify tags
 - 2013-06-26 v0.1.0 authentication & retrieve functionality
 
 ## Contributors
