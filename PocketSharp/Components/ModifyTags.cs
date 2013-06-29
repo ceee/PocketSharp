@@ -78,7 +78,7 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Replaces the specified tags.
+    /// Replaces all existing tags with new ones.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <param name="tags">The tags.</param>
@@ -90,7 +90,7 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Replaces the specified tags.
+    /// Replaces all existing tags with new ones.
     /// </summary>
     /// <param name="item">The item.</param>
     /// <param name="tags">The tags.</param>
