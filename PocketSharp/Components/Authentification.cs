@@ -11,22 +11,48 @@ namespace PocketSharp
   public partial class PocketClient
   {
     /// <summary>
-    /// Gets the authentification URI.
+    /// Retrieves the requestCode from Pocket.
     /// </summary>
-    /// <param name="callbackUri">The callback URI.</param>
     /// <returns></returns>
-    public Uri Authenticate(Uri callbackUri)
+    public string GetRequestCode()
     {
-      RequestCode response = Get<RequestCode>("oauth/request", new List<Parameter>()
+      // check if request code is available
+      if (CallbackUri == null)
       {
-        new Parameter() { Name = "redirect_uri", Value = callbackUri, Type = ParameterType.GetOrPost }
-      });
+        throw new APIException("Authentication methods need a callbackUri on initialization of the PocketClient class");
+      }
+
+      // do request
+      RequestCode response = Get<RequestCode>("oauth/request", Utilities.CreateParamInList("redirect_uri", CallbackUri));
 
       // save code to client
       RequestCode = response.Code;
 
       // generate redirection URI and return
-      return new Uri(string.Format(authentificationUrl, RequestCode, Uri.EscapeDataString(callbackUri.ToString())));
+      return RequestCode;
+    }
+
+
+    /// <summary>
+    /// Generate Authentication URI from requestCode
+    /// </summary>
+    /// <param name="requestCode">The requestCode.</param>
+    /// <returns></returns>
+    public Uri GenerateAuthenticationUri(string requestCode = null)
+    {
+      // check if request code is available
+      if(RequestCode == null && requestCode == null)
+      {
+        throw new APIException("Call GetRequestCode() first to receive a request_code");
+      }
+
+      // override property with given param if available
+      if(requestCode != null)
+      {
+        RequestCode = requestCode;
+      }
+
+      return new Uri(string.Format(authentificationUri, RequestCode, Uri.EscapeDataString(CallbackUri.ToString())));
     }
 
 
@@ -34,18 +60,22 @@ namespace PocketSharp
     /// Requests the access code after authentification
     /// </summary>
     /// <returns></returns>
-    public string GetAccessCode()
+    public string GetAccessCode(string requestCode = null)
     {
       // check if request code is available
-      if(RequestCode == null)
+      if(RequestCode == null && requestCode == null)
       {
-        throw new APIException("Authenticate the user first to receive a request_code");
+        throw new APIException("Call GetRequestCode() first to receive a request_code");
       }
 
-      AccessCode response = Get<AccessCode>("oauth/authorize", new List<Parameter>()
+      // override property with given param if available
+      if(requestCode != null)
       {
-        new Parameter() { Name = "code", Value = RequestCode, Type = ParameterType.GetOrPost }
-      });
+        RequestCode = requestCode;
+      }
+
+      // do request
+      AccessCode response = Get<AccessCode>("oauth/authorize", Utilities.CreateParamInList("code", RequestCode));
 
       // save code to client
       AccessCode = response.Code;

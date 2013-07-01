@@ -34,12 +34,20 @@ namespace PocketSharp
     /// <returns></returns>
     public static Parameter CreateParam(string name, object value, ParameterType type = ParameterType.GetOrPost)
     {
-      return new Parameter()
-      {
-        Name = name,
-        Value = value,
-        Type = type
-      };
+      return new Parameter() { Name = name, Value = value, Type = type };
+    }
+
+
+    /// <summary>
+    /// Creates a Parameter object within a list.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="value">The value.</param>
+    /// <param name="type">The type.</param>
+    /// <returns></returns>
+    public static List<Parameter> CreateParamInList(string name, object value, ParameterType type = ParameterType.GetOrPost)
+    {
+      return new List<Parameter>() { CreateParam(name, value, type) };
     }
 
 

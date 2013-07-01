@@ -17,19 +17,19 @@ namespace PocketSharp
     protected readonly RestClient _restClient;
 
     /// <summary>
-    /// default base URL for the API
+    /// The base URL for the Pocket API
     /// </summary>
-    protected static Uri defaultBaseUrl = new Uri("https://getpocket.com/v3/");
+    protected static Uri baseUri = new Uri("https://getpocket.com/v3/");
 
     /// <summary>
     /// The authentification URL
     /// </summary>
-    protected static string authentificationUrl = defaultBaseUrl + "auth/authorize?request_token={0}&redirect_uri={1}";
+    protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}";
 
     /// <summary>
-    /// base URL for the API
+    /// callback URL for API calls
     /// </summary>
-    protected Uri BaseUrl { get; set; }
+    protected Uri CallbackUri { get; set; }
 
     /// <summary>
     /// Accessor for the Pocket API key
@@ -56,52 +56,28 @@ namespace PocketSharp
     /// <summary>
     /// Initializes a new instance of the <see cref="PocketClient"/> class.
     /// </summary>
-    /// <param name="consumerKey">The API key.</param>
-    public PocketClient(string consumerKey)
-      : this(consumerKey, "", defaultBaseUrl) { }
-
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PocketClient" /> class.
-    /// </summary>
-    /// <param name="consumerKey">The API key.</param>
-    /// <param name="accessCode">The access code.</param>
-    public PocketClient(string consumerKey, string accessCode)
-      : this(consumerKey, accessCode, defaultBaseUrl) { }
-
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PocketClient" /> class.
-    /// </summary>
-    /// <param name="consumerKey">The API key.</param>
-    /// <param name="baseUrl">The base URL.</param>
-    public PocketClient(string consumerKey, Uri baseUrl)
-      : this(consumerKey, "", baseUrl) { }
-
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PocketClient"/> class.
-    /// </summary>
-    /// <param name="consumerKey">The API key.</param>
+    /// <param name="consumerKey">The API key</param>
     /// <param name="accessCode">Provide an access code if the user is already authenticated</param>
-    /// <param name="baseUrl">The base URL.</param>
-    public PocketClient(string consumerKey, string accessCode, Uri baseUrl)
+    /// <param name="callbackUri">The callback URL is called by Pocket after authentication</param>
+    public PocketClient(string consumerKey, string accessCode = null, Uri callbackUri = null)
     {
       // assign public properties
-      BaseUrl = baseUrl;
       ConsumerKey = consumerKey;
 
       // assign access code if submitted
-      if (accessCode != "")
+      if (accessCode != null)
       {
         AccessCode = accessCode.ToString();
       }
 
-      // initialize REST client
-      _restClient = new RestClient
+      // assign callback uri if submitted
+      if (callbackUri != null)
       {
-        BaseUrl = BaseUrl.ToString()
-      };
+        CallbackUri = callbackUri;
+      }
+
+      // initialize REST client
+      _restClient = new RestClient(baseUri.ToString());
 
       // add default parameters to each request
       _restClient.AddDefaultParameter("consumer_key", ConsumerKey);
