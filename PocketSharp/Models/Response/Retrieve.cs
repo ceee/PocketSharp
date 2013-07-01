@@ -7,7 +7,7 @@ namespace PocketSharp.Models
   /// Item Response
   /// </summary>
   [DataContract]
-  class Retrieve : ResponseBase
+  internal class Retrieve : ResponseBase
   {
     /// <summary>
     /// Gets or sets the complete.

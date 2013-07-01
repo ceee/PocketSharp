@@ -6,7 +6,7 @@ namespace PocketSharp.Models
   /// Modify Response
   /// </summary>
   [DataContract]
-  class Modify : ResponseBase
+  internal class Modify : ResponseBase
   {
     /// <summary>
     /// Gets or sets the action results.

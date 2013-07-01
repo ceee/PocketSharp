@@ -6,7 +6,7 @@ namespace PocketSharp.Models
   /// Add Response
   /// </summary>
   [DataContract]
-  class Add : ResponseBase
+  internal class Add : ResponseBase
   {
     /// <summary>
     /// Gets or sets the item.
