@@ -89,7 +89,7 @@ In order to communicate with a Pocket User, you will need a consumer key (which 
 
 The authentication is a 3-step process:
 
-### 1) Generate authentication URI
+#### 1) Generate authentication URI
 
 Receive the **request code** and **authentication URI** from the library by calling `string GetRequestCode()`:
 
@@ -102,12 +102,12 @@ Uri authenticationUri = _client.GenerateAuthenticationUri();
 
 The _request code_ is stored internally, but you can also provide it as param in `GenerateAuthenticationUri(string requestCode = null)`.
 
-### 2) Redirect to Pocket
+#### 2) Redirect to Pocket
 Next you need to redirect the user to the `authenticationUri`, which displays a prompt to grant permissions for the application (see image). After the user granted or denied, he/she is redirected to the `callbackUri`.
 
 ![authentication screen](https://raw.github.com/ceee/PocketSharp/master/PocketSharp/authentication-screen.png)
 
-### 3) Get Access Code
+#### 3) Get Access Code
 Call `string GetAccessCode(string requestCode = null)`
 
 ```csharp
@@ -125,6 +125,13 @@ Note that `GetAccessCode` can only be called with an existing _request code_. If
 Without it you would always have to redo the authentication process.
 
 ## Retrieve
+
+Get list of all items:
+
+```csharp
+List<PocketItem> items = _client.Retrieve();
+// equivalent to: _client.Retrieve(RetrieveFilter.All)
+```
 
 Find items by a tag:
 
