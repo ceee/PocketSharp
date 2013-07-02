@@ -1,5 +1,6 @@
 ﻿using PocketSharp.Models;
 using RestSharp;
+using RestSharp.Contrib;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -29,7 +30,7 @@ namespace PocketSharp
     /// <summary>
     /// callback URL for API calls
     /// </summary>
-    protected Uri CallbackUri { get; set; }
+    protected string CallbackUri { get; set; }
 
     /// <summary>
     /// Accessor for the Pocket API key
@@ -59,7 +60,7 @@ namespace PocketSharp
     /// <param name="consumerKey">The API key</param>
     /// <param name="accessCode">Provide an access code if the user is already authenticated</param>
     /// <param name="callbackUri">The callback URL is called by Pocket after authentication</param>
-    public PocketClient(string consumerKey, string accessCode = null, Uri callbackUri = null)
+    public PocketClient(string consumerKey, string accessCode = null, string callbackUri = null)
     {
       // assign public properties
       ConsumerKey = consumerKey;
@@ -73,7 +74,7 @@ namespace PocketSharp
       // assign callback uri if submitted
       if (callbackUri != null)
       {
-        CallbackUri = callbackUri;
+        CallbackUri = HttpUtility.UrlEncode(callbackUri.ToString());
       }
 
       // initialize REST client
