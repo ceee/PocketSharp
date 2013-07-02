@@ -3,7 +3,7 @@
 > This project is work in progress.
 > PocketSharp will be released as a NuGet package when ready.
 
-PocketSharp is a C#.NET class library, that integrates the [Pocket API v3](http://getpocket.com/developer) and consists of 4 parts:
+**PocketSharp** is a C#.NET class library, that integrates the [Pocket API v3](http://getpocket.com/developer) and consists of 4 parts:
 
 - Authentication
 - Retrieve
@@ -12,7 +12,7 @@ PocketSharp is a C#.NET class library, that integrates the [Pocket API v3](http:
 
 ---
 
-_If you don't know [Pocket](http://getpocket.com), be sure to check it out. It's an awesome service, which lets you save articles, videos, ... in the cloud and access it from all your devices._
+_If you don't know [Pocket](http://getpocket.com), be sure to check it out. It's an awesome service that lets you save articles, videos, ... in the cloud and access it from all your devices._
 
 ---
 
@@ -245,9 +245,14 @@ Renames a tag for the specified item:
 
 ## Release History
 
-- 2013-07-01 v0.3.0-pre update authentication process _(breaking)_
+- 2013-07-02 v0.3.0 update authentication process 
 - 2013-06-27 v0.2.0 add, modify item & modify tags
 - 2013-06-26 v0.1.0 authentication & retrieve functionality
+
+## Used Packages
+
+- [RestSharp](http://restsharp.org/)
+- [ServiceStack.Text](https://github.com/ServiceStack/ServiceStack.Text).
 
 ## Contributors
 | [![twitter/artistandsocial](http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70)](http://twitter.com/artistandsocial "Follow @artistandsocial on Twitter") |
