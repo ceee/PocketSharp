@@ -252,7 +252,7 @@ Renames a tag for the specified item:
 ## Used Packages
 
 - [RestSharp](http://restsharp.org/)
-- [ServiceStack.Text](https://github.com/ServiceStack/ServiceStack.Text).
+- [ServiceStack.Text](https://github.com/ServiceStack/ServiceStack.Text)
 
 ## Contributors
 | [![twitter/artistandsocial](http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70)](http://twitter.com/artistandsocial "Follow @artistandsocial on Twitter") |
