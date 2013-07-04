@@ -1,12 +1,12 @@
 ﻿using System.Runtime.Serialization;
 
-namespace PocketSharp.Models.Authentification
+namespace PocketSharp.Models
 {
   /// <summary>
-  /// Request Code
+  /// Access Code
   /// </summary>
   [DataContract]
-  internal class RequestCode
+  internal class AccessCode
   {
     /// <summary>
     /// Gets or sets the code.
@@ -14,16 +14,16 @@ namespace PocketSharp.Models.Authentification
     /// <value>
     /// The code.
     /// </value>
-    [DataMember]
+    [DataMember(Name = "access_token")]
     public string Code { get; set; }
 
     /// <summary>
-    /// Gets or sets the state.
+    /// Gets or sets the username.
     /// </summary>
     /// <value>
-    /// The state.
+    /// The username.
     /// </value>
     [DataMember]
-    public string State { get; set; }
+    public string Username { get; set; }
   }
 }

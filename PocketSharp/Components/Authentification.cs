@@ -1,7 +1,5 @@
-﻿using PocketSharp.Models.Authentification;
+﻿using PocketSharp.Models;
 using System;
-using System.Collections.Generic;
-using RestSharp;
 
 namespace PocketSharp
 {

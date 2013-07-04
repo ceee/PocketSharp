@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp", "PocketSharp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.Console", "PocketSharp.Console\PocketSharp.Console.csproj", "{81B7D587-A189-4785-BDFE-CA8A9ABA0760}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.Tests", "PocketSharp.Tests\PocketSharp.Tests.csproj", "{F1CEA363-7039-40BA-9744-0071F46BB90C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{81B7D587-A189-4785-BDFE-CA8A9ABA0760}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81B7D587-A189-4785-BDFE-CA8A9ABA0760}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81B7D587-A189-4785-BDFE-CA8A9ABA0760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1CEA363-7039-40BA-9744-0071F46BB90C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1CEA363-7039-40BA-9744-0071F46BB90C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1CEA363-7039-40BA-9744-0071F46BB90C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1CEA363-7039-40BA-9744-0071F46BB90C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

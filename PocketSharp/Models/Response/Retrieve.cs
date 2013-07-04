@@ -34,7 +34,7 @@ namespace PocketSharp.Models
     /// The _ item dictionary.
     /// </value>
     [DataMember(Name = "list")]
-    public Dictionary<string, PocketItem> _ItemDictionary { get; set; }
+    public Dictionary<string, PocketItem> ItemDictionary { get; set; }
 
     /// <summary>
     /// Gets the items.
@@ -45,7 +45,7 @@ namespace PocketSharp.Models
     [IgnoreDataMember]
     public List<PocketItem> Items
     {
-      get { return Utilities.DictionaryToList<PocketItem>(_ItemDictionary); }
+      get { return Utilities.DictionaryToList<PocketItem>(ItemDictionary); }
     }
   }
 }

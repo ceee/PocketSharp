@@ -56,8 +56,8 @@
     <Compile Include="Components\ModifyTags.cs" />
     <Compile Include="Components\Retrieve.cs" />
     <Compile Include="JsonDeserializer.cs" />
-    <Compile Include="Models\Authentification\AccessCode.cs" />
-    <Compile Include="Models\Authentification\RequestCode.cs" />
+    <Compile Include="Models\Response\AccessCode.cs" />
+    <Compile Include="Models\Response\RequestCode.cs" />
     <Compile Include="Models\Parameters\AddParameters.cs" />
     <Compile Include="Models\PocketAuthor.cs" />
     <Compile Include="Models\PocketImage.cs" />

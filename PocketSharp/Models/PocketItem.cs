@@ -182,7 +182,7 @@ namespace PocketSharp.Models
     /// The _ tag dictionary.
     /// </value>
     [DataMember(Name = "tags")]
-    public Dictionary<string, PocketTag> _TagDictionary { get; set; }
+    public Dictionary<string, PocketTag> TagDictionary { get; set; }
 
     /// <summary>
     /// Gets or sets the _ image dictionary.
@@ -191,7 +191,7 @@ namespace PocketSharp.Models
     /// The _ image dictionary.
     /// </value>
     [DataMember(Name = "images")]
-    public Dictionary<string, PocketImage> _ImageDictionary { get; set; }
+    public Dictionary<string, PocketImage> ImageDictionary { get; set; }
 
     /// <summary>
     /// Gets or sets the _ video dictionary.
@@ -200,7 +200,7 @@ namespace PocketSharp.Models
     /// The _ video dictionary.
     /// </value>
     [DataMember(Name = "videos")]
-    public Dictionary<string, PocketVideo> _VideoDictionary { get; set; }
+    public Dictionary<string, PocketVideo> VideoDictionary { get; set; }
 
     /// <summary>
     /// Gets or sets the _ author dictionary.
@@ -209,7 +209,7 @@ namespace PocketSharp.Models
     /// The _ author dictionary.
     /// </value>
     [DataMember(Name = "authors")]
-    public Dictionary<string, PocketAuthor> _AuthorDictionary { get; set; }
+    public Dictionary<string, PocketAuthor> AuthorDictionary { get; set; }
 
 
     /// <summary>
@@ -221,7 +221,7 @@ namespace PocketSharp.Models
     [IgnoreDataMember]
     public List<PocketTag> Tags
     {
-      get { return Utilities.DictionaryToList<PocketTag>(_TagDictionary); }
+      get { return Utilities.DictionaryToList<PocketTag>(TagDictionary); }
     }
 
     /// <summary>
@@ -233,7 +233,7 @@ namespace PocketSharp.Models
     [IgnoreDataMember]
     public List<PocketImage> Images
     {
-      get { return Utilities.DictionaryToList<PocketImage>(_ImageDictionary); }
+      get { return Utilities.DictionaryToList<PocketImage>(ImageDictionary); }
     }
 
     /// <summary>
@@ -257,7 +257,7 @@ namespace PocketSharp.Models
     [IgnoreDataMember]
     public List<PocketVideo> Videos
     {
-      get { return Utilities.DictionaryToList<PocketVideo>(_VideoDictionary); }
+      get { return Utilities.DictionaryToList<PocketVideo>(VideoDictionary); }
     }
 
     /// <summary>
@@ -269,7 +269,7 @@ namespace PocketSharp.Models
     [IgnoreDataMember]
     public List<PocketAuthor> Authors
     {
-      get { return Utilities.DictionaryToList<PocketAuthor>(_AuthorDictionary); }
+      get { return Utilities.DictionaryToList<PocketAuthor>(AuthorDictionary); }
     }
   }
 }

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>fbe5a0d2-d0de-44b1-8b8a-cf8cd3ac2230</ProjectGuid>
+    <ProjectGuid>{F1CEA363-7039-40BA-9744-0071F46BB90C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PocketSharp.Tests</RootNamespace>
