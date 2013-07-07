@@ -50,7 +50,7 @@ namespace PocketSharp
         RequestCode = requestCode;
       }
 
-      return new Uri(string.Format(authentificationUri, RequestCode, Uri.EscapeDataString(CallbackUri)));
+      return new Uri(string.Format(authentificationUri, RequestCode, CallbackUri));
     }
 
 
