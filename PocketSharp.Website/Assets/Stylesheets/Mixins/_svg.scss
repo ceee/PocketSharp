@@ -1,0 +1,15 @@
+
+// svg with fallback
+@mixin svg( $file )
+{
+	.inlinesvg &
+	{
+		background: url('#{$svgPath}#{$file}.svg') no-repeat 0 0;
+
+		> img
+		{
+			opacity: 0;
+			//visibility: hidden;
+		}
+	}
+}

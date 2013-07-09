@@ -1,0 +1,54 @@
+*
+{
+	@include box-sizing(border-box);
+}
+
+html
+{
+  height: 100%;
+}
+
+body
+{
+  line-height: 1;
+  color: $textColor;
+  height: 100%;
+  width: 100%;
+  position: relative;
+	 font-family: 'Segoe UI', Arial, sans-serif;
+	
+
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  -ms-touch-action: double-tap-zoom;
+}
+
+html, body
+{
+	font-size: 100%;
+}
+
+// Get rid of gap under images by making them display: inline-block; by default
+img
+{
+  display: inline-block;
+  vertical-align: middle;
+  -ms-interpolation-mode: bicubic;
+}
+
+// Grid Defaults to get images and embeds to work properly
+img, object, embed
+{
+  max-width: 100%;
+  height: auto;
+}
+
+object, embed
+{
+  height: 100%;
+}
+
+.center
+{
+	text-align: center;
+}

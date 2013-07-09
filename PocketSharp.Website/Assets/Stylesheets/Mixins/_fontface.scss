@@ -1,0 +1,29 @@
+
+@mixin fontFace( $name, $filename, $weight: false, $style: false)
+{
+  @font-face
+  {
+    font-family: quote($name);
+
+    src: font-url("#{$filename}.eot");
+    src: font-url("#{$filename}.eot?#iefix") format("embedded-opentype"),
+		 font-url("#{$filename}.woff") format("woff"),
+		 font-url("#{$filename}.ttf") format("truetype"),
+		 font-url('#{$filename}svg#fix') format('svg');
+
+    @if $weight
+    {
+      font-weight: $weight;
+    }
+    @if $style
+    {
+      font-style: $style;
+    }
+  }
+}
+
+@mixin resetFontForFontsCom
+{
+  font-weight: 400 !important;
+  font-style: normal !important;
+}

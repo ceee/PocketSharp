@@ -1,0 +1,88 @@
+
+// Segoe UI SemiLight
+@include fontFace( 'SegoeUI', 'SegoeUI-SemiLight-final', 300, normal );
+
+
+// Segoe UI Regular
+@include fontFace( 'SegoeUI', 'SegoeUI-Regular-final', 400, normal );
+
+
+// Segoe UI SemiBold
+@include fontFace( 'SegoeUI', 'SegoeUI-SemiBold-final', 500, normal );
+
+
+// Segoe UI Italic
+@include fontFace( 'SegoeUI', 'SegoeUI-Italic-final', 400, italic );
+
+
+// Entypo Icon Font
+@include fontFace( 'entypo', 'entypo', 400, normal );
+
+
+%iconFont
+{
+	&:before
+	{
+		font-family: 'entypo', sans-serif;
+		font-weight: 400 !important;
+		font-style: normal !important;
+		display: inline;
+		width: auto;
+		height: auto;
+		line-height: auto;
+		vertical-align: baseline;
+		text-decoration: none;
+	}
+}
+
+[class*="entypo-"]
+{
+	@extend %iconFont;
+}
+
+
+// default link style
+// mainly used for paragraphs
+a
+{
+  color: $primaryColor;
+  text-decoration: underline;
+  outline: 1px dotted transparent;
+  @extend %shortTransition;
+
+  &:link, &:hover, &:visited
+  {
+    outline: 1px dotted transparent;
+  }
+  &:hover
+  {
+    color: darken($primaryColor, 10%);
+  }
+  &:visited
+  {
+    color: desaturate(lighten($primaryColor, 20%), 20%);
+  }
+  &:focus
+  {
+    outline-color: desaturate(lighten($primaryColor, 30%), 20%);
+  }
+}
+
+
+// default style for headlines
+h1, h2, h3, h4, h5, h6
+{
+  margin: 0;
+	 padding: 0;
+  font-weight: 300;
+
+  i
+  {
+    margin-right: 10px;
+  }
+}
+
+strong, b
+{
+  font-weight: 500 !important;
+}

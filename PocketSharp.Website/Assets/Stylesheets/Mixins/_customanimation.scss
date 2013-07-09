@@ -1,0 +1,9 @@
+
+@mixin customAnimation($params)
+{
+  -webkit-animation: $params;
+  -moz-animation: $params;
+  -ms-animation: $params;
+  -o-animation: $params;
+  animation: $params;
+}

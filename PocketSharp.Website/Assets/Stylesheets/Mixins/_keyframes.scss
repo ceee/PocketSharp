@@ -1,0 +1,20 @@
+
+// originally by bourbon:
+// https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/css3/_keyframes.scss
+
+// Adds keyframes blocks for supported prefixes, removing redundant prefixes in the block's content
+@mixin keyframes($name) 
+{
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+	@-o-keyframes #{$name} {
+		@content;
+	}
+	@keyframes #{$name} {
+		@content;
+	}
+}

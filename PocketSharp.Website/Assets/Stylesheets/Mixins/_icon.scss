@@ -1,0 +1,11 @@
+
+@mixin icon($type)
+{
+	@extend .entypo-#{$type};
+	@extend %iconFont;
+	
+	&:before
+	{
+		@content;	
+	}
+}

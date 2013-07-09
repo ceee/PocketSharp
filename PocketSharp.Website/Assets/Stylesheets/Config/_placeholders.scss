@@ -1,0 +1,55 @@
+
+
+%shortTransition
+{
+  @include transition(all 0.3s ease-in-out);
+}
+
+%antialiased
+{
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+%inlineBlock
+{
+	display: inline-block;
+	*display: block;
+	*zoom: 1;
+}
+
+
+%clearfix
+{
+  *zoom:1;
+  &:before, &:after
+  {
+    content: " ";
+    display: table;
+  }
+  &:after
+  {
+    clear: both;
+  }
+}
+
+%resetLink
+{
+  &:link, &:hover, &:visited, &:focus
+  {
+    outline: 1px dotted transparent;
+  }
+  &:visited, &:hover
+  {
+    color: inherit;
+  }
+}
+
+
+// positioning
+%center
+{
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+}

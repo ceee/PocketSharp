@@ -1,0 +1,5 @@
+source 'http://rubygems.org'
+
+gem 'sass'
+gem 'compass', :require => 'sass'
+gem 'zurb-foundation', '3.2.5'
