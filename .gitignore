@@ -130,6 +130,7 @@ node_modules
 tmp
 _old
 _tmp
+Gemfile.lock
 
 # RIA/Silverlight projects
 Generated_Code/
