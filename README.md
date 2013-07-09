@@ -250,7 +250,7 @@ Renames a tag for the specified item:
 - 2013-06-27 v0.2.0 add, modify item & modify tags
 - 2013-06-26 v0.1.0 authentication & retrieve functionality
 
-## Used Packages
+## Dependencies
 
 - [RestSharp](http://restsharp.org/)
 - [ServiceStack.Text](https://github.com/ServiceStack/ServiceStack.Text)
@@ -259,3 +259,7 @@ Renames a tag for the specified item:
 | [![twitter/artistandsocial](http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70)](http://twitter.com/artistandsocial "Follow @artistandsocial on Twitter") |
 |---|
 | [Tobias Klika @ceee](https://github.com/ceee) |
+
+## License
+
+[MIT License](https://github.com/ceee/PocketSharp/blob/master/LICENSE-MIT)
