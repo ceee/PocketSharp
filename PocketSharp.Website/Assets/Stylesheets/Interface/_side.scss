@@ -2,13 +2,28 @@
 
 .app-side
 {
-  width: 240px;
+  width: 280px;
   float: left;
+
+  h1
+  {
+    //margin-bottom: 10px;
+  }
 }
 
 .app-description
 {
-  background: darken($darkColor, 2%);
-  border-radius: 4px;
-  padding: 20px;
+  margin: 10px 0 30px 0;
+  //color: $midColor;
+}
+
+.app-nuget
+{
+  code 
+  {
+    background: darken($darkColor, 2%);
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 12px;
+  }
 }

@@ -21,9 +21,9 @@
   <link rel="icon" type="image/png" href="/Content/Images/frontendplay.png" />
   <link rel="image_src" href="/Content/Images/frontendplay-200.png" />
 
-  <link href="/Debug/app.css" rel="stylesheet"/>
+  <link href="/Debug/app.css" rel="stylesheet" />
 </head>
-  
+
 <body>
   <div class="app">
 
@@ -34,282 +34,254 @@
       <p class="app-description">
         PocketSharp is a C#.NET class library, that integrates the Pocket API v3
       </p>
+      <div class="app-nuget">
+        <code>Install-Package PocketSharp</code>
+      </div>
     </aside>
 
     <div class="app-main">
-      <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
-<a name="pocketsharp" class="anchor" href="#pocketsharp"><span class="octicon octicon-link"></span></a>PocketSharp</h1>
+      <nav class="app-nav">
+        <a href="/" class="is-active">Getting Started</a>
+        <a href="/">Authenticate</a>
+        <a href="/">Retrieve</a>
+        <a href="/">Modify</a>
+        <a href="/">Add</a>
+      </nav>
+      <article class="article">
 
-<blockquote>
-<p>This project is work in progress.
-PocketSharp will be released as a NuGet package when ready.</p>
-</blockquote>
-
-<p><strong>PocketSharp</strong> is a C#.NET class library, that integrates the <a href="http://getpocket.com/developer">Pocket API v3</a> and consists of 4 parts:</p>
-
-<ul>
-<li>Authentication</li>
-<li>Retrieve</li>
-<li>Modify</li>
-<li>Add</li>
-</ul><hr><p><em>If you don't know <a href="http://getpocket.com">Pocket</a>, be sure to check it out. It's an awesome service that lets you save articles, videos, ... in the cloud and access it from all your devices.</em></p>
-
-<hr><h2>
-<a name="usage-example" class="anchor" href="#usage-example"><span class="octicon octicon-link"></span></a>Usage Example</h2>
-
-<p>Request a <a href="http://getpocket.com/developer/apps/">Consumer Key on Pocket.</a></p>
-
-<p>Include the PocketSharp namespace and it's associated models (you will need them later):</p>
-
-<div class="highlight"><pre><span class="k">using</span> <span class="nn">PocketSharp</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">PocketSharp.Models</span><span class="p">;</span>
-</pre></div>
-
-<p>Initialize PocketClient with:</p>
-
-<div class="highlight"><pre><span class="n">PocketClient</span> <span class="n">_client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PocketClient</span><span class="p">(</span><span class="s">"[YOUR_CONSUMER_KEY]"</span><span class="p">,</span> <span class="s">"[YOUR_ACCESS_CODE]"</span><span class="p">);</span>
-</pre></div>
-
-<p>Do a simple request - e.g. a search for <code>CSS</code>:</p>
-
-<div class="highlight"><pre><span class="n">_client</span><span class="p">.</span><span class="n">Search</span><span class="p">(</span><span class="s">"css"</span><span class="p">).</span><span class="n">ForEach</span><span class="p">(</span>
-    <span class="n">item</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">ID</span> <span class="p">+</span> <span class="s">" | "</span> <span class="p">+</span> <span class="n">item</span><span class="p">.</span><span class="n">Title</span><span class="p">)</span>
-<span class="p">);</span>
-</pre></div>
-
-<p>Which will output:</p>
-
-<pre><code>330361896 | CSS Front-end Frameworks with comparison : By usabli.ca
+        <p>PocketSharp and consists of 4 parts:</p>
+        <ul>
+          <li>Authentication</li>
+          <li>Retrieve</li>
+          <li>Modify</li>
+          <li>Add</li>
+        </ul>
+        <hr />
+        <p><em>If you don't know <a href="http://getpocket.com">Pocket</a>, be sure to check it out. It's an awesome service that lets you save articles, videos, ... in the cloud and access it from all your devices.</em></p>
+        <hr />
+        <h2>Usage Example</h2>
+        <p>Request a <a href="http://getpocket.com/developer/apps/">Consumer Key on Pocket.</a></p>
+        <p>Include the PocketSharp namespace and it's associated models (you will need them later):</p>
+        <p>
+          <code>csharp
+using PocketSharp;
+using PocketSharp.Models;</code>
+        </p>
+        <p>Initialize PocketClient with:</p>
+        <p>
+          <code>csharp
+PocketClient _client = new PocketClient(&quot;[YOUR_CONSUMER_KEY]&quot;, &quot;[YOUR_ACCESS_CODE]&quot;);</code>
+        </p>
+        <p>Do a simple request - e.g. a search for <code>CSS</code>:</p>
+        <p>
+          <code>csharp
+_client.Search(&quot;css&quot;).ForEach(
+	item =&gt; Console.WriteLine(item.ID + &quot; | &quot; + item.Title)
+);</code>
+        </p>
+        <p>Which will output:</p>
+        <pre><code>330361896 | CSS Front-end Frameworks with comparison : By usabli.ca
 345541438 | Editr - HTML, CSS, JavaScript playground
 251743431 | CSS Architecture
 343693149 | CSS3 Transitions - Thank God We Have A Specification!
 ...
 </code></pre>
 
-<h2>
-<a name="create-an-instance" class="anchor" href="#create-an-instance"><span class="octicon octicon-link"></span></a>Create an instance</h2>
-
-<p>Constructor:</p>
-
-<div class="highlight"><pre><span class="n">PocketClient</span><span class="p">(</span><span class="kt">string</span> <span class="n">consumerKey</span><span class="p">,</span> <span class="kt">string</span> <span class="n">accessCode</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">Uri</span> <span class="n">callbackUri</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
-</pre></div>
-
-<p><code>consumerKey</code>: The API key
-<br><code>accessCode</code>: Provide an access code if the user is already authenticated
-<br><code>callbackUri</code>: The callback URL is called by Pocket after authentication</p>
-
-<p>Example:</p>
-
-<div class="highlight"><pre><span class="n">PocketClient</span> <span class="n">_client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PocketClient</span><span class="p">(</span>
-    <span class="n">consumerKey</span><span class="p">:</span> <span class="s">"123498237423498723498723"</span><span class="p">,</span>
-    <span class="n">callbackUri</span><span class="p">:</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">"http://ceecore.com"</span><span class="p">),</span>
-    <span class="n">accessCode</span><span class="p">:</span> <span class="s">"097809-oi987-izi8-jk98-oiuu89"</span>
-<span class="p">);</span>
-</pre></div>
-
-<p>You can change the <em>Access Code</em> after initialization:</p>
-
-<div class="highlight"><pre><span class="n">_client</span><span class="p">.</span><span class="n">AccessCode</span> <span class="p">=</span> <span class="s">"[YOU_ACCESS_CODE]"</span><span class="p">;</span>
-</pre></div>
-
-<p><strong>Before authentication</strong> you will need to provide the <code>callbackUri</code> for authentication requests.
-<br><strong>After authentication</strong> you will need to provide the <code>accessCode</code>.</p>
-
-<h2>
-<a name="authentication" class="anchor" href="#authentication"><span class="octicon octicon-link"></span></a>Authentication</h2>
-
-<p>In order to communicate with a Pocket User, you will need a consumer key (which is generated by <a href="http://getpocket.com/developer/apps/">creating a new application on Pocket</a>) and an <strong>Access Code</strong>.</p>
-
-<p>The authentication is a 3-step process:</p>
-
-<h4>
-<a name="1-generate-authentication-uri" class="anchor" href="#1-generate-authentication-uri"><span class="octicon octicon-link"></span></a>1) Generate authentication URI</h4>
-
-<p>Receive the <strong>request code</strong> and <strong>authentication URI</strong> from the library by calling <code>string GetRequestCode()</code>:</p>
-
-<div class="highlight"><pre><span class="kt">string</span> <span class="n">requestCode</span> <span class="p">=</span> <span class="n">_client</span><span class="p">.</span><span class="n">GetRequestCode</span><span class="p">();</span>
-<span class="c1">// 0f453f2d-1605-8584-28fd-39af8e</span>
-<span class="n">Uri</span> <span class="n">authenticationUri</span> <span class="p">=</span> <span class="n">_client</span><span class="p">.</span><span class="n">GenerateAuthenticationUri</span><span class="p">();</span>
-<span class="c1">// https://getpocket.com/auth/authorize?request_token=0f453f2d-1605-8584-28fd-39af8e&amp;redirect_uri=http%253a%252f%252fceecore.com</span>
-</pre></div>
-
-<p>The <em>request code</em> is stored internally, but you can also provide it as param in <code>GenerateAuthenticationUri(string requestCode = null)</code>.</p>
-
-<h4>
-<a name="2-redirect-to-pocket" class="anchor" href="#2-redirect-to-pocket"><span class="octicon octicon-link"></span></a>2) Redirect to Pocket</h4>
-
-<p>Next you need to redirect the user to the <code>authenticationUri</code>, which displays a prompt to grant permissions for the application (see image). After the user granted or denied, he/she is redirected to the <code>callbackUri</code>.</p>
-
-<p><a href="https://raw.github.com/ceee/PocketSharp/master/PocketSharp/authentication-screen.png" target="_blank"><img src="https://raw.github.com/ceee/PocketSharp/master/PocketSharp/authentication-screen.png" alt="authentication screen" style="max-width:100%;"></a></p>
-
-<h4>
-<a name="3-get-access-code" class="anchor" href="#3-get-access-code"><span class="octicon octicon-link"></span></a>3) Get Access Code</h4>
-
-<p>Call <code>string GetAccessCode(string requestCode = null)</code></p>
-
-<div class="highlight"><pre><span class="kt">string</span> <span class="n">accessCode</span> <span class="p">=</span> <span class="n">_client</span><span class="p">.</span><span class="n">GetAccessCode</span><span class="p">();</span>
-<span class="c1">// fa8bfc16-69b3-4d22-7db7-84a58d</span>
-</pre></div>
-
-<p>Again, the received <em>access code</em> is stored internally.
-Note that <code>GetAccessCode</code> can only be called with an existing <em>request code</em>. If you need to re-authenticate a user, start again with Step 1).</p>
-
-<h4>
-<a name="important" class="anchor" href="#important"><span class="octicon octicon-link"></span></a>Important</h4>
-
-<p><strong>Be sure to permanently store the <em>Access Code</em> for your user.</strong>
-<br>
-Without it you would always have to redo the authentication process.</p>
-
-<h2>
-<a name="retrieve" class="anchor" href="#retrieve"><span class="octicon octicon-link"></span></a>Retrieve</h2>
-
-<p>Get list of all items:</p>
-
-<div class="highlight"><pre><span class="n">List</span><span class="p">&lt;</span><span class="n">PocketItem</span><span class="p">&gt;</span> <span class="n">items</span> <span class="p">=</span> <span class="n">_client</span><span class="p">.</span><span class="n">Retrieve</span><span class="p">();</span>
-<span class="c1">// equivalent to: _client.Retrieve(RetrieveFilter.All)</span>
-</pre></div>
-
-<p>Find items by a tag:</p>
-
-<div class="highlight"><pre><span class="n">List</span><span class="p">&lt;</span><span class="n">PocketItem</span><span class="p">&gt;</span> <span class="n">items</span> <span class="p">=</span> <span class="n">_client</span><span class="p">.</span><span class="n">SearchByTag</span><span class="p">(</span><span class="s">"tutorial"</span><span class="p">);</span>
-</pre></div>
-
-<p>Find items by a search string:</p>
-
-<div class="highlight"><pre><span class="n">List</span><span class="p">&lt;</span><span class="n">PocketItem</span><span class="p">&gt;</span> <span class="n">items</span> <span class="p">=</span> <span class="n">_client</span><span class="p">.</span><span class="n">Search</span><span class="p">(</span><span class="s">"css"</span><span class="p">);</span>
-</pre></div>
-
-<p>Find items by a filter:</p>
-
-<div class="highlight"><pre><span class="n">List</span><span class="p">&lt;</span><span class="n">PocketItem</span><span class="p">&gt;</span> <span class="n">items</span> <span class="p">=</span> <span class="n">_client</span><span class="p">.</span><span class="n">Retrieve</span><span class="p">(</span><span class="n">RetrieveFilter</span><span class="p">.</span><span class="n">Favorite</span><span class="p">);</span> <span class="c1">// only favorites</span>
-</pre></div>
-
-<p>The RetrieveFilter Enum is specified as follows:</p>
-
-<div class="highlight"><pre><span class="k">enum</span> <span class="n">RetrieveFilter</span> <span class="p">{</span> <span class="n">All</span><span class="p">,</span> <span class="n">Unread</span><span class="p">,</span> <span class="n">Archive</span><span class="p">,</span> <span class="n">Favorite</span><span class="p">,</span> <span class="n">Article</span><span class="p">,</span> <span class="n">Video</span><span class="p">,</span> <span class="n">Image</span> <span class="p">}</span>
-</pre></div>
-
-<h4>
-<a name="custom-parameters" class="anchor" href="#custom-parameters"><span class="octicon octicon-link"></span></a>Custom Parameters</h4>
-
-<p>You can create a completely custom parameter list for retrieval with the POCO <code>RetrieveParameters</code>:</p>
-
-<div class="highlight"><pre><span class="kt">var</span> <span class="n">parameters</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RetrieveParameters</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">Count</span> <span class="p">=</span> <span class="m">50</span><span class="p">,</span>
-    <span class="n">Offset</span> <span class="p">=</span> <span class="m">100</span><span class="p">,</span>
-    <span class="n">Sort</span> <span class="p">=</span> <span class="n">SortEnum</span><span class="p">.</span><span class="n">oldest</span>
-    <span class="p">...</span>
-<span class="p">};</span>
-
-<span class="n">List</span><span class="p">&lt;</span><span class="n">PocketItem</span><span class="p">&gt;</span> <span class="n">items</span> <span class="p">=</span> <span class="n">_client</span><span class="p">.</span><span class="n">Retrieve</span><span class="p">(</span><span class="n">parameters</span><span class="p">);</span>
-</pre></div>
-
-<h2>
-<a name="add" class="anchor" href="#add"><span class="octicon octicon-link"></span></a>Add</h2>
-
-<p>Adds a new item to your pocket list.
-Accepts four parameters, with <code>uri</code> being required.</p>
-
-<div class="highlight"><pre><span class="n">PocketItem</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Uri</span> <span class="n">uri</span><span class="p">,</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">tags</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="kt">string</span> <span class="n">title</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="kt">string</span> <span class="n">tweetID</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
-</pre></div>
-
-<p>Example:</p>
-
-<div class="highlight"><pre><span class="n">PocketItem</span> <span class="n">newItem</span> <span class="p">=</span> <span class="n">_client</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span>
-    <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"http://www.neowin.net/news/full-build-2013-conference-sessions-listing-revealed"</span><span class="p">),</span>
-    <span class="k">new</span> <span class="kt">string</span><span class="p">[]</span> <span class="p">{</span> <span class="s">"microsoft"</span><span class="p">,</span> <span class="s">"neowin"</span><span class="p">,</span> <span class="s">"build"</span> <span class="p">}</span>
-<span class="p">);</span>
-</pre></div>
-
-<p>The title can be included for cases where an item does not have a title, which is typical for image or PDF URLs. If Pocket detects a title from the content of the page, this parameter will be ignored.</p>
-
-<p>If you are adding Pocket support to a Twitter client, please send along a reference to the tweet status id (with the tweetID). This allows Pocket to show the original tweet alongside the article.</p>
-
-<h2>
-<a name="modify" class="anchor" href="#modify"><span class="octicon octicon-link"></span></a>Modify</h2>
-
-<p>All Modify methods accept either the itemID (as int) or a <code>PocketItem</code> as parameter.</p>
-
-<p>Archive the specified item:</p>
-
-<pre><code>bool isSuccess = _client.Archive(myPocketItem);
+        <h2>Create an instance</h2>
+        <p>Constructor:</p>
+        <p>
+          <code>csharp
+PocketClient(string consumerKey, string accessCode = null, Uri callbackUri = null)</code>
+        </p>
+        <p>
+          <code>consumerKey</code>: The API key
+          <br>
+          <code>accessCode</code>: Provide an access code if the user is already authenticated
+          <br>
+          <code>callbackUri</code>: The callback URL is called by Pocket after authentication
+        </p>
+        <p>Example:</p>
+        <p>
+          <code>csharp
+PocketClient _client = new PocketClient(
+	consumerKey: &quot;123498237423498723498723&quot;,
+	callbackUri: new Uri(&quot;http://ceecore.com&quot;),
+	accessCode: &quot;097809-oi987-izi8-jk98-oiuu89&quot;
+);</code>
+        </p>
+        <p>You can change the <em>Access Code</em> after initialization:</p>
+        <p>
+          <code>csharp
+_client.AccessCode = &quot;[YOU_ACCESS_CODE]&quot;;</code>
+        </p>
+        <p>
+          <strong>Before authentication</strong> you will need to provide the <code>callbackUri</code> for authentication requests.
+          <br>
+          <strong>After authentication</strong> you will need to provide the <code>accessCode</code>.
+        </p>
+        <h2>Authentication</h2>
+        <p>In order to communicate with a Pocket User, you will need a consumer key (which is generated by <a href="http://getpocket.com/developer/apps/">creating a new application on Pocket</a>) and an <strong>Access Code</strong>.</p>
+        <p>The authentication is a 3-step process:</p>
+        <h4>1) Generate authentication URI</h4>
+        <p>Receive the <strong>request code</strong> and <strong>authentication URI</strong> from the library by calling <code>string GetRequestCode()</code>:</p>
+        <p>
+          <code>csharp
+string requestCode = _client.GetRequestCode();
+// 0f453f2d-1605-8584-28fd-39af8e
+Uri authenticationUri = _client.GenerateAuthenticationUri();
+// https://getpocket.com/auth/authorize?request_token=0f453f2d-1605-8584-28fd-39af8e&amp;redirect_uri=http%253a%252f%252fceecore.com</code>
+        </p>
+        <p>The <em>request code</em> is stored internally, but you can also provide it as param in <code>GenerateAuthenticationUri(string requestCode = null)</code>.</p>
+        <h4>2) Redirect to Pocket</h4>
+        <p>Next you need to redirect the user to the <code>authenticationUri</code>, which displays a prompt to grant permissions for the application (see image). After the user granted or denied, he/she is redirected to the <code>callbackUri</code>.</p>
+        <p>
+          <img src="https://raw.github.com/ceee/PocketSharp/master/PocketSharp/authentication-screen.png" alt="authentication screen" /></p>
+        <h4>3) Get Access Code</h4>
+        <p>Call <code>string GetAccessCode(string requestCode = null)</code></p>
+        <p>
+          <code>csharp
+string accessCode = _client.GetAccessCode();
+// fa8bfc16-69b3-4d22-7db7-84a58d</code>
+        </p>
+        <p>
+          Again, the received <em>access code</em> is stored internally.
+Note that <code>GetAccessCode</code> can only be called with an existing <em>request code</em>. If you need to re-authenticate a user, start again with Step 1).
+        </p>
+        <h4>Important</h4>
+        <p>
+          <strong>Be sure to permanently store the <em>Access Code</em> for your user.</strong>
+          <br>
+          Without it you would always have to redo the authentication process.
+        </p>
+        <h2>Retrieve</h2>
+        <p>Get list of all items:</p>
+        <p>
+          <code>csharp
+List&lt;PocketItem&gt; items = _client.Retrieve();
+// equivalent to: _client.Retrieve(RetrieveFilter.All)</code>
+        </p>
+        <p>Find items by a tag:</p>
+        <p>
+          <code>csharp
+List&lt;PocketItem&gt; items = _client.SearchByTag(&quot;tutorial&quot;);</code>
+        </p>
+        <p>Find items by a search string:</p>
+        <p>
+          <code>csharp
+List&lt;PocketItem&gt; items = _client.Search(&quot;css&quot;);</code>
+        </p>
+        <p>Find items by a filter:</p>
+        <p>
+          <code>csharp
+List&lt;PocketItem&gt; items = _client.Retrieve(RetrieveFilter.Favorite); // only favorites</code>
+        </p>
+        <p>The RetrieveFilter Enum is specified as follows:</p>
+        <p>
+          <code>csharp
+enum RetrieveFilter { All, Unread, Archive, Favorite, Article, Video, Image }</code>
+        </p>
+        <h4>Custom Parameters</h4>
+        <p>You can create a completely custom parameter list for retrieval with the POCO <code>RetrieveParameters</code>:</p>
+        <p>
+          ```csharp
+var parameters = new RetrieveParameters()
+{
+	Count = 50,
+	Offset = 100,
+	Sort = SortEnum.oldest
+	...
+};
+        </p>
+        <p>
+          List<pocketitem>
+          items = _client.Retrieve(parameters);
+```
+        </p>
+        <h2>Add</h2>
+        <p>
+          Adds a new item to your pocket list.
+Accepts four parameters, with <code>uri</code> being required.
+        </p>
+        <p>
+          <code>csharp
+PocketItem Add(Uri uri, string[] tags = null, string title = null, string tweetID = null)</code>
+        </p>
+        <p>Example:</p>
+        <p>
+          <code>csharp
+PocketItem newItem = _client.Add(
+	new Uri(&quot;http://www.neowin.net/news/full-build-2013-conference-sessions-listing-revealed&quot;),
+	new string[] { &quot;microsoft&quot;, &quot;neowin&quot;, &quot;build&quot; }
+);</code>
+        </p>
+        <p>The title can be included for cases where an item does not have a title, which is typical for image or PDF URLs. If Pocket detects a title from the content of the page, this parameter will be ignored.</p>
+        <p>If you are adding Pocket support to a Twitter client, please send along a reference to the tweet status id (with the tweetID). This allows Pocket to show the original tweet alongside the article.</p>
+        <h2>Modify</h2>
+        <p>All Modify methods accept either the itemID (as int) or a <code>PocketItem</code> as parameter.</p>
+        <p>Archive the specified item:</p>
+        <pre><code>bool isSuccess = _client.Archive(myPocketItem);
 </code></pre>
 
-<p>Un-archive the specified item:</p>
-
-<pre><code>bool isSuccess = _client.Unarchive(myPocketItem);
+        <p>Un-archive the specified item:</p>
+        <pre><code>bool isSuccess = _client.Unarchive(myPocketItem);
 </code></pre>
 
-<p>Favorites the specified item:</p>
-
-<pre><code>bool isSuccess = _client.Favorite(myPocketItem);
+        <p>Favorites the specified item:</p>
+        <pre><code>bool isSuccess = _client.Favorite(myPocketItem);
 </code></pre>
 
-<p>Un-favorites the specified item:</p>
-
-<pre><code>bool isSuccess = _client.Unfavorite(myPocketItem);
+        <p>Un-favorites the specified item:</p>
+        <pre><code>bool isSuccess = _client.Unfavorite(myPocketItem);
 </code></pre>
 
-<p>Deletes the specified item:</p>
-
-<pre><code>bool isSuccess = _client.Delete(myPocketItem);
+        <p>Deletes the specified item:</p>
+        <pre><code>bool isSuccess = _client.Delete(myPocketItem);
 </code></pre>
 
-<h4>
-<a name="modify-tags" class="anchor" href="#modify-tags"><span class="octicon octicon-link"></span></a>Modify tags</h4>
-
-<p>Add tags to the specified item:</p>
-
-<pre><code>bool isSuccess = _client.AddTags(myPocketItem, new string[] { "css", "2013" });
+        <h4>Modify tags</h4>
+        <p>Add tags to the specified item:</p>
+        <pre><code>bool isSuccess = _client.AddTags(myPocketItem, new string[] { &quot;css&quot;, &quot;2013&quot; });
 </code></pre>
 
-<p>Remove tags from the specified item:</p>
-
-<pre><code>bool isSuccess = _client.RemoveTags(myPocketItem, new string[] { "css", "2013" });
+        <p>Remove tags from the specified item:</p>
+        <pre><code>bool isSuccess = _client.RemoveTags(myPocketItem, new string[] { &quot;css&quot;, &quot;2013&quot; });
 </code></pre>
 
-<p>Remove all tags from the specified item:</p>
-
-<pre><code>bool isSuccess = _client.RemoveTags(myPocketItem);
+        <p>Remove all tags from the specified item:</p>
+        <pre><code>bool isSuccess = _client.RemoveTags(myPocketItem);
 </code></pre>
 
-<p>Replaces all existing tags with new ones for the specified item:</p>
-
-<pre><code>bool isSuccess = _client.ReplaceTags(myPocketItem, new string[] { "css", "2013" });
+        <p>Replaces all existing tags with new ones for the specified item:</p>
+        <pre><code>bool isSuccess = _client.ReplaceTags(myPocketItem, new string[] { &quot;css&quot;, &quot;2013&quot; });
 </code></pre>
 
-<p>Renames a tag for the specified item:</p>
-
-<pre><code>bool isSuccess = _client.RenameTag(myPocketItem, "oldTagName", "newTagName");
+        <p>Renames a tag for the specified item:</p>
+        <pre><code>bool isSuccess = _client.RenameTag(myPocketItem, &quot;oldTagName&quot;, &quot;newTagName&quot;);
 </code></pre>
 
-<hr><h2>
-<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
+        <hr />
+        <h2>Release History</h2>
+        <ul>
+          <li>2013-07-07 v0.3.1 authentication fixes</li>
+          <li>2013-07-02 v0.3.0 update authentication process </li>
+          <li>2013-06-27 v0.2.0 add, modify item &amp; modify tags</li>
+          <li>2013-06-26 v0.1.0 authentication &amp; retrieve functionality</li>
+        </ul>
+        <h2>Used Packages</h2>
+        <ul>
+          <li><a href="http://restsharp.org/">RestSharp</a></li>
+          <li><a href="https://github.com/ServiceStack/ServiceStack.Text">ServiceStack.Text</a></li>
+        </ul>
+        <h2>Contributors</h2>
+        <p>
+          | <a href="http://twitter.com/artistandsocial" title="Follow @artistandsocial on Twitter">
+            <img src="http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70" alt="twitter/artistandsocial" /></a> |
+|---|
+| <a href="https://github.com/ceee">Tobias Klika @ceee</a> |
+        </p>
 
-<ul>
-<li>2013-07-07 v0.3.1 authentication fixes</li>
-<li>2013-07-02 v0.3.0 update authentication process </li>
-<li>2013-06-27 v0.2.0 add, modify item &amp; modify tags</li>
-<li>2013-06-26 v0.1.0 authentication &amp; retrieve functionality</li>
-</ul><h2>
-<a name="used-packages" class="anchor" href="#used-packages"><span class="octicon octicon-link"></span></a>Used Packages</h2>
 
-<ul>
-<li><a href="http://restsharp.org/">RestSharp</a></li>
-<li><a href="https://github.com/ServiceStack/ServiceStack.Text">ServiceStack.Text</a></li>
-</ul><h2>
-<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
-
-<table>
-<tbody><tr>
-<th><a href="http://twitter.com/artistandsocial" title="Follow @artistandsocial on Twitter"><img src="https://a248.e.akamai.net/camo.github.com/8b2b8890a9b041956524da618a73be363c9fd955/687474703a2f2f67726176617461722e636f6d2f6176617461722f39633631623166343330373432356631326630356433616462393330626136363f733d3730" alt="twitter/artistandsocial" style="max-width:100%;"></a></th>
-</tr>
-<tr>
-<td><a href="https://github.com/ceee">Tobias Klika @ceee</a></td>
-</tr>
-</tbody></table></article>
+      </article>
     </div>
 
   </div>
