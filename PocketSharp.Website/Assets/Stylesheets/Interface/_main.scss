@@ -3,19 +3,29 @@
 	@include box-sizing(border-box);
 }
 
+$screen: "only screen";
+$small: "only screen and (max-width: 480px)";
+
 html
 {
   height: 100%;
 }
 
+html, body
+{
+	font-size: 100%;
+}
+
 body
 {
-  line-height: 1;
+  line-height: 1.2;
   color: $textColor;
   height: 100%;
   width: 100%;
   position: relative;
 	 font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  background: $darkColor image-url('stripe.png') repeat-x top;
 	
 
   -webkit-text-size-adjust: none;
@@ -23,9 +33,27 @@ body
   -ms-touch-action: double-tap-zoom;
 }
 
-html, body
+// app area
+.app
 {
-	font-size: 100%;
+  width: 760px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 100px 20px 0;
+  position: relative;
+
+  @extend %clearfix;
+
+  @media #{$small}
+  {
+    padding-top: 40px;
+  }
+}
+
+.app-main
+{
+  width: 460px;
+  float: right;
 }
 
 // Get rid of gap under images by making them display: inline-block; by default

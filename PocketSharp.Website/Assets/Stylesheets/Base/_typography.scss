@@ -46,9 +46,14 @@
 a
 {
   color: $primaryColor;
+  text-decoration: none;
+  @extend %shortTransition;
+}
+
+.article a
+{
   text-decoration: underline;
   outline: 1px dotted transparent;
-  @extend %shortTransition;
 
   &:link, &:hover, &:visited
   {
