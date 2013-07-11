@@ -166,7 +166,7 @@ var parameters = new RetrieveParameters()
 {
 	Count = 50,
 	Offset = 100,
-	Sort = SortEnum.oldest
+	Sort = Sort.oldest
 	...
 };
 

@@ -15,7 +15,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The state.
     /// </value>
-    public StateEnum? State { get; set; }
+    public State? State { get; set; }
 
     /// <summary>
     /// Gets or sets the favorite.
@@ -39,7 +39,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The type of the content.
     /// </value>
-    public ContentTypeEnum? ContentType { get; set; }
+    public ContentType? ContentType { get; set; }
 
     /// <summary>
     /// Gets or sets the sort.
@@ -47,7 +47,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The sort.
     /// </value>
-    public SortEnum? Sort { get; set; }
+    public Sort? Sort { get; set; }
 
     /// <summary>
     /// Gets or sets the type of the detail.
@@ -55,7 +55,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The type of the detail.
     /// </value>
-    public DetailTypeEnum? DetailType { get; set; }
+    public DetailType? DetailType { get; set; }
 
     /// <summary>
     /// Gets or sets the search.
@@ -125,7 +125,7 @@ namespace PocketSharp.Models
   /// <summary>
   /// Item states
   /// </summary>
-  public enum StateEnum
+  public enum State
   {
     /// <summary>
     /// Only unread items
@@ -144,7 +144,7 @@ namespace PocketSharp.Models
   /// <summary>
   /// Sorting
   /// </summary>
-  public enum SortEnum
+  public enum Sort
   {
     /// <summary>
     /// Newest first
@@ -167,7 +167,7 @@ namespace PocketSharp.Models
   /// <summary>
   /// Item types
   /// </summary>
-  public enum ContentTypeEnum
+  public enum ContentType
   {
     /// <summary>
     /// Articles
@@ -186,7 +186,7 @@ namespace PocketSharp.Models
   /// <summary>
   /// Item data
   /// </summary>
-  public enum DetailTypeEnum
+  public enum DetailType
   {
     /// <summary>
     /// Necessary data

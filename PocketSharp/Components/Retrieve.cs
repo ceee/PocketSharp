@@ -31,22 +31,22 @@ namespace PocketSharp
       switch(filter)
       {
         case RetrieveFilter.Article:
-          parameters.ContentType = ContentTypeEnum.article;
+          parameters.ContentType = ContentType.article;
           break;
         case RetrieveFilter.Image:
-          parameters.ContentType = ContentTypeEnum.image;
+          parameters.ContentType = ContentType.image;
           break;
         case RetrieveFilter.Video:
-          parameters.ContentType = ContentTypeEnum.video;
+          parameters.ContentType = ContentType.video;
           break;
         case RetrieveFilter.Favorite:
           parameters.Favorite = true;
           break;
         case RetrieveFilter.Unread:
-          parameters.State = StateEnum.unread;
+          parameters.State = State.unread;
           break;
         case RetrieveFilter.Archive:
-          parameters.State = StateEnum.archive;
+          parameters.State = State.archive;
           break;
       }
 
@@ -66,7 +66,7 @@ namespace PocketSharp
       RetrieveParameters parameters = new RetrieveParameters()
       {
         Tag = tag,
-        DetailType = DetailTypeEnum.complete
+        DetailType = DetailType.complete
       };
       return Get<Retrieve>("get", parameters.Convert(), true).Items;
     }
@@ -82,7 +82,7 @@ namespace PocketSharp
       RetrieveParameters parameters = new RetrieveParameters()
       {
         Search = searchString,
-        DetailType = DetailTypeEnum.complete
+        DetailType = DetailType.complete
       };
       return Get<Retrieve>("get", parameters.Convert(), true).Items;
     }
