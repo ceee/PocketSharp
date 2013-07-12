@@ -72,6 +72,20 @@ a
     outline-color: desaturate(lighten($primaryColor, 30%), 20%);
   }
 }
+.article
+{
+  h1, h2
+  {
+    margin-top: 50px;
+  }
+  h3, h4
+  {
+    margin-top: 20px;
+  }
+  h2 { font-size: 24px; }
+  h3 { font-size: 20px; }
+  h4 { font-weight: 500; font-size: 16px; }
+}
 
 
 // default style for headlines
@@ -80,6 +94,7 @@ h1, h2, h3, h4, h5, h6
   margin: 0;
 	 padding: 0;
   font-weight: 300;
+  color: $textColor;
 
   i
   {
@@ -89,5 +104,5 @@ h1, h2, h3, h4, h5, h6
 
 strong, b
 {
-  font-weight: 500 !important;
+  font-weight: 700 !important;
 }
