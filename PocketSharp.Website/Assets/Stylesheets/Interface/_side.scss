@@ -4,6 +4,7 @@
 {
   width: 280px;
   float: left;
+  position: fixed;
 
   h1
   {
@@ -25,5 +26,24 @@
     border-radius: 4px;
     padding: 10px 20px;
     font-size: 12px;
+  }
+}
+
+.app-social
+{
+  margin-top: 30px;
+
+  a
+  {
+    width: 40px;
+    height: 40px;
+    font-size: 2em;
+    margin-right: 10px;
+    color: lighten($darkColor, 15%);
+
+    &:hover
+    {
+      color: $secondaryColor;
+    }
   }
 }
