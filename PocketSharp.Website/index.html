@@ -57,33 +57,32 @@
           <h2>Getting Started</h2>
           <p>Request a <a href="http://getpocket.com/developer/apps/">Consumer Key on Pocket.</a></p>
           <p>Include the PocketSharp namespace and it's associated models (you will need them later):</p>
-          <p>
+
             <pre class="language-clike"><code>using PocketSharp;
-  using PocketSharp.Models;</code></pre>
-          </p>
+using PocketSharp.Models;</code></pre>
+
           <p>Initialize PocketClient with:</p>
-          <p>
+
             <pre class="language-clike"><code>PocketClient _client = new PocketClient(&quot;[YOUR_CONSUMER_KEY]&quot;, &quot;[YOUR_ACCESS_CODE]&quot;);</code></pre>
-          </p>
+
           <p>Do a simple request - e.g. a search for <code>CSS</code>:</p>
-          <p>
+
             <pre class="language-clike"><code>_client.Search(&quot;css&quot;).ForEach(
-	  item =&gt; Console.WriteLine(item.ID + &quot; | &quot; + item.Title)
+	 item =&gt; Console.WriteLine(item.ID + &quot; | &quot; + item.Title)
   );</code></pre>
-          </p>
+
           <p>Which will output:</p>
           <pre class="language-markup"><code>330361896 | CSS Front-end Frameworks with comparison : By usabli.ca
-  345541438 | Editr - HTML, CSS, JavaScript playground
-  251743431 | CSS Architecture
-  343693149 | CSS3 Transitions - Thank God We Have A Specification!
-  ...
-  </code></pre>
+345541438 | Editr - HTML, CSS, JavaScript playground
+251743431 | CSS Architecture
+343693149 | CSS3 Transitions - Thank God We Have A Specification!
+...</code></pre>
 
           <h2>Create an instance</h2>
           <p>Constructor:</p>
-          <p>
+
             <pre class="language-clike"><code>PocketClient(string consumerKey, string accessCode = null, Uri callbackUri = null)</code></pre>
-          </p>
+
           <p>
             <code>consumerKey</code>: The API key
             <br>
@@ -92,17 +91,17 @@
             <code>callbackUri</code>: The callback URL is called by Pocket after authentication
           </p>
           <p>Example:</p>
-          <p>
+
             <pre class="language-clike"><code>PocketClient _client = new PocketClient(
-	  consumerKey: &quot;123498237423498723498723&quot;,
-	  callbackUri: new Uri(&quot;http:&frasl;&frasl;ceecore.com&quot;),
-	  accessCode: &quot;097809-oi987-izi8-jk98-oiuu89&quot;
-  );</code></pre>
-          </p>
+	 consumerKey: &quot;123498237423498723498723&quot;,
+	 callbackUri: new Uri(&quot;http:&frasl;&frasl;ceecore.com&quot;),
+	 accessCode: &quot;097809-oi987-izi8-jk98-oiuu89&quot;
+);</code></pre>
+
           <p>You can change the <em>Access Code</em> after initialization:</p>
-          <p>
+
             <pre class="language-clike"><code>_client.AccessCode = &quot;[YOU_ACCESS_CODE]&quot;;</code></pre>
-          </p>
+
           <p>
             <strong>Before authentication</strong> you will need to provide the <code>callbackUri</code> for authentication requests.
             <br>
@@ -138,12 +137,12 @@
         <p>The authentication is a 3-step process:</p>
         <h4>1) Generate authentication URI</h4>
         <p>Receive the <strong>request code</strong> and <strong>authentication URI</strong> from the library by calling <code>string GetRequestCode()</code>:</p>
-        <p>
+
           <pre class="language-clike"><code>string requestCode = _client.GetRequestCode();
 // 0f453f2d-1605-8584-28fd-39af8e
 Uri authenticationUri = _client.GenerateAuthenticationUri();
 // https://getpocket.com/auth/authorize?request_token=0f453f2d-1605-8584-28fd-39af8e&amp;redirect_uri=http%253a%252f%252fceecore.com</code></pre>
-        </p>
+
         <p>The <em>request code</em> is stored internally, but you can also provide it as param in <code>GenerateAuthenticationUri(string requestCode = null)</code>.</p>
         <h4>2) Redirect to Pocket</h4>
         <p>Next you need to redirect the user to the <code>authenticationUri</code>, which displays a prompt to grant permissions for the application (see image). After the user granted or denied, he/she is redirected to the <code>callbackUri</code>.</p>
@@ -151,10 +150,10 @@ Uri authenticationUri = _client.GenerateAuthenticationUri();
           <img src="https://raw.github.com/ceee/PocketSharp/master/PocketSharp/authentication-screen.png" alt="authentication screen" /></p>
         <h4>3) Get Access Code</h4>
         <p>Call <code>string GetAccessCode(string requestCode = null)</code></p>
-        <p>
+
           <pre class="language-clike"><code>string accessCode = _client.GetAccessCode();
 // fa8bfc16-69b3-4d22-7db7-84a58d</code></pre>
-        </p>
+
         <p>
           Again, the received <em>access code</em> is stored internally.
 Note that <code>GetAccessCode</code> can only be called with an existing <em>request code</em>. If you need to re-authenticate a user, start again with Step 1).
@@ -173,29 +172,29 @@ Note that <code>GetAccessCode</code> can only be called with an existing <em>req
 
         <h2>Retrieve</h2>
         <p>Get list of all items:</p>
-        <p>
+
           <pre class="language-clike"><code>List&lt;PocketItem&gt; items = _client.Retrieve();
 // equivalent to: _client.Retrieve(RetrieveFilter.All)</code></pre>
-        </p>
+
         <p>Find items by a tag:</p>
-        <p>
+
           <pre class="language-clike"><code>List&lt;PocketItem&gt; items = _client.SearchByTag(&quot;tutorial&quot;);</code></pre>
-        </p>
+
         <p>Find items by a search string:</p>
-        <p>
+
           <pre class="language-clike"><code>List&lt;PocketItem&gt; items = _client.Search(&quot;css&quot;);</code></pre>
-        </p>
+
         <p>Find items by a filter:</p>
-        <p>
+
           <pre class="language-clike"><code>List&lt;PocketItem&gt; items = _client.Retrieve(RetrieveFilter.Favorite); // only favorites</code></pre>
-        </p>
+
         <p>The RetrieveFilter Enum is specified as follows:</p>
-        <p>
+
           <pre class="language-clike"><code>enum RetrieveFilter { All, Unread, Archive, Favorite, Article, Video, Image }</code></pre>
-        </p>
+
         <h4>Custom Parameters</h4>
         <p>You can create a completely custom parameter list for retrieval with the POCO <code>RetrieveParameters</code>:</p>
-        <p>
+
           <pre class="language-clike"><code>
 var parameters = new RetrieveParameters()
 {
@@ -204,9 +203,9 @@ var parameters = new RetrieveParameters()
 	Sort = SortEnum.oldest
 	...
 };
-List<pocketitem> items = _client.Retrieve(parameters);
+List&lt;pocketitem&gt; items = _client.Retrieve(parameters);
 </code></pre>
-        </p>
+
 
       </div>
 
@@ -217,16 +216,16 @@ List<pocketitem> items = _client.Retrieve(parameters);
           Adds a new item to your pocket list.
 Accepts four parameters, with <code>uri</code> being required.
         </p>
-        <p>
+
           <pre class="language-clike"><code>PocketItem Add(Uri uri, string[] tags = null, string title = null, string tweetID = null)</code></pre>
-        </p>
+
         <p>Example:</p>
-        <p>
+
           <pre class="language-clike"><code>PocketItem newItem = _client.Add(
 	new Uri(&quot;http:&frasl;&frasl;www.neowin.net/news/full-build-2013-conference-sessions-listing-revealed&quot;),
 	new string[] { &quot;microsoft&quot;, &quot;neowin&quot;, &quot;build&quot; }
 );</code></pre>
-        </p>
+
         <p>The title can be included for cases where an item does not have a title, which is typical for image or PDF URLs. If Pocket detects a title from the content of the page, this parameter will be ignored.</p>
         <p>If you are adding Pocket support to a Twitter client, please send along a reference to the tweet status id (with the tweetID). This allows Pocket to show the original tweet alongside the article.</p>
         
