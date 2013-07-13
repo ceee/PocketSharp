@@ -4,7 +4,7 @@
 }
 
 $screen: "only screen";
-$small: "only screen and (max-width: 480px)";
+$small: "only screen and (max-width: 767px)";
 
 html
 {
@@ -94,7 +94,13 @@ div[data-part="gettingstarted"]
 .app-main
 {
   width: 500px;
+  max-width: 100%;
   float: right;
+
+  @media #{$small}
+  {
+    float: none;
+  }
 }
 
 .app-nav
@@ -114,6 +120,7 @@ div[data-part="gettingstarted"]
     color: white;
     float: left;
     cursor: pointer;
+    outline-color: transparent !important;
 
     &.is-active
     {
@@ -122,5 +129,11 @@ div[data-part="gettingstarted"]
     }
     &:first-child { border-radius: 4px 0 0 4px; }
     &:last-child { border-radius: 0 4px 4px 0; }
+
+    @media #{$small}
+    {
+      display: block;
+      float: none;
+    }
   }
 }
