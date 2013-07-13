@@ -126,6 +126,7 @@ tmp
 _old
 _tmp
 Gemfile.lock
+WebWorkbench.mswwsettings
 
 # RIA/Silverlight projects
 Generated_Code/
