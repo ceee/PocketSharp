@@ -4,18 +4,33 @@
 {
   var anchors = document.querySelectorAll('.app-nav a');
 
+  if (window.location.hash.length > 1)
+  {
+    console.info(window.location.hash);
+    changePart.call(document.querySelector('a[data-id="' + window.location.hash.slice(1) + '"]'));
+  }
+
+
   for (var i = anchors.length - 1; i >= 0; i--)
   {
     anchors[i].addEventListener('click', changePart, false);
   }
 
 
-
   function changePart(e)
   {
-    e.preventDefault();
- 
-    var id = this.id;
+    
+    if (e)
+    {
+      e.preventDefault();
+    }
+
+    if (!this.getAttribute)
+    {
+      return;
+    }
+
+    var id = this.getAttribute('data-id');
     var parts = document.querySelectorAll('div[data-part]');
     var isActive = false;
 
@@ -27,6 +42,8 @@
 
       changeActiveClass(this);
     }
+
+    window.location.hash = id;
   }
 
 
