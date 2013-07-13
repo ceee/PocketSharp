@@ -45,69 +45,95 @@
 
     <div class="app-main">
       <nav class="app-nav">
-        <a href="#gettingstarted" class="is-active">Getting Started</a>
-        <a href="#authentication">Authentication</a>
-        <a href="#retrieve">Retrieve</a>
-        <a href="#add">Add</a>
-        <a href="#modify">Modify</a>
+        <a id="gettingstarted" class="is-active">Getting Started</a>
+        <a id="authentication">Authentication</a>
+        <a id="retrieve">Retrieve</a>
+        <a id="add">Add</a>
+        <a id="modify">Modify</a>
       </nav>
       <article class="article">
 
-        <h2 id="gettingstarted">Getting Started</h2>
-        <p>Request a <a href="http://getpocket.com/developer/apps/">Consumer Key on Pocket.</a></p>
-        <p>Include the PocketSharp namespace and it's associated models (you will need them later):</p>
-        <p>
-          <pre class="language-clike"><code>using PocketSharp;
-using PocketSharp.Models;</code></pre>
-        </p>
-        <p>Initialize PocketClient with:</p>
-        <p>
-          <pre class="language-clike"><code>PocketClient _client = new PocketClient(&quot;[YOUR_CONSUMER_KEY]&quot;, &quot;[YOUR_ACCESS_CODE]&quot;);</code></pre>
-        </p>
-        <p>Do a simple request - e.g. a search for <code>CSS</code>:</p>
-        <p>
-          <pre class="language-clike"><code>_client.Search(&quot;css&quot;).ForEach(
-	item =&gt; Console.WriteLine(item.ID + &quot; | &quot; + item.Title)
-);</code></pre>
-        </p>
-        <p>Which will output:</p>
-        <pre class="language-markup"><code>330361896 | CSS Front-end Frameworks with comparison : By usabli.ca
-345541438 | Editr - HTML, CSS, JavaScript playground
-251743431 | CSS Architecture
-343693149 | CSS3 Transitions - Thank God We Have A Specification!
-...
-</code></pre>
+        <div data-part="gettingstarted">
+          <h2>Getting Started</h2>
+          <p>Request a <a href="http://getpocket.com/developer/apps/">Consumer Key on Pocket.</a></p>
+          <p>Include the PocketSharp namespace and it's associated models (you will need them later):</p>
+          <p>
+            <pre class="language-clike"><code>using PocketSharp;
+  using PocketSharp.Models;</code></pre>
+          </p>
+          <p>Initialize PocketClient with:</p>
+          <p>
+            <pre class="language-clike"><code>PocketClient _client = new PocketClient(&quot;[YOUR_CONSUMER_KEY]&quot;, &quot;[YOUR_ACCESS_CODE]&quot;);</code></pre>
+          </p>
+          <p>Do a simple request - e.g. a search for <code>CSS</code>:</p>
+          <p>
+            <pre class="language-clike"><code>_client.Search(&quot;css&quot;).ForEach(
+	  item =&gt; Console.WriteLine(item.ID + &quot; | &quot; + item.Title)
+  );</code></pre>
+          </p>
+          <p>Which will output:</p>
+          <pre class="language-markup"><code>330361896 | CSS Front-end Frameworks with comparison : By usabli.ca
+  345541438 | Editr - HTML, CSS, JavaScript playground
+  251743431 | CSS Architecture
+  343693149 | CSS3 Transitions - Thank God We Have A Specification!
+  ...
+  </code></pre>
 
-        <h2>Create an instance</h2>
-        <p>Constructor:</p>
+          <h2>Create an instance</h2>
+          <p>Constructor:</p>
+          <p>
+            <pre class="language-clike"><code>PocketClient(string consumerKey, string accessCode = null, Uri callbackUri = null)</code></pre>
+          </p>
+          <p>
+            <code>consumerKey</code>: The API key
+            <br>
+            <code>accessCode</code>: Provide an access code if the user is already authenticated
+            <br>
+            <code>callbackUri</code>: The callback URL is called by Pocket after authentication
+          </p>
+          <p>Example:</p>
+          <p>
+            <pre class="language-clike"><code>PocketClient _client = new PocketClient(
+	  consumerKey: &quot;123498237423498723498723&quot;,
+	  callbackUri: new Uri(&quot;http:&frasl;&frasl;ceecore.com&quot;),
+	  accessCode: &quot;097809-oi987-izi8-jk98-oiuu89&quot;
+  );</code></pre>
+          </p>
+          <p>You can change the <em>Access Code</em> after initialization:</p>
+          <p>
+            <pre class="language-clike"><code>_client.AccessCode = &quot;[YOU_ACCESS_CODE]&quot;;</code></pre>
+          </p>
+          <p>
+            <strong>Before authentication</strong> you will need to provide the <code>callbackUri</code> for authentication requests.
+            <br>
+            <strong>After authentication</strong> you will need to provide the <code>accessCode</code>.
+          </p>
+
+          <h2>Release History</h2>
+        <ul>
+          <li>2013-07-07 v0.3.1 authentication fixes</li>
+          <li>2013-07-02 v0.3.0 update authentication process </li>
+          <li>2013-06-27 v0.2.0 add, modify item &amp; modify tags</li>
+          <li>2013-06-26 v0.1.0 authentication &amp; retrieve functionality</li>
+        </ul>
+        <h2>Used Packages</h2>
+        <ul>
+          <li><a href="http://restsharp.org/">RestSharp</a></li>
+          <li><a href="https://github.com/ServiceStack/ServiceStack.Text">ServiceStack.Text</a></li>
+        </ul>
+        <h2>Contributors</h2>
         <p>
-          <pre class="language-clike"><code>PocketClient(string consumerKey, string accessCode = null, Uri callbackUri = null)</code></pre>
+          <a href="https://github.com/ceee" title="Tobias Klika @ceee on github">
+            <img src="http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=40" alt="twitter/artistandsocial" /></a> &nbsp; <a href="https://github.com/ceee">Tobias Klika @ceee</a>
         </p>
-        <p>
-          <code>consumerKey</code>: The API key
-          <br>
-          <code>accessCode</code>: Provide an access code if the user is already authenticated
-          <br>
-          <code>callbackUri</code>: The callback URL is called by Pocket after authentication
-        </p>
-        <p>Example:</p>
-        <p>
-          <pre class="language-clike"><code>PocketClient _client = new PocketClient(
-	consumerKey: &quot;123498237423498723498723&quot;,
-	callbackUri: new Uri(&quot;http:&frasl;&frasl;ceecore.com&quot;),
-	accessCode: &quot;097809-oi987-izi8-jk98-oiuu89&quot;
-);</code></pre>
-        </p>
-        <p>You can change the <em>Access Code</em> after initialization:</p>
-        <p>
-          <pre class="language-clike"><code>_client.AccessCode = &quot;[YOU_ACCESS_CODE]&quot;;</code></pre>
-        </p>
-        <p>
-          <strong>Before authentication</strong> you will need to provide the <code>callbackUri</code> for authentication requests.
-          <br>
-          <strong>After authentication</strong> you will need to provide the <code>accessCode</code>.
-        </p>
-        <h2 id="authentication">Authentication</h2>
+      </div>
+
+
+
+      <div data-part="authentication">
+
+
+        <h2>Authentication</h2>
         <p>In order to communicate with a Pocket User, you will need a consumer key (which is generated by <a href="http://getpocket.com/developer/apps/">creating a new application on Pocket</a>) and an <strong>Access Code</strong>.</p>
         <p>The authentication is a 3-step process:</p>
         <h4>1) Generate authentication URI</h4>
@@ -139,7 +165,13 @@ Note that <code>GetAccessCode</code> can only be called with an existing <em>req
           <br>
           Without it you would always have to redo the authentication process.
         </p>
-        <h2 id="retrieve">Retrieve</h2>
+        
+      </div>
+
+      
+      <div data-part="retrieve">
+
+        <h2>Retrieve</h2>
         <p>Get list of all items:</p>
         <p>
           <pre class="language-clike"><code>List&lt;PocketItem&gt; items = _client.Retrieve();
@@ -175,7 +207,12 @@ var parameters = new RetrieveParameters()
 List<pocketitem> items = _client.Retrieve(parameters);
 </code></pre>
         </p>
-        <h2 id="add">Add</h2>
+
+      </div>
+
+      <div data-part="add">
+
+        <h2>Add</h2>
         <p>
           Adds a new item to your pocket list.
 Accepts four parameters, with <code>uri</code> being required.
@@ -192,7 +229,12 @@ Accepts four parameters, with <code>uri</code> being required.
         </p>
         <p>The title can be included for cases where an item does not have a title, which is typical for image or PDF URLs. If Pocket detects a title from the content of the page, this parameter will be ignored.</p>
         <p>If you are adding Pocket support to a Twitter client, please send along a reference to the tweet status id (with the tweetID). This allows Pocket to show the original tweet alongside the article.</p>
-        <h2 id="modify">Modify</h2>
+        
+      </div>
+
+      <div data-part="modify">
+        
+        <h2>Modify</h2>
         <p>All Modify methods accept either the itemID (as int) or a <code>PocketItem</code> as parameter.</p>
         <p>Archive the specified item:</p>
         <pre class="language-clike"><code>bool isSuccess = _client.Archive(myPocketItem);
@@ -235,27 +277,7 @@ Accepts four parameters, with <code>uri</code> being required.
         <pre class="language-clike"><code>bool isSuccess = _client.RenameTag(myPocketItem, &quot;oldTagName&quot;, &quot;newTagName&quot;);
 </code></pre>
 
-        <hr />
-        <h2>Release History</h2>
-        <ul>
-          <li>2013-07-07 v0.3.1 authentication fixes</li>
-          <li>2013-07-02 v0.3.0 update authentication process </li>
-          <li>2013-06-27 v0.2.0 add, modify item &amp; modify tags</li>
-          <li>2013-06-26 v0.1.0 authentication &amp; retrieve functionality</li>
-        </ul>
-        <h2>Used Packages</h2>
-        <ul>
-          <li><a href="http://restsharp.org/">RestSharp</a></li>
-          <li><a href="https://github.com/ServiceStack/ServiceStack.Text">ServiceStack.Text</a></li>
-        </ul>
-        <h2>Contributors</h2>
-        <p>
-          | <a href="http://twitter.com/artistandsocial" title="Follow @artistandsocial on Twitter">
-            <img src="http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70" alt="twitter/artistandsocial" /></a> |
-|---|
-| <a href="https://github.com/ceee">Tobias Klika @ceee</a> |
-        </p>
-
+     </div>
 
       </article>
     </div>

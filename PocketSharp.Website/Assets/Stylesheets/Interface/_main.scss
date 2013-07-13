@@ -61,6 +61,16 @@ object, embed
 .article
 {
   color: darken($midColor, 10%);
+  padding-bottom: 50px;
+}
+
+div[data-part]
+{
+  display: none;
+}
+div[data-part="gettingstarted"]
+{
+  display: block;
 }
 
 
@@ -103,6 +113,7 @@ object, embed
     padding: 0 15px;
     color: white;
     float: left;
+    cursor: pointer;
 
     &.is-active
     {
