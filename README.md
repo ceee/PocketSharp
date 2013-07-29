@@ -11,7 +11,9 @@
 
 ## Install using NuGet
 
-`Install-Package PocketSharp`
+```
+Install-Package PocketSharp
+```
 
 ## Usage Example
 
