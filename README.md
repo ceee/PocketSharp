@@ -1,8 +1,5 @@
 # PocketSharp
 
-> This project is work in progress.
-> PocketSharp will be released as a NuGet package when ready.
-
 **PocketSharp** is a C#.NET class library, that integrates the [Pocket API v3](http://getpocket.com/developer) and consists of 4 parts:
 
 - Authentication
@@ -10,11 +7,11 @@
 - Modify
 - Add
 
----
+[pocketsharp.frontendplay.com](http://pocketsharp.frontendplay.com/)
 
-_If you don't know [Pocket](http://getpocket.com), be sure to check it out. It's an awesome service that lets you save articles, videos, ... in the cloud and access it from all your devices._
+## Install using NuGet
 
----
+`Install-Package PocketSharp`
 
 ## Usage Example
 
