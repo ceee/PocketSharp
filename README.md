@@ -244,6 +244,7 @@ Renames a tag for the specified item:
 
 ## Release History
 
+- 2013-08-16 v0.3.2 tag modification fixed and full retrieval of items for Retrieve method
 - 2013-07-07 v0.3.1 authentication fixes
 - 2013-07-02 v0.3.0 update authentication process 
 - 2013-06-27 v0.2.0 add, modify item & modify tags

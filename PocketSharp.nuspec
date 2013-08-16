@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PocketSharp</id>
-    <version>0.3.1</version>
+    <version>0.3.2</version>
     <title>PocketSharp</title>
     <authors>Tobias Klika</authors>
     <owners>Tobias Klika</owners>
@@ -20,7 +20,7 @@
     <copyright>Copyright by cee, 2013</copyright>
     <tags>PocketAPI Pocket API PocketSharp Tobias Klika cee RestSharp</tags>
     <dependencies>
-      <dependency id="ServiceStack.Text" version="3.9.49" />
+      <dependency id="ServiceStack.Text" version="3.9.58" />
       <dependency id="RestSharp" version="104.1" />
     </dependencies>
     <frameworkAssemblies>
@@ -36,6 +36,5 @@
   </metadata>
   <files>
     <file src="PocketSharp\bin\Release\PocketSharp.dll" target="lib/net40" />
-    <file src="PocketSharp\bin\Release\PocketSharp.pdb" target="lib/net40" />
   </files>
 </package>
