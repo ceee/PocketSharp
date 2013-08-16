@@ -74,7 +74,7 @@ namespace PocketSharp.Models
       if (Time != null)
         parameters.Add("time", Utilities.GetUnixTimestamp(Time));
       if (Tags != null)
-        parameters.Add("tags", String.Join(",", Tags));
+        parameters.Add("tags", Tags);
       if (OldTag != null)
         parameters.Add("old_tag", OldTag);
       if (NewTag != null)
