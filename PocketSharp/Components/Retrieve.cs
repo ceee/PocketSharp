@@ -50,7 +50,7 @@ namespace PocketSharp
           break;
       }
 
-      //parameters.DetailType = DetailTypeEnum.complete;
+      parameters.DetailType = DetailType.complete;
 
       return Get<Retrieve>("get",  parameters.Convert(), true).Items;
     }
