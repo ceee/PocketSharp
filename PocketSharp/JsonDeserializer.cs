@@ -30,7 +30,18 @@ namespace PocketSharp
     public static void AddCustomDeserialization()
     {
       // generate correct Uri format
-      JsConfig<Uri>.DeSerializeFn = value => new Uri(value);
+      JsConfig<Uri>.DeSerializeFn = value =>
+      {
+        Uri result = null;
+        try
+        {
+          result = new Uri(value);
+        }
+        catch(ArgumentNullException e) {}
+        catch(UriFormatException e) {}
+
+        return result;
+      };
 
       // create DateTime from UNIX timestamp input
       JsConfig<DateTime?>.DeSerializeFn = value =>
