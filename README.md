@@ -1,4 +1,4 @@
-![socialShare](https://raw.github.com/ceee/PocketSharp/master/PocketSharp.Website/Assets/Images/github-header.png)
+![PocketSharp](https://raw.github.com/ceee/PocketSharp/master/PocketSharp.Website/Assets/Images/github-header.png)
 
 # PocketSharp
 
