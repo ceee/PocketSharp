@@ -1,5 +1,6 @@
 ﻿using PocketSharp.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace PocketSharp
 {
@@ -12,7 +13,7 @@ namespace PocketSharp
     /// Retrieves the requestCode from Pocket.
     /// </summary>
     /// <returns></returns>
-    public string GetRequestCode()
+    public async Task<string> GetRequestCode()
     {
       // check if request code is available
       if (CallbackUri == null)
@@ -21,7 +22,7 @@ namespace PocketSharp
       }
 
       // do request
-      RequestCode response = Get<RequestCode>("oauth/request", Utilities.CreateParamInList("redirect_uri", CallbackUri));
+      RequestCode response = await Request<RequestCode>("oauth/request", Utilities.CreateParamInList("redirect_uri", CallbackUri));
 
       // save code to client
       RequestCode = response.Code;
@@ -58,7 +59,7 @@ namespace PocketSharp
     /// Requests the access code after authentification
     /// </summary>
     /// <returns></returns>
-    public string GetAccessCode(string requestCode = null)
+    public async Task<string> GetAccessCode(string requestCode = null)
     {
       // check if request code is available
       if(RequestCode == null && requestCode == null)
@@ -73,7 +74,7 @@ namespace PocketSharp
       }
 
       // do request
-      AccessCode response = Get<AccessCode>("oauth/authorize", Utilities.CreateParamInList("code", RequestCode));
+      AccessCode response = await Request<AccessCode>("oauth/authorize", Utilities.CreateParamInList("code", RequestCode));
 
       // save code to client
       AccessCode = response.Code;

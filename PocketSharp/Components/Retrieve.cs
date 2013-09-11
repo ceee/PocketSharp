@@ -1,5 +1,6 @@
 ﻿using PocketSharp.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PocketSharp
 {
@@ -13,9 +14,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="parameters">parameters, which are mapped to the officials from http://getpocket.com/developer/docs/v3/retrieve </param>
     /// <returns></returns>
-    public List<PocketItem> Retrieve(RetrieveParameters parameters)
+    public async Task<List<PocketItem>> Retrieve(RetrieveParameters parameters)
     {
-      return Get<Retrieve>("get", parameters.Convert(), true).Items;
+      return await Request<Retrieve>("get", parameters.Convert(), true).Items;
     }
 
 
@@ -24,7 +25,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="filter">The filter.</param>
     /// <returns></returns>
-    public List<PocketItem> Retrieve(RetrieveFilter filter = RetrieveFilter.All)
+    public async Task<List<PocketItem>> Retrieve(RetrieveFilter filter = RetrieveFilter.All)
     {
       RetrieveParameters parameters = new RetrieveParameters();
 
@@ -52,7 +53,7 @@ namespace PocketSharp
 
       parameters.DetailType = DetailType.complete;
 
-      return Get<Retrieve>("get",  parameters.Convert(), true).Items;
+      return await Request<Retrieve>("get", parameters.Convert(), true).Items;
     }
 
 
@@ -61,14 +62,14 @@ namespace PocketSharp
     /// </summary>
     /// <param name="tag">The tag.</param>
     /// <returns></returns>
-    public List<PocketItem> SearchByTag(string tag)
+    public async Task<List<PocketItem>> SearchByTag(string tag)
     {
       RetrieveParameters parameters = new RetrieveParameters()
       {
         Tag = tag,
         DetailType = DetailType.complete
       };
-      return Get<Retrieve>("get", parameters.Convert(), true).Items;
+      return await Request<Retrieve>("get", parameters.Convert(), true).Items;
     }
 
 
@@ -77,14 +78,14 @@ namespace PocketSharp
     /// </summary>
     /// <param name="searchString">The search string.</param>
     /// <returns></returns>
-    public List<PocketItem> Search(string searchString)
+    public async Task<List<PocketItem>> Search(string searchString)
     {
       RetrieveParameters parameters = new RetrieveParameters()
       {
         Search = searchString,
         DetailType = DetailType.complete
       };
-      return Get<Retrieve>("get", parameters.Convert(), true).Items;
+      return await Request<Retrieve>("get", parameters.Convert(), true).Items;
     }
   }
 

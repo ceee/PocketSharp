@@ -1,4 +1,5 @@
 ﻿using PocketSharp.Models;
+using System.Threading.Tasks;
 
 namespace PocketSharp
 {
@@ -12,9 +13,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
-    public bool Archive(int itemID)
+    public async Task<bool> Archive(int itemID)
     {
-      return PutSendActionDefault(itemID, "archive");
+      return await PutSendActionDefault(itemID, "archive");
     }
 
 
@@ -23,9 +24,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="item">The item.</param>
     /// <returns></returns>
-    public bool Archive(PocketItem item)
+    public async Task<bool> Archive(PocketItem item)
     {
-      return Archive(item.ID);
+      return await Archive(item.ID);
     }
 
 
@@ -34,9 +35,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
-    public bool Unarchive(int itemID)
+    public async Task<bool> Unarchive(int itemID)
     {
-      return PutSendActionDefault(itemID, "readd");
+      return await PutSendActionDefault(itemID, "readd");
     }
 
 
@@ -45,9 +46,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="item">The item.</param>
     /// <returns></returns>
-    public bool Unarchive(PocketItem item)
+    public async Task<bool> Unarchive(PocketItem item)
     {
-      return Unarchive(item.ID);
+      return await Unarchive(item.ID);
     }
 
 
@@ -56,9 +57,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
-    public bool Favorite(int itemID)
+    public async Task<bool> Favorite(int itemID)
     {
-      return PutSendActionDefault(itemID, "favorite");
+      return await PutSendActionDefault(itemID, "favorite");
     }
 
 
@@ -67,9 +68,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="item">The item.</param>
     /// <returns></returns>
-    public bool Favorite(PocketItem item)
+    public async Task<bool> Favorite(PocketItem item)
     {
-      return Favorite(item.ID);
+      return await Favorite(item.ID);
     }
 
 
@@ -78,9 +79,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
-    public bool Unfavorite(int itemID)
+    public async Task<bool> Unfavorite(int itemID)
     {
-      return PutSendActionDefault(itemID, "unfavorite");
+      return await PutSendActionDefault(itemID, "unfavorite");
     }
 
 
@@ -89,9 +90,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="item">The item.</param>
     /// <returns></returns>
-    public bool Unfavorite(PocketItem item)
+    public async Task<bool> Unfavorite(PocketItem item)
     {
-      return Unfavorite(item.ID);
+      return await Unfavorite(item.ID);
     }
 
 
@@ -100,9 +101,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
-    public bool Delete(int itemID)
+    public async Task<bool> Delete(int itemID)
     {
-      return PutSendActionDefault(itemID, "delete");
+      return await PutSendActionDefault(itemID, "delete");
     }
 
 
@@ -111,9 +112,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="item">The item.</param>
     /// <returns></returns>
-    public bool Delete(PocketItem item)
+    public async Task<bool> Delete(PocketItem item)
     {
-      return Delete(item.ID);
+      return await Delete(item.ID);
     }
 
 
@@ -123,9 +124,9 @@ namespace PocketSharp
     /// <param name="itemID">The item ID.</param>
     /// <param name="action">The action.</param>
     /// <returns></returns>
-    protected bool PutSendActionDefault(int itemID, string action)
+    protected async Task<bool> PutSendActionDefault(int itemID, string action)
     {
-      return PutSendAction(new ActionParameter()
+      return await PutSendAction(new ActionParameter()
       {
         Action = action,
         ID = itemID

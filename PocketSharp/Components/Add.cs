@@ -1,5 +1,6 @@
 ﻿using PocketSharp.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace PocketSharp
 {
@@ -16,7 +17,7 @@ namespace PocketSharp
     /// <param name="title">This can be included for cases where an item does not have a title, which is typical for image or PDF URLs. If Pocket detects a title from the content of the page, this parameter will be ignored.</param>
     /// <param name="tweetID">If you are adding Pocket support to a Twitter client, please send along a reference to the tweet status id. This allows Pocket to show the original tweet alongside the article.</param>
     /// <returns></returns>
-    public PocketItem Add(Uri uri, string[] tags = null, string title = null, string tweetID = null)
+    public async Task<PocketItem> Add(Uri uri, string[] tags = null, string title = null, string tweetID = null)
     {
       AddParameters parameters = new AddParameters()
       {
@@ -25,7 +26,7 @@ namespace PocketSharp
         Title = title,
         TweetID = tweetID
       };
-      return Get<Add>("add", parameters.Convert(), true).Item;
+      return await Request<Add>("add", parameters.Convert(), true).Item;
     }
 
 
@@ -34,9 +35,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="uri">The URL of the item you want to save</param>
     /// <returns></returns>
-    public PocketItem Add(Uri uri)
+    public async Task<PocketItem> Add(Uri uri)
     {
-      return Add(uri, null, null, null);
+      return await Add(uri, null, null, null);
     }
   }
 }
