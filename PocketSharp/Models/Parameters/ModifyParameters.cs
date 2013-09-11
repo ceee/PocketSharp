@@ -1,6 +1,4 @@
-﻿using RestSharp;
-using ServiceStack.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PocketSharp.Models
 {
@@ -26,11 +24,11 @@ namespace PocketSharp.Models
     {
       List<object> actions = new List<object>();
 
-      Actions.ForEach(action => actions.Add(action.Convert()));
+      //Actions.ForEach(action => actions.Add(action.Convert()));
 
       return new List<Parameter>()
       {
-        Utilities.CreateParam("actions", JsonSerializer.SerializeToString(actions))
+      //  Utilities.CreateParam("actions", JsonSerializer.SerializeToString(actions))
       };
     }
   }
