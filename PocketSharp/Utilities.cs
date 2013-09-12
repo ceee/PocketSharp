@@ -1,7 +1,7 @@
-﻿
-using RestSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using PocketSharp.Models;
+
 namespace PocketSharp
 {
   /// <summary>
@@ -32,9 +32,9 @@ namespace PocketSharp
     /// <param name="value">The value.</param>
     /// <param name="type">The type.</param>
     /// <returns></returns>
-    public static Parameter CreateParam(string name, object value, ParameterType type = ParameterType.GetOrPost)
+    public static Parameter CreateParam(string name, object value)
     {
-      return new Parameter() { Name = name, Value = value, Type = type };
+      return new Parameter() { Name = name, Value = value };
     }
 
 
@@ -45,9 +45,9 @@ namespace PocketSharp
     /// <param name="value">The value.</param>
     /// <param name="type">The type.</param>
     /// <returns></returns>
-    public static List<Parameter> CreateParamInList(string name, object value, ParameterType type = ParameterType.GetOrPost)
+    public static List<Parameter> CreateParamInList(string name, object value)
     {
-      return new List<Parameter>() { CreateParam(name, value, type) };
+      return new List<Parameter>() { CreateParam(name, value) };
     }
 
 

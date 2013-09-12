@@ -26,7 +26,10 @@ namespace PocketSharp
         Title = title,
         TweetID = tweetID
       };
-      return await Request<Add>("add", parameters.Convert(), true).Item;
+
+      Add response = await Request<Add>("add", parameters.Convert(), true);
+
+      return response.Item;
     }
 
 
@@ -37,7 +40,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<PocketItem> Add(Uri uri)
     {
-      return await Add(uri, null, null, null);
+      return await Add(uri, null);
     }
   }
 }

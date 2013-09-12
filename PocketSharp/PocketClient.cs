@@ -1,9 +1,11 @@
 ﻿using PocketSharp.Models;
-using RestSharp;
-using RestSharp.Contrib;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace PocketSharp
 {
@@ -15,7 +17,7 @@ namespace PocketSharp
     /// <summary>
     /// REST client used for the API communication
     /// </summary>
-    protected readonly RestClient _restClient;
+    protected readonly HttpClient _restClient;
 
     /// <summary>
     /// The base URL for the Pocket API
@@ -37,11 +39,6 @@ namespace PocketSharp
     /// see: http://getpocket.com/developer
     /// </summary>
     public string ConsumerKey { get; set; }
-
-    /// <summary>
-    /// Returns all associated data from the last request
-    /// </summary>
-    public IRestResponse LastRequestData { get; private set; }
 
     /// <summary>
     /// Code retrieved on authentification
@@ -74,58 +71,29 @@ namespace PocketSharp
       // assign callback uri if submitted
       if (callbackUri != null)
       {
-        CallbackUri = HttpUtility.UrlEncode(callbackUri.ToString());
+        CallbackUri = Uri.EscapeUriString(callbackUri.ToString());
       }
 
       // initialize REST client
-      _restClient = new RestClient(baseUri.ToString());
+      _restClient = new HttpClient(new HttpClientHandler()
+      {
+        AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
+      });
 
-      // add default parameters to each request
-      _restClient.AddDefaultParameter("consumer_key", ConsumerKey);
+      // set base uri
+      _restClient.BaseAddress = baseUri;
 
       // Pocket needs this specific Accept header :-S
-      _restClient.AddDefaultHeader("Accept", "*/*");
+      _restClient.DefaultRequestHeaders.Add("Accept", "*/*");
 
       // defines the response format (according to the Pocket docs)
-      _restClient.AddDefaultHeader("X-Accept", "application/json");
+      _restClient.DefaultRequestHeaders.Add("X-Accept", "application/json");
 
       // custom JSON deserializer (ServiceStack.Text)
-      _restClient.AddHandler("application/json", new JsonDeserializer());
+      //_restClient.AddHandler("application/json", new JsonDeserializer());
 
       // add custom deserialization lambdas
-      JsonDeserializer.AddCustomDeserialization();
-    }
-
-
-    /// <summary>
-    /// Makes a HTTP REST request to the API
-    /// </summary>
-    /// <param name="request">The request.</param>
-    /// <returns></returns>
-    protected string Request(RestRequest request)
-    {
-      IRestResponse response = _restClient.Execute(request);
-
-      LastRequestData = response;
-      ValidateResponse(response);
-
-      return response.Content;
-    }
-
-    /// <summary>
-    /// Makes a typed HTTP REST request to the API
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="request">The request.</param>
-    /// <returns></returns>
-    protected T Request<T>(RestRequest request) where T : new()
-    {
-      IRestResponse<T> response = _restClient.Execute<T>(request);
-
-      LastRequestData = response;
-      ValidateResponse(response);
-
-      return response.Data;
+      //JsonDeserializer.AddCustomDeserialization();
     }
 
 
@@ -138,33 +106,55 @@ namespace PocketSharp
     /// <param name="requireAuth">if set to <c>true</c> [require auth].</param>
     /// <returns></returns>
     /// <exception cref="APIException">No access token available. Use authentification first.</exception>
-    protected T Get<T>(string method, List<Parameter> parameters = null, bool requireAuth = false) where T : class, new()
+    protected async Task<T> Request<T>(string method, List<Parameter> parameters = null, bool requireAuth = false) where T : class, new()
     {
       if (requireAuth && AccessCode == null)
       {
         throw new APIException("No access token available. Use authentification first.");
       }
 
+      // convert parameters
+      List<KeyValuePair<string, string>> kvParameters = new List<KeyValuePair<string, string>>();
+
+      if (parameters != null)
+      {
+        foreach (Parameter item in parameters)
+        {
+          if (item.Value != null)
+          {
+            kvParameters.Add(new KeyValuePair<string, string>(item.Name, item.Value.ToString()));
+          }
+        }
+      }
+
       // every single Pocket API endpoint requires HTTP POST data
-      var request = new RestRequest(method, Method.POST);
+      HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, method);
+
+      // add consumer key to each request
+      kvParameters.Add(new KeyValuePair<string, string>("consumer_key", ConsumerKey));
 
       // add access token (necessary for all requests except authentification)
       if (AccessCode != null)
       {
-        request.AddParameter("access_token", AccessCode);
+        kvParameters.Add(new KeyValuePair<string, string>("access_token", AccessCode));
       }
 
-      // enumeration for params
-      if (parameters != null)
-      {
-        parameters.ForEach(delegate(Parameter param)
-        {
-          request.AddParameter(param);
-        });
-      }
+      // content of the request
+      request.Content = new FormUrlEncodedContent(kvParameters);
 
-      // do the request
-      return Request<T>(request);
+      // make async request
+      HttpResponseMessage response = await _restClient.SendAsync(request);
+
+      // throw exception if no valid response
+      response.EnsureSuccessStatusCode();
+
+      // read response
+      string responseString = response.Content.ReadAsStringAsync().Result;
+
+      // deserialize object
+      return JsonConvert.DeserializeObject<T>(responseString);
+
+      //ValidateResponse(response);
     }
 
 
@@ -173,14 +163,16 @@ namespace PocketSharp
     /// </summary>
     /// <param name="actionParameter">The action parameter.</param>
     /// <returns></returns>
-    protected bool PutSendAction(ActionParameter actionParameter)
+    protected async Task<bool> PutSendAction(ActionParameter actionParameter)
     {
       ModifyParameters parameters = new ModifyParameters()
       {
         Actions = new List<ActionParameter>() { actionParameter }
       };
 
-      return Get<Modify>("send", parameters.Convert(), true).Status;
+      Modify response = await Request<Modify>("send", parameters.Convert(), true);
+
+      return response.Status;
     }
 
 
@@ -192,44 +184,44 @@ namespace PocketSharp
     /// <exception cref="APIException">
     /// Error retrieving response
     /// </exception>
-    protected void ValidateResponse(IRestResponse response)
-    {
-      if (response.StatusCode != HttpStatusCode.OK)
-      {
-        // get pocket error headers
-        Parameter error = response.Headers[1];
-        Parameter errorCode = response.Headers[2];
+    //protected void ValidateResponse(IRestResponse response)
+    //{
+    //  if (response.StatusCode != HttpStatusCode.OK)
+    //  {
+    //    // get pocket error headers
+    //    Parameter error = response.Headers[1];
+    //    Parameter errorCode = response.Headers[2];
 
-        string exceptionString = response.Content;
+    //    string exceptionString = response.Content;
 
-        bool isPocketError = error.Name == "X-Error";
+    //    bool isPocketError = error.Name == "X-Error";
 
-        // update message to include pocket response data
-        if (isPocketError)
-        {
-          exceptionString = exceptionString + "\nPocketResponse: (" + errorCode.Value + ") " + error.Value;
-        }
+    //    // update message to include pocket response data
+    //    if (isPocketError)
+    //    {
+    //      exceptionString = exceptionString + "\nPocketResponse: (" + errorCode.Value + ") " + error.Value;
+    //    }
 
-        // create exception
-        APIException exception = new APIException(exceptionString, response.ErrorException);
+    //    // create exception
+    //    APIException exception = new APIException(exceptionString, response.ErrorException);
 
-        if (isPocketError)
-        {
-          // add custom pocket fields
-          exception.PocketError = error.Value.ToString();
-          exception.PocketErrorCode = Convert.ToInt32(errorCode.Value);
+    //    if (isPocketError)
+    //    {
+    //      // add custom pocket fields
+    //      exception.PocketError = error.Value.ToString();
+    //      exception.PocketErrorCode = Convert.ToInt32(errorCode.Value);
 
-          // add to generic exception data
-          exception.Data.Add(error.Name, error.Value);
-          exception.Data.Add(errorCode.Name, errorCode.Value);
-        }
+    //      // add to generic exception data
+    //      exception.Data.Add(error.Name, error.Value);
+    //      exception.Data.Add(errorCode.Name, errorCode.Value);
+    //    }
 
-        throw exception;
-      }
-      else if (response.ErrorException != null)
-      {
-        throw new APIException("Error retrieving response", response.ErrorException);
-      }
-    }
+    //    throw exception;
+    //  }
+    //  else if (response.ErrorException != null)
+    //  {
+    //    throw new APIException("Error retrieving response", response.ErrorException);
+    //  }
+    //}
   }
 }
