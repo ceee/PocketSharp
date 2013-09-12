@@ -35,6 +35,6 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="PocketSharp\bin\Release\PocketSharp.dll" target="lib/net40" />
+    <file src="PocketSharp\bin\Release\PocketSharp.dll" target="lib\portable-net40+wp80+win" />
   </files>
 </package>
