@@ -18,7 +18,7 @@ namespace PocketSharp
       // check if request code is available
       if (CallbackUri == null)
       {
-        throw new APIException("Authentication methods need a callbackUri on initialization of the PocketClient class");
+        throw new PocketException("Authentication methods need a callbackUri on initialization of the PocketClient class");
       }
 
       // do request
@@ -42,7 +42,7 @@ namespace PocketSharp
       // check if request code is available
       if(RequestCode == null && requestCode == null)
       {
-        throw new APIException("Call GetRequestCode() first to receive a request_code");
+        throw new PocketException("Call GetRequestCode() first to receive a request_code");
       }
 
       // override property with given param if available
@@ -64,7 +64,7 @@ namespace PocketSharp
       // check if request code is available
       if(RequestCode == null && requestCode == null)
       {
-        throw new APIException("Call GetRequestCode() first to receive a request_code");
+        throw new PocketException("Call GetRequestCode() first to receive a request_code");
       }
 
       // override property with given param if available

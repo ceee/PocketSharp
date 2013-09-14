@@ -6,7 +6,7 @@ namespace PocketSharp
   /// <summary>
   /// custom Pocket API Exceptions
   /// </summary>
-  public class APIException : Exception
+  public class PocketException : Exception
   {
     /// <summary>
     /// Gets or sets the pocket error code.
@@ -26,26 +26,26 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="APIException"/> class.
+    /// Initializes a new instance of the <see cref="PocketException"/> class.
     /// </summary>
-    public APIException()
+    public PocketException()
       : base() { }
 
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="APIException"/> class.
+    /// Initializes a new instance of the <see cref="PocketException"/> class.
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
-    public APIException(string message)
+    public PocketException(string message)
       : base(message) { }
 
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="APIException"/> class.
+    /// Initializes a new instance of the <see cref="PocketException"/> class.
     /// </summary>
     /// <param name="message">The error message that explains the reason for the exception.</param>
     /// <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
-    public APIException(string message, Exception innerException)
+    public PocketException(string message, Exception innerException)
       : base(message, innerException) { }
   }
 }
