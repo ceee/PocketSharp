@@ -1,11 +1,12 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
 {
   /// <summary>
   /// Add Response
   /// </summary>
-  [DataContract]
+  [JsonObject]
   internal class Add : ResponseBase
   {
     /// <summary>
@@ -14,7 +15,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The item.
     /// </value>
-    [DataMember]
+    [JsonProperty]
     public PocketItem Item { get; set; }
   }
 }

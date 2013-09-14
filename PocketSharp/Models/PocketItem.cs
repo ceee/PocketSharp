@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -8,7 +9,7 @@ namespace PocketSharp.Models
   /// Item containing all available data
   /// see: http://getpocket.com/developer/docs/v3/retrieve
   /// </summary>
-  [DataContract]
+  [JsonObject]
   public class PocketItem
   {
     /// <summary>
@@ -17,7 +18,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The ID.
     /// </value>
-    [DataMember(Name = "item_id")]
+    [JsonProperty("item_id")]
     public int ID { get; set; }
 
     /// <summary>
@@ -26,7 +27,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The URI.
     /// </value>
-    [DataMember(Name = "resolved_url")]
+    [JsonProperty("resolved_url")]
     public Uri Uri { get; set; }
 
     /// <summary>
@@ -35,7 +36,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The title.
     /// </value>
-    [DataMember(Name = "resolved_title")]
+    [JsonProperty("resolved_title")]
     public string Title { get; set; }
 
     /// <summary>
@@ -44,7 +45,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The full title.
     /// </value>
-    [DataMember(Name = "given_title")]
+    [JsonProperty("given_title")]
     public string FullTitle { get; set; }
 
     /// <summary>
@@ -53,7 +54,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The excerpt.
     /// </value>
-    [DataMember]
+    [JsonProperty]
     public string Excerpt { get; set; }
 
     /// <summary>
@@ -62,7 +63,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The status.
     /// </value>
-    [DataMember]
+    [JsonProperty]
     public int Status { get; set; }
 
     /// <summary>
@@ -71,7 +72,7 @@ namespace PocketSharp.Models
     /// <value>
     /// <c>true</c> if this instance is favorite; otherwise, <c>false</c>.
     /// </value>
-    [DataMember(Name = "favorite")]
+    [JsonProperty("favorite")]
     public bool IsFavorite { get; set; }
 
     /// <summary>
@@ -80,7 +81,7 @@ namespace PocketSharp.Models
     /// <value>
     /// <c>true</c> if this instance is archive; otherwise, <c>false</c>.
     /// </value>
-    [IgnoreDataMember]
+    [JsonIgnore]
     public bool IsArchive { get { return Status == 1; } }
 
     /// <summary>
@@ -89,7 +90,7 @@ namespace PocketSharp.Models
     /// <value>
     /// <c>true</c> if this instance is deleted; otherwise, <c>false</c>.
     /// </value>
-    [IgnoreDataMember]
+    [JsonIgnore]
     public bool IsDeleted { get { return Status == 2; } }
 
     /// <summary>
@@ -98,7 +99,7 @@ namespace PocketSharp.Models
     /// <value>
     /// <c>true</c> if this instance is article; otherwise, <c>false</c>.
     /// </value>
-    [DataMember(Name = "is_article")]
+    [JsonProperty("is_article")]
     public bool IsArticle { get; set; }
 
     /// <summary>
@@ -107,7 +108,7 @@ namespace PocketSharp.Models
     /// <value>
     ///   <c>true</c> if this instance has image; otherwise, <c>false</c>.
     /// </value>
-    [DataMember(Name = "has_image")]
+    [JsonProperty("has_image")]
     public bool HasImage { get; set; }
 
     /// <summary>
@@ -116,7 +117,7 @@ namespace PocketSharp.Models
     /// <value>
     ///   <c>true</c> if this instance has video; otherwise, <c>false</c>.
     /// </value>
-    [DataMember(Name = "has_video")]
+    [JsonProperty("has_video")]
     public bool HasVideo { get; set; }
 
     /// <summary>
@@ -125,7 +126,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The word count.
     /// </value>
-    [DataMember(Name = "word_count")]
+    [JsonProperty("word_count")]
     public int WordCount { get; set; }
 
     /// <summary>
@@ -134,7 +135,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The sort.
     /// </value>
-    [DataMember(Name = "sort_id")]
+    [JsonProperty("sort_id")]
     public int Sort { get; set; }
 
 
@@ -144,7 +145,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The add time.
     /// </value>
-    [DataMember(Name = "time_added")]
+    [JsonProperty("time_added")]
     public DateTime? AddTime { get; set; }
 
     /// <summary>
@@ -153,7 +154,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The update time.
     /// </value>
-    [DataMember(Name = "time_updated")]
+    [JsonProperty("time_updated")]
     public DateTime? UpdateTime { get; set; }
 
     /// <summary>
@@ -162,7 +163,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The read time.
     /// </value>
-    [DataMember(Name = "time_read")]
+    [JsonProperty("time_read")]
     public DateTime? ReadTime { get; set; }
 
     /// <summary>
@@ -171,7 +172,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The favorite time.
     /// </value>
-    [DataMember(Name = "time_favorited")]
+    [JsonProperty("time_favorited")]
     public DateTime? FavoriteTime { get; set; }
 
 
@@ -181,7 +182,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The _ tag dictionary.
     /// </value>
-    [DataMember(Name = "tags")]
+    [JsonProperty("tags")]
     public Dictionary<string, PocketTag> TagDictionary { get; set; }
 
     /// <summary>
@@ -190,7 +191,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The _ image dictionary.
     /// </value>
-    [DataMember(Name = "images")]
+    [JsonProperty("images")]
     public Dictionary<string, PocketImage> ImageDictionary { get; set; }
 
     /// <summary>
@@ -199,7 +200,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The _ video dictionary.
     /// </value>
-    [DataMember(Name = "videos")]
+    [JsonProperty("videos")]
     public Dictionary<string, PocketVideo> VideoDictionary { get; set; }
 
     /// <summary>
@@ -208,7 +209,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The _ author dictionary.
     /// </value>
-    [DataMember(Name = "authors")]
+    [JsonProperty("authors")]
     public Dictionary<string, PocketAuthor> AuthorDictionary { get; set; }
 
 
@@ -218,7 +219,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The tags.
     /// </value>
-    [IgnoreDataMember]
+    [JsonIgnore]
     public List<PocketTag> Tags
     {
       get { return Utilities.DictionaryToList<PocketTag>(TagDictionary); }
@@ -230,7 +231,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The images.
     /// </value>
-    [IgnoreDataMember]
+    [JsonIgnore]
     public List<PocketImage> Images
     {
       get { return Utilities.DictionaryToList<PocketImage>(ImageDictionary); }
@@ -242,7 +243,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The lead image.
     /// </value>
-    [IgnoreDataMember]
+    [JsonIgnore]
     public PocketImage LeadImage
     {
       get { return Images != null ? Images[0] : null; }
@@ -254,7 +255,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The videos.
     /// </value>
-    [IgnoreDataMember]
+    [JsonIgnore]
     public List<PocketVideo> Videos
     {
       get { return Utilities.DictionaryToList<PocketVideo>(VideoDictionary); }
@@ -266,7 +267,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The authors.
     /// </value>
-    [IgnoreDataMember]
+    [JsonIgnore]
     public List<PocketAuthor> Authors
     {
       get { return Utilities.DictionaryToList<PocketAuthor>(AuthorDictionary); }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
@@ -6,7 +7,7 @@ namespace PocketSharp.Models
   /// <summary>
   /// Video
   /// </summary>
-  [DataContract]
+  [JsonObject]
   public class PocketVideo
   {
     /// <summary>
@@ -15,7 +16,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The ID.
     /// </value>
-    [DataMember(Name = "video_id")]
+    [JsonProperty("video_id")]
     public string ID { get; set; }
 
     /// <summary>
@@ -24,7 +25,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The external ID.
     /// </value>
-    [DataMember(Name = "vid")]
+    [JsonProperty("vid")]
     public string ExternalID { get; set; }
 
     /// <summary>
@@ -33,7 +34,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The URI.
     /// </value>
-    [DataMember(Name = "src")]
+    [JsonProperty("src")]
     public Uri Uri { get; set; }
   }
 }

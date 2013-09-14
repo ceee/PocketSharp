@@ -1,11 +1,12 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
 {
   /// <summary>
   /// Request Code
   /// </summary>
-  [DataContract]
+  [JsonObject]
   internal class RequestCode
   {
     /// <summary>
@@ -14,7 +15,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The code.
     /// </value>
-    [DataMember]
+    [JsonProperty]
     public string Code { get; set; }
 
     /// <summary>
@@ -23,7 +24,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The state.
     /// </value>
-    [DataMember]
+    [JsonProperty]
     public string State { get; set; }
   }
 }

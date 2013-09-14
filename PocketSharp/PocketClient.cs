@@ -152,7 +152,11 @@ namespace PocketSharp
       string responseString = response.Content.ReadAsStringAsync().Result;
 
       // deserialize object
-      return JsonConvert.DeserializeObject<T>(responseString);
+      return JsonConvert.DeserializeObject<T>(
+        responseString, 
+        new BoolConverter(),
+        new UnixDateTimeConverter()
+      );
 
       //ValidateResponse(response);
     }

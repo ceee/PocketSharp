@@ -7,32 +7,45 @@ using System.Text;
 
 namespace PocketSharp
 {
-  //public class UnixDateTimeConverter : DateTimeConverterBase
-  //{
-  //  /// <summary>
-  //  /// Writes the JSON representation of the object.
-  //  /// </summary>
-  //  /// <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter"/> to write to.</param><param name="value">The value.</param><param name="serializer">The calling serializer.</param>
-  //  //public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-  //  //{
-  //  //  DateTime epoc = new DateTime(1970, 1, 1);
-  //  //  var delta = (DateTime)value - epoc;
 
-  //  //  writer.WriteValue((long)delta.TotalSeconds);
-  //  //}
+  public class BoolConverter : JsonConverter
+  {
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    {
+      writer.WriteValue(((bool)value) ? 1 : 0);
+    }
+
+    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    {
+      return reader.Value.ToString() == "1";
+    }
+
+    public override bool CanConvert(Type objectType)
+    {
+      return objectType == typeof(bool);
+    }
+  }
 
 
-  //  ///// <summary>
-  //  ///// Reads the JSON representation of the object.
-  //  ///// </summary>
-  //  ///// <param name="reader">The <see cref = "JsonReader" /> to read from.</param>
-  //  ///// <param name="objectType">Type of the object.</param>
-  //  ///// <param name="existingValue">The existing value of object being read.</param>
-  //  ///// <param name="serializer">The calling serializer.</param>
-  //  ///// <returns>The object value.</returns>
-  //  //public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-  //  //{
-  //  //  return existingValue == "0" ? null : new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Convert.ToDouble(existingValue)).ToLocalTime();
-  //  //}
-  //}
+
+  public class UnixDateTimeConverter : DateTimeConverterBase
+  {
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    {
+      DateTime epoc = new DateTime(1970, 1, 1);
+      var delta = (DateTime)value - epoc;
+
+      writer.WriteValue((long)delta.TotalSeconds);
+    }
+
+    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    {
+      if(reader.Value.ToString() == "0")
+      {
+        return null;
+      }
+
+      return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Convert.ToDouble(reader.Value)).ToLocalTime();
+    }
+  }
 }

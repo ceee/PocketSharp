@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
@@ -6,7 +7,7 @@ namespace PocketSharp.Models
   /// <summary>
   /// Item Response
   /// </summary>
-  [DataContract]
+  [JsonObject]
   internal class Retrieve : ResponseBase
   {
     /// <summary>
@@ -15,7 +16,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The complete.
     /// </value>
-    [DataMember(Name = "complete")]
+    [JsonProperty("complete")]
     public int Complete { get; set; }
 
     /// <summary>
@@ -24,7 +25,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The since.
     /// </value>
-    [DataMember]
+    [JsonProperty]
     public int Since { get; set; }
 
     /// <summary>
@@ -33,7 +34,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The _ item dictionary.
     /// </value>
-    [DataMember(Name = "list")]
+    [JsonProperty("list")]
     public Dictionary<string, PocketItem> ItemDictionary { get; set; }
 
     /// <summary>
@@ -42,7 +43,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The items.
     /// </value>
-    [IgnoreDataMember]
+    [JsonIgnore]
     public List<PocketItem> Items
     {
       get { return Utilities.DictionaryToList<PocketItem>(ItemDictionary); }

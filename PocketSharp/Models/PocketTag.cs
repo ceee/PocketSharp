@@ -1,11 +1,12 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
 {
   /// <summary>
   /// Tag
   /// </summary>
-  [DataContract]
+  [JsonObject]
   public class PocketTag
   {
     /// <summary>
@@ -14,7 +15,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The name.
     /// </value>
-    [DataMember(Name = "tag")]
+    [JsonProperty("tag")]
     public string Name { get; set; }
   }
 }

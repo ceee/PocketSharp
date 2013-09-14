@@ -1,11 +1,12 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
 {
   /// <summary>
   /// Modify Response
   /// </summary>
-  [DataContract]
+  [JsonObject]
   internal class Modify : ResponseBase
   {
     /// <summary>
@@ -14,7 +15,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The action results.
     /// </value>
-    [DataMember(Name = "action_results")]
+    [JsonProperty("action_results")]
     public bool[] ActionResults { get; set; }
   }
 }

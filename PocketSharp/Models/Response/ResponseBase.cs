@@ -1,11 +1,12 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
 {
   /// <summary>
   /// Base for Responses
   /// </summary>
-  [DataContract]
+  [JsonObject]
   internal class ResponseBase
   {
     /// <summary>
@@ -14,7 +15,7 @@ namespace PocketSharp.Models
     /// <value>
     ///   <c>true</c> if status is OK; otherwise, <c>false</c>.
     /// </value>
-    [DataMember(Name = "status")]
+    [JsonProperty("status")]
     public bool Status { get; set; }
   }
 }

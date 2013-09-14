@@ -165,4 +165,5 @@ $RECYCLE.BIN/
 # =========================
 
 PocketSharp.Console/
+PocketSharp.WpfTests/
 !PocketSharp.Website/Release/
