@@ -96,12 +96,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PocketSharp\PocketSharp.csproj">
-      <Project>{1a291041-add8-467c-a6e4-0aca26328cdf}</Project>
-      <Name>PocketSharp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

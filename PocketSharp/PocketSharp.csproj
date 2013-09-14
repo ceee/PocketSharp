@@ -45,7 +45,6 @@
     <Compile Include="Components\Modify.cs" />
     <Compile Include="Components\ModifyTags.cs" />
     <Compile Include="Components\Retrieve.cs" />
-    <Compile Include="JsonDeserializer.cs" />
     <Compile Include="JsonExtensions.cs" />
     <Compile Include="Models\Parameters\ActionParameter.cs" />
     <Compile Include="Models\Parameters\AddParameters.cs" />

@@ -4,10 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.Tests", "Pocket
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp", "PocketSharp\PocketSharp.csproj", "{817200C3-A327-4E35-9B5F-63A51C088577}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.WpfTests", "PocketSharp.WpfTests\PocketSharp.WpfTests.csproj", "{775569C2-987F-4AC4-8BA5-A315A21ED1B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.Wpf", "PocketSharp.Examples\PocketSharp.Wpf\PocketSharp.Wpf.csproj", "{775569C2-987F-4AC4-8BA5-A315A21ED1B7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{817200C3-A327-4E35-9B5F-63A51C088577} = {817200C3-A327-4E35-9B5F-63A51C088577}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PocketSharp.Examples", "PocketSharp.Examples", "{AFD4E3F1-B23C-4924-BA5B-D917FBADB8FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +32,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{775569C2-987F-4AC4-8BA5-A315A21ED1B7} = {AFD4E3F1-B23C-4924-BA5B-D917FBADB8FA}
 	EndGlobalSection
 EndGlobal
