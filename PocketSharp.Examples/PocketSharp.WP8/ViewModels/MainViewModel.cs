@@ -64,8 +64,6 @@ namespace PocketSharp.WP8.ViewModels
     /// </summary>
     public async Task LoadData()
     {
-      // User: pocketsharp-tests
-      // PW:   pocketsharp
       // !! please don't misuse this account !!
       PocketClient client = new PocketClient(
         consumerKey: "15396-f6f92101d72c8e270a6c9bb3",

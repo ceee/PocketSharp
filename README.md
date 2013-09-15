@@ -49,7 +49,7 @@ Do a simple request - e.g. a search for `CSS`:
 ```csharp
 var items = await _client.Search("css");
 items.ForEach(
-	item => Debug.Write(item.ID + " | " + item.Title)
+	item => Debug.WriteLine(item.ID + " | " + item.Title)
 );
 ```
 
