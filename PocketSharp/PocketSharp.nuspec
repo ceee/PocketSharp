@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.github.com/ceee/PocketSharp/master/LICENSE-MIT</licenseUrl>
+    <projectUrl>http://pocketsharp.frontendplay.com</projectUrl>
+    <iconUrl>http://pocketsharp.frontendplay.com/Assets/Images/pocketsharp.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <language>en-US</language>
+    <releaseNotes>
+      <![CDATA[
+           For full release notes see https://github.com/ceee/PocketSharp#release-history
+         ]]>
+    </releaseNotes>
+    <copyright>Copyright by cee, 2013</copyright>
+    <tags>PocketAPI Pocket API PocketSharp Tobias Klika cee RestSharp</tags>
+  </metadata>
+</package>
