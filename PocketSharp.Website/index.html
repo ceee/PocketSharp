@@ -53,6 +53,19 @@
       <article class="article">
 
         <div data-part="gettingstarted">
+          <h2>Supported platforms</h2>
+          <p>PocketSharp is a <strong>Portable Class Library</strong> (since 1.0.0), therefore it's compatible with multiple platforms:</p>
+          <ul>
+          <li><strong>.NET</strong> &gt;= 4.0.3 (including WPF)</li>
+          <li><strong>Silverlight</strong> &gt;= 4</li>
+          <li><strong>Windows Phone</strong> &gt;= 7.5</li>
+          <li><strong>Windows Store</strong></li>
+          </ul>
+          <p>You can find examples for Silverlight 5, WP8 and WPF in the <code>PocketSharp.Examples</code> folder.</p>
+          <h2>Async Support</h2>
+          <p>All public methods, which communicate with the Pocket servers are asynchronous. So they should be called with the preceding <code>await</code> keyword, and the encapsulated method marked with <code>async</code>.</p>
+          <p><em>In PocketSharp versions &lt; 1.0.0 all methods lacked async support and were blocking.</em></p>
+
           <h2>Getting Started</h2>
           <p>Request a <a href="http://getpocket.com/developer/apps/">Consumer Key on Pocket.</a></p>
           <p>Include the PocketSharp namespace and it's associated models (you will need them later):</p>
@@ -66,8 +79,8 @@ using PocketSharp.Models;</code></pre>
 
           <p>Do a simple request - e.g. a search for <code>CSS</code>:</p>
 
-            <pre class="language-clike"><code>_client.Search(&quot;css&quot;).ForEach(
-	 item =&gt; Console.WriteLine(item.ID + &quot; | &quot; + item.Title)
+            <pre class="language-clike"><code>await _client.Search(&quot;css&quot;).ForEach(
+	 item =&gt; Debug.WriteLine(item.ID + &quot; | &quot; + item.Title)
   );</code></pre>
 
           <p>Which will output:</p>
@@ -109,6 +122,7 @@ using PocketSharp.Models;</code></pre>
 
           <h2>Release History</h2>
         <ul>
+          <li>2013-09-15 v1.0.0 convert to PCL &amp; implement async</li>
           <li>2013-08-16 v0.3.2 tag modification fixed and full retrieval of items for Retrieve method</li>
           <li>2013-07-07 v0.3.1 authentication fixes</li>
           <li>2013-07-02 v0.3.0 update authentication process </li>
@@ -117,8 +131,9 @@ using PocketSharp.Models;</code></pre>
         </ul>
         <h2>Used Packages</h2>
         <ul>
-          <li><a href="http://restsharp.org/">RestSharp</a></li>
-          <li><a href="https://github.com/ServiceStack/ServiceStack.Text">ServiceStack.Text</a></li>
+          <li><a href="https://www.nuget.org/packages/Microsoft.Bcl.Async/">Microsoft.Bcl.Async</a></li>
+          <li><a href="https://www.nuget.org/packages/Microsoft.Net.Http/">Microsoft.Net.Http</a></li>
+          <li><a href="https://www.nuget.org/packages/Newtonsoft.Json/">Newtonsoft.Json</a></li>
         </ul>
         <h2>Contributors</h2>
         <p>
@@ -138,7 +153,7 @@ using PocketSharp.Models;</code></pre>
         <h4>1) Generate authentication URI</h4>
         <p>Receive the <strong>request code</strong> and <strong>authentication URI</strong> from the library by calling <code>string GetRequestCode()</code>:</p>
 
-          <pre class="language-clike"><code>string requestCode = _client.GetRequestCode();
+          <pre class="language-clike"><code>string requestCode = await _client.GetRequestCode();
 // 0f453f2d-1605-8584-28fd-39af8e
 Uri authenticationUri = _client.GenerateAuthenticationUri();
 // https://getpocket.com/auth/authorize?request_token=0f453f2d-1605-8584-28fd-39af8e&amp;redirect_uri=http%253a%252f%252fceecore.com</code></pre>
@@ -149,9 +164,9 @@ Uri authenticationUri = _client.GenerateAuthenticationUri();
         <p>
           <img src="https://raw.github.com/ceee/PocketSharp/master/PocketSharp/authentication-screen.png" alt="authentication screen" /></p>
         <h4>3) Get Access Code</h4>
-        <p>Call <code>string GetAccessCode(string requestCode = null)</code></p>
+        <p>Call <code>Task&lt;string&gt; GetAccessCode(string requestCode = null)</code></p>
 
-          <pre class="language-clike"><code>string accessCode = _client.GetAccessCode();
+          <pre class="language-clike"><code>string accessCode = await _client.GetAccessCode();
 // fa8bfc16-69b3-4d22-7db7-84a58d</code></pre>
 
         <p>
@@ -164,29 +179,29 @@ Note that <code>GetAccessCode</code> can only be called with an existing <em>req
           <br>
           Without it you would always have to redo the authentication process.
         </p>
-        
+
       </div>
 
-      
+
       <div data-part="retrieve">
 
         <h2>Retrieve</h2>
         <p>Get list of all items:</p>
 
-          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = _client.Retrieve();
-// equivalent to: _client.Retrieve(RetrieveFilter.All)</code></pre>
+          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Retrieve();
+// equivalent to: await _client.Retrieve(RetrieveFilter.All)</code></pre>
 
         <p>Find items by a tag:</p>
 
-          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = _client.SearchByTag(&quot;tutorial&quot;);</code></pre>
+          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.SearchByTag(&quot;tutorial&quot;);</code></pre>
 
         <p>Find items by a search string:</p>
 
-          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = _client.Search(&quot;css&quot;);</code></pre>
+          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Search(&quot;css&quot;);</code></pre>
 
         <p>Find items by a filter:</p>
 
-          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = _client.Retrieve(RetrieveFilter.Favorite); // only favorites</code></pre>
+          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Retrieve(RetrieveFilter.Favorite); // only favorites</code></pre>
 
         <p>The RetrieveFilter Enum is specified as follows:</p>
 
@@ -203,7 +218,7 @@ var parameters = new RetrieveParameters()
 	Sort = SortEnum.oldest
 	...
 };
-List&lt;pocketitem&gt; items = _client.Retrieve(parameters);
+List&lt;pocketitem&gt; items = await _client.Retrieve(parameters);
 </code></pre>
 
 
@@ -217,63 +232,63 @@ List&lt;pocketitem&gt; items = _client.Retrieve(parameters);
 Accepts four parameters, with <code>uri</code> being required.
         </p>
 
-          <pre class="language-clike"><code>PocketItem Add(Uri uri, string[] tags = null, string title = null, string tweetID = null)</code></pre>
+          <pre class="language-clike"><code>Task&lt;PocketItem&gt; Add(Uri uri, string[] tags = null, string title = null, string tweetID = null)</code></pre>
 
         <p>Example:</p>
 
-          <pre class="language-clike"><code>PocketItem newItem = _client.Add(
+          <pre class="language-clike"><code>PocketItem newItem = await _client.Add(
 	new Uri(&quot;http:&frasl;&frasl;www.neowin.net/news/full-build-2013-conference-sessions-listing-revealed&quot;),
 	new string[] { &quot;microsoft&quot;, &quot;neowin&quot;, &quot;build&quot; }
 );</code></pre>
 
         <p>The title can be included for cases where an item does not have a title, which is typical for image or PDF URLs. If Pocket detects a title from the content of the page, this parameter will be ignored.</p>
         <p>If you are adding Pocket support to a Twitter client, please send along a reference to the tweet status id (with the tweetID). This allows Pocket to show the original tweet alongside the article.</p>
-        
+
       </div>
 
       <div data-part="modify">
-        
+
         <h2>Modify</h2>
         <p>All Modify methods accept either the itemID (as int) or a <code>PocketItem</code> as parameter.</p>
         <p>Archive the specified item:</p>
-        <pre class="language-clike"><code>bool isSuccess = _client.Archive(myPocketItem);
+        <pre class="language-clike"><code>bool isSuccess = await _client.Archive(myPocketItem);
 </code></pre>
 
         <p>Un-archive the specified item:</p>
-        <pre class="language-clike"><code>bool isSuccess = _client.Unarchive(myPocketItem);
+        <pre class="language-clike"><code>bool isSuccess = await _client.Unarchive(myPocketItem);
 </code></pre>
 
         <p>Favorites the specified item:</p>
-        <pre class="language-clike"><code>bool isSuccess = _client.Favorite(myPocketItem);
+        <pre class="language-clike"><code>bool isSuccess = await _client.Favorite(myPocketItem);
 </code></pre>
 
         <p>Un-favorites the specified item:</p>
-        <pre class="language-clike"><code>bool isSuccess = _client.Unfavorite(myPocketItem);
+        <pre class="language-clike"><code>bool isSuccess = await _client.Unfavorite(myPocketItem);
 </code></pre>
 
         <p>Deletes the specified item:</p>
-        <pre class="language-clike"><code>bool isSuccess = _client.Delete(myPocketItem);
+        <pre class="language-clike"><code>bool isSuccess = await _client.Delete(myPocketItem);
 </code></pre>
 
         <h4>Modify tags</h4>
         <p>Add tags to the specified item:</p>
-        <pre class="language-clike"><code>bool isSuccess = _client.AddTags(myPocketItem, new string[] { &quot;css&quot;, &quot;2013&quot; });
+        <pre class="language-clike"><code>bool isSuccess = await _client.AddTags(myPocketItem, new string[] { &quot;css&quot;, &quot;2013&quot; });
 </code></pre>
 
         <p>Remove tags from the specified item:</p>
-        <pre class="language-clike"><code>bool isSuccess = _client.RemoveTags(myPocketItem, new string[] { &quot;css&quot;, &quot;2013&quot; });
+        <pre class="language-clike"><code>bool isSuccess = await _client.RemoveTags(myPocketItem, new string[] { &quot;css&quot;, &quot;2013&quot; });
 </code></pre>
 
         <p>Remove all tags from the specified item:</p>
-        <pre class="language-clike"><code>bool isSuccess = _client.RemoveTags(myPocketItem);
+        <pre class="language-clike"><code>bool isSuccess = await _client.RemoveTags(myPocketItem);
 </code></pre>
 
         <p>Replaces all existing tags with new ones for the specified item:</p>
-        <pre class="language-clike"><code>bool isSuccess = _client.ReplaceTags(myPocketItem, new string[] { &quot;css&quot;, &quot;2013&quot; });
+        <pre class="language-clike"><code>bool isSuccess = await _client.ReplaceTags(myPocketItem, new string[] { &quot;css&quot;, &quot;2013&quot; });
 </code></pre>
 
         <p>Renames a tag for the specified item:</p>
-        <pre class="language-clike"><code>bool isSuccess = _client.RenameTag(myPocketItem, &quot;oldTagName&quot;, &quot;newTagName&quot;);
+        <pre class="language-clike"><code>bool isSuccess = await _client.RenameTag(myPocketItem, &quot;oldTagName&quot;, &quot;newTagName&quot;);
 </code></pre>
 
      </div>

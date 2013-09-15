@@ -1,11 +1,6 @@
 ![PocketSharp](https://raw.github.com/ceee/PocketSharp/master/PocketSharp.Website/Assets/Images/github-header.png)
 
-**PocketSharp** is a C#.NET class library, that integrates the [Pocket API v3](http://getpocket.com/developer) and consists of 4 parts:
-
-- Authentication
-- Retrieve
-- Modify
-- Add
+**PocketSharp** is a C#.NET class library, that integrates the [Pocket API v3](http://getpocket.com/developer) and consists of 4 parts: [Authentication](#authentication), [Retrieve](#retrieve), [Modify](#modify) and [Add](#add).
 
 [pocketsharp.frontendplay.com](http://pocketsharp.frontendplay.com/)
 
@@ -14,6 +9,23 @@
 ```
 Install-Package PocketSharp
 ```
+
+## Supported platforms
+
+PocketSharp is a **Portable Class Library** (since 1.0.0), therefore it's compatible with multiple platforms:
+
+- **.NET** >= 4.0.3 (including WPF)
+- **Silverlight** >= 4
+- **Windows Phone** >= 7.5
+- **Windows Store**
+
+You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Examples` folder.
+
+## Async Support
+
+All public methods, which communicate with the Pocket servers are asynchronous. So they should be called with the preceding `await` keyword, and the encapsulated method marked with `async`.
+
+_In PocketSharp versions < 1.0.0 all methods lacked async support and were blocking._
 
 ## Usage Example
 
@@ -35,8 +47,9 @@ PocketClient _client = new PocketClient("[YOUR_CONSUMER_KEY]", "[YOUR_ACCESS_COD
 Do a simple request - e.g. a search for `CSS`:
 
 ```csharp
-_client.Search("css").ForEach(
-	item => Console.WriteLine(item.ID + " | " + item.Title)
+var items = await _client.Search("css");
+items.ForEach(
+	item => Debug.Write(item.ID + " | " + item.Title)
 );
 ```
 
@@ -93,7 +106,7 @@ The authentication is a 3-step process:
 Receive the **request code** and **authentication URI** from the library by calling `string GetRequestCode()`:
 
 ```csharp
-string requestCode = _client.GetRequestCode();
+string requestCode = await _client.GetRequestCode();
 // 0f453f2d-1605-8584-28fd-39af8e
 Uri authenticationUri = _client.GenerateAuthenticationUri();
 // https://getpocket.com/auth/authorize?request_token=0f453f2d-1605-8584-28fd-39af8e&redirect_uri=http%253a%252f%252fceecore.com
@@ -107,10 +120,10 @@ Next you need to redirect the user to the `authenticationUri`, which displays a 
 ![authentication screen](https://raw.github.com/ceee/PocketSharp/master/PocketSharp/authentication-screen.png)
 
 #### 3) Get Access Code
-Call `string GetAccessCode(string requestCode = null)`
+Call `Task<string> GetAccessCode(string requestCode = null)`
 
 ```csharp
-string accessCode = _client.GetAccessCode();
+string accessCode = await _client.GetAccessCode();
 // fa8bfc16-69b3-4d22-7db7-84a58d
 ```
 
@@ -128,26 +141,26 @@ Without it you would always have to redo the authentication process.
 Get list of all items:
 
 ```csharp
-List<PocketItem> items = _client.Retrieve();
-// equivalent to: _client.Retrieve(RetrieveFilter.All)
+List<PocketItem> items = await _client.Retrieve();
+// equivalent to: await _client.Retrieve(RetrieveFilter.All)
 ```
 
 Find items by a tag:
 
 ```csharp
-List<PocketItem> items = _client.SearchByTag("tutorial");
+List<PocketItem> items = await _client.SearchByTag("tutorial");
 ```
 
 Find items by a search string:
 
 ```csharp
-List<PocketItem> items = _client.Search("css");
+List<PocketItem> items = await _client.Search("css");
 ```
 
 Find items by a filter:
 
 ```csharp
-List<PocketItem> items = _client.Retrieve(RetrieveFilter.Favorite); // only favorites
+List<PocketItem> items = await _client.Retrieve(RetrieveFilter.Favorite); // only favorites
 ```
 
 The RetrieveFilter Enum is specified as follows:
@@ -169,7 +182,7 @@ var parameters = new RetrieveParameters()
 	...
 };
 
-List<PocketItem> items = _client.Retrieve(parameters);
+List<PocketItem> items = await _client.Retrieve(parameters);
 ```
 
 ## Add
@@ -178,13 +191,13 @@ Adds a new item to your pocket list.
 Accepts four parameters, with `uri` being required.
 
 ```csharp
-PocketItem Add(Uri uri, string[] tags = null, string title = null, string tweetID = null)
+Task<PocketItem> Add(Uri uri, string[] tags = null, string title = null, string tweetID = null)
 ```
 
 Example:
 
 ```csharp
-PocketItem newItem = _client.Add(
+PocketItem newItem = await _client.Add(
 	new Uri("http://www.neowin.net/news/full-build-2013-conference-sessions-listing-revealed"),
 	new string[] { "microsoft", "neowin", "build" }
 );
@@ -200,50 +213,51 @@ All Modify methods accept either the itemID (as int) or a `PocketItem` as parame
 
 Archive the specified item:
 
-	bool isSuccess = _client.Archive(myPocketItem);
+	bool isSuccess = await _client.Archive(myPocketItem);
 
 Un-archive the specified item:
 
-	bool isSuccess = _client.Unarchive(myPocketItem);
+	bool isSuccess = await _client.Unarchive(myPocketItem);
 
 Favorites the specified item:
 
-	bool isSuccess = _client.Favorite(myPocketItem);
+	bool isSuccess = await _client.Favorite(myPocketItem);
 
 Un-favorites the specified item:
 
-	bool isSuccess = _client.Unfavorite(myPocketItem);
+	bool isSuccess = await _client.Unfavorite(myPocketItem);
 
 Deletes the specified item:
 
-	bool isSuccess = _client.Delete(myPocketItem);
+	bool isSuccess = await _client.Delete(myPocketItem);
 
 #### Modify tags
 
 Add tags to the specified item:
 
-	bool isSuccess = _client.AddTags(myPocketItem, new string[] { "css", "2013" });
+	bool isSuccess = await _client.AddTags(myPocketItem, new string[] { "css", "2013" });
 
 Remove tags from the specified item:
 
-	bool isSuccess = _client.RemoveTags(myPocketItem, new string[] { "css", "2013" });
+	bool isSuccess = await _client.RemoveTags(myPocketItem, new string[] { "css", "2013" });
 
 Remove all tags from the specified item:
 
-	bool isSuccess = _client.RemoveTags(myPocketItem);
+	bool isSuccess = await _client.RemoveTags(myPocketItem);
 
 Replaces all existing tags with new ones for the specified item:
 
-	bool isSuccess = _client.ReplaceTags(myPocketItem, new string[] { "css", "2013" });
+	bool isSuccess = await _client.ReplaceTags(myPocketItem, new string[] { "css", "2013" });
 
 Renames a tag for the specified item:
 
-	bool isSuccess = _client.RenameTag(myPocketItem, "oldTagName", "newTagName");
+	bool isSuccess = await _client.RenameTag(myPocketItem, "oldTagName", "newTagName");
 
 ---
 
 ## Release History
 
+- 2013-09-15 v1.0.0 convert to PCL & implement async
 - 2013-08-16 v0.3.2 tag modification fixed and full retrieval of items for Retrieve method
 - 2013-07-07 v0.3.1 authentication fixes
 - 2013-07-02 v0.3.0 update authentication process 
@@ -252,8 +266,9 @@ Renames a tag for the specified item:
 
 ## Dependencies
 
-- [RestSharp](http://restsharp.org/)
-- [ServiceStack.Text](https://github.com/ServiceStack/ServiceStack.Text)
+- [Microsoft.Bcl.Async](https://www.nuget.org/packages/Microsoft.Bcl.Async/)
+- [Microsoft.Net.Http](https://www.nuget.org/packages/Microsoft.Net.Http/)
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
 
 ## Contributors
 | [![twitter/artistandsocial](http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70)](http://twitter.com/artistandsocial "Follow @artistandsocial on Twitter") |
