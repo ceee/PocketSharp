@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
 {
   /// <summary>
   /// All parameters which can be passed for item retrieval
   /// </summary>
-  public class RetrieveParameters
+  [DataContract]
+  internal class RetrieveParameters : Parameters
   {
     /// <summary>
     /// Gets or sets the state.
@@ -14,6 +17,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The state.
     /// </value>
+    [DataMember(Name = "state")]
     public State? State { get; set; }
 
     /// <summary>
@@ -22,6 +26,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The favorite.
     /// </value>
+    [DataMember(Name = "favorite")]
     public bool? Favorite { get; set; }
 
     /// <summary>
@@ -30,6 +35,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The tag.
     /// </value>
+    [DataMember(Name = "tag")]
     public string Tag { get; set; }
 
     /// <summary>
@@ -38,6 +44,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The type of the content.
     /// </value>
+    [DataMember(Name = "contentType")]
     public ContentType? ContentType { get; set; }
 
     /// <summary>
@@ -46,6 +53,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The sort.
     /// </value>
+    [DataMember(Name = "sort")]
     public Sort? Sort { get; set; }
 
     /// <summary>
@@ -54,6 +62,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The type of the detail.
     /// </value>
+    [DataMember(Name="detailType")]
     public DetailType? DetailType { get; set; }
 
     /// <summary>
@@ -62,6 +71,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The search.
     /// </value>
+    [DataMember(Name = "search")]
     public string Search { get; set; }
 
     /// <summary>
@@ -70,6 +80,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The domain.
     /// </value>
+    [DataMember(Name = "domain")]
     public string Domain { get; set; }
 
     /// <summary>
@@ -78,6 +89,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The since.
     /// </value>
+    [DataMember(Name = "since")]
     public DateTime? Since { get; set; }
 
     /// <summary>
@@ -86,6 +98,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The count.
     /// </value>
+    [DataMember(Name = "count")]
     public int? Count { get; set; }
 
     /// <summary>
@@ -94,30 +107,8 @@ namespace PocketSharp.Models
     /// <value>
     /// The offset.
     /// </value>
+    [DataMember(Name = "offset")]
     public int? Offset { get; set; }
-
-
-    /// <summary>
-    /// Converts this instance to a parameter list.
-    /// </summary>
-    /// <returns></returns>
-    public List<Parameter> Convert()
-    {
-      return new List<Parameter>()
-      {
-        Utilities.CreateParam("state", State != null ? State.ToString() : null ),
-        Utilities.CreateParam("favorite", Favorite != null ? (bool)Favorite ? "1" : "0" : null),
-        Utilities.CreateParam("tag", Tag),
-        Utilities.CreateParam("contentType", ContentType != null ? ContentType.ToString() : null),
-        Utilities.CreateParam("sort", Sort != null ? Sort.ToString() : null),
-        Utilities.CreateParam("detailType", DetailType != null ? DetailType.ToString() : null),
-        Utilities.CreateParam("search", Search),
-        Utilities.CreateParam("domain", Domain),
-        Utilities.CreateParam("since", Utilities.GetUnixTimestamp(Since)),
-        Utilities.CreateParam("count", Count),
-        Utilities.CreateParam("offset", Offset)
-      };
-    }
   }
 
 

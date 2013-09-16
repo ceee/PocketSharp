@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
 {
   /// <summary>
   /// All parameters which can be passed for a modify action
   /// </summary>
+  [DataContract]
   public class ActionParameter
   {
     /// <summary>
@@ -14,6 +16,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The action.
     /// </value>
+    [DataMember(Name = "action")]
     public string Action { get; set; }
 
     /// <summary>
@@ -22,6 +25,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The ID.
     /// </value>
+    [DataMember(Name = "item_id")]
     public int ID { get; set; }
 
     /// <summary>
@@ -30,6 +34,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The time.
     /// </value>
+    [DataMember(Name = "time")]
     public DateTime? Time { get; set; }
 
     // specific params
@@ -40,6 +45,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The tags.
     /// </value>
+    [DataMember(Name = "tags")]
     public string[] Tags { get; set; }
 
     /// <summary>
@@ -48,6 +54,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The old tag.
     /// </value>
+    [DataMember(Name = "old_tag")]
     public string OldTag { get; set; }
 
     /// <summary>
@@ -56,6 +63,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The new tag.
     /// </value>
+    [DataMember(Name = "new_tag")]
     public string NewTag { get; set; }
 
 
@@ -63,7 +71,7 @@ namespace PocketSharp.Models
     /// Converts this instance to a parameter list.
     /// </summary>
     /// <returns></returns>
-    public object Convert()
+    public Dictionary<string, object> Convert()
     {
       Dictionary<string, object> parameters = new Dictionary<string, object>
       {

@@ -6,10 +6,9 @@ using PocketSharp.Models;
 
 namespace PocketSharp.Tests
 {
-
   public class RetrieveTests : TestsBase
   {
-    public RetrieveTests() : base() {}
+    public RetrieveTests() : base() { }
 
 
     [Fact]
@@ -21,20 +20,20 @@ namespace PocketSharp.Tests
     }
 
 
-    [Fact]
-    public async Task ItemContainsUri()
-    {
-      List<PocketItem> items = await client.Retrieve(new RetrieveParameters()
-      {
-        Count = 1  
-      });
+    //[Fact]
+    //public async Task ItemContainsUri()
+    //{
+    //  List<PocketItem> items = await client.Retrieve(new RetrieveParameters()
+    //  {
+    //    Count = 1  
+    //  });
 
-      Assert.True(items.Count == 1);
+    //  Assert.True(items.Count == 1);
 
-      PocketItem item = items[0];
+    //  PocketItem item = items[0];
 
-      Assert.True(item.Uri.ToString().StartsWith("http"));
-    }
+    //  Assert.True(item.Uri.ToString().StartsWith("http"));
+    //}
 
 
     [Fact]

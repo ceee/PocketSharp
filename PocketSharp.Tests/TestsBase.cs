@@ -10,6 +10,8 @@ namespace PocketSharp.Tests
   {
     protected PocketClient client;
 
+    protected List<int> itemsToDelete = new List<int>();
+
 
     // setup
     public TestsBase()
@@ -24,9 +26,12 @@ namespace PocketSharp.Tests
 
 
     // teardown
-    public void Dispose()
+    public void Dispose() 
     {
-
+      itemsToDelete.ForEach(async id =>
+      {
+        await client.Delete(id);
+      });
     }
   }
 }

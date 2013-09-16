@@ -37,7 +37,29 @@ namespace PocketSharp.Models
     /// The title.
     /// </value>
     [JsonProperty("resolved_title")]
-    public string Title { get; set; }
+    private string _ResolvedTitle { get; set; }
+
+    /// <summary>
+    /// Gets or sets the title.
+    /// </summary>
+    /// <value>
+    /// The title.
+    /// </value>
+    [JsonProperty("title")]
+    private string _InternalTitle { get; set; }
+
+    /// <summary>
+    /// Gets or sets the title.
+    /// </summary>
+    /// <value>
+    /// The title.
+    /// </value>
+    [JsonIgnore]
+    public string Title
+    {
+      get { return _InternalTitle ?? _ResolvedTitle; }
+      set { _InternalTitle = value; _ResolvedTitle = value; }
+    }
 
     /// <summary>
     /// Gets or sets the full title.
@@ -183,7 +205,7 @@ namespace PocketSharp.Models
     /// The _ tag dictionary.
     /// </value>
     [JsonProperty("tags")]
-    public Dictionary<string, PocketTag> TagDictionary { get; set; }
+    private Dictionary<string, PocketTag> _TagDictionary { get; set; }
 
     /// <summary>
     /// Gets or sets the _ image dictionary.
@@ -192,7 +214,7 @@ namespace PocketSharp.Models
     /// The _ image dictionary.
     /// </value>
     [JsonProperty("images")]
-    public Dictionary<string, PocketImage> ImageDictionary { get; set; }
+    private Dictionary<string, PocketImage> _ImageDictionary { get; set; }
 
     /// <summary>
     /// Gets or sets the _ video dictionary.
@@ -201,7 +223,7 @@ namespace PocketSharp.Models
     /// The _ video dictionary.
     /// </value>
     [JsonProperty("videos")]
-    public Dictionary<string, PocketVideo> VideoDictionary { get; set; }
+    private Dictionary<string, PocketVideo> _VideoDictionary { get; set; }
 
     /// <summary>
     /// Gets or sets the _ author dictionary.
@@ -210,7 +232,7 @@ namespace PocketSharp.Models
     /// The _ author dictionary.
     /// </value>
     [JsonProperty("authors")]
-    public Dictionary<string, PocketAuthor> AuthorDictionary { get; set; }
+    private Dictionary<string, PocketAuthor> _AuthorDictionary { get; set; }
 
 
     /// <summary>
@@ -222,7 +244,7 @@ namespace PocketSharp.Models
     [JsonIgnore]
     public List<PocketTag> Tags
     {
-      get { return Utilities.DictionaryToList<PocketTag>(TagDictionary); }
+      get { return Utilities.DictionaryToList<PocketTag>(_TagDictionary); }
     }
 
     /// <summary>
@@ -234,7 +256,7 @@ namespace PocketSharp.Models
     [JsonIgnore]
     public List<PocketImage> Images
     {
-      get { return Utilities.DictionaryToList<PocketImage>(ImageDictionary); }
+      get { return Utilities.DictionaryToList<PocketImage>(_ImageDictionary); }
     }
 
     /// <summary>
@@ -246,7 +268,7 @@ namespace PocketSharp.Models
     [JsonIgnore]
     public PocketImage LeadImage
     {
-      get { return Images != null ? Images[0] : null; }
+      get { return Images.Count > 0 ? Images[0] : null; }
     }
 
     /// <summary>
@@ -258,7 +280,7 @@ namespace PocketSharp.Models
     [JsonIgnore]
     public List<PocketVideo> Videos
     {
-      get { return Utilities.DictionaryToList<PocketVideo>(VideoDictionary); }
+      get { return Utilities.DictionaryToList<PocketVideo>(_VideoDictionary); }
     }
 
     /// <summary>
@@ -270,7 +292,7 @@ namespace PocketSharp.Models
     [JsonIgnore]
     public List<PocketAuthor> Authors
     {
-      get { return Utilities.DictionaryToList<PocketAuthor>(AuthorDictionary); }
+      get { return Utilities.DictionaryToList<PocketAuthor>(_AuthorDictionary); }
     }
   }
 }

@@ -14,7 +14,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="parameters">parameters, which are mapped to the officials from http://getpocket.com/developer/docs/v3/retrieve </param>
     /// <returns></returns>
-    public async Task<List<PocketItem>> Retrieve(RetrieveParameters parameters)
+    internal async Task<List<PocketItem>> Retrieve(RetrieveParameters parameters)
     {
       Retrieve response = await Request<Retrieve>("get", parameters.Convert(), true);
 

@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Linq;
 
 namespace PocketSharp.Models
 {
   /// <summary>
   /// All parameters which can be passed to add a new item
   /// </summary>
-  public class AddParameters
+  [DataContract]
+  internal class AddParameters : Parameters
   {
     /// <summary>
     /// Gets or sets the URI.
@@ -14,6 +18,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The URI.
     /// </value>
+    [DataMember(Name="url")]
     public Uri Uri { get; set; }
 
     /// <summary>
@@ -22,6 +27,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The title.
     /// </value>
+    [DataMember(Name="title")]
     public string Title { get; set; }
 
     /// <summary>
@@ -30,6 +36,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The tags.
     /// </value>
+    [DataMember(Name="tags")]
     public string[] Tags { get; set; }
 
     /// <summary>
@@ -38,21 +45,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The tweet ID.
     /// </value>
+    [DataMember(Name="tweet_id")]
     public string TweetID { get; set; }
-
-    /// <summary>
-    /// Converts this instance to a parameter list.
-    /// </summary>
-    /// <returns></returns>
-    public List<Parameter> Convert()
-    {
-      return new List<Parameter>()
-      {
-        Utilities.CreateParam("url", Uri.ToString() ),
-        Utilities.CreateParam("title", Title),
-        Utilities.CreateParam("tags", String.Join(",", Tags)),
-        Utilities.CreateParam("tweet_id", TweetID)
-      };
-    }
   }
 }

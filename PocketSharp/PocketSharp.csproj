@@ -49,7 +49,7 @@
     <Compile Include="Models\Parameters\ActionParameter.cs" />
     <Compile Include="Models\Parameters\AddParameters.cs" />
     <Compile Include="Models\Parameters\ModifyParameters.cs" />
-    <Compile Include="Models\Parameters\Parameter.cs" />
+    <Compile Include="Models\Parameters\Parameters.cs" />
     <Compile Include="Models\Parameters\RetrieveParameters.cs" />
     <Compile Include="Models\PocketAuthor.cs" />
     <Compile Include="Models\PocketImage.cs" />

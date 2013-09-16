@@ -26,32 +26,6 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Creates a Parameter object.
-    /// </summary>
-    /// <param name="name">The name.</param>
-    /// <param name="value">The value.</param>
-    /// <param name="type">The type.</param>
-    /// <returns></returns>
-    public static Parameter CreateParam(string name, object value)
-    {
-      return new Parameter() { Name = name, Value = value };
-    }
-
-
-    /// <summary>
-    /// Creates a Parameter object within a list.
-    /// </summary>
-    /// <param name="name">The name.</param>
-    /// <param name="value">The value.</param>
-    /// <param name="type">The type.</param>
-    /// <returns></returns>
-    public static List<Parameter> CreateParamInList(string name, object value)
-    {
-      return new List<Parameter>() { CreateParam(name, value) };
-    }
-
-
-    /// <summary>
     /// Convert a dictionary to a list
     /// </summary>
     /// <typeparam name="T"></typeparam>

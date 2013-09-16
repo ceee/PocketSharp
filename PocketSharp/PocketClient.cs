@@ -94,50 +94,27 @@ namespace PocketSharp
     }
 
 
-    /// <summary>
-    /// Fetches a typed resource
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="method">Requested method (path after /v3/)</param>
-    /// <param name="parameters">Additional POST parameters</param>
-    /// <param name="requireAuth">if set to <c>true</c> [require auth].</param>
-    /// <returns></returns>
-    /// <exception cref="PocketException">No access token available. Use authentification first.</exception>
-    protected async Task<T> Request<T>(string method, List<Parameter> parameters = null, bool requireAuth = false) where T : class, new()
+    protected async Task<T> Request<T>(string method, Dictionary<string, string> parameters = null, bool requireAuth = false) where T : class, new()
     {
       if (requireAuth && AccessCode == null)
       {
         throw new PocketException("SDK error: No access token available. Use authentification first.");
       }
 
-      // convert parameters
-      Dictionary<string, string> parameterDict = new Dictionary<string, string>();
-
-      if (parameters != null)
-      {
-        foreach (Parameter item in parameters)
-        {
-          if (item.Value != null)
-          {
-            parameterDict.Add(item.Name, item.Value.ToString());
-          }
-        }
-      }
-
       // every single Pocket API endpoint requires HTTP POST data
       HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, method);
 
       // add consumer key to each request
-      parameterDict.Add("consumer_key", ConsumerKey);
+      parameters.Add("consumer_key", ConsumerKey);
 
       // add access token (necessary for all requests except authentification)
       if (AccessCode != null)
       {
-        parameterDict.Add("access_token", AccessCode);
+        parameters.Add("access_token", AccessCode);
       }
 
       // content of the request
-      request.Content = new FormUrlEncodedContent(parameterDict);
+      request.Content = new FormUrlEncodedContent(parameters);
 
       // make async request
       HttpResponseMessage response = await _restClient.SendAsync(request);
@@ -148,9 +125,11 @@ namespace PocketSharp
       // read response
       var responseString = await response.Content.ReadAsStringAsync();
 
+      responseString = responseString.Replace("[]", "{}");
+
       // deserialize object
       T parsedResponse = JsonConvert.DeserializeObject<T>(
-        responseString, 
+        responseString,
         new JsonSerializerSettings
         {
           Error = (object sender, ErrorEventArgs args) =>

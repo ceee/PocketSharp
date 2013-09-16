@@ -6,8 +6,21 @@ using PocketSharp.Models;
 
 namespace PocketSharp.Tests
 {
-  class AddTests : TestsBase
+  public class AddTests : TestsBase
   {
     public AddTests() : base() { }
+
+
+    [Fact]
+    public async Task AddSimpleItemWithUriOnly()
+    {
+      var uri = new Uri("http://frontendplay.com");
+
+      PocketItem item = await client.Add(uri);
+
+      Assert.Equal<Uri>(uri, item.Uri);
+
+      itemsToDelete.Add(item.ID);
+    }
   }
 }
