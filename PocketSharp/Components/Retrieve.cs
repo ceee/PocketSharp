@@ -16,7 +16,7 @@ namespace PocketSharp
     /// <returns></returns>
     internal async Task<List<PocketItem>> Retrieve(RetrieveParameters parameters)
     {
-      Retrieve response = await Request<Retrieve>("get", parameters.Convert(), true);
+      Retrieve response = await Request<Retrieve>("get", parameters.Convert());
 
       return response.Items;
     }
@@ -55,7 +55,7 @@ namespace PocketSharp
 
       parameters.DetailType = DetailType.complete;
 
-      Retrieve response = await Request<Retrieve>("get", parameters.Convert(), true);
+      Retrieve response = await Request<Retrieve>("get", parameters.Convert());
 
       return response.Items;
     }
@@ -74,7 +74,7 @@ namespace PocketSharp
         DetailType = DetailType.complete
       };
 
-      Retrieve response = await Request<Retrieve>("get", parameters.Convert(), true);
+      Retrieve response = await Request<Retrieve>("get", parameters.Convert());
 
       return response.Items;
     }
@@ -93,7 +93,7 @@ namespace PocketSharp
         DetailType = DetailType.complete
       };
 
-      Retrieve response = await Request<Retrieve>("get", parameters.Convert(), true);
+      Retrieve response = await Request<Retrieve>("get", parameters.Convert());
 
       return response.Items;
     }

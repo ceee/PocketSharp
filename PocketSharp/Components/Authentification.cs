@@ -26,7 +26,7 @@ namespace PocketSharp
       RequestCode response = await Request<RequestCode>("oauth/request", new Dictionary<string, string>()
       { 
         { "redirect_uri", CallbackUri } 
-      });
+      }, false);
 
       // save code to client
       RequestCode = response.Code;
@@ -81,7 +81,7 @@ namespace PocketSharp
       AccessCode response = await Request<AccessCode>("oauth/authorize", new Dictionary<string, string>()
       { 
         { "code", RequestCode } 
-      });
+      }, false);
 
       // save code to client
       AccessCode = response.Code;

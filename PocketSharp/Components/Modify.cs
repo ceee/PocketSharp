@@ -1,4 +1,5 @@
 ﻿using PocketSharp.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PocketSharp
@@ -15,7 +16,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<bool> Archive(int itemID)
     {
-      return await PutSendActionDefault(itemID, "archive");
+      return await SendDefault(itemID, "archive");
     }
 
 
@@ -37,7 +38,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<bool> Unarchive(int itemID)
     {
-      return await PutSendActionDefault(itemID, "readd");
+      return await SendDefault(itemID, "readd");
     }
 
 
@@ -59,7 +60,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<bool> Favorite(int itemID)
     {
-      return await PutSendActionDefault(itemID, "favorite");
+      return await SendDefault(itemID, "favorite");
     }
 
 
@@ -81,7 +82,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<bool> Unfavorite(int itemID)
     {
-      return await PutSendActionDefault(itemID, "unfavorite");
+      return await SendDefault(itemID, "unfavorite");
     }
 
 
@@ -103,7 +104,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<bool> Delete(int itemID)
     {
-      return await PutSendActionDefault(itemID, "delete");
+      return await SendDefault(itemID, "delete");
     }
 
 
@@ -124,9 +125,9 @@ namespace PocketSharp
     /// <param name="itemID">The item ID.</param>
     /// <param name="action">The action.</param>
     /// <returns></returns>
-    protected async Task<bool> PutSendActionDefault(int itemID, string action)
+    protected async Task<bool> SendDefault(int itemID, string action)
     {
-      return await PutSendAction(new ActionParameter()
+      return await Send(new ActionParameter()
       {
         Action = action,
         ID = itemID

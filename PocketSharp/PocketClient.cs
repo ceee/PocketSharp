@@ -94,7 +94,16 @@ namespace PocketSharp
     }
 
 
-    protected async Task<T> Request<T>(string method, Dictionary<string, string> parameters = null, bool requireAuth = false) where T : class, new()
+    /// <summary>
+    /// Fetches a typed resource
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="method">Requested method (path after /v3/)</param>
+    /// <param name="parameters">Additional POST parameters</param>
+    /// <param name="requireAuth">if set to <c>true</c> [require auth].</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException">No access token available. Use authentification first.</exception>
+    protected async Task<T> Request<T>(string method, Dictionary<string, string> parameters = null, bool requireAuth = true) where T : class, new()
     {
       if (requireAuth && AccessCode == null)
       {
@@ -150,20 +159,38 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Puts an action
+    /// Sends a list of actions
+    /// </summary>
+    /// <param name="actionParameters">The action parameters.</param>
+    /// <returns></returns>
+    internal async Task<bool> Send(List<ActionParameter> actionParameters)
+    {
+      List<Dictionary<string, string>> actionParamList = new List<Dictionary<string, string>>();
+
+      foreach (var action in actionParameters)
+      {
+        actionParamList.Add(action.Convert());
+      }
+
+      Dictionary<string, string> parameters = new Dictionary<string, string>() {{
+        "actions", JsonConvert.SerializeObject(actionParamList)                                                                    
+      }};
+
+      Modify response = await Request<Modify>("send", parameters);
+
+      return response.Status;
+    }
+
+
+    /// <summary>
+    /// Sends an action
     /// </summary>
     /// <param name="actionParameter">The action parameter.</param>
     /// <returns></returns>
-    protected async Task<bool> PutSendAction(ActionParameter actionParameter)
+    internal async Task<bool> Send(ActionParameter actionParameter)
     {
-      ModifyParameters parameters = new ModifyParameters()
-      {
-        Actions = new List<ActionParameter>() { actionParameter }
-      };
-
-      Modify response = await Request<Modify>("send", parameters.Convert(), true);
-
-      return response.Status;
+      bool response = await Send(new List<ActionParameter>() { actionParameter });
+      return response;
     }
 
 

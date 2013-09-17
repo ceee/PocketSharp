@@ -27,7 +27,7 @@ namespace PocketSharp
         TweetID = tweetID
       };
 
-      Add response = await Request<Add>("add", parameters.Convert(), true);
+      Add response = await Request<Add>("add", parameters.Convert());
 
       return response.Item;
     }

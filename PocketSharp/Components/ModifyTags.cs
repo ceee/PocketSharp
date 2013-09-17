@@ -16,7 +16,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<bool> AddTags(int itemID, string[] tags)
     {
-      return await PutSendActionForTags(itemID, "tags_add", tags);
+      return await SendTags(itemID, "tags_add", tags);
     }
 
 
@@ -40,7 +40,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<bool> RemoveTags(int itemID, string[] tags)
     {
-      return await PutSendActionForTags(itemID, "tags_remove", tags);
+      return await SendTags(itemID, "tags_remove", tags);
     }
 
 
@@ -63,7 +63,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<bool> RemoveTags(int itemID)
     {
-      return await PutSendActionDefault(itemID, "tags_clear");
+      return await SendDefault(itemID, "tags_clear");
     }
 
 
@@ -86,7 +86,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<bool> ReplaceTags(int itemID, string[] tags)
     {
-      return await PutSendActionForTags(itemID, "tags_replace", tags);
+      return await SendTags(itemID, "tags_replace", tags);
     }
 
 
@@ -111,7 +111,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<bool> RenameTag(int itemID, string oldTag, string newTag)
     {
-      return await PutSendAction(new ActionParameter()
+      return await Send(new ActionParameter()
       {
         Action = "tag_rename",
         ID = itemID,
@@ -141,9 +141,9 @@ namespace PocketSharp
     /// <param name="action">The action.</param>
     /// <param name="tags">The tags.</param>
     /// <returns></returns>
-    protected async Task<bool> PutSendActionForTags(int itemID, string action, string[] tags)
+    protected async Task<bool> SendTags(int itemID, string action, string[] tags)
     {
-      return await PutSendAction(new ActionParameter()
+      return await Send(new ActionParameter()
       {
         Action = action,
         ID = itemID,
