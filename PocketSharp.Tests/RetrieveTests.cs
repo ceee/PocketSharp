@@ -20,20 +20,14 @@ namespace PocketSharp.Tests
     }
 
 
-    //[Fact]
-    //public async Task ItemContainsUri()
-    //{
-    //  List<PocketItem> items = await client.Retrieve(new RetrieveParameters()
-    //  {
-    //    Count = 1  
-    //  });
+    [Fact]
+    public async Task ItemContainsUri()
+    {
+      List<PocketItem> items = await client.Retrieve(count: 1);
 
-    //  Assert.True(items.Count == 1);
-
-    //  PocketItem item = items[0];
-
-    //  Assert.True(item.Uri.ToString().StartsWith("http"));
-    //}
+      Assert.True(items.Count == 1);
+      Assert.True(items[0].Uri.ToString().StartsWith("http"));
+    }
 
 
     [Fact]

@@ -1,4 +1,5 @@
 ﻿using PocketSharp.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,8 +15,34 @@ namespace PocketSharp
     /// </summary>
     /// <param name="parameters">parameters, which are mapped to the officials from http://getpocket.com/developer/docs/v3/retrieve </param>
     /// <returns></returns>
-    internal async Task<List<PocketItem>> Retrieve(RetrieveParameters parameters)
+    public async Task<List<PocketItem>> Retrieve(
+      State? state = null,
+      bool? favorite = null,
+      string tag = null,
+      ContentType? contentType = null,
+      Sort? sort = null,
+      string search = null,
+      string domain = null,
+      DateTime? since = null,
+      int? count = null,
+      int? offset = null
+    )
     {
+      RetrieveParameters parameters = new RetrieveParameters()
+      {
+        State = state,
+        Favorite = favorite,
+        Tag = tag,
+        ContentType = contentType,
+        Sort = sort,
+        DetailType = DetailType.complete,
+        Search = search,
+        Domain = domain,
+        Since = since,
+        Count = count,
+        Offset = offset
+      };
+
       Retrieve response = await Request<Retrieve>("get", parameters.Convert());
 
       return response.Items;
@@ -27,7 +54,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="filter">The filter.</param>
     /// <returns></returns>
-    public async Task<List<PocketItem>> Retrieve(RetrieveFilter filter = RetrieveFilter.All)
+    public async Task<List<PocketItem>> RetrieveByFilter(RetrieveFilter filter = RetrieveFilter.All)
     {
       RetrieveParameters parameters = new RetrieveParameters();
 
@@ -68,15 +95,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<List<PocketItem>> SearchByTag(string tag)
     {
-      RetrieveParameters parameters = new RetrieveParameters()
-      {
-        Tag = tag,
-        DetailType = DetailType.complete
-      };
-
-      Retrieve response = await Request<Retrieve>("get", parameters.Convert());
-
-      return response.Items;
+      return await Retrieve(tag: tag);
     }
 
 
@@ -87,15 +106,7 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<List<PocketItem>> Search(string searchString)
     {
-      RetrieveParameters parameters = new RetrieveParameters()
-      {
-        Search = searchString,
-        DetailType = DetailType.complete
-      };
-
-      Retrieve response = await Request<Retrieve>("get", parameters.Convert());
-
-      return response.Items;
+      return await Retrieve(search: searchString);
     }
   }
 
