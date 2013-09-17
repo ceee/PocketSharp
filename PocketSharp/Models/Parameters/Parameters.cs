@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Linq;
+using System.Collections;
+using Newtonsoft.Json;
 
 namespace PocketSharp.Models
 {
@@ -31,11 +33,19 @@ namespace PocketSharp.Models
       {
         DataMemberAttribute attribute = (DataMemberAttribute)propertyInfo.GetCustomAttributes(typeof(DataMemberAttribute‌), false).FirstOrDefault();
         string name = attribute.Name ?? propertyInfo.Name.ToLower();
+        object value = propertyInfo.GetValue(this, null);
 
-        if (propertyInfo.GetValue(this, null) != null)
+        if (value == null)
         {
-          parameterDict.Add(name, propertyInfo.GetValue(this, null).ToString());
+          continue;
         }
+
+        if (value is IEnumerable && value.GetType().GetElementType() == typeof(string))
+        {
+          value = string.Join(",", ((IEnumerable)value).Cast<object>().Select(x => x.ToString()).ToArray());
+        }
+
+        parameterDict.Add(name, value.ToString());
       }
 
       return parameterDict;

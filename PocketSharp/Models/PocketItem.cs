@@ -268,7 +268,7 @@ namespace PocketSharp.Models
     [JsonIgnore]
     public PocketImage LeadImage
     {
-      get { return Images.Count > 0 ? Images[0] : null; }
+      get { return Images != null && Images.Count > 0 ? Images[0] : null; }
     }
 
     /// <summary>
