@@ -32,6 +32,8 @@
       </h1>
       <p class="app-description">
         PocketSharp is a C#.NET class library, that integrates the Pocket API v3
+        <br><br>
+        Current version: <b>1.2.0</b>
       </p>
       <div class="app-nuget">
         <code>Install-Package PocketSharp</code>
@@ -122,6 +124,8 @@ using PocketSharp.Models;</code></pre>
 
           <h2>Release History</h2>
         <ul>
+          <li>2013-09-17 v1.2.0 simplified retrieve methods</li>
+          <li>2013-09-17 v1.1.0 fix modification requests</li>
           <li>2013-09-15 v1.0.0 convert to PCL &amp; implement async</li>
           <li>2013-08-16 v0.3.2 tag modification fixed and full retrieval of items for Retrieve method</li>
           <li>2013-07-07 v0.3.1 authentication fixes</li>
@@ -186,42 +190,34 @@ Note that <code>GetAccessCode</code> can only be called with an existing <em>req
       <div data-part="retrieve">
 
         <h2>Retrieve</h2>
-        <p>Get list of all items:</p>
 
-          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Retrieve();
-// equivalent to: await _client.Retrieve(RetrieveFilter.All)</code></pre>
-
-        <p>Find items by a tag:</p>
-
-          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.SearchByTag(&quot;tutorial&quot;);</code></pre>
-
-        <p>Find items by a search string:</p>
-
-          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Search(&quot;css&quot;);</code></pre>
-
-        <p>Find items by a filter:</p>
-
-          <pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Retrieve(RetrieveFilter.Favorite); // only favorites</code></pre>
-
-        <p>The RetrieveFilter Enum is specified as follows:</p>
-
-          <pre class="language-clike"><code>enum RetrieveFilter { All, Unread, Archive, Favorite, Article, Video, Image }</code></pre>
-
-        <h4>Custom Parameters</h4>
-        <p>You can create a completely custom parameter list for retrieval with the POCO <code>RetrieveParameters</code>:</p>
-
-          <pre class="language-clike"><code>
-var parameters = new RetrieveParameters()
-{
-	Count = 50,
-	Offset = 100,
-	Sort = SortEnum.oldest
-	...
-};
-List&lt;pocketitem&gt; items = await _client.Retrieve(parameters);
-</code></pre>
-
-
+<p>Get list of all items:</p>
+<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Retrieve();
+// equivalent to: await _client.RetrieveByFilter(RetrieveFilter.All)</code></pre></p>
+<p>Get a list with specific parameters (explanation in the <a href="http://getpocket.com/developer/docs/v3/retrieve">Pocket Docs</a>):</p>
+<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Retrieve(
+  State? state = null,
+  bool? favorite = null,
+  string tag = null,
+  ContentType? contentType = null,
+  Sort? sort = null,
+  string search = null,
+  string domain = null,
+  DateTime? since = null,
+  int? count = null,
+  int? offset = null
+);</code></pre></p>
+<p>It's best to use parameters as <em>named parameters</em>, to avoid typing <code>null</code> values:</p>
+<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Retrieve(count: 10, offset: 20, sort: Sort.oldest);</code></pre></p>
+<p>Find items by a tag:</p>
+<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.SearchByTag(&quot;tutorial&quot;);</code></pre></p>
+<p>Find items by a search string:</p>
+<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Search(&quot;css&quot;);</code></pre></p>
+<p>Get a filtered list:</p>
+<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.RetrieveByFilter(RetrieveFilter.Favorite);
+// returns favorites only</code></pre></p>
+<p>The RetrieveFilter Enum is specified as follows:</p>
+<p><pre class="language-clike"><code>enum RetrieveFilter { All, Unread, Archive, Favorite, Article, Video, Image }</code></pre></p>
       </div>
 
       <div data-part="add">

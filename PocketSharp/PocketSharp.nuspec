@@ -10,7 +10,7 @@
     <projectUrl>http://pocketsharp.frontendplay.com</projectUrl>
     <iconUrl>http://pocketsharp.frontendplay.com/Assets/Images/pocketsharp.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>PocketSharp is a .NET class library, that integrates the Pocket API v3</description>
     <language>en-US</language>
     <releaseNotes>
       <![CDATA[

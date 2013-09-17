@@ -19,7 +19,7 @@ PocketSharp is a **Portable Class Library** (since 1.0.0), therefore it's compat
 - **Windows Phone** >= 7.5
 - **Windows Store**
 
-You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Examples` folder.
+You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Examples` ([@github](https://github.com/ceee/PocketSharp/tree/master/PocketSharp.Examples)) folder.
 
 ## Async Support
 
@@ -142,7 +142,30 @@ Get list of all items:
 
 ```csharp
 List<PocketItem> items = await _client.Retrieve();
-// equivalent to: await _client.Retrieve(RetrieveFilter.All)
+// equivalent to: await _client.RetrieveByFilter(RetrieveFilter.All)
+```
+
+Get a list with specific parameters (explanation in the [Pocket Docs](http://getpocket.com/developer/docs/v3/retrieve)):
+
+```csharp
+List<PocketItem> items = await _client.Retrieve(
+  State? state = null,
+  bool? favorite = null,
+  string tag = null,
+  ContentType? contentType = null,
+  Sort? sort = null,
+  string search = null,
+  string domain = null,
+  DateTime? since = null,
+  int? count = null,
+  int? offset = null 
+);
+```
+
+It's best to use parameters as _named parameters_, to avoid typing `null` values:
+
+```csharp
+List<PocketItem> items = await _client.Retrieve(count: 10, offset: 20, sort: Sort.oldest);
 ```
 
 Find items by a tag:
@@ -157,32 +180,17 @@ Find items by a search string:
 List<PocketItem> items = await _client.Search("css");
 ```
 
-Find items by a filter:
+Get a filtered list:
 
 ```csharp
-List<PocketItem> items = await _client.Retrieve(RetrieveFilter.Favorite); // only favorites
+List<PocketItem> items = await _client.RetrieveByFilter(RetrieveFilter.Favorite);
+// returns favorites only
 ```
 
 The RetrieveFilter Enum is specified as follows:
 
 ```csharp
 enum RetrieveFilter { All, Unread, Archive, Favorite, Article, Video, Image }
-```
-
-#### Custom Parameters
-
-You can create a completely custom parameter list for retrieval with the POCO `RetrieveParameters`:
-
-```csharp
-var parameters = new RetrieveParameters()
-{
-	Count = 50,
-	Offset = 100,
-	Sort = Sort.oldest
-	...
-};
-
-List<PocketItem> items = await _client.Retrieve(parameters);
 ```
 
 ## Add
@@ -257,6 +265,8 @@ Renames a tag for the specified item:
 
 ## Release History
 
+- 2013-09-17 v1.2.0 simplified retrieve methods
+- 2013-09-17 v1.1.0 fix modification requests
 - 2013-09-15 v1.0.0 convert to PCL & implement async
 - 2013-08-16 v0.3.2 tag modification fixed and full retrieval of items for Retrieve method
 - 2013-07-07 v0.3.1 authentication fixes
