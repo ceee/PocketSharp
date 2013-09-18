@@ -265,6 +265,7 @@ Renames a tag for the specified item:
 
 ## Release History
 
+- 2013-09-18 v1.2.1 correct parameter conversion for DateTime and Boolean
 - 2013-09-17 v1.2.0 simplified retrieve methods
 - 2013-09-17 v1.1.0 fix modification requests
 - 2013-09-15 v1.0.0 convert to PCL & implement async
