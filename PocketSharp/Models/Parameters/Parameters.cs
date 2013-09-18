@@ -35,14 +35,28 @@ namespace PocketSharp.Models
         string name = attribute.Name ?? propertyInfo.Name.ToLower();
         object value = propertyInfo.GetValue(this, null);
 
+        // invalid parameter
         if (value == null)
         {
           continue;
         }
 
+        // convert array to comma-seperated list
         if (value is IEnumerable && value.GetType().GetElementType() == typeof(string))
         {
           value = string.Join(",", ((IEnumerable)value).Cast<object>().Select(x => x.ToString()).ToArray());
+        }
+
+        // convert booleans
+        if (value is bool)
+        {
+          value = System.Convert.ToBoolean(value) ? "1" : "0";
+        }
+
+        // convert DateTime to UNIX timestamp
+        if (value is DateTime)
+        {
+          value = (int)((DateTime)value - new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
         parameterDict.Add(name, value.ToString());

@@ -35,12 +35,12 @@ namespace PocketSharp.Tests
       List<PocketItem> items = await client.Retrieve(
         state: State.unread,
         tag: "pocket",
-        contentType: ContentType.article,
+        sort: Sort.title,
         since: new DateTime(2010, 12, 10),
         count: 2
       );
 
-      Assert.True(items.Count > 0);
+      Assert.InRange<int>(items.Count, 0, 2);
     }
 
 
