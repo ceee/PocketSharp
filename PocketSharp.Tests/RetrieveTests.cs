@@ -21,6 +21,30 @@ namespace PocketSharp.Tests
 
 
     [Fact]
+    public async Task AreFilteredItemsRetrieved()
+    {
+      List<PocketItem> items = await client.RetrieveByFilter(RetrieveFilter.Favorite);
+
+      Assert.True(items.Count > 0);
+    }
+
+
+    [Fact]
+    public async Task RetrieveWithMultipleFilters()
+    {
+      List<PocketItem> items = await client.Retrieve(
+        state: State.unread,
+        tag: "pocket",
+        contentType: ContentType.article,
+        since: new DateTime(2010, 12, 10),
+        count: 2
+      );
+
+      Assert.True(items.Count > 0);
+    }
+
+
+    [Fact]
     public async Task ItemContainsUri()
     {
       List<PocketItem> items = await client.Retrieve(count: 1);
