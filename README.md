@@ -168,6 +168,12 @@ It's best to use parameters as _named parameters_, to avoid typing `null` values
 List<PocketItem> items = await _client.Retrieve(count: 10, offset: 20, sort: Sort.oldest);
 ```
 
+Get item by ID:
+
+```csharp
+PocketItem item = await _client.Retrieve(1298198);
+```
+
 Find items by a tag:
 
 ```csharp
@@ -265,6 +271,7 @@ Renames a tag for the specified item:
 
 ## Release History
 
+- 2013-09-19 v1.3.0 get Item by ID + tag modification bugfixes
 - 2013-09-18 v1.2.1 correct parameter conversion for DateTime and Boolean
 - 2013-09-17 v1.2.0 simplified retrieve methods
 - 2013-09-17 v1.1.0 fix modification requests

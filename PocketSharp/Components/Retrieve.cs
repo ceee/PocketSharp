@@ -61,7 +61,7 @@ namespace PocketSharp
         state: State.all  
       );
       
-      return items.Single<PocketItem>(item => item.ID == itemID);
+      return items.SingleOrDefault<PocketItem>(item => item.ID == itemID);
     }
 
 

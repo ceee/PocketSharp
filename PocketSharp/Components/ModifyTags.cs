@@ -48,7 +48,7 @@ namespace PocketSharp
     /// Removes the specified tags.
     /// </summary>
     /// <param name="item">The item.</param>
-    /// <param name="tags">The tags.</param>
+    /// <param name="tags">The tag.</param>
     /// <returns></returns>
     public async Task<bool> RemoveTags(PocketItem item, string[] tags)
     {
@@ -60,7 +60,7 @@ namespace PocketSharp
     /// Removes a tag.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
-    /// <param name="tags">The tags.</param>
+    /// <param name="tags">The tag.</param>
     /// <returns></returns>
     public async Task<bool> RemoveTag(int itemID, string tag)
     {
