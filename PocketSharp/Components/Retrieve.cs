@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace PocketSharp
 {
@@ -46,6 +47,21 @@ namespace PocketSharp
       Retrieve response = await Request<Retrieve>("get", parameters.Convert());
 
       return response.Items;
+    }
+
+
+    /// <summary>
+    /// Retrieves an item by a given ID
+    /// </summary>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    public async Task<PocketItem> Retrieve(int itemID)
+    {
+      List<PocketItem> items = await Retrieve(
+        state: State.all  
+      );
+      
+      return items.Single<PocketItem>(item => item.ID == itemID);
     }
 
 

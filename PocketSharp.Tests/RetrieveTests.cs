@@ -21,6 +21,18 @@ namespace PocketSharp.Tests
 
 
     [Fact]
+    public async Task IsItemRetrievedById()
+    {
+      List<PocketItem> items = await client.Retrieve();
+      PocketItem item = items[0];
+      PocketItem itemDuplicate = await client.Retrieve(item.ID);
+
+      Assert.True(item.ID == itemDuplicate.ID);
+      Assert.True(item.Uri == itemDuplicate.Uri);
+    }
+
+
+    [Fact]
     public async Task AreFilteredItemsRetrieved()
     {
       List<PocketItem> items = await client.RetrieveByFilter(RetrieveFilter.Favorite);
