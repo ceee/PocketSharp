@@ -165,7 +165,7 @@ namespace PocketSharp
     /// <returns></returns>
     internal async Task<bool> Send(List<ActionParameter> actionParameters)
     {
-      List<Dictionary<string, string>> actionParamList = new List<Dictionary<string, string>>();
+      List<Dictionary<string, object>> actionParamList = new List<Dictionary<string, object>>();
 
       foreach (var action in actionParameters)
       {

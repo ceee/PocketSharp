@@ -57,6 +57,30 @@ namespace PocketSharp
 
 
     /// <summary>
+    /// Removes a tag.
+    /// </summary>
+    /// <param name="itemID">The item ID.</param>
+    /// <param name="tags">The tags.</param>
+    /// <returns></returns>
+    public async Task<bool> RemoveTag(int itemID, string tag)
+    {
+      return await SendTags(itemID, "tags_remove", new string[] { tag });
+    }
+
+
+    /// <summary>
+    /// Removes a tag.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <param name="tags">The tags.</param>
+    /// <returns></returns>
+    public async Task<bool> RemoveTag(PocketItem item, string tag)
+    {
+      return await RemoveTag(item.ID, tag);
+    }
+
+
+    /// <summary>
     /// Clears all tags.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
@@ -79,7 +103,7 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Replaces all existing tags with new ones.
+    /// Replaces all existing tags with the given tags.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <param name="tags">The tags.</param>

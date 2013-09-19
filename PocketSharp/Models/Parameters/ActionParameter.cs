@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -8,7 +9,7 @@ namespace PocketSharp.Models
   /// All parameters which can be passed for a modify action
   /// </summary>
   [DataContract]
-  internal class ActionParameter : Parameters
+  internal class ActionParameter
   {
     /// <summary>
     /// Gets or sets the action.
@@ -67,28 +68,28 @@ namespace PocketSharp.Models
     public string NewTag { get; set; }
 
 
-    ///// <summary>
-    ///// Converts this instance to a parameter list.
-    ///// </summary>
-    ///// <returns></returns>
-    //public Dictionary<string, object> Convert()
-    //{
-    //  Dictionary<string, object> parameters = new Dictionary<string, object>
-    //  {
-    //    { "item_id", ID },
-    //    { "action", Action }
-    //  };
+    /// <summary>
+    /// Converts this instance to a parameter list.
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<string, object> Convert()
+    {
+      Dictionary<string, object> parameters = new Dictionary<string, object>
+      {
+        { "item_id", ID.ToString() },
+        { "action", Action }
+      };
 
-    //  if (Time != null)
-    //    parameters.Add("time", Utilities.GetUnixTimestamp(Time));
-    //  if (Tags != null)
-    //    parameters.Add("tags", Tags);
-    //  if (OldTag != null)
-    //    parameters.Add("old_tag", OldTag);
-    //  if (NewTag != null)
-    //    parameters.Add("new_tag", NewTag);
+      if (Time != null)
+        parameters.Add("time", Time != null ? Utilities.GetUnixTimestamp(Time).ToString() : null);
+      if (Tags != null)
+        parameters.Add("tags", Tags);
+      if (OldTag != null)
+        parameters.Add("old_tag", OldTag);
+      if (NewTag != null)
+        parameters.Add("new_tag", NewTag);
 
-    //  return parameters;
-    //}
+      return parameters;
+    }
   }
 }
