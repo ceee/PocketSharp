@@ -12,10 +12,12 @@ namespace PocketSharp
   public partial class PocketClient
   {
     /// <summary>
-    /// Retrieves all items from pocket
+    /// Retrieves items from pocket
+    /// with the given filters
     /// </summary>
     /// <param name="parameters">parameters, which are mapped to the officials from http://getpocket.com/developer/docs/v3/retrieve </param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> Retrieve(
       State? state = null,
       bool? favorite = null,
@@ -52,9 +54,11 @@ namespace PocketSharp
 
     /// <summary>
     /// Retrieves an item by a given ID
+    /// Note: The Pocket API contains no method, which allows to retrieve a single item, so all items are retrieved and filtered locally by the ID.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<PocketItem> Retrieve(int itemID)
     {
       List<PocketItem> items = await Retrieve(
@@ -66,10 +70,11 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Retrieves all items with a filter from pocket
+    /// Retrieves all items by a given filter
     /// </summary>
     /// <param name="filter">The filter.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> RetrieveByFilter(RetrieveFilter filter = RetrieveFilter.All)
     {
       RetrieveParameters parameters = new RetrieveParameters();
@@ -105,10 +110,11 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Retrieves items by tag from pocket
+    /// Retrieves items by tag
     /// </summary>
     /// <param name="tag">The tag.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> SearchByTag(string tag)
     {
       return await Retrieve(tag: tag);
@@ -116,10 +122,11 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Retrieves items from pocket which match the specified search string in title or content
+    /// Retrieves items which match the specified search string in title or content
     /// </summary>
     /// <param name="searchString">The search string.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> Search(string searchString)
     {
       return await Retrieve(search: searchString);

@@ -14,6 +14,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> Archive(int itemID)
     {
       return await SendDefault(itemID, "archive");
@@ -25,6 +26,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="item">The item.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> Archive(PocketItem item)
     {
       return await Archive(item.ID);
@@ -36,6 +38,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> Unarchive(int itemID)
     {
       return await SendDefault(itemID, "readd");
@@ -47,6 +50,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="item">The item.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> Unarchive(PocketItem item)
     {
       return await Unarchive(item.ID);
@@ -58,6 +62,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> Favorite(int itemID)
     {
       return await SendDefault(itemID, "favorite");
@@ -69,6 +74,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="item">The item.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> Favorite(PocketItem item)
     {
       return await Favorite(item.ID);
@@ -80,6 +86,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> Unfavorite(int itemID)
     {
       return await SendDefault(itemID, "unfavorite");
@@ -91,6 +98,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="item">The item.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> Unfavorite(PocketItem item)
     {
       return await Unfavorite(item.ID);
@@ -102,6 +110,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> Delete(int itemID)
     {
       return await SendDefault(itemID, "delete");

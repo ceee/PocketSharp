@@ -9,11 +9,12 @@ namespace PocketSharp
   public partial class PocketClient
   {
     /// <summary>
-    /// Adds the specified tags.
+    /// Adds the specified tags to an item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <param name="tags">The tags.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> AddTags(int itemID, string[] tags)
     {
       return await SendTags(itemID, "tags_add", tags);
@@ -21,11 +22,12 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Adds the specified tags.
+    /// Adds the specified tags to an item.
     /// </summary>
     /// <param name="item">The item.</param>
     /// <param name="tags">The tags.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> AddTags(PocketItem item, string[] tags)
     {
       return await AddTags(item.ID, tags);
@@ -33,11 +35,12 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Removes the specified tags.
+    /// Removes the specified tags from an item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <param name="tags">The tags.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> RemoveTags(int itemID, string[] tags)
     {
       return await SendTags(itemID, "tags_remove", tags);
@@ -45,11 +48,12 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Removes the specified tags.
+    /// Removes the specified tags from an item.
     /// </summary>
     /// <param name="item">The item.</param>
     /// <param name="tags">The tag.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> RemoveTags(PocketItem item, string[] tags)
     {
       return await RemoveTags(item.ID, tags);
@@ -57,11 +61,12 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Removes a tag.
+    /// Removes a tag from an item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <param name="tags">The tag.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> RemoveTag(int itemID, string tag)
     {
       return await SendTags(itemID, "tags_remove", new string[] { tag });
@@ -69,11 +74,12 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Removes a tag.
+    /// Removes a tag from an item.
     /// </summary>
     /// <param name="item">The item.</param>
     /// <param name="tags">The tags.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> RemoveTag(PocketItem item, string tag)
     {
       return await RemoveTag(item.ID, tag);
@@ -81,10 +87,11 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Clears all tags.
+    /// Clears all tags from an item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> RemoveTags(int itemID)
     {
       return await SendDefault(itemID, "tags_clear");
@@ -92,10 +99,11 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Clears all tags.
+    /// Clears all tags from an item.
     /// </summary>
     /// <param name="item">The item.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> RemoveTags(PocketItem item)
     {
       return await RemoveTags(item.ID);
@@ -103,11 +111,12 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Replaces all existing tags with the given tags.
+    /// Replaces all existing tags with the given tags in an item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <param name="tags">The tags.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> ReplaceTags(int itemID, string[] tags)
     {
       return await SendTags(itemID, "tags_replace", tags);
@@ -115,11 +124,12 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Replaces all existing tags with new ones.
+    /// Replaces all existing tags with the given new ones in an item.
     /// </summary>
     /// <param name="item">The item.</param>
     /// <param name="tags">The tags.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> ReplaceTags(PocketItem item, string[] tags)
     {
       return await ReplaceTags(item.ID, tags);
@@ -127,12 +137,13 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Renames a tag.
+    /// Renames a tag in an item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
     /// <param name="oldTag">The old tag.</param>
     /// <param name="newTag">The new tag name.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> RenameTag(int itemID, string oldTag, string newTag)
     {
       return await Send(new ActionParameter()
@@ -146,12 +157,13 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Renames a tag.
+    /// Renames a tag in an item.
     /// </summary>
     /// <param name="item">The item.</param>
     /// <param name="oldTag">The old tag.</param>
     /// <param name="newTag">The new tag name.</param>
     /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<bool> RenameTag(PocketItem item, string oldTag, string newTag)
     {
       return await RenameTag(item.ID, oldTag, newTag);
