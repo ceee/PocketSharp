@@ -67,12 +67,41 @@ namespace PocketSharp.Tests
 
 
     [Fact]
+    public async Task InvalidRetrievalReturnsNoResults()
+    {
+      List<PocketItem> items = await client.Retrieve(
+        favorite: true,
+        search: "xoiu987a#;"
+      );
+
+      Assert.False(items.Count > 0);
+
+      PocketItem item = await client.Retrieve(99999999);
+
+      Assert.Null(item);
+
+      items = await client.RetrieveByFilter(RetrieveFilter.Video);
+
+      Assert.False(items.Count > 0);
+    }
+
+
+    [Fact]
     public async Task SearchReturnsResult()
     {
       List<PocketItem> items = await client.Search("pocket");
 
       Assert.True(items.Count > 0);
       Assert.True(items[0].FullTitle.ToLower().Contains("pocket"));
+    }
+
+
+    [Fact]
+    public async Task InvalidSearchReturnsNoResult()
+    {
+      List<PocketItem> items = await client.Search("adsüasd-opiu2;.398dfyx");
+
+      Assert.False(items.Count > 0);
     }
 
 
@@ -94,6 +123,15 @@ namespace PocketSharp.Tests
       });
 
       Assert.True(found);
+    }
+
+
+    [Fact]
+    public async Task InvalidSearchByTagsReturnsNoResult()
+    {
+      List<PocketItem> items = await client.SearchByTag("adsüasd-opiu2;.398dfyx");
+
+      Assert.False(items.Count > 0);
     }
   }
 }
