@@ -2,7 +2,9 @@
 
 **PocketSharp** is a C#.NET class library, that integrates the [Pocket API v3](http://getpocket.com/developer) and consists of 4 parts: [Authentication](#authentication), [Retrieve](#retrieve), [Modify](#modify) and [Add](#add).
 
-[pocketsharp.frontendplay.com](http://pocketsharp.frontendplay.com/)
+**Website:** [pocketsharp.frontendplay.com](http://pocketsharp.frontendplay.com/)
+<br>
+**NuGet:** [nuget.org/packages/PocketSharp](https://www.nuget.org/packages/PocketSharp/)
 
 ## Install using NuGet
 
@@ -141,14 +143,14 @@ Without it you would always have to redo the authentication process.
 Get list of all items:
 
 ```csharp
-List<PocketItem> items = await _client.Retrieve();
-// equivalent to: await _client.RetrieveByFilter(RetrieveFilter.All)
+List<PocketItem> items = await _client.Get();
+// equivalent to: await _client.Get(RetrieveFilter.All)
 ```
 
 Get a list with specific parameters (explanation in the [Pocket Docs](http://getpocket.com/developer/docs/v3/retrieve)):
 
 ```csharp
-List<PocketItem> items = await _client.Retrieve(
+List<PocketItem> items = await _client.Get(
   State? state = null,
   bool? favorite = null,
   string tag = null,
@@ -165,13 +167,13 @@ List<PocketItem> items = await _client.Retrieve(
 It's best to use parameters as _named parameters_, to avoid typing `null` values:
 
 ```csharp
-List<PocketItem> items = await _client.Retrieve(count: 10, offset: 20, sort: Sort.oldest);
+List<PocketItem> items = await _client.Get(count: 10, offset: 20, sort: Sort.oldest);
 ```
 
 Get item by ID:
 
 ```csharp
-PocketItem item = await _client.Retrieve(1298198);
+PocketItem item = await _client.Get(1298198);
 ```
 
 Find items by a tag:
@@ -186,10 +188,16 @@ Find items by a search string:
 List<PocketItem> items = await _client.Search("css");
 ```
 
+Get all tags:
+
+```csharp
+List<PocketTag> items = await _client.GetTags();
+```
+
 Get a filtered list:
 
 ```csharp
-List<PocketItem> items = await _client.RetrieveByFilter(RetrieveFilter.Favorite);
+List<PocketItem> items = await _client.Get(RetrieveFilter.Favorite);
 // returns favorites only
 ```
 
@@ -271,16 +279,17 @@ Renames a tag for the specified item:
 
 ## Release History
 
-- 2013-09-19 v1.3.0 get Item by ID + tag modification bugfixes
-- 2013-09-18 v1.2.1 correct parameter conversion for DateTime and Boolean
-- 2013-09-17 v1.2.0 simplified retrieve methods
-- 2013-09-17 v1.1.0 fix modification requests
-- 2013-09-15 v1.0.0 convert to PCL & implement async
-- 2013-08-16 v0.3.2 tag modification fixed and full retrieval of items for Retrieve method
-- 2013-07-07 v0.3.1 authentication fixes
-- 2013-07-02 v0.3.0 update authentication process 
-- 2013-06-27 v0.2.0 add, modify item & modify tags
-- 2013-06-26 v0.1.0 authentication & retrieve functionality
+- **1.4.0** (2013-09-21) rename `Retrieve` to `Get` + update IntelliSense documentation + add `GetTags` method
+- **1.3.0** (2013-09-19) get Item by ID + tag modification bugfixes
+- **1.2.1** (2013-09-18) correct parameter conversion for DateTime and Boolean
+- **1.2.0** (2013-09-17) simplified retrieve methods
+- **1.1.0** (2013-09-17) fix modification requests
+- **1.0.0** (2013-09-15) convert to PCL & implement async
+- **0.3.2** (2013-08-16) tag modification fixed and full retrieval of items for Retrieve method
+- **0.3.1** (2013-07-07) authentication fixes
+- **0.3.0** (2013-07-02) update authentication process 
+- **0.2.0** (2013-06-27) add, modify item & modify tags
+- **0.1.0** (2013-06-26) authentication & retrieve functionality
 
 ## Dependencies
 

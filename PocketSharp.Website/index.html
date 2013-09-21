@@ -16,7 +16,7 @@
   <meta property="og:site_name" content="PocketSharp" />
   <meta property="og:description" content="PocketSharp is a C#.NET class library that integrates the Pocket API" />
 
-  <meta property="og:image" content="http://frontendplay.com/Content/Images/frontendplay-200.png" />
+  <meta property="og:image" content="http://pocketsharp.frontendplay.com/Assets/Images/pocketsharp.png" />
   <link rel="icon" type="image/png" href="/Assets/Images/pocketsharp.png" />
   <link rel="image_src" href="/Assets/Images/pocketsharp.png" />
 
@@ -33,7 +33,8 @@
       <p class="app-description">
         PocketSharp is a C#.NET class library, that integrates the Pocket API v3
         <br><br>
-        Current version: <b>1.3.0</b>
+        Current version: <b>1.4.0</b><br>
+        (<a href="https://www.nuget.org/packages/PocketSharp/">@ nuget</a>)
       </p>
       <div class="app-nuget">
         <code>Install-Package PocketSharp</code>
@@ -124,16 +125,17 @@ using PocketSharp.Models;</code></pre>
 
           <h2>Release History</h2>
         <ul>
-          <li>2013-09-19 v1.3.0 get Item by ID + tag modification bugfixes</li>
-          <li>2013-09-18 v1.2.1 correct parameter conversion for DateTime and Boolean</li>
-          <li>2013-09-17 v1.2.0 simplified retrieve methods</li>
-          <li>2013-09-17 v1.1.0 fix modification requests</li>
-          <li>2013-09-15 v1.0.0 convert to PCL &amp; implement async</li>
-          <li>2013-08-16 v0.3.2 tag modification fixed and full retrieval of items for Retrieve method</li>
-          <li>2013-07-07 v0.3.1 authentication fixes</li>
-          <li>2013-07-02 v0.3.0 update authentication process </li>
-          <li>2013-06-27 v0.2.0 add, modify item &amp; modify tags</li>
-          <li>2013-06-26 v0.1.0 authentication &amp; retrieve functionality</li>
+          <li><b>1.4.0</b> (2013-09-21) rename <code>Retrieve</code> to <code>Get</code> + update IntelliSense documentation + add <code>GetTags</code> method
+          <li><b>1.3.0</b> (2013-09-19) get Item by ID + tag modification bugfixes</li>
+          <li><b>1.2.1</b> (2013-09-18) correct parameter conversion for DateTime and Boolean</li>
+          <li><b>1.2.0</b> (2013-09-17) simplified retrieve methods</li>
+          <li><b>1.1.0</b> (2013-09-17) fix modification requests</li>
+          <li><b>1.0.0</b> (2013-09-15) convert to PCL &amp; implement async</li>
+          <li><b>0.3.2</b> (2013-08-16) tag modification fixed and full retrieval of items for Retrieve method</li>
+          <li><b>0.3.1</b> (2013-07-07) authentication fixes</li>
+          <li><b>0.3.0</b> (2013-07-02) update authentication process </li>
+          <li><b>0.2.0</b> (2013-06-27) add, modify item &amp; modify tags</li>
+          <li><b>0.1.0</b> (2013-06-26) authentication &amp; retrieve functionality</li>
         </ul>
         <h2>Used Packages</h2>
         <ul>
@@ -194,10 +196,10 @@ Note that <code>GetAccessCode</code> can only be called with an existing <em>req
         <h2>Retrieve</h2>
 
 <p>Get list of all items:</p>
-<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Retrieve();
-// equivalent to: await _client.RetrieveByFilter(RetrieveFilter.All)</code></pre></p>
+<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Get();
+// equivalent to: await _client.Get(RetrieveFilter.All)</code></pre></p>
 <p>Get a list with specific parameters (explanation in the <a href="http://getpocket.com/developer/docs/v3/retrieve">Pocket Docs</a>):</p>
-<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Retrieve(
+<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Get(
   State? state = null,
   bool? favorite = null,
   string tag = null,
@@ -210,15 +212,18 @@ Note that <code>GetAccessCode</code> can only be called with an existing <em>req
   int? offset = null
 );</code></pre></p>
 <p>It's best to use parameters as <em>named parameters</em>, to avoid typing <code>null</code> values:</p>
-<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Retrieve(count: 10, offset: 20, sort: Sort.oldest);</code></pre></p>
+<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Get(count: 10, offset: 20, sort: Sort.oldest);</code></pre></p>
 <p>Get item by ID:</p>
-<p><pre class="language-clike"><code>PocketItem item = await _client.Retrieve(1298198);</code></pre></p>
+<p><pre class="language-clike"><code>PocketItem item = await _client.Get(1298198);</code></pre></p>
 <p>Find items by a tag:</p>
 <p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.SearchByTag(&quot;tutorial&quot;);</code></pre></p>
 <p>Find items by a search string:</p>
 <p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Search(&quot;css&quot;);</code></pre></p>
+<p>Get all tags:</p>
+<p><pre class="language-clike"><code>List&lt;PocketTag&gt; items = await _client.GetTags();</code></pre></p>
 <p>Get a filtered list:</p>
-<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.RetrieveByFilter(RetrieveFilter.Favorite);
+<p>Get a filtered list:</p>
+<p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Get(RetrieveFilter.Favorite);
 // returns favorites only</code></pre></p>
 <p>The RetrieveFilter Enum is specified as follows:</p>
 <p><pre class="language-clike"><code>enum RetrieveFilter { All, Unread, Archive, Favorite, Article, Video, Image }</code></pre></p>

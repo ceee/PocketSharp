@@ -144,7 +144,6 @@ namespace PocketSharp
           Error = (object sender, ErrorEventArgs args) =>
           {
             throw new PocketException(String.Format("Parse error: {0}", args.ErrorContext.Error.Message));
-            args.ErrorContext.Handled = true;
           },
           Converters =
           {
