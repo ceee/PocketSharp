@@ -32,17 +32,5 @@ namespace PocketSharp
 
       return response.Item;
     }
-
-
-    /// <summary>
-    /// Adds a new item to pocket
-    /// </summary>
-    /// <param name="uri">The URL of the item you want to save</param>
-    /// <returns>A simple representation of the saved item which doesn't contain all data (is only returned by calling the Retrieve method)</returns>
-    /// <exception cref="PocketException"></exception>
-    public async Task<PocketItem> Add(Uri uri)
-    {
-      return await Add(uri, null);
-    }
   }
 }

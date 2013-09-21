@@ -18,7 +18,7 @@ namespace PocketSharp
     /// <param name="parameters">parameters, which are mapped to the officials from http://getpocket.com/developer/docs/v3/retrieve </param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> Retrieve(
+    public async Task<List<PocketItem>> Get(
       State? state = null,
       bool? favorite = null,
       string tag = null,
@@ -59,9 +59,9 @@ namespace PocketSharp
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<PocketItem> Retrieve(int itemID)
+    public async Task<PocketItem> Get(int itemID)
     {
-      List<PocketItem> items = await Retrieve(
+      List<PocketItem> items = await Get(
         state: State.all  
       );
       
@@ -75,7 +75,7 @@ namespace PocketSharp
     /// <param name="filter">The filter.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> RetrieveByFilter(RetrieveFilter filter = RetrieveFilter.All)
+    public async Task<List<PocketItem>> Get(RetrieveFilter filter)
     {
       RetrieveParameters parameters = new RetrieveParameters();
 
@@ -117,7 +117,7 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> SearchByTag(string tag)
     {
-      return await Retrieve(tag: tag);
+      return await Get(tag: tag);
     }
 
 
@@ -129,7 +129,7 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> Search(string searchString)
     {
-      return await Retrieve(search: searchString);
+      return await Get(search: searchString);
     }
   }
 
