@@ -75,7 +75,7 @@ namespace PocketSharp.WP8.ViewModels
 
       try
       {
-        items = await client.Retrieve().ConfigureAwait(false);
+        items = await client.Get().ConfigureAwait(false);
 
         items.ForEach(item =>
         {

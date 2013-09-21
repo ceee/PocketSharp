@@ -42,7 +42,7 @@ namespace PocketSharp.Wpf
 
       try
       {
-        items = await client.Retrieve();
+        items = await client.Get();
 
         items.ForEach(item =>
         {

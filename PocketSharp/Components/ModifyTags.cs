@@ -1,5 +1,7 @@
 ﻿using PocketSharp.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace PocketSharp
 {
@@ -8,6 +10,26 @@ namespace PocketSharp
   /// </summary>
   public partial class PocketClient
   {
+    /// <summary>
+    /// Retrieves all available tags.
+    /// Note: The Pocket API contains no method, which allows to retrieve all tags, so all items are retrieved and the associated tags extracted.
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    public async Task<List<PocketTag>> GetTags()
+    {
+      List<PocketItem> items = await Get(
+        state: State.all
+      );
+
+      return items.Where(item => item.Tags != null)
+                  .SelectMany(item => item.Tags)
+                  .GroupBy(item => item.Name)
+                  .Select(item => item.First())
+                  .ToList<PocketTag>();
+    }
+
+
     /// <summary>
     /// Adds the specified tags to an item.
     /// </summary>

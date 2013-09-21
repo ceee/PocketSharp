@@ -14,7 +14,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task AreItemsRetrieved()
     {
-      List<PocketItem> items = await client.Retrieve();
+      List<PocketItem> items = await client.Get();
 
       Assert.True(items.Count > 0);
     }
@@ -23,9 +23,9 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task IsItemRetrievedById()
     {
-      List<PocketItem> items = await client.Retrieve();
+      List<PocketItem> items = await client.Get();
       PocketItem item = items[0];
-      PocketItem itemDuplicate = await client.Retrieve(item.ID);
+      PocketItem itemDuplicate = await client.Get(item.ID);
 
       Assert.True(item.ID == itemDuplicate.ID);
       Assert.True(item.Uri == itemDuplicate.Uri);
@@ -35,7 +35,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task AreFilteredItemsRetrieved()
     {
-      List<PocketItem> items = await client.RetrieveByFilter(RetrieveFilter.Favorite);
+      List<PocketItem> items = await client.Get(RetrieveFilter.Favorite);
 
       Assert.True(items.Count > 0);
     }
@@ -44,7 +44,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task RetrieveWithMultipleFilters()
     {
-      List<PocketItem> items = await client.Retrieve(
+      List<PocketItem> items = await client.Get(
         state: State.unread,
         tag: "pocket",
         sort: Sort.title,
@@ -59,7 +59,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task ItemContainsUri()
     {
-      List<PocketItem> items = await client.Retrieve(count: 1);
+      List<PocketItem> items = await client.Get(count: 1);
 
       Assert.True(items.Count == 1);
       Assert.True(items[0].Uri.ToString().StartsWith("http"));
@@ -69,18 +69,18 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task InvalidRetrievalReturnsNoResults()
     {
-      List<PocketItem> items = await client.Retrieve(
+      List<PocketItem> items = await client.Get(
         favorite: true,
         search: "xoiu987a#;"
       );
 
       Assert.False(items.Count > 0);
 
-      PocketItem item = await client.Retrieve(99999999);
+      PocketItem item = await client.Get(99999999);
 
       Assert.Null(item);
 
-      items = await client.RetrieveByFilter(RetrieveFilter.Video);
+      items = await client.Get(RetrieveFilter.Video);
 
       Assert.False(items.Count > 0);
     }
@@ -102,6 +102,15 @@ namespace PocketSharp.Tests
       List<PocketItem> items = await client.Search("adsüasd-opiu2;.398dfyx");
 
       Assert.False(items.Count > 0);
+    }
+
+
+    [Fact]
+    public async Task RetrieveTagsReturnsResult()
+    {
+      List<PocketTag> items = await client.GetTags();
+
+      Assert.True(items.Count > 0);
     }
 
 

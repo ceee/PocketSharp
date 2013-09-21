@@ -34,7 +34,7 @@ namespace PocketSharp.Tests
         tweetID: "380051788172632065"
       );
 
-      List<PocketItem> items = await client.Retrieve();
+      List<PocketItem> items = await client.Get();
       PocketItem itemDesired = null;
 
       items.ForEach(itm =>

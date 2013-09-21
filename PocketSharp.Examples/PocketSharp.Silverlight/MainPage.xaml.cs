@@ -46,7 +46,7 @@ namespace PocketSharp.Silverlight
 
       try
       {
-        items = await client.Retrieve();
+        items = await client.Get();
 
         items.ForEach(item =>
         {
