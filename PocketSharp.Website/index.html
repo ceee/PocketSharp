@@ -34,7 +34,7 @@
         PocketSharp is a C#.NET class library, that integrates the Pocket API v3
         <br><br>
         Current version: <b>1.4.0</b><br>
-        (<a href="https://www.nuget.org/packages/PocketSharp/">@ nuget</a>)
+        <a href="https://www.nuget.org/packages/PocketSharp/">@ nuget</a>
       </p>
       <div class="app-nuget">
         <code>Install-Package PocketSharp</code>
@@ -221,7 +221,6 @@ Note that <code>GetAccessCode</code> can only be called with an existing <em>req
 <p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Search(&quot;css&quot;);</code></pre></p>
 <p>Get all tags:</p>
 <p><pre class="language-clike"><code>List&lt;PocketTag&gt; items = await _client.GetTags();</code></pre></p>
-<p>Get a filtered list:</p>
 <p>Get a filtered list:</p>
 <p><pre class="language-clike"><code>List&lt;PocketItem&gt; items = await _client.Get(RetrieveFilter.Favorite);
 // returns favorites only</code></pre></p>
