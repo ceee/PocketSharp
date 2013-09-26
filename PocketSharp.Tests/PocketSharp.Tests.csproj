@@ -67,7 +67,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AddTests.cs" />
-    <Compile Include="AuthenticationTests.cs" />
+    <Compile Include="AccountTests.cs" />
     <Compile Include="ModifyTagsTests.cs" />
     <Compile Include="ModifyTests.cs" />
     <Compile Include="RetrieveTests.cs" />

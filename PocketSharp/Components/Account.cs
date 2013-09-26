@@ -1,6 +1,7 @@
 ﻿using PocketSharp.Models;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PocketSharp
@@ -94,6 +95,53 @@ namespace PocketSharp
       AccessCode = response.Code;
 
       return AccessCode;
+    }
+
+
+    /// <summary>
+    /// Registers a new account.
+    /// Account has to be activated via a activation email sent by Pocket.
+    /// </summary>
+    /// <param name="username">The username.</param>
+    /// <param name="email">The email.</param>
+    /// <param name="password">The password.</param>
+    /// <returns></returns>
+    /// <exception cref="System.ArgumentNullException">All parameters are required</exception>
+    /// <exception cref="System.FormatException">
+    /// Invalid email address.
+    /// or
+    /// Invalid username. Please only use letters, numbers, and/or dashes and between 1-20 characters.
+    /// </exception>
+    public async Task<bool> RegisterAccount(string username, string email, string password)
+    {
+      if (username == null || email == null || password == null)
+      {
+        throw new ArgumentNullException("All parameters are required");  
+      }
+
+      Match matchEmail = Regex.Match(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,10}))$");
+      Match matchUsername = Regex.Match(username, @"^([\w\-]{1,20})$");
+
+      if (!matchEmail.Success)
+      {
+        throw new FormatException("Invalid email address.");
+      }
+
+      if (!matchUsername.Success)
+      {
+        throw new FormatException("Invalid username. Please only use letters, numbers, and/or dashes and between 1-20 characters.");
+      }
+
+      RegisterParameters parameters = new RegisterParameters()
+      {
+        Username = username,
+        Email = email,
+        Password = password
+      };
+
+      ResponseBase response = await Request<ResponseBase>("signup", parameters.Convert(), false);
+
+      return response.Status;
     }
   }
 }
