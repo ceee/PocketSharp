@@ -39,9 +39,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Statistics.cs" />
+    <Compile Include="Models\PocketStatistics.cs" />
     <Compile Include="PocketException.cs" />
     <Compile Include="Components\Add.cs" />
-    <Compile Include="Components\Authentification.cs" />
+    <Compile Include="Components\Account.cs" />
     <Compile Include="Components\Modify.cs" />
     <Compile Include="Components\ModifyTags.cs" />
     <Compile Include="Components\Get.cs" />

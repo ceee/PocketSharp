@@ -142,5 +142,14 @@ namespace PocketSharp.Tests
 
       Assert.False(items.Count > 0);
     }
+
+
+    [Fact]
+    public async Task AreStatisticsRetrieved()
+    {
+      PocketStatistics statistics = await client.Statistics();
+
+      Assert.True(statistics.CountAll > 0);
+    }
   }
 }

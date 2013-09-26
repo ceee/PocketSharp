@@ -113,6 +113,11 @@ namespace PocketSharp
       // every single Pocket API endpoint requires HTTP POST data
       HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, method);
 
+      if (parameters == null)
+      {
+        parameters = new Dictionary<string, string>();
+      }
+
       // add consumer key to each request
       parameters.Add("consumer_key", ConsumerKey);
 

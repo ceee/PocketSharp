@@ -20,7 +20,7 @@ namespace PocketSharp.Tests
       client = new PocketClient(
         consumerKey: "15396-f6f92101d72c8e270a6c9bb3",
         callbackUri: "http://frontendplay.com",
-        accessCode: "2c62cd50-b78a-5558-918b-65adae"
+        accessCode: "80acf6c5-c198-03c0-b94c-e74402"
       );
     }
 
