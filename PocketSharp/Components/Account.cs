@@ -120,7 +120,7 @@ namespace PocketSharp
       }
 
       Match matchEmail = Regex.Match(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,10}))$");
-      Match matchUsername = Regex.Match(username, @"^([\w\-]{1,20})$");
+      Match matchUsername = Regex.Match(username, @"^([\w\-_]{1,20})$");
 
       if (!matchEmail.Success)
       {
