@@ -285,6 +285,7 @@ Renames a tag for the specified item:
 
 ## Release History
 
+- **1.5.0** (2013-09-28) add statistics and registration API
 - **1.4.0** (2013-09-21) rename `Retrieve` to `Get` + update IntelliSense documentation + add `GetTags` method
 - **1.3.0** (2013-09-19) get Item by ID + tag modification bugfixes
 - **1.2.1** (2013-09-18) correct parameter conversion for DateTime and Boolean
