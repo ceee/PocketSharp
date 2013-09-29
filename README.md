@@ -159,7 +159,9 @@ Without it you would always have to redo the authentication process.
 The `RegisterAccount` method exists in Pocket API v3, but is currently undocumented.
 <br>The user cannot authenticate directly after registration, as the account has to be activated via an opt-in link, which is sent to the e-mail address.
 
-	bool isSuccess = await _client.RegisterAccount("myUsername", "me@mymail.com", "mypassword");
+```csharp
+bool isSuccess = await _client.RegisterAccount("myUsername", "me@mymail.com", "mypassword");
+```
 
 After registration you have to remind the user to check his/her mail account.
 
@@ -260,52 +262,74 @@ All Modify methods accept either the itemID (as int) or a `PocketItem` as parame
 
 Archive the specified item:
 
-	bool isSuccess = await _client.Archive(myPocketItem);
+```csharp
+bool isSuccess = await _client.Archive(myPocketItem);
+```
 
 Un-archive the specified item:
 
-	bool isSuccess = await _client.Unarchive(myPocketItem);
+```csharp
+bool isSuccess = await _client.Unarchive(myPocketItem);
+```
 
 Favorites the specified item:
 
-	bool isSuccess = await _client.Favorite(myPocketItem);
+```csharp
+bool isSuccess = await _client.Favorite(myPocketItem);
+```
 
 Un-favorites the specified item:
 
-	bool isSuccess = await _client.Unfavorite(myPocketItem);
+```csharp
+bool isSuccess = await _client.Unfavorite(myPocketItem);
+```
 
 Deletes the specified item:
 
-	bool isSuccess = await _client.Delete(myPocketItem);
+```csharp
+bool isSuccess = await _client.Delete(myPocketItem);
+```
 
 #### Modify tags
 
 Add tags to the specified item:
 
-	bool isSuccess = await _client.AddTags(myPocketItem, new string[] { "css", "2013" });
+```csharp
+bool isSuccess = await _client.AddTags(myPocketItem, new string[] { "css", "2013" });
+```
 
 Remove tags from the specified item:
 
-	bool isSuccess = await _client.RemoveTags(myPocketItem, new string[] { "css", "2013" });
+```csharp
+bool isSuccess = await _client.RemoveTags(myPocketItem, new string[] { "css", "2013" });
+```
 
 Remove all tags from the specified item:
 
-	bool isSuccess = await _client.RemoveTags(myPocketItem);
+```csharp
+bool isSuccess = await _client.RemoveTags(myPocketItem);
+```
 
 Replaces all existing tags with new ones for the specified item:
 
-	bool isSuccess = await _client.ReplaceTags(myPocketItem, new string[] { "css", "2013" });
+```csharp
+bool isSuccess = await _client.ReplaceTags(myPocketItem, new string[] { "css", "2013" });
+```
 
 Renames a tag for the specified item:
 
-	bool isSuccess = await _client.RenameTag(myPocketItem, "oldTagName", "newTagName");
+```csharp
+bool isSuccess = await _client.RenameTag(myPocketItem, "oldTagName", "newTagName");
+```
 
 ## Statistics
 
 The Pocket API supports retrieval of a simple statistics object.
 
-	PocketStatistics statistics = await client.Statistics();
-	// PocketStatistics: [CountAll], [CountRead], [CountUnread]
+```csharp
+PocketStatistics statistics = await client.Statistics();
+// PocketStatistics: [CountAll], [CountRead], [CountUnread]
+```
 
 ---
 
