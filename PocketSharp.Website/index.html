@@ -237,7 +237,7 @@ Note that <code>GetAccessCode</code> can only be called with an existing <em>req
 <p><pre class="language-clike"><code>enum RetrieveFilter { All, Unread, Archive, Favorite, Article, Video, Image }</code></pre></p>
 <h2>Statistics</h2>
 <p>The Pocket API supports retrieval of a simple statistics object.</p>
-<pre class="language-clike">PocketStatistics statistics = await client.Statistics();
+<pre class="language-clike"><code>PocketStatistics statistics = await client.Statistics();
 // PocketStatistics: [CountAll], [CountRead], [CountUnread]
 </code></pre>
       </div>
