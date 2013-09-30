@@ -209,10 +209,17 @@ Find items by a tag:
 List<PocketItem> items = await _client.SearchByTag("tutorial");
 ```
 
-Find items by a search string:
+Find items by a search string.
+<br>PocketSharp uses an internal search, which is significantly faster than the Search API by Pocket.
 
 ```csharp
 List<PocketItem> items = await _client.Search("css");
+```
+
+Find items by a search string by already available items:
+
+```csharp
+List<PocketItem> items = await _client.Search(myPocketItemList, "css");
 ```
 
 Get all tags:
@@ -335,6 +342,7 @@ PocketStatistics statistics = await client.Statistics();
 
 ## Release History
 
+- **1.5.1** (2013-09-30) `RetrieveFilter.All` didn't work; improve search speed
 - **1.5.0** (2013-09-28) add statistics and registration API
 - **1.4.0** (2013-09-21) rename `Retrieve` to `Get` + update IntelliSense documentation + add `GetTags` method
 - **1.3.0** (2013-09-19) get Item by ID + tag modification bugfixes
