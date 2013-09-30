@@ -6,9 +6,9 @@ using PocketSharp.Models;
 
 namespace PocketSharp.Tests
 {
-  public class RetrieveTests : TestsBase
+  public class GetTests : TestsBase
   {
-    public RetrieveTests() : base() { }
+    public GetTests() : base() { }
 
 
     [Fact]

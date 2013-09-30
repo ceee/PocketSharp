@@ -99,6 +99,9 @@ namespace PocketSharp
         case RetrieveFilter.Archive:
           parameters.State = State.archive;
           break;
+        case RetrieveFilter.All:
+          parameters.State = State.all;
+          break;
       }
 
       parameters.DetailType = DetailType.complete;
@@ -142,14 +145,39 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Retrieves items which match the specified search string in title or content
+    /// Retrieves items which match the specified search string in title and URI
     /// </summary>
     /// <param name="searchString">The search string.</param>
     /// <returns></returns>
+    /// <exception cref="System.ArgumentOutOfRangeException">Search string length has to be a minimum of 2 chars</exception>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> Search(string searchString)
+    public async Task<List<PocketItem>> Search(string searchString, bool searchInUri = true)
     {
-      return await Get(search: searchString);
+      List<PocketItem> items = await Get(RetrieveFilter.All);
+
+      return Search(items, searchString);
+    }
+
+
+    /// <summary>
+    /// Finds the specified search string in title and URI for an available list of items
+    /// </summary>
+    /// <param name="availableItems">The available items.</param>
+    /// <param name="searchString">The search string.</param>
+    /// <returns></returns>
+    /// <exception cref="System.ArgumentOutOfRangeException">Search string length has to be a minimum of 2 chars</exception>
+    /// <exception cref="PocketException"></exception>
+    public List<PocketItem> Search(List<PocketItem> availableItems, string searchString)
+    {
+      if (searchString.Length < 2)
+      {
+        throw new ArgumentOutOfRangeException("Search string length has to be a minimum of 2 chars");
+      }
+
+      return availableItems.Where(item => (
+        (!String.IsNullOrEmpty(item.FullTitle) && item.FullTitle.ToLower().Contains(searchString))
+        || item.Uri.ToString().ToLower().Contains(searchString)
+      )).ToList();
     }
   }
 

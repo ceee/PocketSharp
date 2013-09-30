@@ -70,7 +70,7 @@
     <Compile Include="AccountTests.cs" />
     <Compile Include="ModifyTagsTests.cs" />
     <Compile Include="ModifyTests.cs" />
-    <Compile Include="RetrieveTests.cs" />
+    <Compile Include="GetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestsBase.cs" />
   </ItemGroup>
