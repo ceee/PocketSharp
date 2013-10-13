@@ -16,9 +16,9 @@ namespace PocketSharp.Tests
     {
       PocketReader reader = new PocketReader();
 
-      await reader.Read(new Uri("https://github.com/ceee/PocketSharp"));
+      string result = await reader.Read(new Uri("https://github.com/ceee/PocketSharp"));
 
-      Assert.True(true);
+      Assert.True(result.Length > 0);
     }
   }
 }
