@@ -28,8 +28,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SgmlReader", "PortablePorts
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PortablePorts", "PortablePorts", "{82F79DE3-76D7-4FCB-AA7E-16BA7E363E0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.Reader", "PocketSharp.Reader\PocketSharp.Reader.csproj", "{DB574D27-C040-453A-A459-4D6DCCBF2E2E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,14 +104,6 @@ Global
 		{9112414C-E2D1-43BA-A298-A89F77D94332}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9112414C-E2D1-43BA-A298-A89F77D94332}.Release|ARM.ActiveCfg = Release|Any CPU
 		{9112414C-E2D1-43BA-A298-A89F77D94332}.Release|x86.ActiveCfg = Release|Any CPU
-		{DB574D27-C040-453A-A459-4D6DCCBF2E2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB574D27-C040-453A-A459-4D6DCCBF2E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB574D27-C040-453A-A459-4D6DCCBF2E2E}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{DB574D27-C040-453A-A459-4D6DCCBF2E2E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DB574D27-C040-453A-A459-4D6DCCBF2E2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB574D27-C040-453A-A459-4D6DCCBF2E2E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB574D27-C040-453A-A459-4D6DCCBF2E2E}.Release|ARM.ActiveCfg = Release|Any CPU
-		{DB574D27-C040-453A-A459-4D6DCCBF2E2E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

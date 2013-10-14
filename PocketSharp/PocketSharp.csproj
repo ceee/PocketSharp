@@ -66,6 +66,7 @@
     <Compile Include="Models\Response\ResponseBase.cs" />
     <Compile Include="Models\Response\Retrieve.cs" />
     <Compile Include="PocketClient.cs" />
+    <Compile Include="PocketReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
@@ -97,6 +98,12 @@
     <Reference Include="System.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.1.1.3\lib\portable-net40+sl4+win8+wp71\System.Threading.Tasks.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PortablePorts\NReadability\NReadability.csproj">
+      <Project>{14c3ee6a-54a4-4a37-8b56-d52a3802f1c2}</Project>
+      <Name>NReadability</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

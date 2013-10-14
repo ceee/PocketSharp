@@ -10,7 +10,7 @@ namespace PocketSharp
   /// <summary>
   /// PocketReader
   /// </summary>
-  public partial class PocketReader
+  public class PocketReader
   {
     /// <summary>
     /// REST client used for HTML retrieval
