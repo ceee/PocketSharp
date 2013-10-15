@@ -39,12 +39,6 @@ All public methods, which communicate with the Pocket servers are asynchronous. 
 
 _In PocketSharp versions < 1.0.0 all methods lacked async support and were blocking._
 
-## What's next?
-
-In the next version I will implement the **Article View API**, but not the official by Pocket, because it is not available for everyone and doesn't satisfy my needs.
-
-Maybe I will try to add behavior to PocketItems as a next step, for example: `myPocketItem.Archive();`
-
 ## Usage Example
 
 Request a [Consumer Key on Pocket.](http://getpocket.com/developer/apps/)
