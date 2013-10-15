@@ -57,7 +57,7 @@ namespace PocketSharp
 
       string htmlResponse = await Request(uri);
 
-      TranscodingInput input = new TranscodingInput(htmlResponse);
+      TranscodingInput input = new TranscodingInput("<html><head></head><body><h1>HALLO</h1><p>was geht</p></body></html>");
       TranscodingResult result = transcoder.Transcode(input);
 
       //      //new TranscodingInput(
