@@ -173,7 +173,7 @@ namespace NReadability
     /// <param name="readingStyle">Styling for the extracted article.</param>
     /// <param name="readingMargin">Margin for the extracted article.</param>
     /// <param name="readingSize">Font size for the extracted article.</param>
-    private NReadabilityTranscoder(
+    public NReadabilityTranscoder(
       bool dontStripUnlikelys,
       bool dontNormalizeSpacesInTextContent,
       bool dontWeightClasses,

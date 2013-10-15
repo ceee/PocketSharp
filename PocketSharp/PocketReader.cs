@@ -53,20 +53,37 @@ namespace PocketSharp
     /// <returns></returns>
     public async Task<string> Read(Uri uri)
     {
-      NReadabilityTranscoder transcoder = new NReadabilityTranscoder();
+      // initialize transcoder
+      NReadabilityTranscoder transcoder = new NReadabilityTranscoder(
+        dontStripUnlikelys: false,
+        dontNormalizeSpacesInTextContent: true,
+        dontWeightClasses: false,
+        readingStyle: ReadingStyle.Ebook,
+        readingMargin: ReadingMargin.Narrow,
+        readingSize: ReadingSize.Medium
+      );
 
+      // get HTML string from URI
       string htmlResponse = await Request(uri);
 
-      TranscodingInput input = new TranscodingInput("<html><head></head><body><h1>HALLO</h1><p>was geht</p></body></html>");
-      TranscodingResult result = transcoder.Transcode(input);
+      // set properties for processing
+      TranscodingInput transcodingInput = new TranscodingInput(htmlResponse)
+      {
+        Url = uri.ToString(),
+        DomSerializationParams = new DomSerializationParams()
+        {
+          PrettyPrint = true,
+          DontIncludeContentTypeMetaElement = true,
+          DontIncludeMobileSpecificMetaElements = true,
+          DontIncludeDocTypeMetaElement = true,
+          DontIncludeGeneratorMetaElement = true
+        }
+      };
 
-      //      //new TranscodingInput(
-      //      //transcoder.Transcode(
-      //      //string transcodedContent =
-      //      //  transcoder.Transcode("https://github.com/marek-stoj/NReadability", out success);
+      // process/transcode HTML
+      TranscodingResult transcodingResult = transcoder.Transcode(transcodingInput);
 
-
-      return result.ExtractedContent;
+      return transcodingResult.ExtractedContent;
     }
 
 

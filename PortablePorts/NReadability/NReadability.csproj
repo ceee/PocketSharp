@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Content Include="Resources\readability.css" />
+    <EmbeddedResource Include="Resources\readability.css" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttributeTransformationInput.cs" />
