@@ -36,7 +36,15 @@ namespace NReadability
     /// </summary>
     /// <param name="document">System.Xml.Linq.XDocument instance containing the DOM to be serialized.</param>
     /// <param name="domSerializationParams">Contains parameters that modify the behaviour of the output serialization.</param>
-    /// <returns>Serialized representation of the DOM.</returns>
+    /// <param name="bodyOnly">if set to <c>true</c> [returns body only].</param>
+    /// <returns>
+    /// Serialized representation of the DOM.
+    /// </returns>
+    /// <exception cref="System.ArgumentException">
+    /// The document must have a root.
+    /// or
+    /// The document's root must be an html element.
+    /// </exception>
     public string SerializeDocument(XDocument document, DomSerializationParams domSerializationParams)
     {
       if (!domSerializationParams.DontIncludeContentTypeMetaElement
@@ -72,6 +80,16 @@ namespace NReadability
       if (!domSerializationParams.DontIncludeDocTypeMetaElement)
       {
         result = "<!DOCTYPE html>\r\n" + result;
+      }
+
+      if (domSerializationParams.BodyOnly && document.Root != null)
+      {
+        var body = document.Root.GetChildrenByTagName("body").FirstOrDefault();
+
+        if (body != null)
+        {
+          result = body.GetInnerHtml();
+        }
       }
 
       return result;

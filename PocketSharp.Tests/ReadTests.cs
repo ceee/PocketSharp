@@ -16,7 +16,7 @@ namespace PocketSharp.Tests
     {
       PocketReader reader = new PocketReader();
 
-      string result = await reader.Read(new Uri("https://github.com/ceee/PocketSharp"));
+      string result = await reader.Read(new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation"));
 
       Assert.True(result.Length > 0);
     }

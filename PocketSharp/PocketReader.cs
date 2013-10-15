@@ -72,6 +72,7 @@ namespace PocketSharp
         Url = uri.ToString(),
         DomSerializationParams = new DomSerializationParams()
         {
+          BodyOnly = true,
           PrettyPrint = true,
           DontIncludeContentTypeMetaElement = true,
           DontIncludeMobileSpecificMetaElements = true,
@@ -82,7 +83,7 @@ namespace PocketSharp
 
       // process/transcode HTML
       TranscodingResult transcodingResult = transcoder.Transcode(transcodingInput);
-
+      
       return transcodingResult.ExtractedContent;
     }
 

@@ -1,3 +1,4 @@
+using System.Xml.Linq;
 namespace NReadability
 {
   public class TranscodingResult
@@ -17,5 +18,7 @@ namespace NReadability
     public string ExtractedTitle { get; set; }
 
     public string NextPageUrl { get; set; }
+
+    public XDocument RawDocument { get; set; }
   }
 }

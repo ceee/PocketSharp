@@ -43,6 +43,11 @@ namespace NReadability
     /// </summary>
     public bool DontIncludeGeneratorMetaElement { get; set; }
 
+    /// <summary>
+    /// Render complete Website or only the Body
+    /// </summary>
+    public bool BodyOnly { get; set; }
+
     #endregion
   }
 }
