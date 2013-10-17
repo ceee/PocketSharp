@@ -101,9 +101,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PortablePorts\NReadability\NReadability.csproj">
+    <ProjectReference Include="..\PortablePorts\NReadability\PocketSharp.Ports.NReadability.csproj">
       <Project>{14c3ee6a-54a4-4a37-8b56-d52a3802f1c2}</Project>
-      <Name>NReadability</Name>
+      <Name>PocketSharp.Ports.NReadability</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

@@ -60,9 +60,9 @@
     <Compile Include="WebTranscodingResult.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SgmlReader\SgmlReader.csproj">
+    <ProjectReference Include="..\SgmlReader\PocketSharp.Ports.SgmlReader.csproj">
       <Project>{9112414c-e2d1-43ba-a298-a89f77d94332}</Project>
-      <Name>SgmlReader</Name>
+      <Name>PocketSharp.Ports.SgmlReader</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
