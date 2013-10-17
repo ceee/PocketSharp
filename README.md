@@ -39,6 +39,10 @@ All public methods, which communicate with the Pocket servers are asynchronous. 
 
 _In PocketSharp versions < 1.0.0 all methods lacked async support and were blocking._
 
+## What's next
+
+Next is Reading API support (with NReadability implementation). Release: Mid October.
+
 ## Usage Example
 
 Request a [Consumer Key on Pocket.](http://getpocket.com/developer/apps/)
