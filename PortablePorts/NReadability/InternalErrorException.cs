@@ -21,7 +21,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace NReadability
+namespace PocketSharp.Ports.NReadability
 {
   /// <summary>
   /// An exception that is thrown when an internal error occurrs in the application.

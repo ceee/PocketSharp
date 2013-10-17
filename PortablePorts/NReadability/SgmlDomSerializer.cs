@@ -22,7 +22,7 @@ using System;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace NReadability
+namespace PocketSharp.Ports.NReadability
 {
   /// <summary>
   /// A class for serializing a DOM to string.

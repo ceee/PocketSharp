@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace NReadability
+namespace PocketSharp.Ports.NReadability
 {
   public static class Consts
   {

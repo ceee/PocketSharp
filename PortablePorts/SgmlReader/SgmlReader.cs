@@ -40,7 +40,7 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 
-namespace Sgml
+namespace PocketSharp.Ports.Sgml
 {
     /// <summary>
     /// SGML is case insensitive, so here you can choose between converting

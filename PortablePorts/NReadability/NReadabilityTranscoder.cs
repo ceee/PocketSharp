@@ -28,7 +28,7 @@ using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace NReadability
+namespace PocketSharp.Ports.NReadability
 {
   /// <summary>
   /// A class that extracts main content from a HTML page.

@@ -22,7 +22,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace NReadability
+namespace PocketSharp.Ports.NReadability
 {
   internal class EncodedStringWriter : StringWriter
   {

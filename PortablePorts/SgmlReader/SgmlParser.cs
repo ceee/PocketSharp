@@ -31,7 +31,7 @@ using System.Text;
 using System.Threading;
 using System.Xml;
 
-namespace Sgml {
+namespace PocketSharp.Ports.Sgml {
     /// <summary>
     /// Thrown if any errors occur while parsing the source.
     /// </summary>

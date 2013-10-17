@@ -1,6 +1,6 @@
 using System;
 
-namespace NReadability
+namespace PocketSharp.Ports.NReadability
 {
   public static class HtmlUtils
   {

@@ -24,7 +24,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace NReadability
+namespace PocketSharp.Ports.NReadability
 {
   public static class DomExtensions
   {

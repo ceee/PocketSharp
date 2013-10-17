@@ -1,5 +1,7 @@
+using System;
 using System.Xml.Linq;
-namespace NReadability
+
+namespace PocketSharp.Ports.NReadability
 {
   public class TranscodingResult
   {

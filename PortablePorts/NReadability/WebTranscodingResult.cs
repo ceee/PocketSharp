@@ -1,4 +1,4 @@
-namespace NReadability
+namespace PocketSharp.Ports.NReadability
 {
   public class WebTranscodingResult
   {

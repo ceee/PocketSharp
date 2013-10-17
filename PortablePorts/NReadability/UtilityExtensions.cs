@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NReadability
+namespace PocketSharp.Ports.NReadability
 {
   internal static class UtilityExtensions
   {

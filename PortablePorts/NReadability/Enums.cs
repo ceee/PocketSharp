@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-namespace NReadability
+namespace PocketSharp.Ports.NReadability
 {
   /// <summary>
   /// Determines how the extracted article will be styled.

@@ -23,10 +23,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
-using Sgml;
+using PocketSharp.Ports.Sgml;
 using System.IO;
 
-namespace NReadability
+namespace PocketSharp.Ports.NReadability
 {
   /// <summary>
   /// A class for constructing a DOM from HTML markup.
