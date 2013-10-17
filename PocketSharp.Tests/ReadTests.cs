@@ -18,7 +18,7 @@ namespace PocketSharp.Tests
 
       string result = await reader.Read(new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation"));
 
-      Assert.True(result.Length > 0);
+      Assert.True(result.Length > 15000);
     }
   }
 }
