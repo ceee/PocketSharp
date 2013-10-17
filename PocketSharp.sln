@@ -22,9 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{19DD45
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.Ports.NReadability", "PortablePorts\NReadability\PocketSharp.Ports.NReadability.csproj", "{14C3EE6A-54A4-4A37-8B56-D52A3802F1C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReadability", "PortablePorts\NReadability\NReadability.csproj", "{14C3EE6A-54A4-4A37-8B56-D52A3802F1C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.Ports.SgmlReader", "PortablePorts\SgmlReader\PocketSharp.Ports.SgmlReader.csproj", "{9112414C-E2D1-43BA-A298-A89F77D94332}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SgmlReader", "PortablePorts\SgmlReader\SgmlReader.csproj", "{9112414C-E2D1-43BA-A298-A89F77D94332}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PortablePorts", "PortablePorts", "{82F79DE3-76D7-4FCB-AA7E-16BA7E363E0D}"
 EndProject

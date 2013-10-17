@@ -48,8 +48,8 @@ namespace PocketSharp.Ports.NReadability
     }
 
     #endregion
-      
-    private static readonly string _ReadabilityStylesheetResourceName = "NReadability.Resources.readability.css";
+
+    private static readonly string _ReadabilityStylesheetResourceName = typeof(NReadabilityTranscoder).Namespace + ".Resources.readability.css";
 
     #region Algorithm constants
 
