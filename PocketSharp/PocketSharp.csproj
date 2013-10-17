@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Components\Statistics.cs" />
     <Compile Include="Models\Parameters\RegisterParameters.cs" />
+    <Compile Include="Models\PocketArticle.cs" />
     <Compile Include="Models\PocketStatistics.cs" />
     <Compile Include="PocketException.cs" />
     <Compile Include="Components\Add.cs" />

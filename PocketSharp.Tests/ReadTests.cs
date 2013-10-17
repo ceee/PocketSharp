@@ -8,17 +8,39 @@ namespace PocketSharp.Tests
 {
   public class ReadTests : TestsBase
   {
-    public ReadTests() : base() { }
+    private PocketReader reader;
+
+
+    public ReadTests() : base()
+    {
+      reader = new PocketReader();
+    }
 
 
     [Fact]
-    public async Task TemporaryReadTest()
+    public async Task ReadArticleTest()
     {
-      PocketReader reader = new PocketReader();
+      PocketArticle result = await reader.Read(new PocketItem()
+      {
+        ID = 99,
+        Uri = new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation")
+      });
 
-      string result = await reader.Read(new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation"));
+      Assert.True(result.Content.Length > 15000);
+    }
 
-      Assert.True(result.Length > 15000);
+
+    [Fact]
+    public async Task ReadArticleWithInvalidUriTest()
+    {
+      await ThrowsAsync<PocketException>(async () =>
+      {
+        await reader.Read(new PocketItem()
+        {
+          ID = 99,
+          Uri = new Uri("http://frontendplayyyyy.com")
+        });
+      });
     }
   }
 }
