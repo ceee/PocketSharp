@@ -27,8 +27,7 @@ namespace PocketSharp
       _httpClient = new HttpClient(new HttpClientHandler()
       {
         AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip,
-        AllowAutoRedirect = true,
-        MaxAutomaticRedirections = 10
+        AllowAutoRedirect = true
       });
 
       // add accept types
