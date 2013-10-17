@@ -44,10 +44,12 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Reads content from the given URI.
+    /// Reads article content from the given PocketItem.
+    /// This method does not use the official Article View API, which is private.
+    /// The PocketReader is based on a custom PCL port of NReadability and SgmlReader.
     /// </summary>
     /// <param name="item">The pocket item.</param>
-    /// <returns></returns>
+    /// <returns>A Pocket article with extracted content and title.</returns>
     /// <exception cref="PocketException"></exception>
     public async Task<PocketArticle> Read(PocketItem item)
     {
