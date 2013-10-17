@@ -325,16 +325,13 @@ Accepts four parameters, with <code>uri</code> being required.
 <p>This content can be encapsulated in a <code>&lt;body&gt;</code>-Tag and displayed as a readable website with a custom CSS (it's up to you!).</p>
 <h3>Implementation</h3>
 <p>As with all PocketSharp implementations you have to require the main namespace and it's model namespace:</p>
-<p><pre class="language-clike"><code>
-using PocketSharp;
+<p><pre class="language-clike"><code>using PocketSharp;
 using PocketSharp.Models;</code></pre></p>
 <p>The <code>PocketReader</code> is a seperated class with it's own <code>HttpClient</code>. Create an instance of it:</p>
-<p><pre class="language-clike"><code>
-PocketReader reader = new PocketReader();</code></pre></p>
+<p><pre class="language-clike"><code>PocketReader reader = new PocketReader();</code></pre></p>
 <p><code>PocketReader</code> needs a <code>PocketItem</code> as a parameter to correctly identify its <code>ID</code> and <code>Uri</code>. With this requirement you can successfully query for an articles content.<br>
 Don't forget exception handling in case a website is down or not accessible.</p>
-<p><pre class="language-clike"><code>
-PocketArticle article;
+<p><pre class="language-clike"><code>PocketArticle article;
 try
 {
   article = await reader.Read(myPocketItem);

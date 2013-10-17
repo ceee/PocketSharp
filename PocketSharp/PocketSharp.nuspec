@@ -14,10 +14,10 @@
     <language>en-US</language>
     <releaseNotes>
       <![CDATA[
-           For full release notes see https://github.com/ceee/PocketSharp#release-history
+           For full release notes see https://github.com/ceee/PocketSharp/blob/master/CHANGELOG.md
          ]]>
     </releaseNotes>
     <copyright>Copyright by cee, 2013</copyright>
-    <tags>PocketAPI Pocket API PocketSharp Tobias Klika cee RestSharp</tags>
+    <tags>PocketAPI Pocket API PocketSharp Tobias Klika cee NReadability Reader Article SDK Pockem</tags>
   </metadata>
 </package>
