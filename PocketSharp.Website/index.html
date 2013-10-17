@@ -33,7 +33,7 @@
       <p class="app-description">
         PocketSharp is a C#.NET class library, that integrates the Pocket API v3
         <br><br>
-        Current version: <b>1.5.1</b><br>
+        Current version: <b>2.0.0</b><br>
         <a href="https://www.nuget.org/packages/PocketSharp/">@ nuget</a>
       </p>
       <div class="app-nuget">
@@ -48,10 +48,11 @@
     <div class="app-main">
       <nav class="app-nav">
         <a href="#" data-id="gettingstarted" class="is-active">Getting Started</a>
-        <a href="#" data-id="account">Account</a>
         <a href="#" data-id="get">Get</a>
         <a href="#" data-id="add">Add</a>
+        <a href="#" data-id="reader">Reader</a>
         <a href="#" data-id="modify">Modify</a>
+        <a href="#" data-id="account">Account</a>
       </nav>
       <article class="article">
 
@@ -125,6 +126,7 @@ using PocketSharp.Models;</code></pre>
 
           <h2>Release History</h2>
         <ul>
+          <li><b>2.0.0</b> (2013-10-17) Add Reader API</li>
           <li><b>1.5.1</b> (2013-09-30) <code>RetrieveFilter.All</code> didn't work; improve search speed</li>
           <li><b>1.5.0</b> (2013-09-28) add statistics and registration API</li>
           <li><b>1.4.0</b> (2013-09-21) rename <code>Retrieve</code> to <code>Get</code> + update IntelliSense documentation + add <code>GetTags</code> method</li>
@@ -313,6 +315,43 @@ Accepts four parameters, with <code>uri</code> being required.
 </code></pre>
 
      </div>
+
+     <div data-part="reader">
+      <h2>Article Reader API</h2>
+      <p>PocketSharp 2.0 implements a new <strong>Reader API</strong>.</p>
+<p>This API does _not _use the official (and private) Article View API by Pocket. It is based on a custom PCL port of NReadability and SgmlReader, which are included in the solution.</p>
+<h3>What's it all about?</h3>
+<p>The Reader API extracts the main content of a website and returns the extracted content as HTML and it's associated title (which should already be available in the <code>PocketItem</code>).</p>
+<p>This content can be encapsulated in a <code>&lt;body&gt;</code>-Tag and displayed as a readable website with a custom CSS (it's up to you!).</p>
+<h3>Implementation</h3>
+<p>As with all PocketSharp implementations you have to require the main namespace and it's model namespace:</p>
+<p><pre class="language-clike"><code>
+using PocketSharp;
+using PocketSharp.Models;</code></pre></p>
+<p>The <code>PocketReader</code> is a seperated class with it's own <code>HttpClient</code>. Create an instance of it:</p>
+<p><pre class="language-clike"><code>
+PocketReader reader = new PocketReader();</code></pre></p>
+<p><code>PocketReader</code> needs a <code>PocketItem</code> as a parameter to correctly identify its <code>ID</code> and <code>Uri</code>. With this requirement you can successfully query for an articles content.<br>
+Don't forget exception handling in case a website is down or not accessible.</p>
+<p><pre class="language-clike"><code>
+PocketArticle article;
+try
+{
+  article = await reader.Read(myPocketItem);
+  // PocketArticle: {
+  //   int PocketItemID
+  //   string Content
+  //   string Title
+  //   string NextPageUrl
+  // }
+}
+catch (PocketException exc)
+{
+  // handle exception
+}
+</code></pre></p>
+
+    </di>
 
       </article>
     </div>
