@@ -1,3 +1,8 @@
+### 2.0.1 (2013-10-19)
+
+- Catch HttpRequestExceptions and provide as InnerException for PocketException
+- Read Article from URI (method overload)
+
 ### 2.0.0 (2013-10-17)
 
 - Add Reader API _(does not use the official Article View API, which is private. The PocketReader is based on a custom PCL port of NReadability and SgmlReader)_
