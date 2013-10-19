@@ -15,7 +15,7 @@ Install-Package PocketSharp
 
 ## Documentation
 
-See [wiki](https://github.com/ceee/PocketSharp/wiki) or [website]((http://pocketsharp.frontendplay.com/).
+See [wiki](https://github.com/ceee/PocketSharp/wiki) or [website](http://pocketsharp.frontendplay.com/).
 
 ## Supported platforms
 
