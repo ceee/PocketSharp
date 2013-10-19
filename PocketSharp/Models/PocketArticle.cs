@@ -40,6 +40,6 @@ namespace PocketSharp.Models
     /// <value>
     /// The next page URL.
     /// </value>
-    public string NextPageUrl { get; set; }
+    public Uri NextPage { get; set; }
   }
 }

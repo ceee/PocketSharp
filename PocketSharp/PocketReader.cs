@@ -43,13 +43,32 @@ namespace PocketSharp
 
 
     /// <summary>
+    /// Reads article content from the given URI.
+    /// This method does not use the official Article View API, which is private.
+    /// The PocketReader is based on a custom PCL port of NReadability and SgmlReader.
+    /// </summary>
+    /// <param name="uri">An URI.</param>
+    /// <returns>A Pocket article with extracted content and title.</returns>
+    /// <exception cref="PocketRequestException"></exception>
+    public async Task<PocketArticle> Read(Uri uri)
+    {
+      return await Read(new PocketItem()
+      {
+        ID = 0,
+        Uri = uri
+      });
+    }
+
+
+
+    /// <summary>
     /// Reads article content from the given PocketItem.
     /// This method does not use the official Article View API, which is private.
     /// The PocketReader is based on a custom PCL port of NReadability and SgmlReader.
     /// </summary>
     /// <param name="item">The pocket item.</param>
     /// <returns>A Pocket article with extracted content and title.</returns>
-    /// <exception cref="PocketException"></exception>
+    /// <exception cref="PocketRequestException"></exception>
     public async Task<PocketArticle> Read(PocketItem item)
     {
       // initialize transcoder
@@ -87,7 +106,7 @@ namespace PocketSharp
       {
         Content = transcodingResult.ExtractedContent,
         Title = transcodingResult.ExtractedTitle,
-        NextPageUrl = transcodingResult.NextPageUrl,
+        NextPage = transcodingResult.NextPageUrl != null ? new Uri(transcodingResult.NextPageUrl, UriKind.Absolute) : null,
         PocketItemID = item.ID
       };
     }
@@ -102,9 +121,17 @@ namespace PocketSharp
     protected async Task<string> Request(Uri uri)
     {
       HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
+      HttpResponseMessage response = null;
 
       // make async request
-      HttpResponseMessage response = await _httpClient.SendAsync(request);
+      try
+      {
+        response = await _httpClient.SendAsync(request);
+      }
+      catch (HttpRequestException exc)
+      {
+        throw new PocketException(exc.Message, exc);
+      }
 
       // validate HTTP response
       if (response.StatusCode != HttpStatusCode.OK)
@@ -115,9 +142,7 @@ namespace PocketSharp
       }
 
       // read response
-      var responseString = await response.Content.ReadAsStringAsync();
-
-      return responseString;
+      return await response.Content.ReadAsStringAsync();
     }
   }
 }

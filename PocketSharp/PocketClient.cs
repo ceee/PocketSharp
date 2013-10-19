@@ -112,6 +112,7 @@ namespace PocketSharp
 
       // every single Pocket API endpoint requires HTTP POST data
       HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, method);
+      HttpResponseMessage response = null;
 
       if (parameters == null)
       {
@@ -131,7 +132,14 @@ namespace PocketSharp
       request.Content = new FormUrlEncodedContent(parameters);
 
       // make async request
-      HttpResponseMessage response = await _restClient.SendAsync(request);
+      try
+      {
+        response = await _restClient.SendAsync(request);
+      }
+      catch (HttpRequestException exc)
+      {
+        throw new PocketException(exc.Message, exc);
+      }
 
       // validate HTTP response
       ValidateResponse(response);
