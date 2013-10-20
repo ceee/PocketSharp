@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PocketSharp")]
-[assembly: AssemblyDescription("PocketSharp is a .NET class library that integrates the Pocket API v3")]
+[assembly: AssemblyDescription("PocketSharp is a .NET class library that integrates the Pocket API v3 (support a custom Article View API)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("cee")]
 [assembly: AssemblyProduct("PocketSharp")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCopyright("Copyright © cee 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
