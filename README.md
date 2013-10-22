@@ -21,7 +21,7 @@ See [wiki](https://github.com/ceee/PocketSharp/wiki) or [website](http://pockets
 
 PocketSharp is a **Portable Class Library** (since 1.0.0), therefore it's compatible with multiple platforms:
 
-- **.NET** >= 4.5 (including WPF)
+- **.NET** >= 4.0.3 (including WPF)
 - **Silverlight** >= 4
 - **Windows Phone** >= 7.5
 - **Windows Store**
