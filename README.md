@@ -24,12 +24,9 @@ See [wiki](https://github.com/ceee/PocketSharp/wiki) or [website](http://pockets
 A search for items containing `CSS`:
 
 ```csharp
-using PocketSharp;
-using PocketSharp.Models;
+PocketClient client = new PocketClient("[YOUR_CONSUMER_KEY]", "[YOUR_ACCESS_CODE]");
 
-PocketClient _client = new PocketClient("[YOUR_CONSUMER_KEY]", "[YOUR_ACCESS_CODE]");
-
-var items = await _client.Search("css");
+List<PocketItem> items = await client.Search("css");
 
 items.ForEach(
 	item => Debug.WriteLine(item.ID + " | " + item.Title)
