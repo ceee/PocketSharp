@@ -17,6 +17,36 @@ Install-Package PocketSharp
 
 See [wiki](https://github.com/ceee/PocketSharp/wiki) or [website](http://pocketsharp.frontendplay.com/).
 
+---
+
+## Usage Example:
+
+A search for items containing `CSS`:
+
+```csharp
+using PocketSharp;
+using PocketSharp.Models;
+
+PocketClient _client = new PocketClient("[YOUR_CONSUMER_KEY]", "[YOUR_ACCESS_CODE]");
+
+var items = await _client.Search("css");
+
+items.ForEach(
+	item => Debug.WriteLine(item.ID + " | " + item.Title)
+);
+```
+
+Which will output:
+
+    330361896 | CSS Front-end Frameworks with comparison : By usabli.ca
+    345541438 | Editr - HTML, CSS, JavaScript playground
+    251743431 | CSS Architecture
+    343693149 | CSS3 Transitions - Thank God We Have A Specification!
+	...
+
+---
+
+
 ## Supported platforms
 
 PocketSharp is a **Portable Class Library** (since 1.0.0), therefore it's compatible with multiple platforms:
@@ -28,7 +58,10 @@ PocketSharp is a **Portable Class Library** (since 1.0.0), therefore it's compat
 
 You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Examples` ([@github](https://github.com/ceee/PocketSharp/tree/master/PocketSharp.Examples)) folder.
 
----
+## What's next?
+
+- `cancellationToken` support for all methods
+- get account statistics on your current usage data (remaining requests, ...)
 
 ## Dependencies
 
