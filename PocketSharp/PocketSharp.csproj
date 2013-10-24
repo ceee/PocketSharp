@@ -44,6 +44,7 @@
     <Compile Include="Components\Statistics.cs" />
     <Compile Include="Models\Parameters\RegisterParameters.cs" />
     <Compile Include="Models\PocketArticle.cs" />
+    <Compile Include="Models\PocketLimits.cs" />
     <Compile Include="Models\PocketStatistics.cs" />
     <Compile Include="Utilities\PocketException.cs" />
     <Compile Include="Components\Add.cs" />

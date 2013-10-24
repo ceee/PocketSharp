@@ -23,6 +23,11 @@ namespace PocketSharp
     protected readonly HttpClient _restClient;
 
     /// <summary>
+    /// Caches HTTP headers from last response
+    /// </summary>
+    private HttpResponseHeaders lastHeaders;
+
+    /// <summary>
     /// The base URL for the Pocket API
     /// </summary>
     protected static Uri baseUri = new Uri("https://getpocket.com/v3/");
@@ -52,6 +57,7 @@ namespace PocketSharp
     /// Code retrieved on authentification-success
     /// </summary>
     public string AccessCode { get; set; }
+
 
 
     /// <summary>
@@ -143,6 +149,9 @@ namespace PocketSharp
 
       // validate HTTP response
       ValidateResponse(response);
+
+      // cache headers
+      lastHeaders = response.Headers;
 
       // read response
       var responseString = await response.Content.ReadAsStringAsync();
@@ -267,6 +276,11 @@ namespace PocketSharp
     {
       string result = null;
 
+      if (headers == null || String.IsNullOrEmpty(key))
+      {
+        return null;
+      }
+
       foreach (var header in headers)
       {
         if (header.Key == key)
@@ -275,6 +289,7 @@ namespace PocketSharp
           headerEnumerator.MoveNext();
 
           result = headerEnumerator.Current;
+          break;
         }
       }
 

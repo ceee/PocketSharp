@@ -151,5 +151,14 @@ namespace PocketSharp.Tests
 
       Assert.True(statistics.CountAll > 0);
     }
+
+
+    [Fact]
+    public async Task AreLimitsRetrieved()
+    {
+      PocketLimits limits = await client.GetUsageLimits();
+
+      Assert.True(limits.RateLimitForConsumerKey > 9999);
+    }
   }
 }
