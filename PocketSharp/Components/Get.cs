@@ -11,13 +11,22 @@ namespace PocketSharp
   /// </summary>
   public partial class PocketClient
   {
-    /// <summary>
-    /// Retrieves items from pocket
-    /// with the given filters
-    /// </summary>
-    /// <param name="parameters">parameters, which are mapped to the officials from http://getpocket.com/developer/docs/v3/retrieve </param>
-    /// <returns></returns>
-    /// <exception cref="PocketException"></exception>
+      /// <summary>
+      /// Retrieves items from pocket
+      /// with the given filters
+      /// </summary>
+      /// <param name="state">The state.</param>
+      /// <param name="favorite">The favorite.</param>
+      /// <param name="tag">The tag.</param>
+      /// <param name="contentType">Type of the content.</param>
+      /// <param name="sort">The sort.</param>
+      /// <param name="search">The search.</param>
+      /// <param name="domain">The domain.</param>
+      /// <param name="since">The since.</param>
+      /// <param name="count">The count.</param>
+      /// <param name="offset">The offset.</param>
+      /// <returns></returns>
+      /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> Get(
       State? state = null,
       bool? favorite = null,
