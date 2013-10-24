@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Runtime.Serialization;
+using PropertyChanged;
 
 namespace PocketSharp.Models
 {
@@ -8,6 +8,7 @@ namespace PocketSharp.Models
   /// Image
   /// </summary>
   [JsonObject]
+  [ImplementPropertyChanged]
   public class PocketImage
   {
     /// <summary>
