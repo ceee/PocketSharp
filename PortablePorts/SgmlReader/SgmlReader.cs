@@ -397,7 +397,6 @@ namespace PocketSharp.Ports.Sgml
         private string m_rootElementName;
 
         private string m_href;
-        private string m_errorLogFile;
         private Entity m_lastError;
         private string m_proxy;
         private TextReader m_inputStream;
