@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using PropertyChanged;
 
 namespace PocketSharp.Models
 {
@@ -10,6 +10,7 @@ namespace PocketSharp.Models
   /// see: http://getpocket.com/developer/docs/v3/retrieve
   /// </summary>
   [JsonObject]
+  [ImplementPropertyChanged]
   public class PocketItem
   {
     /// <summary>

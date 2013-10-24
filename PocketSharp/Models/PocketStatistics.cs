@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System.Runtime.Serialization;
+using PropertyChanged;
 
 namespace PocketSharp.Models
 {
@@ -7,6 +7,7 @@ namespace PocketSharp.Models
   /// Statistics
   /// </summary>
   [JsonObject]
+  [ImplementPropertyChanged]
   public class PocketStatistics
   {
     /// <summary>
