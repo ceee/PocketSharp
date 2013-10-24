@@ -35,7 +35,7 @@ namespace PocketSharp
     /// <summary>
     /// callback URL for API calls
     /// </summary>
-    protected string CallbackUri { get; set; }
+    public string CallbackUri { get; set; }
 
     /// <summary>
     /// Accessor for the Pocket API key
