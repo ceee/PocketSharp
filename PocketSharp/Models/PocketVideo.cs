@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Runtime.Serialization;
 using PropertyChanged;
 
 namespace PocketSharp.Models
