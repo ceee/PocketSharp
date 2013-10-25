@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Linq;
 using System.Collections;
-using Newtonsoft.Json;
 
 namespace PocketSharp.Models
 {

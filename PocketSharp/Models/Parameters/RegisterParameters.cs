@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Linq;
+﻿using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
 {

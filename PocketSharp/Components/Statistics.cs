@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using PocketSharp.Models;
+﻿using PocketSharp.Models;
 using System;
 using System.Threading.Tasks;
 
