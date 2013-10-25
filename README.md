@@ -67,13 +67,9 @@ You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Example
 - [SgmlReader](https://github.com/MindTouch/SGMLReader) - converted to a PCL
 
 ## Contributors
-| [![ceee](http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70)](https://github.com/ceee "Tobias Klika") |
-|---|
-| [ceee](https://github.com/ceee) |
-
-| [![ScottIsAFool](http://gravatar.com/avatar/6df656872a87b09a7470feb4867ed927?s=70)](https://github.com/ScottIsAFool "Scott Lovegrove") |
-|---|
-| [ScottIsAFool](https://github.com/ScottIsAFool) |
+| [![ceee](http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70)](https://github.com/ceee "Tobias Klika") | [![ScottIsAFool](http://gravatar.com/avatar/6df656872a87b09a7470feb4867ed927?s=70)](https://github.com/ScottIsAFool "Scott Lovegrove") |
+|---|---|
+| [ceee](https://github.com/ceee) | [ScottIsAFool](https://github.com/ScottIsAFool) |
 
 ## License
 
