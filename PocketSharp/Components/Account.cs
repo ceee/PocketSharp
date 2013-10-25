@@ -73,29 +73,41 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<string> GetAccessCode(string requestCode = null)
     {
-      // check if request code is available
-      if(RequestCode == null && requestCode == null)
-      {
-        throw new NullReferenceException("Call GetRequestCode() first to receive a request_code");
-      }
-
-      // override property with given param if available
-      if(requestCode != null)
-      {
-        RequestCode = requestCode;
-      }
-
-      // do request
-      AccessCode response = await Request<AccessCode>("oauth/authorize", new Dictionary<string, string>()
-      { 
-        { "code", RequestCode } 
-      }, false);
-
-      // save code to client
-      AccessCode = response.Code;
-
-      return AccessCode;
+        await GetUser(requestCode);
+        return AccessCode;
     }
+
+    /// <summary>
+    /// Gets the user.
+    /// </summary>
+    /// <param name="requestCode">The request code.</param>
+    /// <returns>The authenticated user</returns>
+    /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
+      public async Task<PocketUser> GetUser(string requestCode = null)
+      {
+          // check if request code is available
+          if (RequestCode == null && requestCode == null)
+          {
+              throw new NullReferenceException("Call GetRequestCode() first to receive a request_code");
+          }
+
+          // override property with given param if available
+          if (requestCode != null)
+          {
+              RequestCode = requestCode;
+          }
+
+          // do request
+          PocketUser response = await Request<PocketUser>("oauth/authorize", new Dictionary<string, string>()
+          {
+              {"code", RequestCode}
+          }, false);
+
+          // save code to client
+          AccessCode = response.Code;
+
+          return response;
+      }
 
 
     /// <summary>
