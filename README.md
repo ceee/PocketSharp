@@ -2,12 +2,7 @@
 
 **PocketSharp** is a C#.NET portable class library that integrates the [Pocket API v3](http://getpocket.com/developer).
 
-**Website:** [pocketsharp.frontendplay.com](http://pocketsharp.frontendplay.com/)
-<br>
-**NuGet:** [nuget.org/packages/PocketSharp](https://www.nuget.org/packages/PocketSharp/)
-
-
-## Install using NuGet
+## Install using [NuGet](https://www.nuget.org/packages/PocketSharp/)
 
 ```
 Install-Package PocketSharp
@@ -15,7 +10,7 @@ Install-Package PocketSharp
 
 ## Documentation
 
-See [wiki](https://github.com/ceee/PocketSharp/wiki) or [website](http://pocketsharp.frontendplay.com/).
+See [wiki](https://github.com/ceee/PocketSharp/wiki)
 
 ---
 
@@ -48,7 +43,7 @@ Which will output:
 
 PocketSharp is a **Portable Class Library** (since 1.0.0), therefore it's compatible with multiple platforms:
 
-- **.NET** >= 4.0.3 (including WPF)
+- **.NET** >= 4.5 (including WPF)
 - **Silverlight** >= 4
 - **Windows Phone** >= 7.5
 - **Windows Store**
@@ -58,13 +53,13 @@ You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Example
 ## What's next?
 
 - `cancellationToken` support for all methods
-- get account statistics on your current usage data (remaining requests, ...)
 
 ## Dependencies
 
 - [Microsoft.Bcl.Async](https://www.nuget.org/packages/Microsoft.Bcl.Async/)
 - [Microsoft.Net.Http](https://www.nuget.org/packages/Microsoft.Net.Http/)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
+- [PropertyChanged.Fody](https://github.com/Fody/PropertyChanged)
 
 ## Forked Dependencies
 
@@ -72,9 +67,13 @@ You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Example
 - [SgmlReader](https://github.com/MindTouch/SGMLReader) - converted to a PCL
 
 ## Contributors
-| [![twitter/artistandsocial](http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70)](http://twitter.com/artistandsocial "Follow @artistandsocial on Twitter") |
+| [![ceee](http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70)](https://github.com/ceee "Tobias Klika") |
 |---|
 | [Tobias Klika @ceee](https://github.com/ceee) |
+
+| [![ScottIsAFool](http://gravatar.com/avatar/6df656872a87b09a7470feb4867ed927?s=70)](https://github.com/ScottIsAFool "Scott Lovegrove") |
+|---|
+| [Scott Lovegrove @ScottIsAFool](https://github.com/ScottIsAFool) |
 
 ## License
 

@@ -1,3 +1,11 @@
+### 2.1.0 (2013-10-25)
+
+- Rename `Statistics()` to `GetUserStatistics()`
+- Made `CallbackUri` public (thanks to @ScottIsAFool)
+- Added Fody/PropertyChanged (thanks to @ScottIsAFool)
+- Method `GetUsageLimits()` to retrieve API usage limits
+- Add PORTABLE constant to SgmlReader 
+
 ### 2.0.1 (2013-10-19)
 
 - Catch HttpRequestExceptions and provide as InnerException for PocketException
