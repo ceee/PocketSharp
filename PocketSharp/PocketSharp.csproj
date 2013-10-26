@@ -63,7 +63,7 @@
     <Compile Include="Models\PocketItem.cs" />
     <Compile Include="Models\PocketTag.cs" />
     <Compile Include="Models\PocketVideo.cs" />
-    <Compile Include="Models\Response\AccessCode.cs" />
+    <Compile Include="Models\PocketUser.cs" />
     <Compile Include="Models\Response\Add.cs" />
     <Compile Include="Models\Response\Modify.cs" />
     <Compile Include="Models\Response\RequestCode.cs" />

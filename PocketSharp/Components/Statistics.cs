@@ -25,7 +25,7 @@ namespace PocketSharp
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    [Obsolete("Please use GetUserStatistics")]
+    [Obsolete("Please use GetUserStatistics instead")]
     public async Task<PocketStatistics> Statistics()
     {
       return await GetUserStatistics();

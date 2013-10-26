@@ -65,36 +65,51 @@ namespace PocketSharp
 
     /// <summary>
     /// Requests the access code after authentication
-    /// The access code has to permanently be stored within the users session, and should be added as a parameter for all future PocketClient initializations. 
+    /// The access code has to permanently be stored within the users session, and should be passed in the constructor for all future PocketClient initializations. 
     /// </summary>
     /// <param name="requestCode">The requestCode. If no requestCode is supplied, the property from the PocketClient intialization is used.</param>
     /// <returns>The permanent access code, which is used to authenticate the user with the application</returns>
     /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
     /// <exception cref="PocketException"></exception>
+    [Obsolete("Please use GetUser instead")]
     public async Task<string> GetAccessCode(string requestCode = null)
     {
+      await GetUser(requestCode);
+      return AccessCode;
+    }
+
+
+    /// <summary>
+    /// Requests the access code and username after authentication
+    /// The access code has to permanently be stored within the users session, and should be passed in the constructor for all future PocketClient initializations. 
+    /// </summary>
+    /// <param name="requestCode">The request code.</param>
+    /// <returns>The authenticated user</returns>
+    /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
+    public async Task<PocketUser> GetUser(string requestCode = null)
+    {
       // check if request code is available
-      if(RequestCode == null && requestCode == null)
+      if (RequestCode == null && requestCode == null)
       {
         throw new NullReferenceException("Call GetRequestCode() first to receive a request_code");
       }
 
       // override property with given param if available
-      if(requestCode != null)
+      if (requestCode != null)
       {
         RequestCode = requestCode;
       }
 
       // do request
-      AccessCode response = await Request<AccessCode>("oauth/authorize", new Dictionary<string, string>()
-      { 
-        { "code", RequestCode } 
+      PocketUser response = await Request<PocketUser>("oauth/authorize", new Dictionary<string, string>()
+      {
+        {"code", RequestCode}
       }, false);
 
       // save code to client
       AccessCode = response.Code;
 
-      return AccessCode;
+      return response;
     }
 
 

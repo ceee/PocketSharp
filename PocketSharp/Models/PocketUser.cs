@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PropertyChanged;
 
 namespace PocketSharp.Models
 {
@@ -6,7 +7,8 @@ namespace PocketSharp.Models
   /// Access Code
   /// </summary>
   [JsonObject]
-  internal class AccessCode
+  [ImplementPropertyChanged]
+  public class PocketUser
   {
     /// <summary>
     /// Gets or sets the code.
@@ -23,7 +25,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The username.
     /// </value>
-    [JsonProperty]
+    [JsonProperty("username")]
     public string Username { get; set; }
   }
 }

@@ -1,8 +1,13 @@
+### 2.2.0 (2013-10-26)
+
+- Made `GetAccessCode` obsolete
+- Return username after authentication with `GetUser` (thanks to [ScottIsAFool](https://github.com/ScottIsAFool))
+
 ### 2.1.0 (2013-10-25)
 
 - Rename `Statistics()` to `GetUserStatistics()`
-- Made `CallbackUri` public (thanks to @ScottIsAFool)
-- Added Fody/PropertyChanged (thanks to @ScottIsAFool)
+- Made `CallbackUri` public (thanks to [ScottIsAFool](https://github.com/ScottIsAFool))
+- Added Fody/PropertyChanged (thanks to [ScottIsAFool](https://github.com/ScottIsAFool))
 - Method `GetUsageLimits()` to retrieve API usage limits
 - Add PORTABLE constant to SgmlReader 
 
