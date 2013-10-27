@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Xunit;
 using PocketSharp.Models;
+using System.Diagnostics;
 
 namespace PocketSharp.Tests
 {
@@ -41,6 +41,19 @@ namespace PocketSharp.Tests
           Uri = new Uri("http://frontendplayyyyy.com")
         });
       });
+    }
+
+
+    [Fact]
+    public async Task IsBodyOnlyProperlyResolved()
+    {
+      PocketArticle result = await reader.Read(new PocketItem()
+      {
+        ID = 99,
+        Uri = new Uri("http://calebjacob.com/tooltipster/")
+      });
+
+      Assert.True(result.Content.Substring(0, 4) == "<div");
     }
   }
 }

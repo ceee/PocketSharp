@@ -84,7 +84,7 @@ namespace PocketSharp.Ports.NReadability
 
       if (domSerializationParams.BodyOnly && document.Root != null)
       {
-        var body = document.Root.GetChildrenByTagName("body").FirstOrDefault();
+        var body = document.Root.GetElementsByTagName("body").FirstOrDefault();
 
         if (body != null)
         {

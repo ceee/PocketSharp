@@ -108,13 +108,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\PortablePorts\NReadability\NReadability.csproj">
       <Project>{14c3ee6a-54a4-4a37-8b56-d52a3802f1c2}</Project>
       <Name>NReadability</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
