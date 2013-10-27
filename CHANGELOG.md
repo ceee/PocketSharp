@@ -1,3 +1,7 @@
+### 2.2.1 (2013-10-27)
+
+- Fix NReadability parsing issue
+
 ### 2.2.0 (2013-10-26)
 
 - Made `GetAccessCode` obsolete
