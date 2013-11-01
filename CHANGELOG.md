@@ -1,3 +1,7 @@
+### 2.2.2 (2013-11-01)
+
+- Password validation in RegisterAccount
+
 ### 2.2.1 (2013-10-27)
 
 - Fix NReadability parsing issue
