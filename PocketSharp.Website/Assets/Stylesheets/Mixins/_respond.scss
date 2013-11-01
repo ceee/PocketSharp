@@ -1,6 +1,0 @@
-
-@mixin respond($size)
-{
-	$query: "only screen and (max-width: #{$size})";
-	@media #{$query} { @content; }
-}

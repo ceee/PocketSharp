@@ -1,4 +1,4 @@
-![PocketSharp](https://raw.github.com/ceee/PocketSharp/master/PocketSharp.Website/Assets/Images/github-header.png)
+![PocketSharp](https://raw.github.com/ceee/PocketSharp/master/Assets/github-header.png)
 
 **PocketSharp** is a C#.NET portable class library that integrates the [Pocket API v3](http://getpocket.com/developer).
 
