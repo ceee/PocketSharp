@@ -126,6 +126,8 @@ namespace PocketSharp
     /// Invalid email address.
     /// or
     /// Invalid username. Please only use letters, numbers, and/or dashes and between 1-20 characters.
+    /// or
+    /// Invalid password.
     /// </exception>
     /// <exception cref="PocketException"></exception>
     public async Task<bool> RegisterAccount(string username, string email, string password)
@@ -146,6 +148,11 @@ namespace PocketSharp
       if (!matchUsername.Success)
       {
         throw new FormatException("(2) Invalid username. Please only use letters, numbers, and/or dashes and between 1-20 characters.");
+      }
+
+      if (password.Length < 3)
+      {
+        throw new FormatException("(3) Invalid password.");
       }
 
       RegisterParameters parameters = new RegisterParameters()

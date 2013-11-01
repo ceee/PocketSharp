@@ -7,7 +7,7 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>https://raw.github.com/ceee/PocketSharp/master/LICENSE-MIT</licenseUrl>
-    <projectUrl>http://pocketsharp.frontendplay.com</projectUrl>
+    <projectUrl>https://github.com/ceee/PocketSharp</projectUrl>
     <iconUrl>https://raw.github.com/ceee/PocketSharp/master/pocketsharp.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>PocketSharp is a C#.NET portable class library that integrates the Pocket API v3.</description>
