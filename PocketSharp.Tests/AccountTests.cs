@@ -50,6 +50,11 @@ namespace PocketSharp.Tests
         await client.RegisterAccount("myusername", "pocketsharp@outlook,com", "mypassword");
       });
 
+      await ThrowsAsync<FormatException>(async () =>
+      {
+        await client.RegisterAccount("myusername", "pocketsharp@outlook.com", "my");
+      });
+
       await ThrowsAsync<ArgumentNullException>(async () =>
       {
         await client.RegisterAccount("myusername", null, "mypassword");
