@@ -13,7 +13,7 @@ namespace PocketSharp
   /// <summary>
   /// PocketClient
   /// </summary>
-  public partial class PocketClient
+  public partial class PocketClient : IPocketClient
   {
     /// <summary>
     /// REST client used for the API communication
