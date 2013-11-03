@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Statistics.cs" />
+    <Compile Include="IPocketClient.cs" />
     <Compile Include="Models\Parameters\RegisterParameters.cs" />
     <Compile Include="Models\PocketArticle.cs" />
     <Compile Include="Models\PocketLimits.cs" />
