@@ -25,6 +25,8 @@ namespace PocketSharp.Tests
       );
 
       urls = File.ReadAllLines("../../url-10000.csv").Select(item => item.Split(',')[1]);
+
+      //await FillAccount(598, 10000);
     }
 
 
@@ -56,6 +58,23 @@ namespace PocketSharp.Tests
     public void IsSearchedSuccessfullyOn10000Items()
     {
       
+    }
+
+
+    private async Task FillAccount(int offset, int count)
+    {
+      int r;
+      int r2;
+      string[] tag;
+      Random rnd = new Random();
+
+      foreach (string url in urls.Skip(offset).Take(count))
+      {
+        r = rnd.Next(tags.Length);
+        r2 = rnd.Next(tags.Length);
+        tag = new string[] { tags[r], tags[r2] };
+        await client.Add(new Uri("http://" + url), tag);
+      }
     }
   }
 }
