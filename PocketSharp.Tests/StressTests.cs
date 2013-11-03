@@ -3,24 +3,33 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Xunit;
 using PocketSharp.Models;
+using System.IO;
+using System.Linq;
+using System.Diagnostics;
 
 namespace PocketSharp.Tests
 {
   public class StressTests : TestsBase
   {
+    private static IEnumerable<string> urls;
+    private static string[] tags = new string[]{ "css", "js", "csharp", "windows", "microsoft" };
+
+
     public StressTests() : base() 
     { 
       // !! please don't misuse this account !!
       client = new PocketClient(
-        consumerKey: "15396-f6f92101d72c8e270a6c9bb3",
+        consumerKey: "20000-786d0bc8c39294e9829111d6",
         callbackUri: "http://frontendplay.com",
-        accessCode: "80acf6c5-c198-03c0-b94c-e74402"
+        accessCode: "9b8ecb6b-7801-1a5c-7b39-2ba05b"
       );
+
+      urls = File.ReadAllLines("../../url-10000.csv").Select(item => item.Split(',')[1]);
     }
 
 
     [Fact]
-    public void Are100ItemsRetrievedProperly()
+    public async Task Are100ItemsRetrievedProperly()
     {
       
     }

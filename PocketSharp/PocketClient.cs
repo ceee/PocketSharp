@@ -168,7 +168,8 @@ namespace PocketSharp
           Converters =
           {
             new BoolConverter(),
-            new UnixDateTimeConverter()
+            new UnixDateTimeConverter(),
+            new NullableIntConverter()
           }
         }
       );

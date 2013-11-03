@@ -75,6 +75,7 @@
     <Compile Include="GetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadTests.cs" />
+    <Compile Include="StressTests.cs" />
     <Compile Include="TestsBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +87,8 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="url-10000.csv" />
+    <None Include="url-100000.csv" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
