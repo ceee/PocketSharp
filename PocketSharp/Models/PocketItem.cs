@@ -200,65 +200,44 @@ namespace PocketSharp.Models
 
 
     /// <summary>
-    /// Gets or sets the _ tag dictionary.
-    /// </summary>
-    /// <value>
-    /// The _ tag dictionary.
-    /// </value>
-    [JsonProperty("tags")]
-    private Dictionary<string, PocketTag> _TagDictionary { get; set; }
-
-    /// <summary>
-    /// Gets or sets the _ image dictionary.
-    /// </summary>
-    /// <value>
-    /// The _ image dictionary.
-    /// </value>
-    [JsonProperty("images")]
-    private Dictionary<string, PocketImage> _ImageDictionary { get; set; }
-
-    /// <summary>
-    /// Gets or sets the _ video dictionary.
-    /// </summary>
-    /// <value>
-    /// The _ video dictionary.
-    /// </value>
-    [JsonProperty("videos")]
-    private Dictionary<string, PocketVideo> _VideoDictionary { get; set; }
-
-    /// <summary>
-    /// Gets or sets the _ author dictionary.
-    /// </summary>
-    /// <value>
-    /// The _ author dictionary.
-    /// </value>
-    [JsonProperty("authors")]
-    private Dictionary<string, PocketAuthor> _AuthorDictionary { get; set; }
-
-
-    /// <summary>
-    /// Gets the tags.
+    /// Gets or sets the tags.
     /// </summary>
     /// <value>
     /// The tags.
     /// </value>
-    [JsonIgnore]
-    public List<PocketTag> Tags
-    {
-      get { return Utilities.DictionaryToList<PocketTag>(_TagDictionary); }
-    }
+    [JsonProperty("tags")]
+    [JsonConverter(typeof(ObjectToArrayConverter<PocketTag>))]
+    public List<PocketTag> Tags { get; set; }
 
     /// <summary>
-    /// Gets the images.
+    /// Gets or sets the images.
     /// </summary>
     /// <value>
     /// The images.
     /// </value>
-    [JsonIgnore]
-    public List<PocketImage> Images
-    {
-      get { return Utilities.DictionaryToList<PocketImage>(_ImageDictionary); }
-    }
+    [JsonProperty("images")]
+    [JsonConverter(typeof(ObjectToArrayConverter<PocketImage>))]
+    public List<PocketImage> Images { get; set; }
+
+    /// <summary>
+    /// Gets or sets the videos.
+    /// </summary>
+    /// <value>
+    /// The videos.
+    /// </value>
+    [JsonProperty("videos")]
+    [JsonConverter(typeof(ObjectToArrayConverter<PocketVideo>))]
+    public List<PocketVideo> Videos { get; set; }
+
+    /// <summary>
+    /// Gets or sets the authors.
+    /// </summary>
+    /// <value>
+    /// The authors.
+    /// </value>
+    [JsonProperty("authors")]
+    [JsonConverter(typeof(ObjectToArrayConverter<PocketAuthor>))]
+    public List<PocketAuthor> Authors { get; set; }
 
     /// <summary>
     /// Gets the lead image.
@@ -270,30 +249,6 @@ namespace PocketSharp.Models
     public PocketImage LeadImage
     {
       get { return Images != null && Images.Count > 0 ? Images[0] : null; }
-    }
-
-    /// <summary>
-    /// Gets the videos.
-    /// </summary>
-    /// <value>
-    /// The videos.
-    /// </value>
-    [JsonIgnore]
-    public List<PocketVideo> Videos
-    {
-      get { return Utilities.DictionaryToList<PocketVideo>(_VideoDictionary); }
-    }
-
-    /// <summary>
-    /// Gets the authors.
-    /// </summary>
-    /// <value>
-    /// The authors.
-    /// </value>
-    [JsonIgnore]
-    public List<PocketAuthor> Authors
-    {
-      get { return Utilities.DictionaryToList<PocketAuthor>(_AuthorDictionary); }
     }
   }
 }

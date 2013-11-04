@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using PocketSharp.Models;
 
@@ -147,7 +148,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task AreStatisticsRetrieved()
     {
-      PocketStatistics statistics = await client.Statistics();
+      PocketStatistics statistics = await client.GetUserStatistics();
 
       Assert.True(statistics.CountAll > 0);
     }
@@ -159,6 +160,16 @@ namespace PocketSharp.Tests
       PocketLimits limits = await client.GetUsageLimits();
 
       Assert.True(limits.RateLimitForConsumerKey > 9999);
+    }
+
+
+    [Fact]
+    public async Task IsNewPocketItemListGeneratorWorking()
+    {
+      List<PocketItem> items = await client.Get(count: 1, tag: "pocket");
+      PocketItem item = items[0];
+
+      Assert.True(item.Tags.Find(i => i.Name == "pocket") != null);
     }
   }
 }
