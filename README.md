@@ -54,9 +54,8 @@ You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Example
 
 - `cancellationToken` support for all methods
 - support HTML injection into content from PocketArticle (maybe remove title from Article)
-- benchmarking download of large lists
-- benchmarking of search algorithm
-- Update website and merge into plugin repository site
+- benchmarking download of large lists + search algorithm
+- make setters for inline objects in PocketItem (images, videos, ...)
 
 ## Dependencies
 
