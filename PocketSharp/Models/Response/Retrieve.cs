@@ -28,24 +28,13 @@ namespace PocketSharp.Models
     public int Since { get; set; }
 
     /// <summary>
-    /// Gets or sets the _ item dictionary.
-    /// </summary>
-    /// <value>
-    /// The _ item dictionary.
-    /// </value>
-    [JsonProperty("list")]
-    public Dictionary<string, PocketItem> ItemDictionary { get; set; }
-
-    /// <summary>
     /// Gets the items.
     /// </summary>
     /// <value>
     /// The items.
     /// </value>
-    [JsonIgnore]
-    public List<PocketItem> Items
-    {
-      get { return Utilities.DictionaryToList<PocketItem>(ItemDictionary); }
-    }
+    [JsonProperty("list")]
+    [JsonConverter(typeof(ObjectToArrayConverter<PocketItem>))]
+    public List<PocketItem> Items { get; set; }
   }
 }
