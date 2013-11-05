@@ -220,8 +220,7 @@ namespace PocketSharp
     /// <returns></returns>
     internal async Task<bool> Send(ActionParameter actionParameter)
     {
-      bool response = await Send(new List<ActionParameter>() { actionParameter });
-      return response;
+      return await Send(new List<ActionParameter>() { actionParameter });
     }
 
 
