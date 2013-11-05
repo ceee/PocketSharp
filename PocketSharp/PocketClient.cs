@@ -36,26 +36,37 @@ namespace PocketSharp
     protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}";
 
     /// <summary>
-    /// callback URL for API calls
+    /// callback URLi for API calls
     /// </summary>
+    /// <value>
+    /// The callback URI.
+    /// </value>
     public string CallbackUri { get; set; }
 
     /// <summary>
     /// Accessor for the Pocket API key
     /// see: http://getpocket.com/developer
     /// </summary>
+    /// <value>
+    /// The consumer key.
+    /// </value>
     public string ConsumerKey { get; set; }
 
     /// <summary>
     /// Code retrieved on authentification
     /// </summary>
+    /// <value>
+    /// The request code.
+    /// </value>
     public string RequestCode { get; set; }
 
     /// <summary>
     /// Code retrieved on authentification-success
     /// </summary>
+    /// <value>
+    /// The access code.
+    /// </value>
     public string AccessCode { get; set; }
-
 
 
     /// <summary>

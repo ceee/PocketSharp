@@ -9,24 +9,36 @@ namespace PocketSharp
   {
     #region properties
     /// <summary>
-    /// callback URL for API calls
+    /// callback URLi for API calls
     /// </summary>
+    /// <value>
+    /// The callback URI.
+    /// </value>
     string CallbackUri { get; set; }
 
     /// <summary>
     /// Accessor for the Pocket API key
     /// see: http://getpocket.com/developer
     /// </summary>
+    /// <value>
+    /// The consumer key.
+    /// </value>
     string ConsumerKey { get; set; }
 
     /// <summary>
     /// Code retrieved on authentification
     /// </summary>
+    /// <value>
+    /// The request code.
+    /// </value>
     string RequestCode { get; set; }
 
     /// <summary>
     /// Code retrieved on authentification-success
     /// </summary>
+    /// <value>
+    /// The access code.
+    /// </value>
     string AccessCode { get; set; }
     #endregion
 
@@ -43,16 +55,20 @@ namespace PocketSharp
     /// Generate Authentication URI from requestCode
     /// </summary>
     /// <param name="requestCode">The requestCode. If no requestCode is supplied, the property from the PocketClient intialization is used.</param>
-    /// <returns>A valid URI to redirect the user to.</returns>
+    /// <returns>
+    /// A valid URI to redirect the user to.
+    /// </returns>
     /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
     Uri GenerateAuthenticationUri(string requestCode = null);
 
     /// <summary>
     /// Requests the access code after authentication
-    /// The access code has to permanently be stored within the users session, and should be passed in the constructor for all future PocketClient initializations. 
+    /// The access code has to permanently be stored within the users session, and should be passed in the constructor for all future PocketClient initializations.
     /// </summary>
     /// <param name="requestCode">The requestCode. If no requestCode is supplied, the property from the PocketClient intialization is used.</param>
-    /// <returns>The permanent access code, which is used to authenticate the user with the application</returns>
+    /// <returns>
+    /// The permanent access code, which is used to authenticate the user with the application
+    /// </returns>
     /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
     /// <exception cref="PocketException"></exception>
     [Obsolete("Please use GetUser instead")]
@@ -60,10 +76,12 @@ namespace PocketSharp
 
     /// <summary>
     /// Requests the access code and username after authentication
-    /// The access code has to permanently be stored within the users session, and should be passed in the constructor for all future PocketClient initializations. 
+    /// The access code has to permanently be stored within the users session, and should be passed in the constructor for all future PocketClient initializations.
     /// </summary>
     /// <param name="requestCode">The request code.</param>
-    /// <returns>The authenticated user</returns>
+    /// <returns>
+    /// The authenticated user
+    /// </returns>
     /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
     Task<PocketUser> GetUser(string requestCode = null);
 
@@ -95,7 +113,9 @@ namespace PocketSharp
     /// <param name="tags">A comma-separated list of tags to apply to the item</param>
     /// <param name="title">This can be included for cases where an item does not have a title, which is typical for image or PDF URLs. If Pocket detects a title from the content of the page, this parameter will be ignored.</param>
     /// <param name="tweetID">If you are adding Pocket support to a Twitter client, please send along a reference to the tweet status id. This allows Pocket to show the original tweet alongside the article.</param>
-    /// <returns>A simple representation of the saved item which doesn't contain all data (is only returned by calling the Retrieve method)</returns>
+    /// <returns>
+    /// A simple representation of the saved item which doesn't contain all data (is only returned by calling the Retrieve method)
+    /// </returns>
     /// <exception cref="PocketException"></exception>
     Task<PocketItem> Add(Uri uri, string[] tags = null, string title = null, string tweetID = null);
     #endregion
