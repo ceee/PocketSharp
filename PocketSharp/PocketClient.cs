@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
+using System.Threading;
 
 namespace PocketSharp
 {
@@ -118,7 +119,11 @@ namespace PocketSharp
     /// <param name="requireAuth">if set to <c>true</c> [require auth].</param>
     /// <returns></returns>
     /// <exception cref="PocketException">No access token available. Use authentification first.</exception>
-    protected async Task<T> Request<T>(string method, Dictionary<string, string> parameters = null, bool requireAuth = true) where T : class, new()
+    protected async Task<T> Request<T>(
+      string method, 
+      CancellationToken cancellationToken,
+      Dictionary<string, string> parameters = null, 
+      bool requireAuth = true) where T : class, new()
     {
       if (requireAuth && AccessCode == null)
       {
@@ -149,7 +154,7 @@ namespace PocketSharp
       // make async request
       try
       {
-        response = await _restClient.SendAsync(request);
+        response = await _restClient.SendAsync(request, cancellationToken);
       }
       catch (HttpRequestException exc)
       {
@@ -194,7 +199,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="actionParameters">The action parameters.</param>
     /// <returns></returns>
-    internal async Task<bool> Send(List<ActionParameter> actionParameters)
+    internal async Task<bool> Send(List<ActionParameter> actionParameters, CancellationToken cancellationToken)
     {
       List<Dictionary<string, object>> actionParamList = new List<Dictionary<string, object>>();
 
@@ -207,7 +212,7 @@ namespace PocketSharp
         "actions", JsonConvert.SerializeObject(actionParamList)                                                                    
       }};
 
-      Modify response = await Request<Modify>("send", parameters);
+      Modify response = await Request<Modify>("send", cancellationToken, parameters);
 
       return response.Status;
     }
@@ -218,9 +223,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="actionParameter">The action parameter.</param>
     /// <returns></returns>
-    internal async Task<bool> Send(ActionParameter actionParameter)
+    internal async Task<bool> Send(ActionParameter actionParameter, CancellationToken cancellationToken)
     {
-      return await Send(new List<ActionParameter>() { actionParameter });
+      return await Send(new List<ActionParameter>() { actionParameter }, cancellationToken);
     }
 
 
