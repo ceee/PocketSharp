@@ -116,6 +116,7 @@ namespace PocketSharp
     /// <returns>
     /// A simple representation of the saved item which doesn't contain all data (is only returned by calling the Retrieve method)
     /// </returns>
+    /// <exception cref="System.FormatException">(1) Uri should be absolute.</exception>
     /// <exception cref="PocketException"></exception>
     Task<PocketItem> Add(Uri uri, string[] tags = null, string title = null, string tweetID = null);
     #endregion
