@@ -26,44 +26,10 @@ namespace PocketSharp
     /// <param name="since">The since.</param>
     /// <param name="count">The count.</param>
     /// <param name="offset">The offset.</param>
-    /// <returns></returns>
-    /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> Get(
-      State? state = null,
-      bool? favorite = null,
-      string tag = null,
-      ContentType? contentType = null,
-      Sort? sort = null,
-      string search = null,
-      string domain = null,
-      DateTime? since = null,
-      int? count = null,
-      int? offset = null
-    )
-    {
-      return await Get(CancellationToken.None, state, favorite, tag, contentType, sort, search, domain, since, count, offset);
-    }
-
-
-    /// <summary>
-    /// Retrieves items from pocket
-    /// with the given filters
-    /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
-    /// <param name="state">The state.</param>
-    /// <param name="favorite">The favorite.</param>
-    /// <param name="tag">The tag.</param>
-    /// <param name="contentType">Type of the content.</param>
-    /// <param name="sort">The sort.</param>
-    /// <param name="search">The search.</param>
-    /// <param name="domain">The domain.</param>
-    /// <param name="since">The since.</param>
-    /// <param name="count">The count.</param>
-    /// <param name="offset">The offset.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> Get(
-      CancellationToken cancellationToken,
       State? state = null,
       bool? favorite = null,
       string tag = null,
@@ -73,7 +39,8 @@ namespace PocketSharp
       string domain = null,
       DateTime? since = null,
       int? count = null,
-      int? offset = null
+      int? offset = null,
+      CancellationToken cancellationToken = default(CancellationToken)
     )
     {
       RetrieveParameters parameters = new RetrieveParameters()
@@ -102,23 +69,10 @@ namespace PocketSharp
     /// Note: The Pocket API contains no method, which allows to retrieve a single item, so all items are retrieved and filtered locally by the ID.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
-    /// <returns></returns>
-    /// <exception cref="PocketException"></exception>
-    public async Task<PocketItem> Get(int itemID)
-    {
-      return await Get(CancellationToken.None, itemID);
-    }
-
-
-    /// <summary>
-    /// Retrieves an item by a given ID
-    /// Note: The Pocket API contains no method, which allows to retrieve a single item, so all items are retrieved and filtered locally by the ID.
-    /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
-    /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<PocketItem> Get(CancellationToken cancellationToken, int itemID)
+    public async Task<PocketItem> Get(int itemID, CancellationToken cancellationToken = default(CancellationToken))
     {
       List<PocketItem> items = await Get(
         cancellationToken: cancellationToken,
@@ -133,22 +87,10 @@ namespace PocketSharp
     /// Retrieves all items by a given filter
     /// </summary>
     /// <param name="filter">The filter.</param>
-    /// <returns></returns>
-    /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> Get(RetrieveFilter filter)
-    {
-      return await Get(CancellationToken.None, filter);
-    }
-
-
-    /// <summary>
-    /// Retrieves all items by a given filter
-    /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
-    /// <param name="filter">The filter.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> Get(CancellationToken cancellationToken, RetrieveFilter filter)
+    public async Task<List<PocketItem>> Get(RetrieveFilter filter, CancellationToken cancellationToken = default(CancellationToken))
     {
       RetrieveParameters parameters = new RetrieveParameters();
 
@@ -189,22 +131,10 @@ namespace PocketSharp
     /// Retrieves all available tags.
     /// Note: The Pocket API contains no method, which allows to retrieve all tags, so all items are retrieved and the associated tags extracted.
     /// </summary>
-    /// <returns></returns>
-    /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketTag>> GetTags()
-    {
-      return await GetTags(CancellationToken.None);
-    }
-
-
-    /// <summary>
-    /// Retrieves all available tags.
-    /// Note: The Pocket API contains no method, which allows to retrieve all tags, so all items are retrieved and the associated tags extracted.
-    /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketTag>> GetTags(CancellationToken cancellationToken)
+    public async Task<List<PocketTag>> GetTags(CancellationToken cancellationToken = default(CancellationToken))
     {
       List<PocketItem> items = await Get(
         cancellationToken: cancellationToken,
@@ -223,22 +153,10 @@ namespace PocketSharp
     /// Retrieves items by tag
     /// </summary>
     /// <param name="tag">The tag.</param>
-    /// <returns></returns>
-    /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> SearchByTag(string tag)
-    {
-      return await SearchByTag(CancellationToken.None, tag);
-    }
-
-
-    /// <summary>
-    /// Retrieves items by tag
-    /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
-    /// <param name="tag">The tag.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> SearchByTag(CancellationToken cancellationToken, string tag)
+    public async Task<List<PocketItem>> SearchByTag(string tag, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await Get(
         cancellationToken: cancellationToken,
@@ -251,27 +169,14 @@ namespace PocketSharp
     /// Retrieves items which match the specified search string in title and URI
     /// </summary>
     /// <param name="searchString">The search string.</param>
-    /// <returns></returns>
-    /// <exception cref="System.ArgumentOutOfRangeException">Search string length has to be a minimum of 2 chars</exception>
-    /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> Search(string searchString, bool searchInUri = true)
-    {
-      return await Search(CancellationToken.None, searchString, searchInUri);
-    }
-
-
-    /// <summary>
-    /// Retrieves items which match the specified search string in title and URI
-    /// </summary>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <param name="searchString">The search string.</param>
     /// <param name="searchInUri">if set to <c>true</c> [search in URI].</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="System.ArgumentOutOfRangeException">Search string length has to be a minimum of 2 chars</exception>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> Search(CancellationToken cancellationToken, string searchString, bool searchInUri = true)
+    public async Task<List<PocketItem>> Search(string searchString, bool searchInUri = true, CancellationToken cancellationToken = default(CancellationToken))
     {
-      List<PocketItem> items = await Get(cancellationToken, RetrieveFilter.All);
+      List<PocketItem> items = await Get(RetrieveFilter.All, cancellationToken);
       return Search(items, searchString);
     }
 

@@ -13,21 +13,10 @@ namespace PocketSharp
     /// <summary>
     /// Statistics from the user account.
     /// </summary>
-    /// <returns></returns>
-    /// <exception cref="PocketException"></exception>
-    public async Task<PocketStatistics> GetUserStatistics()
-    {
-      return await GetUserStatistics(CancellationToken.None);
-    }
-
-
-    /// <summary>
-    /// Statistics from the user account.
-    /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<PocketStatistics> GetUserStatistics(CancellationToken cancellationToken)
+    public async Task<PocketStatistics> GetUserStatistics(CancellationToken cancellationToken = default(CancellationToken))
     {
       return await Request<PocketStatistics>("stats", cancellationToken);
     }
@@ -38,23 +27,10 @@ namespace PocketSharp
     /// If a request was made before, the data is returned synchronously from the cache.
     /// Note: This method only works for authenticated users with a given AccessCode.
     /// </summary>
-    /// <returns></returns>
-    /// <exception cref="PocketException"></exception>
-    public async Task<PocketLimits> GetUsageLimits()
-    {
-      return await GetUsageLimits(CancellationToken.None);
-    }
-
-
-    /// <summary>
-    /// Returns API usage statistics.
-    /// If a request was made before, the data is returned synchronously from the cache.
-    /// Note: This method only works for authenticated users with a given AccessCode.
-    /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<PocketLimits> GetUsageLimits(CancellationToken cancellationToken)
+    public async Task<PocketLimits> GetUsageLimits(CancellationToken cancellationToken = default(CancellationToken))
     {
       string rateLimitForConsumerKey = TryGetHeaderValue(lastHeaders, "X-Limit-Key-Limit");
 

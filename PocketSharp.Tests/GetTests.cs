@@ -16,7 +16,6 @@ namespace PocketSharp.Tests
     public async Task AreItemsRetrieved()
     {
       List<PocketItem> items = await client.Get();
-
       Assert.True(items.Count > 0);
     }
 
