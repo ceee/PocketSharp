@@ -198,7 +198,7 @@ namespace PocketSharp
         Password = password
       };
 
-      ResponseBase response = await Request<ResponseBase>("signup", parameters.Convert(), false);
+      ResponseBase response = await Request<ResponseBase>("signup", cancellationToken, parameters.Convert(), false);
 
       return response.Status;
     }

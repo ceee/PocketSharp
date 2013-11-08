@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Threading;
 
 namespace PocketSharp
 {
@@ -11,23 +12,58 @@ namespace PocketSharp
   /// </summary>
   public partial class PocketClient
   {
-      /// <summary>
-      /// Retrieves items from pocket
-      /// with the given filters
-      /// </summary>
-      /// <param name="state">The state.</param>
-      /// <param name="favorite">The favorite.</param>
-      /// <param name="tag">The tag.</param>
-      /// <param name="contentType">Type of the content.</param>
-      /// <param name="sort">The sort.</param>
-      /// <param name="search">The search.</param>
-      /// <param name="domain">The domain.</param>
-      /// <param name="since">The since.</param>
-      /// <param name="count">The count.</param>
-      /// <param name="offset">The offset.</param>
-      /// <returns></returns>
-      /// <exception cref="PocketException"></exception>
+    /// <summary>
+    /// Retrieves items from pocket
+    /// with the given filters
+    /// </summary>
+    /// <param name="state">The state.</param>
+    /// <param name="favorite">The favorite.</param>
+    /// <param name="tag">The tag.</param>
+    /// <param name="contentType">Type of the content.</param>
+    /// <param name="sort">The sort.</param>
+    /// <param name="search">The search.</param>
+    /// <param name="domain">The domain.</param>
+    /// <param name="since">The since.</param>
+    /// <param name="count">The count.</param>
+    /// <param name="offset">The offset.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> Get(
+      State? state = null,
+      bool? favorite = null,
+      string tag = null,
+      ContentType? contentType = null,
+      Sort? sort = null,
+      string search = null,
+      string domain = null,
+      DateTime? since = null,
+      int? count = null,
+      int? offset = null
+    )
+    {
+      return await Get(CancellationToken.None, state, favorite, tag, contentType, sort, search, domain, since, count, offset);
+    }
+
+
+    /// <summary>
+    /// Retrieves items from pocket
+    /// with the given filters
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="state">The state.</param>
+    /// <param name="favorite">The favorite.</param>
+    /// <param name="tag">The tag.</param>
+    /// <param name="contentType">Type of the content.</param>
+    /// <param name="sort">The sort.</param>
+    /// <param name="search">The search.</param>
+    /// <param name="domain">The domain.</param>
+    /// <param name="since">The since.</param>
+    /// <param name="count">The count.</param>
+    /// <param name="offset">The offset.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    public async Task<List<PocketItem>> Get(
+      CancellationToken cancellationToken,
       State? state = null,
       bool? favorite = null,
       string tag = null,
@@ -55,7 +91,7 @@ namespace PocketSharp
         Offset = offset
       };
 
-      Retrieve response = await Request<Retrieve>("get", parameters.Convert());
+      Retrieve response = await Request<Retrieve>("get", cancellationToken, parameters.Convert());
 
       return response.Items;
     }
@@ -70,7 +106,22 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<PocketItem> Get(int itemID)
     {
+      return await Get(CancellationToken.None, itemID);
+    }
+
+
+    /// <summary>
+    /// Retrieves an item by a given ID
+    /// Note: The Pocket API contains no method, which allows to retrieve a single item, so all items are retrieved and filtered locally by the ID.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    public async Task<PocketItem> Get(CancellationToken cancellationToken, int itemID)
+    {
       List<PocketItem> items = await Get(
+        cancellationToken: cancellationToken,
         state: State.all  
       );
       
@@ -86,9 +137,22 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> Get(RetrieveFilter filter)
     {
+      return await Get(CancellationToken.None, filter);
+    }
+
+
+    /// <summary>
+    /// Retrieves all items by a given filter
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="filter">The filter.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    public async Task<List<PocketItem>> Get(CancellationToken cancellationToken, RetrieveFilter filter)
+    {
       RetrieveParameters parameters = new RetrieveParameters();
 
-      switch(filter)
+      switch (filter)
       {
         case RetrieveFilter.Article:
           parameters.ContentType = ContentType.article;
@@ -115,7 +179,7 @@ namespace PocketSharp
 
       parameters.DetailType = DetailType.complete;
 
-      Retrieve response = await Request<Retrieve>("get", parameters.Convert());
+      Retrieve response = await Request<Retrieve>("get", cancellationToken, parameters.Convert());
 
       return response.Items;
     }
@@ -129,7 +193,21 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<List<PocketTag>> GetTags()
     {
+      return await GetTags(CancellationToken.None);
+    }
+
+
+    /// <summary>
+    /// Retrieves all available tags.
+    /// Note: The Pocket API contains no method, which allows to retrieve all tags, so all items are retrieved and the associated tags extracted.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    public async Task<List<PocketTag>> GetTags(CancellationToken cancellationToken)
+    {
       List<PocketItem> items = await Get(
+        cancellationToken: cancellationToken,
         state: State.all
       );
 
@@ -149,7 +227,23 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> SearchByTag(string tag)
     {
-      return await Get(tag: tag);
+      return await SearchByTag(CancellationToken.None, tag);
+    }
+
+
+    /// <summary>
+    /// Retrieves items by tag
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="tag">The tag.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    public async Task<List<PocketItem>> SearchByTag(CancellationToken cancellationToken, string tag)
+    {
+      return await Get(
+        cancellationToken: cancellationToken,
+        tag: tag
+      );
     }
 
 
@@ -162,8 +256,22 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<List<PocketItem>> Search(string searchString, bool searchInUri = true)
     {
-      List<PocketItem> items = await Get(RetrieveFilter.All);
+      return await Search(CancellationToken.None, searchString, searchInUri);
+    }
 
+
+    /// <summary>
+    /// Retrieves items which match the specified search string in title and URI
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="searchString">The search string.</param>
+    /// <param name="searchInUri">if set to <c>true</c> [search in URI].</param>
+    /// <returns></returns>
+    /// <exception cref="System.ArgumentOutOfRangeException">Search string length has to be a minimum of 2 chars</exception>
+    /// <exception cref="PocketException"></exception>
+    public async Task<List<PocketItem>> Search(CancellationToken cancellationToken, string searchString, bool searchInUri = true)
+    {
+      List<PocketItem> items = await Get(cancellationToken, RetrieveFilter.All);
       return Search(items, searchString);
     }
 
