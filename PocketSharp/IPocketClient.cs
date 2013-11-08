@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PocketSharp.Models;
+using System.Threading;
 
 namespace PocketSharp
 {
@@ -52,6 +53,15 @@ namespace PocketSharp
     Task<string> GetRequestCode();
 
     /// <summary>
+    /// Retrieves the requestCode from Pocket, which is used to generate the Authentication URI to authenticate the user
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="System.NullReferenceException">Authentication methods need a callbackUri on initialization of the PocketClient class</exception>
+    /// <exception cref="PocketException"></exception>
+    Task<string> GetRequestCode(CancellationToken cancellationToken);
+
+    /// <summary>
     /// Generate Authentication URI from requestCode
     /// </summary>
     /// <param name="requestCode">The requestCode. If no requestCode is supplied, the property from the PocketClient intialization is used.</param>
@@ -60,19 +70,6 @@ namespace PocketSharp
     /// </returns>
     /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
     Uri GenerateAuthenticationUri(string requestCode = null);
-
-    /// <summary>
-    /// Requests the access code after authentication
-    /// The access code has to permanently be stored within the users session, and should be passed in the constructor for all future PocketClient initializations.
-    /// </summary>
-    /// <param name="requestCode">The requestCode. If no requestCode is supplied, the property from the PocketClient intialization is used.</param>
-    /// <returns>
-    /// The permanent access code, which is used to authenticate the user with the application
-    /// </returns>
-    /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
-    /// <exception cref="PocketException"></exception>
-    [Obsolete("Please use GetUser instead")]
-    Task<string> GetAccessCode(string requestCode = null);
 
     /// <summary>
     /// Requests the access code and username after authentication
@@ -84,6 +81,18 @@ namespace PocketSharp
     /// </returns>
     /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
     Task<PocketUser> GetUser(string requestCode = null);
+
+    /// <summary>
+    /// Requests the access code and username after authentication
+    /// The access code has to permanently be stored within the users session, and should be passed in the constructor for all future PocketClient initializations.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="requestCode">The request code.</param>
+    /// <returns>
+    /// The authenticated user
+    /// </returns>
+    /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
+    Task<PocketUser> GetUser(CancellationToken cancellationToken, string requestCode = null);
 
     /// <summary>
     /// Registers a new account.
@@ -103,6 +112,24 @@ namespace PocketSharp
     /// </exception>
     /// <exception cref="PocketException"></exception>
     Task<bool> RegisterAccount(string username, string email, string password);
+
+    /// <summary>
+    /// Registers a new account.
+    /// Account has to be activated via a activation email sent by Pocket.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="username">The username.</param>
+    /// <param name="email">The email.</param>
+    /// <param name="password">The password.</param>
+    /// <returns></returns>
+    /// <exception cref="System.ArgumentNullException">All parameters are required</exception>
+    /// <exception cref="System.FormatException">Invalid email address.
+    /// or
+    /// Invalid username. Please only use letters, numbers, and/or dashes and between 1-20 characters.
+    /// or
+    /// Invalid password.</exception>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> RegisterAccount(CancellationToken cancellationToken, string username, string email, string password);
     #endregion
 
     #region add methods
@@ -119,6 +146,21 @@ namespace PocketSharp
     /// <exception cref="System.FormatException">(1) Uri should be absolute.</exception>
     /// <exception cref="PocketException"></exception>
     Task<PocketItem> Add(Uri uri, string[] tags = null, string title = null, string tweetID = null);
+
+    /// <summary>
+    /// Adds a new item to pocket
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="uri">The URL of the item you want to save</param>
+    /// <param name="tags">A comma-separated list of tags to apply to the item</param>
+    /// <param name="title">This can be included for cases where an item does not have a title, which is typical for image or PDF URLs. If Pocket detects a title from the content of the page, this parameter will be ignored.</param>
+    /// <param name="tweetID">If you are adding Pocket support to a Twitter client, please send along a reference to the tweet status id. This allows Pocket to show the original tweet alongside the article.</param>
+    /// <returns>
+    /// A simple representation of the saved item which doesn't contain all data (is only returned by calling the Retrieve method)
+    /// </returns>
+    /// <exception cref="System.FormatException">(1) Uri should be absolute.</exception>
+    /// <exception cref="PocketException"></exception>
+    Task<PocketItem> Add(CancellationToken cancellationToken, Uri uri, string[] tags = null, string title = null, string tweetID = null);
     #endregion
 
     #region get methods

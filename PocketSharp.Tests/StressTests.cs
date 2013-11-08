@@ -29,9 +29,9 @@ namespace PocketSharp.Tests
 
 
     [Fact]
-    public async Task Are100ItemsRetrievedProperly()
+    public async Task Are100IdingtemsRetrievedProperly()
     {
-      // await FillAccount(1577, 10000);
+      await FillAccount(3817, 10000);
     }
 
     [Fact]
