@@ -515,6 +515,26 @@ namespace PocketSharp
     Task<bool> AddTags(PocketItem item, string[] tags);
 
     /// <summary>
+    /// Adds the specified tags to an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <param name="tags">The tags.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> AddTags(CancellationToken cancellationToken, int itemID, string[] tags);
+
+    /// <summary>
+    /// Adds the specified tags to an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="item">The item.</param>
+    /// <param name="tags">The tags.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> AddTags(CancellationToken cancellationToken, PocketItem item, string[] tags);
+
+    /// <summary>
     /// Removes the specified tags from an item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
@@ -531,6 +551,26 @@ namespace PocketSharp
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
     Task<bool> RemoveTags(PocketItem item, string[] tags);
+
+    /// <summary>
+    /// Removes the specified tags from an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <param name="tags">The tags.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> RemoveTags(CancellationToken cancellationToken, int itemID, string[] tags);
+
+    /// <summary>
+    /// Removes the specified tags from an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="item">The item.</param>
+    /// <param name="tags">The tag.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> RemoveTags(CancellationToken cancellationToken, PocketItem item, string[] tags);
 
     /// <summary>
     /// Removes a tag from an item.
@@ -551,6 +591,26 @@ namespace PocketSharp
     Task<bool> RemoveTag(PocketItem item, string tag);
 
     /// <summary>
+    /// Removes a tag from an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <param name="tag">The tag.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> RemoveTag(CancellationToken cancellationToken, int itemID, string tag);
+
+    /// <summary>
+    /// Removes a tag from an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="item">The item.</param>
+    /// <param name="tag">The tag.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> RemoveTag(CancellationToken cancellationToken, PocketItem item, string tag);
+
+    /// <summary>
     /// Clears all tags from an item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
@@ -565,6 +625,24 @@ namespace PocketSharp
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
     Task<bool> RemoveTags(PocketItem item);
+
+    /// <summary>
+    /// Clears all tags from an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> RemoveTags(CancellationToken cancellationToken, int itemID);
+
+    /// <summary>
+    /// Clears all tags from an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="item">The item.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> RemoveTags(CancellationToken cancellationToken, PocketItem item);
 
     /// <summary>
     /// Replaces all existing tags with the given tags in an item.
@@ -585,6 +663,26 @@ namespace PocketSharp
     Task<bool> ReplaceTags(PocketItem item, string[] tags);
 
     /// <summary>
+    /// Replaces all existing tags with the given tags in an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <param name="tags">The tags.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> ReplaceTags(CancellationToken cancellationToken, int itemID, string[] tags);
+
+    /// <summary>
+    /// Replaces all existing tags with the given new ones in an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="item">The item.</param>
+    /// <param name="tags">The tags.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> ReplaceTags(CancellationToken cancellationToken, PocketItem item, string[] tags);
+
+    /// <summary>
     /// Renames a tag in an item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
@@ -603,6 +701,28 @@ namespace PocketSharp
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
     Task<bool> RenameTag(PocketItem item, string oldTag, string newTag);
+
+    /// <summary>
+    /// Renames a tag in an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <param name="oldTag">The old tag.</param>
+    /// <param name="newTag">The new tag name.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> RenameTag(CancellationToken cancellationToken, int itemID, string oldTag, string newTag);
+
+    /// <summary>
+    /// Renames a tag in an item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="item">The item.</param>
+    /// <param name="oldTag">The old tag.</param>
+    /// <param name="newTag">The new tag name.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> RenameTag(CancellationToken cancellationToken, PocketItem item, string oldTag, string newTag);
     #endregion
 
     #region statistics methods
@@ -616,10 +736,10 @@ namespace PocketSharp
     /// <summary>
     /// Statistics from the user account.
     /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    [Obsolete("Please use GetUserStatistics instead")]
-    Task<PocketStatistics> Statistics();
+    Task<PocketStatistics> GetUserStatistics(CancellationToken cancellationToken);
 
     /// <summary>
     /// Returns API usage statistics.
@@ -629,6 +749,16 @@ namespace PocketSharp
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
     Task<PocketLimits> GetUsageLimits();
+
+    /// <summary>
+    /// Returns API usage statistics.
+    /// If a request was made before, the data is returned synchronously from the cache.
+    /// Note: This method only works for authenticated users with a given AccessCode.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<PocketLimits> GetUsageLimits(CancellationToken cancellationToken);
     #endregion
   }
 }
