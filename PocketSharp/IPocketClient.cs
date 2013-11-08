@@ -343,6 +343,24 @@ namespace PocketSharp
     Task<bool> Archive(PocketItem item);
 
     /// <summary>
+    /// Archives the specified item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> Archive(CancellationToken cancellationToken, int itemID);
+
+    /// <summary>
+    /// Archives the specified item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="item">The item.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> Archive(CancellationToken cancellationToken, PocketItem item);
+
+    /// <summary>
     /// Un-archives the specified item (alias for Readd).
     /// </summary>
     /// <param name="itemID">The item ID.</param>
@@ -357,6 +375,24 @@ namespace PocketSharp
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
     Task<bool> Unarchive(PocketItem item);
+
+    /// <summary>
+    /// Un-archives the specified item (alias for Readd).
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> Unarchive(CancellationToken cancellationToken, int itemID);
+
+    /// <summary>
+    /// Unarchives the specified item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="item">The item.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> Unarchive(CancellationToken cancellationToken, PocketItem item);
 
     /// <summary>
     /// Favorites the specified item.
@@ -375,6 +411,24 @@ namespace PocketSharp
     Task<bool> Favorite(PocketItem item);
 
     /// <summary>
+    /// Favorites the specified item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> Favorite(CancellationToken cancellationToken, int itemID);
+
+    /// <summary>
+    /// Favorites the specified item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="item">The item.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> Favorite(CancellationToken cancellationToken, PocketItem item);
+
+    /// <summary>
     /// Un-favorites the specified item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
@@ -391,6 +445,24 @@ namespace PocketSharp
     Task<bool> Unfavorite(PocketItem item);
 
     /// <summary>
+    /// Un-favorites the specified item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> Unfavorite(CancellationToken cancellationToken, int itemID);
+
+    /// <summary>
+    /// Un-favorites the specified item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="item">The item.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> Unfavorite(CancellationToken cancellationToken, PocketItem item);
+
+    /// <summary>
     /// Deletes the specified item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>
@@ -404,6 +476,23 @@ namespace PocketSharp
     /// <param name="item">The item.</param>
     /// <returns></returns>
     Task<bool> Delete(PocketItem item);
+
+    /// <summary>
+    /// Deletes the specified item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="itemID">The item ID.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> Delete(CancellationToken cancellationToken, int itemID);
+
+    /// <summary>
+    /// Deletes the specified item.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <param name="item">The item.</param>
+    /// <returns></returns>
+    Task<bool> Delete(CancellationToken cancellationToken, PocketItem item);
     #endregion
 
     #region modify tags methods
