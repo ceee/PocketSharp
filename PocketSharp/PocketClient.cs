@@ -1,13 +1,13 @@
-﻿using PocketSharp.Models;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using PocketSharp.Models;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace PocketSharp
 {
@@ -69,6 +69,14 @@ namespace PocketSharp
     /// </value>
     public string AccessCode { get; set; }
 
+    /// <summary>
+    /// Action which is executed before every request
+    /// </summary>
+    /// <value>
+    /// The pre request callback.
+    /// </value>
+    public Action<string> PreRequest { get; set; }
+
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PocketClient"/> class.
@@ -120,9 +128,9 @@ namespace PocketSharp
     /// <returns></returns>
     /// <exception cref="PocketException">No access token available. Use authentification first.</exception>
     protected async Task<T> Request<T>(
-      string method, 
+      string method,
       CancellationToken cancellationToken,
-      Dictionary<string, string> parameters = null, 
+      Dictionary<string, string> parameters = null,
       bool requireAuth = true) where T : class, new()
     {
       if (requireAuth && AccessCode == null)
@@ -150,6 +158,12 @@ namespace PocketSharp
 
       // content of the request
       request.Content = new FormUrlEncodedContent(parameters);
+
+      // call pre request action
+      if (PreRequest != null)
+      {
+        PreRequest(method);
+      }
 
       // make async request
       try

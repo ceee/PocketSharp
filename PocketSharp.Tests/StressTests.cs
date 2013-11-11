@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using Xunit;
-using PocketSharp.Models;
 using System.IO;
 using System.Linq;
-using System.Diagnostics;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace PocketSharp.Tests
 {
   public class StressTests : TestsBase
   {
     private static IEnumerable<string> urls;
-    private static string[] tags = new string[]{ "css", "js", "csharp", "windows", "microsoft" };
+    private static string[] tags = new string[] { "css", "js", "csharp", "windows", "microsoft" };
 
 
-    public StressTests() : base() 
-    { 
+    public StressTests()
+      : base()
+    {
       // !! please don't misuse this account !!
       client = new PocketClient(
         consumerKey: "20000-786d0bc8c39294e9829111d6",
@@ -31,7 +30,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task Are100IdingtemsRetrievedProperly()
     {
-      await FillAccount(4457, 10000);
+      await FillAccount(8360, 10000);
     }
 
     [Fact]
@@ -49,13 +48,13 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task Are0ItemsRetrievedProperly()
     {
-      
+
     }
 
     [Fact]
     public async Task IsSearchedSuccessfullyOn10000Items()
     {
-      
+
     }
 
 

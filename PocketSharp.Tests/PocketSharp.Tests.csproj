@@ -68,6 +68,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="MiscTests.cs" />
     <Compile Include="AddTests.cs" />
     <Compile Include="AccountTests.cs" />
     <Compile Include="ModifyTagsTests.cs" />
