@@ -199,7 +199,8 @@ namespace PocketSharp
           {
             new BoolConverter(),
             new UnixDateTimeConverter(),
-            new NullableIntConverter()
+            new NullableIntConverter(),
+            new UriConverter()
           }
         }
       );

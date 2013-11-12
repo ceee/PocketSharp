@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using PocketSharp.Models;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
-using PocketSharp.Models;
 
 namespace PocketSharp.Tests
 {
@@ -15,6 +15,19 @@ namespace PocketSharp.Tests
     public async Task AddSimpleItemWithUriOnly()
     {
       var uri = new Uri("http://frontendplay.com");
+
+      PocketItem item = await client.Add(uri);
+
+      Assert.Equal<Uri>(uri, item.Uri);
+
+      itemsToDelete.Add(item.ID);
+    }
+
+
+    [Fact]
+    public async Task ItemWithInstableImagesIsAdded()
+    {
+      var uri = new Uri("http://www.valoronline.com.br");
 
       PocketItem item = await client.Add(uri);
 
@@ -39,7 +52,7 @@ namespace PocketSharp.Tests
 
       items.ForEach(itm =>
       {
-        if(itm.ID == item.ID)
+        if (itm.ID == item.ID)
         {
           itemDesired = itm;
         }
