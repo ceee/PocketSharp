@@ -1,8 +1,7 @@
-﻿using System;
+﻿using PocketSharp.Models;
+using System;
 using System.Threading.Tasks;
 using Xunit;
-using PocketSharp.Models;
-using System.Diagnostics;
 
 namespace PocketSharp.Tests
 {
@@ -11,7 +10,8 @@ namespace PocketSharp.Tests
     private PocketReader reader;
 
 
-    public ReadTests() : base()
+    public ReadTests()
+      : base()
     {
       reader = new PocketReader();
     }

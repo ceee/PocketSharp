@@ -82,6 +82,10 @@
     <Compile Include="TestsBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PocketSharp.Reader\PocketSharp.Reader.csproj">
+      <Project>{9d1bbd72-c263-43d3-9f2a-98f9f99235a4}</Project>
+      <Name>PocketSharp.Reader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PocketSharp\PocketSharp.csproj">
       <Project>{817200c3-a327-4e35-9b5f-63a51c088577}</Project>
       <Name>PocketSharp</Name>

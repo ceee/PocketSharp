@@ -5,18 +5,17 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{817200C3-A327-4E35-9B5F-63A51C088577}</ProjectGuid>
+    <ProjectGuid>{9D1BBD72-C263-43D3-9F2A-98F9F99235A4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PocketSharp</RootNamespace>
-    <AssemblyName>PocketSharp</AssemblyName>
+    <AssemblyName>PocketSharp.Reader</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile96</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <FodyPath>..\packages\Fody.1.17.4.0</FodyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,42 +36,11 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <None Include="Fody.targets" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\Statistics.cs" />
-    <Compile Include="IPocketClient.cs" />
-    <Compile Include="Models\Parameters\RegisterParameters.cs" />
-    <Compile Include="Models\PocketArticle.cs" />
-    <Compile Include="Models\PocketLimits.cs" />
-    <Compile Include="Models\PocketStatistics.cs" />
-    <Compile Include="Utilities\PocketException.cs" />
-    <Compile Include="Components\Add.cs" />
-    <Compile Include="Components\Account.cs" />
-    <Compile Include="Components\Modify.cs" />
-    <Compile Include="Components\ModifyTags.cs" />
-    <Compile Include="Components\Get.cs" />
-    <Compile Include="Utilities\JsonExtensions.cs" />
-    <Compile Include="Models\Parameters\ActionParameter.cs" />
-    <Compile Include="Models\Parameters\AddParameters.cs" />
-    <Compile Include="Models\Parameters\ModifyParameters.cs" />
-    <Compile Include="Models\Parameters\Parameters.cs" />
-    <Compile Include="Models\Parameters\RetrieveParameters.cs" />
-    <Compile Include="Models\PocketAuthor.cs" />
-    <Compile Include="Models\PocketImage.cs" />
-    <Compile Include="Models\PocketItem.cs" />
-    <Compile Include="Models\PocketTag.cs" />
-    <Compile Include="Models\PocketVideo.cs" />
-    <Compile Include="Models\PocketUser.cs" />
-    <Compile Include="Models\Response\Add.cs" />
-    <Compile Include="Models\Response\Modify.cs" />
-    <Compile Include="Models\Response\RequestCode.cs" />
-    <Compile Include="Models\Response\ResponseBase.cs" />
-    <Compile Include="Models\Response\Retrieve.cs" />
-    <Compile Include="PocketClient.cs" />
+    <Compile Include="PocketReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">
@@ -80,13 +48,6 @@
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.165\lib\portable-net40+sl4+win8+wp71\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="PropertyChanged">
-      <HintPath>..\packages\PropertyChanged.Fody.1.41.0.0\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="System.IO">
       <HintPath>..\packages\Microsoft.Bcl.1.1.6\lib\portable-net40+sl4+win8+wp71\System.IO.dll</HintPath>
@@ -108,17 +69,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FodyWeavers.xml" />
+    <ProjectReference Include="..\PocketSharp\PocketSharp.csproj">
+      <Project>{817200c3-a327-4e35-9b5f-63a51c088577}</Project>
+      <Name>PocketSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PortablePorts\NReadability\NReadability.csproj">
+      <Project>{14c3ee6a-54a4-4a37-8b56-d52a3802f1c2}</Project>
+      <Name>NReadability</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
-  <Import Project="Fody.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
