@@ -60,13 +60,13 @@ You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Example
 
 - [ ] support for new Preferences API
 - [x] `cancellationToken` support for all methods
-- [ ] support HTML injection into content from PocketArticle (maybe remove title from Article)
+- [x] support HTML injection into content from PocketArticle (maybe remove title from Article)
 - [x] make setters for inline objects in PocketItem (images, videos, ...)
 - [x] IPocketClient interface
 - [x] PreRequest callback allows injection of `Action<string>` before every request
 - [ ] Submit multiple actions in one request
 - [x] Split PocketReader into own NuGet package
-- [ ] bugfixes, for sure!
+- [x] bugfixes, for sure!
 
 ## Dependencies
 
