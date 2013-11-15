@@ -8,6 +8,12 @@
 Install-Package PocketSharp
 ```
 
+for the Reader (coming in v3.0):
+
+```
+Install-Package PocketSharp.Reader
+```
+
 ## Documentation
 
 See [wiki](https://github.com/ceee/PocketSharp/wiki)
@@ -24,7 +30,7 @@ PocketClient client = new PocketClient("[YOUR_CONSUMER_KEY]", "[YOUR_ACCESS_CODE
 List<PocketItem> items = await client.Search("css");
 
 items.ForEach(
-	item => Debug.WriteLine(item.ID + " | " + item.Title)
+  item => Debug.WriteLine(item.ID + " | " + item.Title)
 );
 ```
 
@@ -34,7 +40,7 @@ Which will output:
     345541438 | Editr - HTML, CSS, JavaScript playground
     251743431 | CSS Architecture
     343693149 | CSS3 Transitions - Thank God We Have A Specification!
-	...
+  ...
 
 ---
 
@@ -52,24 +58,26 @@ You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Example
 
 ## What's new in the upcoming PocketSharp v3.0?
 
-- support for new Preferences API
-- `cancellationToken` support for all methods
-- support HTML injection into content from PocketArticle (maybe remove title from Article)
-- make setters for inline objects in PocketItem (images, videos, ...)
-- IPocketClient interface
-- PreRequest callback allows injection of `Action<string>` before every request
-- Submit multiple actions in one request
-- Split PocketReader into own NuGet package
-- bugfixes, for sure!
+- [ ] support for new Preferences API
+- [x] `cancellationToken` support for all methods
+- [ ] support HTML injection into content from PocketArticle (maybe remove title from Article)
+- [x] make setters for inline objects in PocketItem (images, videos, ...)
+- [x] IPocketClient interface
+- [x] PreRequest callback allows injection of `Action<string>` before every request
+- [ ] Submit multiple actions in one request
+- [x] Split PocketReader into own NuGet package
+- [ ] bugfixes, for sure!
 
 ## Dependencies
 
-- [Microsoft.Bcl.Async](https://www.nuget.org/packages/Microsoft.Bcl.Async/)
-- [Microsoft.Net.Http](https://www.nuget.org/packages/Microsoft.Net.Http/)
-- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
-- [PropertyChanged.Fody](https://github.com/Fody/PropertyChanged)
+- [Microsoft.Bcl.Async](https://www.nuget.org/packages/Microsoft.Bcl.Async/) _(used in PocketSharp & PocketSharp.Reader)_
+- [Microsoft.Net.Http](https://www.nuget.org/packages/Microsoft.Net.Http/) _(used in PocketSharp & PocketSharp.Reader)_
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/) _(only for PocketSharp project)_
+- [PropertyChanged.Fody](https://github.com/Fody/PropertyChanged) _(only for PocketSharp project)_
 
 ## Forked Dependencies
+
+_used in PocketSharp.Reader_
 
 - [NReadability](https://github.com/marek-stoj/NReadability) - converted to a PCL with minor adaptations
 - [SgmlReader](https://github.com/MindTouch/SGMLReader) - converted to a PCL
