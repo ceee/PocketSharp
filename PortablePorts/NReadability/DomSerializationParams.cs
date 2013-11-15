@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace PocketSharp.Ports.NReadability
 {
   public class DomSerializationParams
@@ -48,6 +47,10 @@ namespace PocketSharp.Ports.NReadability
     /// </summary>
     public bool BodyOnly { get; set; }
 
+    /// <summary>
+    /// Remove headline of website
+    /// </summary>
+    public bool NoHeadline { get; set; }
     #endregion
   }
 }

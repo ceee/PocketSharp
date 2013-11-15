@@ -59,15 +59,17 @@ namespace PocketSharp
     /// The PocketReader is based on a custom PCL port of NReadability and SgmlReader.
     /// </summary>
     /// <param name="uri">An URI.</param>
+    /// <param name="bodyOnly">if set to <c>true</c> [only body is returned].</param>
+    /// <param name="noHeadline">if set to <c>true</c> [no headline (h1) is included].</param>
     /// <returns>A Pocket article with extracted content and title.</returns>
     /// <exception cref="PocketRequestException"></exception>
-    public async Task<PocketArticle> Read(Uri uri)
+    public async Task<PocketArticle> Read(Uri uri, bool bodyOnly = true, bool noHeadline = false)
     {
       return await Read(new PocketItem()
       {
         ID = 0,
         Uri = uri
-      });
+      }, bodyOnly, noHeadline);
     }
 
 
@@ -78,9 +80,13 @@ namespace PocketSharp
     /// The PocketReader is based on a custom PCL port of NReadability and SgmlReader.
     /// </summary>
     /// <param name="item">The pocket item.</param>
-    /// <returns>A Pocket article with extracted content and title.</returns>
+    /// <param name="bodyOnly">if set to <c>true</c> [only body is returned].</param>
+    /// <param name="noHeadline">if set to <c>true</c> [no headline (h1) is included].</param>
+    /// <returns>
+    /// A Pocket article with extracted content and title.
+    /// </returns>
     /// <exception cref="PocketRequestException"></exception>
-    public async Task<PocketArticle> Read(PocketItem item)
+    public async Task<PocketArticle> Read(PocketItem item, bool bodyOnly = true, bool noHeadline = false)
     {
       // initialize transcoder
       NReadabilityTranscoder transcoder = new NReadabilityTranscoder(
@@ -101,11 +107,12 @@ namespace PocketSharp
         Url = item.Uri.ToString(),
         DomSerializationParams = new DomSerializationParams()
         {
-          BodyOnly = true,
+          BodyOnly = bodyOnly,
+          NoHeadline = noHeadline,
           PrettyPrint = true,
           DontIncludeContentTypeMetaElement = true,
           DontIncludeMobileSpecificMetaElements = true,
-          DontIncludeDocTypeMetaElement = true,
+          DontIncludeDocTypeMetaElement = false,
           DontIncludeGeneratorMetaElement = true
         }
       };

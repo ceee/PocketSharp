@@ -26,6 +26,23 @@ namespace PocketSharp.Tests
         Uri = new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation")
       });
 
+      Assert.DoesNotContain("<!DOCTYPE html>", result.Content);
+      Assert.Contains("<h1>", result.Content);
+      Assert.True(result.Content.Length > 15000);
+    }
+
+
+    [Fact]
+    public async Task ReadArticleWithContainerNoHeadlineTest()
+    {
+      PocketArticle result = await reader.Read(new PocketItem()
+      {
+        ID = 99,
+        Uri = new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation")
+      }, false, true);
+
+      Assert.Contains("<!DOCTYPE html>", result.Content);
+      Assert.DoesNotContain("<h1>", result.Content);
       Assert.True(result.Content.Length > 15000);
     }
 

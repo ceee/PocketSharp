@@ -92,6 +92,16 @@ namespace PocketSharp.Ports.NReadability
         }
       }
 
+      if (domSerializationParams.NoHeadline)
+      {
+        var h1 = document.Root.GetElementsByTagName("h1").FirstOrDefault();
+
+        if (h1 != null)
+        {
+          result = result.Replace(h1.ToString(), "");
+        }
+      }
+
       return result;
     }
 
