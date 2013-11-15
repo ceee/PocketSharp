@@ -15,7 +15,7 @@ namespace PocketSharp
     /// <summary>
     /// Used UserAgent for HTTP request
     /// </summary>
-    public string userAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.4 Safari/537.36 OPR/18.0.1284.2";
+    protected string _userAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.4 Safari/537.36 OPR/18.0.1284.2";
 
     /// <summary>
     /// REST client used for HTML retrieval
@@ -26,8 +26,14 @@ namespace PocketSharp
     /// <summary>
     /// Initializes a new instance of the <see cref="PocketReader"/> class.
     /// </summary>
-    public PocketReader()
+    public PocketReader(string userAgent = null)
     {
+      // override user agent
+      if (!string.IsNullOrEmpty(userAgent))
+      {
+        _userAgent = userAgent;
+      }
+
       // initialize HTTP client
       _httpClient = new HttpClient(new HttpClientHandler()
       {
@@ -42,7 +48,7 @@ namespace PocketSharp
       _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip,deflate");
 
       // add user agent
-      _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", userAgent + " PocketSharp / 3.0");
+      _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", _userAgent + " PocketSharp / 3.0");
     }
 
 

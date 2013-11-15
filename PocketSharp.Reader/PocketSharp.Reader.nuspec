@@ -10,7 +10,12 @@
     <projectUrl>https://github.com/ceee/PocketSharp</projectUrl>
     <iconUrl>https://raw.github.com/ceee/PocketSharp/master/Assets/pocketsharp.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>PocketSharp is a C#.NET portable class library that integrates the Pocket API v3.</description>
+    <description>
+      <![CDATA[
+        PocketSharp is a C#.NET portable class library that integrates the Pocket API v3.
+        PocketSharp.Reader contains the reader which extracts readable content from websites.
+      ]]>
+    </description>
     <language>en-US</language>
     <releaseNotes>
       <![CDATA[
