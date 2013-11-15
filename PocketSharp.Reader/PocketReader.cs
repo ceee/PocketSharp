@@ -10,7 +10,7 @@ namespace PocketSharp
   /// <summary>
   /// PocketReader
   /// </summary>
-  public class PocketReader
+  public class PocketReader : IPocketReader
   {
     /// <summary>
     /// Used UserAgent for HTTP request
