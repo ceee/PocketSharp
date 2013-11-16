@@ -5,10 +5,10 @@ using System.Runtime.Serialization;
 namespace PocketSharp.Models
 {
   /// <summary>
-  /// All parameters which can be passed for a modify action
+  /// All parameters which can be passed for a send action
   /// </summary>
   [DataContract]
-  internal class ActionParameter
+  public class PocketAction
   {
     /// <summary>
     /// Gets or sets the action.
@@ -20,13 +20,31 @@ namespace PocketSharp.Models
     public string Action { get; set; }
 
     /// <summary>
-    /// Gets or sets the ID.
+    /// Gets or sets the PocketItem ID.
     /// </summary>
     /// <value>
     /// The ID.
     /// </value>
     [DataMember(Name = "item_id")]
     public int ID { get; set; }
+
+    /// <summary>
+    /// Gets or sets the URI (for adding a new item).
+    /// </summary>
+    /// <value>
+    /// The URI.
+    /// </value>
+    [DataMember(Name = "url")]
+    public Uri Uri { get; set; }
+
+    /// <summary>
+    /// Gets or sets the Title (for adding a new item).
+    /// </summary>
+    /// <value>
+    /// The Title.
+    /// </value>
+    [DataMember(Name = "title")]
+    public string Title { get; set; }
 
     /// <summary>
     /// Gets or sets the time.
@@ -71,7 +89,7 @@ namespace PocketSharp.Models
     /// Converts this instance to a parameter list.
     /// </summary>
     /// <returns></returns>
-    public Dictionary<string, object> Convert()
+    internal Dictionary<string, object> Convert()
     {
       Dictionary<string, object> parameters = new Dictionary<string, object>
       {
@@ -87,6 +105,10 @@ namespace PocketSharp.Models
         parameters.Add("old_tag", OldTag);
       if (NewTag != null)
         parameters.Add("new_tag", NewTag);
+      if (Title != null)
+        parameters.Add("title", Title);
+      if (Uri != null)
+        parameters.Add("uri", Uri.ToString());
 
       return parameters;
     }

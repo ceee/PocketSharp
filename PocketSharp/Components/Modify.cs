@@ -1,4 +1,5 @@
 ﻿using PocketSharp.Models;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,6 +10,20 @@ namespace PocketSharp
   /// </summary>
   public partial class PocketClient
   {
+    /// <summary>
+    /// Sends multiple actions in one request.
+    /// See: http://getpocket.com/developer/docs/v3/modify
+    /// </summary>
+    /// <param name="actions">The actions.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    public async Task<bool> SendActions(List<PocketAction> actions, CancellationToken cancellationToken = default(CancellationToken))
+    {
+      return await Send(actions, cancellationToken);
+    }
+
+
     /// <summary>
     /// Archives the specified item.
     /// </summary>
@@ -147,7 +162,7 @@ namespace PocketSharp
     /// <returns></returns>
     protected async Task<bool> SendDefault(CancellationToken cancellationToken, int itemID, string action)
     {
-      return await Send(new ActionParameter()
+      return await Send(new PocketAction()
       {
         Action = action,
         ID = itemID

@@ -214,7 +214,7 @@ namespace PocketSharp
     /// </summary>
     /// <param name="actionParameters">The action parameters.</param>
     /// <returns></returns>
-    internal async Task<bool> Send(List<ActionParameter> actionParameters, CancellationToken cancellationToken)
+    internal async Task<bool> Send(List<PocketAction> actionParameters, CancellationToken cancellationToken)
     {
       List<Dictionary<string, object>> actionParamList = new List<Dictionary<string, object>>();
 
@@ -238,9 +238,9 @@ namespace PocketSharp
     /// </summary>
     /// <param name="actionParameter">The action parameter.</param>
     /// <returns></returns>
-    internal async Task<bool> Send(ActionParameter actionParameter, CancellationToken cancellationToken)
+    internal async Task<bool> Send(PocketAction actionParameter, CancellationToken cancellationToken)
     {
-      return await Send(new List<ActionParameter>() { actionParameter }, cancellationToken);
+      return await Send(new List<PocketAction>() { actionParameter }, cancellationToken);
     }
 
 

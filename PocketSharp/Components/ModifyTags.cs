@@ -193,7 +193,7 @@ namespace PocketSharp
     /// <returns></returns>
     protected async Task<bool> SendTags(CancellationToken cancellationToken, int itemID, string action, string[] tags)
     {
-      return await Send(new ActionParameter()
+      return await Send(new PocketAction()
       {
         Action = action,
         ID = itemID,
