@@ -64,7 +64,7 @@ You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Example
 - [x] make setters for inline objects in PocketItem (images, videos, ...)
 - [x] IPocketClient interface
 - [x] PreRequest callback allows injection of `Action<string>` before every request
-- [ ] Submit multiple actions in one request
+- [x] Submit multiple actions in one request
 - [x] Split PocketReader into own NuGet package
 - [x] bugfixes, for sure!
 

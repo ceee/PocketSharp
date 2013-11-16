@@ -135,7 +135,7 @@ namespace PocketSharp
     {
       if (requireAuth && AccessCode == null)
       {
-        throw new PocketException("SDK error: No access token available. Use authentification first.");
+        throw new PocketException("SDK error: No access token available. Use authentication first.");
       }
 
       // every single Pocket API endpoint requires HTTP POST data

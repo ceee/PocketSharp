@@ -15,7 +15,7 @@ namespace PocketSharp
     /// <summary>
     /// Used UserAgent for HTTP request
     /// </summary>
-    protected string _userAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.4 Safari/537.36 OPR/18.0.1284.2";
+    protected string _userAgent = "Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0; ARM; Mobile; Touch{0}) like Gecko";
 
     /// <summary>
     /// REST client used for HTML retrieval
@@ -48,7 +48,7 @@ namespace PocketSharp
       _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip,deflate");
 
       // add user agent
-      _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", _userAgent + " PocketSharp / 3.0");
+      _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", string.Format(_userAgent, "; PocketSharp/3.0"));
     }
 
 
