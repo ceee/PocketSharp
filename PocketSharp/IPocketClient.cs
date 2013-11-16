@@ -1,8 +1,8 @@
-﻿using System;
+﻿using PocketSharp.Models;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using PocketSharp.Models;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace PocketSharp
 {
@@ -203,6 +203,16 @@ namespace PocketSharp
     #endregion
 
     #region modify methods
+    /// <summary>
+    /// Sends multiple actions in one request.
+    /// See: http://getpocket.com/developer/docs/v3/modify
+    /// </summary>
+    /// <param name="actions">The actions.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> SendActions(List<PocketAction> actions, CancellationToken cancellationToken = default(CancellationToken));
+
     /// <summary>
     /// Archives the specified item.
     /// </summary>

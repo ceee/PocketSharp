@@ -54,7 +54,7 @@
     <Compile Include="Components\ModifyTags.cs" />
     <Compile Include="Components\Get.cs" />
     <Compile Include="Utilities\JsonExtensions.cs" />
-    <Compile Include="Models\Parameters\ActionParameter.cs" />
+    <Compile Include="Models\PocketAction.cs" />
     <Compile Include="Models\Parameters\AddParameters.cs" />
     <Compile Include="Models\Parameters\ModifyParameters.cs" />
     <Compile Include="Models\Parameters\Parameters.cs" />

@@ -158,7 +158,7 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<bool> RenameTag(int itemID, string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken))
     {
-      return await Send(new ActionParameter()
+      return await Send(new PocketAction()
       {
         Action = "tag_rename",
         ID = itemID,
