@@ -79,12 +79,14 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PocketClient"/> class.
+    /// Initializes a new instance of the <see cref="PocketClient" /> class.
     /// </summary>
     /// <param name="consumerKey">The API key</param>
     /// <param name="accessCode">Provide an access code if the user is already authenticated</param>
     /// <param name="callbackUri">The callback URL is called by Pocket after authentication</param>
-    public PocketClient(string consumerKey, string accessCode = null, string callbackUri = null)
+    /// <param name="handler">The http handler.</param>
+    /// <param name="timeout">The timeout (in seconds).</param>
+    public PocketClient(string consumerKey, string accessCode = null, string callbackUri = null, HttpMessageHandler handler = null, int? timeout = null)
     {
       // assign public properties
       ConsumerKey = consumerKey;
@@ -102,12 +104,24 @@ namespace PocketSharp
       }
 
       // initialize REST client
-      _restClient = new HttpClient(new HttpClientHandler()
-      {
-        AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
-      });
+        if (handler != null)
+        {
+            _restClient = new HttpClient(handler);
+        }
+        else
+        {
+            _restClient = new HttpClient(new HttpClientHandler()
+            {
+                AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
+            });
+        }
 
-      // set base uri
+        if (timeout.HasValue)
+        {
+            _restClient.Timeout = TimeSpan.FromSeconds(timeout.Value);
+        }
+
+        // set base uri
       _restClient.BaseAddress = baseUri;
 
       // Pocket needs this specific Accept header :-S
@@ -123,6 +137,7 @@ namespace PocketSharp
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="method">Requested method (path after /v3/)</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
     /// <param name="parameters">Additional POST parameters</param>
     /// <param name="requireAuth">if set to <c>true</c> [require auth].</param>
     /// <returns></returns>
