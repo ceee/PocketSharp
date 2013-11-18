@@ -1,11 +1,10 @@
-﻿using System;
+﻿using PocketSharp.WP8.Resources;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using PocketSharp.WP8.Resources;
-using PocketSharp;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace PocketSharp.WP8.ViewModels
 {
@@ -68,14 +67,14 @@ namespace PocketSharp.WP8.ViewModels
       PocketClient client = new PocketClient(
         consumerKey: "15396-f6f92101d72c8e270a6c9bb3",
         callbackUri: "http://frontendplay.com",
-        accessCode: "2c62cd50-b78a-5558-918b-65adae"
+        accessCode: "80acf6c5-c198-03c0-b94c-e74402"
       );
 
       List<PocketSharp.Models.PocketItem> items = null;
 
       try
       {
-        items = await client.Get().ConfigureAwait(false);
+        items = await client.Get();
 
         items.ForEach(item =>
         {
