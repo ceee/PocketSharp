@@ -24,8 +24,11 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="PocketReader"/> class.
+    /// Initializes a new instance of the <see cref="PocketReader" /> class.
     /// </summary>
+    /// <param name="userAgent">Custom UserAgent string.</param>
+    /// <param name="handler">The HttpMessage handler.</param>
+    /// <param name="timeout">Request timeout (in seconds).</param>
     public PocketReader(string userAgent = null, HttpMessageHandler handler = null, int? timeout = null)
     {
       // override user agent
@@ -35,22 +38,15 @@ namespace PocketSharp
       }
 
       // initialize HTTP client
-      if (handler != null)
+      _httpClient = new HttpClient(handler ?? new HttpClientHandler()
       {
-          _httpClient = new HttpClient(handler);
-      }
-      else
-      {
-          _httpClient = new HttpClient(new HttpClientHandler()
-          {
-              AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip,
-              AllowAutoRedirect = true
-          });
-      }
+        AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip,
+        AllowAutoRedirect = true
+      });
 
       if (timeout.HasValue)
       {
-          _httpClient.Timeout = TimeSpan.FromSeconds(timeout.Value);
+        _httpClient.Timeout = TimeSpan.FromSeconds(timeout.Value);
       }
 
       // add accept types

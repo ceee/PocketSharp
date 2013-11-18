@@ -84,8 +84,8 @@ namespace PocketSharp
     /// <param name="consumerKey">The API key</param>
     /// <param name="accessCode">Provide an access code if the user is already authenticated</param>
     /// <param name="callbackUri">The callback URL is called by Pocket after authentication</param>
-    /// <param name="handler">The http handler.</param>
-    /// <param name="timeout">The timeout (in seconds).</param>
+    /// <param name="handler">The HttpMessage handler.</param>
+    /// <param name="timeout">Request timeout (in seconds).</param>
     public PocketClient(string consumerKey, string accessCode = null, string callbackUri = null, HttpMessageHandler handler = null, int? timeout = null)
     {
       // assign public properties
@@ -104,24 +104,17 @@ namespace PocketSharp
       }
 
       // initialize REST client
-        if (handler != null)
-        {
-            _restClient = new HttpClient(handler);
-        }
-        else
-        {
-            _restClient = new HttpClient(new HttpClientHandler()
-            {
-                AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
-            });
-        }
+      _restClient = new HttpClient(handler ?? new HttpClientHandler()
+      {
+        AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
+      });
 
-        if (timeout.HasValue)
-        {
-            _restClient.Timeout = TimeSpan.FromSeconds(timeout.Value);
-        }
+      if (timeout.HasValue)
+      {
+        _restClient.Timeout = TimeSpan.FromSeconds(timeout.Value);
+      }
 
-        // set base uri
+      // set base uri
       _restClient.BaseAddress = baseUri;
 
       // Pocket needs this specific Accept header :-S
