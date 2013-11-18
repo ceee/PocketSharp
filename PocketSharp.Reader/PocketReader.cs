@@ -26,7 +26,7 @@ namespace PocketSharp
     /// <summary>
     /// Initializes a new instance of the <see cref="PocketReader"/> class.
     /// </summary>
-    public PocketReader(string userAgent = null)
+    public PocketReader(string userAgent = null, HttpMessageHandler handler = null, int? timeout = null)
     {
       // override user agent
       if (!string.IsNullOrEmpty(userAgent))
@@ -35,11 +35,23 @@ namespace PocketSharp
       }
 
       // initialize HTTP client
-      _httpClient = new HttpClient(new HttpClientHandler()
+      if (handler != null)
       {
-        AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip,
-        AllowAutoRedirect = true
-      });
+          _httpClient = new HttpClient(handler);
+      }
+      else
+      {
+          _httpClient = new HttpClient(new HttpClientHandler()
+          {
+              AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip,
+              AllowAutoRedirect = true
+          });
+      }
+
+      if (timeout.HasValue)
+      {
+          _httpClient.Timeout = TimeSpan.FromSeconds(timeout.Value);
+      }
 
       // add accept types
       _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -61,8 +73,9 @@ namespace PocketSharp
     /// <param name="uri">An URI.</param>
     /// <param name="bodyOnly">if set to <c>true</c> [only body is returned].</param>
     /// <param name="noHeadline">if set to <c>true</c> [no headline (h1) is included].</param>
-    /// <returns>A Pocket article with extracted content and title.</returns>
-    /// <exception cref="PocketRequestException"></exception>
+    /// <returns>
+    /// A Pocket article with extracted content and title.
+    /// </returns>
     public async Task<PocketArticle> Read(Uri uri, bool bodyOnly = true, bool noHeadline = false)
     {
       return await Read(new PocketItem()
