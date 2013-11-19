@@ -111,9 +111,24 @@ namespace PocketSharp
   {
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
+      JObject jObject;
       List<T> result = new List<T>();
-      JObject jObject = JObject.Load(reader);
       T target;
+
+      // object is an array
+      if (reader.TokenType == JsonToken.StartArray)
+      {
+        return serializer.Deserialize<List<T>>(reader);
+      }
+
+      try
+      {
+        jObject = JObject.Load(reader);
+      }
+      catch
+      {
+        return null;
+      }
 
       // Populate the object properties
       foreach (KeyValuePair<string, JToken> item in jObject)
@@ -124,6 +139,11 @@ namespace PocketSharp
       }
 
       return result;
+    }
+
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    {
+      throw new NotImplementedException();
     }
 
     public override List<T> Create(Type objectType)

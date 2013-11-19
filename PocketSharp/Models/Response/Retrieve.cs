@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace PocketSharp.Models
@@ -24,8 +25,8 @@ namespace PocketSharp.Models
     /// <value>
     /// The since.
     /// </value>
-    [JsonProperty]
-    public int Since { get; set; }
+    [JsonProperty("since")]
+    public DateTime Since { get; set; }
 
     /// <summary>
     /// Gets the items.

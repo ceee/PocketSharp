@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
-using PropertyChanged;
 
 namespace PocketSharp.Models
 {
