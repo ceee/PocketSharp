@@ -120,6 +120,10 @@ namespace PocketSharp
       {
         return serializer.Deserialize<List<T>>(reader);
       }
+      else if (reader.TokenType == JsonToken.Null)
+      {
+        return null;
+      }
 
       try
       {
