@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using PocketSharp.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
-using PocketSharp.Models;
 
 namespace PocketSharp.Tests
 {
@@ -169,6 +168,83 @@ namespace PocketSharp.Tests
       PocketItem item = items[0];
 
       Assert.True(item.Tags.Find(i => i.Name == "pocket") != null);
+    }
+
+
+    [Fact]
+    public async Task IsSinceParameterWorkingOnAddTags()
+    {
+      DateTime since = DateTime.UtcNow;
+
+      List<PocketItem> items = await client.Get(state: State.all);
+      PocketItem itemToModify = items[0];
+
+      Assert.True(items.Count >= 3);
+
+      items = await client.Get(state: State.all, since: since);
+
+      Assert.True(items == null || items.Count == 0);
+
+      await client.AddTags(itemToModify, new string[] { "pocketsharp" });
+
+      items = await client.Get(state: State.all, since: since);
+
+      Assert.True(items.Count > 0);
+
+      await client.RemoveTags(itemToModify, new string[] { "pocketsharp" });
+    }
+
+
+    [Fact]
+    public async Task IsSinceParameterWorkingOnFavoriteAndArchiveModification()
+    {
+      DateTime since = DateTime.UtcNow;
+
+      List<PocketItem> items = await client.Get(state: State.all);
+      PocketItem itemToModify = items[0];
+
+      Assert.True(items.Count >= 3);
+
+      items = await client.Get(state: State.all, since: since);
+
+      Assert.True(items == null || items.Count == 0);
+
+      await client.Favorite(itemToModify);
+
+      items = await client.Get(state: State.all, since: since);
+
+      Assert.True(items.Count > 0);
+
+      await client.Unfavorite(itemToModify);
+
+      since = DateTime.UtcNow;
+
+      await client.Archive(itemToModify);
+
+      items = await client.Get(state: State.all, since: since);
+
+      Assert.True(items.Count > 0);
+
+      await client.Unarchive(itemToModify);
+    }
+
+
+    [Fact]
+    public async Task IsSinceParameterWorkingOnAddAndDelete()
+    {
+      DateTime since = DateTime.UtcNow;
+
+      PocketItem item = await client.Add(new Uri("http://frontendplay.com"));
+
+      List<PocketItem> items = await client.Get(state: State.all, since: since);
+
+      since = DateTime.UtcNow;
+
+      await client.Delete(item);
+
+      items = await client.Get(state: State.all, since: since);
+
+      Assert.True(items.Count == 1 && items[0].IsDeleted);
     }
   }
 }
