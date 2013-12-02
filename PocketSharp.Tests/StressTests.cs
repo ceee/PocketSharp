@@ -68,7 +68,7 @@ namespace PocketSharp.Tests
       List<PocketItem> items = await client.Get(search: "google");
 
       Assert.True(items.Count > 0);
-      Assert.True(items[0].FullTitle.ToLower().Contains("google"));
+      Assert.True(items[0].Title.ToLower().Contains("google") || items[0].Uri.ToString().ToLower().Contains("google"));
     }
 
     [Fact]

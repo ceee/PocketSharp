@@ -1,9 +1,9 @@
 ﻿using PocketSharp.Models;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace PocketSharp
 {
@@ -76,9 +76,9 @@ namespace PocketSharp
     {
       List<PocketItem> items = await Get(
         cancellationToken: cancellationToken,
-        state: State.all  
+        state: State.all
       );
-      
+
       return items.SingleOrDefault<PocketItem>(item => item.ID == itemID);
     }
 

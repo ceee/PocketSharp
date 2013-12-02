@@ -50,13 +50,13 @@ namespace PocketSharp
     public Uri GenerateAuthenticationUri(string requestCode = null)
     {
       // check if request code is available
-      if(RequestCode == null && requestCode == null)
+      if (RequestCode == null && requestCode == null)
       {
         throw new NullReferenceException("Call GetRequestCode() first to receive a request_code");
       }
 
       // override property with given param if available
-      if(requestCode != null)
+      if (requestCode != null)
       {
         RequestCode = requestCode;
       }
@@ -122,7 +122,7 @@ namespace PocketSharp
     {
       if (username == null || email == null || password == null)
       {
-        throw new ArgumentNullException("All parameters are required");  
+        throw new ArgumentNullException("All parameters are required");
       }
 
       Match matchEmail = Regex.Match(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,10}))$");
