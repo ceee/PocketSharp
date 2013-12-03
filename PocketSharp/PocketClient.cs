@@ -24,7 +24,12 @@ namespace PocketSharp
     /// <summary>
     /// Caches HTTP headers from last response
     /// </summary>
-    private HttpResponseHeaders lastHeaders;
+    public HttpResponseHeaders lastHeaders;
+
+    /// <summary>
+    /// Caches JSON data from last response
+    /// </summary>
+    public string lastResponseData;
 
     /// <summary>
     /// The base URL for the Pocket API
@@ -191,6 +196,9 @@ namespace PocketSharp
 
       // read response
       var responseString = await response.Content.ReadAsStringAsync();
+
+      // cache response
+      lastResponseData = responseString;
 
       responseString = responseString.Replace("[]", "{}");
 
