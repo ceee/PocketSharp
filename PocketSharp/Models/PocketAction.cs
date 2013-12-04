@@ -102,10 +102,11 @@ namespace PocketSharp.Models
     {
       Dictionary<string, object> parameters = new Dictionary<string, object>
       {
-        { "item_id", ID.ToString() },
         { "action", Action }
       };
 
+      if (ID != 0 && !String.IsNullOrEmpty(ID.ToString()))
+        parameters.Add("item_id", ID.ToString());
       if (Time != null)
         parameters.Add("time", Time != null ? Utilities.GetUnixTimestamp(Time).ToString() : null);
       if (Tags != null)
@@ -114,9 +115,9 @@ namespace PocketSharp.Models
         parameters.Add("old_tag", OldTag);
       if (NewTag != null)
         parameters.Add("new_tag", NewTag);
-      if (Title != null)
+      if (!String.IsNullOrEmpty(Title))
         parameters.Add("title", Title);
-      if (TweetID != null)
+      if (!String.IsNullOrEmpty(TweetID))
         parameters.Add("ref_id", TweetID);
       if (Uri != null)
         parameters.Add("uri", Uri.ToString());
