@@ -47,6 +47,15 @@ namespace PocketSharp.Models
     public string Title { get; set; }
 
     /// <summary>
+    /// Gets or sets the associated Tweet ID.
+    /// </summary>
+    /// <value>
+    /// The Tweet ID.
+    /// </value>
+    [DataMember(Name = "ref_id")]
+    public string TweetID { get; set; }
+
+    /// <summary>
     /// Gets or sets the time.
     /// </summary>
     /// <value>
@@ -107,6 +116,8 @@ namespace PocketSharp.Models
         parameters.Add("new_tag", NewTag);
       if (Title != null)
         parameters.Add("title", Title);
+      if (TweetID != null)
+        parameters.Add("ref_id", TweetID);
       if (Uri != null)
         parameters.Add("uri", Uri.ToString());
 
