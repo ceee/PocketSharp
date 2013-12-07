@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Diagnostics;
+using Newtonsoft.Json;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace PocketSharp.Models
   /// </summary>
   [JsonObject]
   [ImplementPropertyChanged]
+  [DebuggerDisplay("Uri = {Uri}, Title = {Title}")]
   public class PocketItem
   {
     /// <summary>
@@ -21,6 +23,15 @@ namespace PocketSharp.Models
     /// </value>
     [JsonProperty("item_id")]
     public int ID { get; set; }
+
+    /// <summary>
+    /// Gets or sets the resolved identifier.
+    /// </summary>
+    /// <value>
+    /// The resolved identifier.
+    /// </value>
+    [JsonProperty("resolved_id")]
+    public string ResolvedId { get; set; }
 
     /// <summary>
     /// Gets or sets the URI.
@@ -132,7 +143,7 @@ namespace PocketSharp.Models
     ///   <c>true</c> if this instance has image; otherwise, <c>false</c>.
     /// </value>
     [JsonProperty("has_image")]
-    public bool HasImage { get; set; }
+    private PocketBoolean _HasImage { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this instance has video.
@@ -141,7 +152,67 @@ namespace PocketSharp.Models
     ///   <c>true</c> if this instance has video; otherwise, <c>false</c>.
     /// </value>
     [JsonProperty("has_video")]
-    public bool HasVideo { get; set; }
+    private PocketBoolean _HasVideo { get; set; }
+
+    /// <summary>
+    /// Gets a value indicating whether [has image].
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if [has image]; otherwise, <c>false</c>.
+    /// </value>
+    [JsonIgnore]
+    public bool HasImage
+    {
+      get
+      {
+        return _HasImage == PocketBoolean.Yes || _HasImage == PocketBoolean.IsType;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether [has video].
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if [has video]; otherwise, <c>false</c>.
+    /// </value>
+    [JsonIgnore]
+    public bool HasVideo
+    {
+      get
+      {
+        return _HasVideo == PocketBoolean.Yes || _HasVideo == PocketBoolean.IsType;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether [is video].
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if [is video]; otherwise, <c>false</c>.
+    /// </value>
+    [JsonIgnore]
+    public bool IsVideo
+    {
+      get
+      {
+        return _HasVideo == PocketBoolean.IsType;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether [is image].
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if [is image]; otherwise, <c>false</c>.
+    /// </value>
+    [JsonIgnore]
+    public bool IsImage
+    {
+      get
+      {
+        return _HasImage == PocketBoolean.IsType;
+      }
+    }
 
     /// <summary>
     /// Gets or sets the word count.
