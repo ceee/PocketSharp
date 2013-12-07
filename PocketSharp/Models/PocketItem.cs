@@ -165,7 +165,7 @@ namespace PocketSharp.Models
     {
       get
       {
-        return _HasImage == PocketBoolean.Yes;
+        return _HasImage == PocketBoolean.Yes || _HasImage == PocketBoolean.IsType;
       }
     }
 
@@ -180,7 +180,7 @@ namespace PocketSharp.Models
     {
       get
       {
-        return _HasVideo == PocketBoolean.Yes;
+        return _HasVideo == PocketBoolean.Yes || _HasVideo == PocketBoolean.IsType;
       }
     }
 
