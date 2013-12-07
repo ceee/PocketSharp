@@ -1,6 +1,6 @@
 ﻿namespace PocketSharp.Models
 {
-  public enum PocketBoolean
+  internal enum PocketBoolean
   {
     No = 0,
     Yes = 1,
