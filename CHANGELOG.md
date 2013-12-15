@@ -1,3 +1,16 @@
+### 3.0.0 (2013-12-15)
+
+- `cancellationToken` support for all methods
+- Toggle inclusion of title in PocketArticle.Content
+- Make setters for inline objects in PocketItem (images, videos, ...)
+- IPocketClient interface
+- PreRequest callback allows injection of `Action<string>` before every request
+- `lastHeaders` and `lastRequestData` in PocketClient for better debugging
+- Submit multiple actions in one request with `SendActions`
+- New `IsVideo`, `IsImage` and `ResolvedId` as new properties in PocketItem
+- Split PocketReader into own NuGet package
+- A lot of bugfixes
+
 ### 2.2.2 (2013-11-01)
 
 - Password validation in RegisterAccount
@@ -9,13 +22,13 @@
 ### 2.2.0 (2013-10-26)
 
 - Made `GetAccessCode` obsolete
-- Return username after authentication with `GetUser` (thanks to [ScottIsAFool](https://github.com/ScottIsAFool))
+- Return username after authentication with `GetUser`
 
 ### 2.1.0 (2013-10-25)
 
 - Rename `Statistics()` to `GetUserStatistics()`
-- Made `CallbackUri` public (thanks to [ScottIsAFool](https://github.com/ScottIsAFool))
-- Added Fody/PropertyChanged (thanks to [ScottIsAFool](https://github.com/ScottIsAFool))
+- Made `CallbackUri` public
+- Added Fody/PropertyChanged
 - Method `GetUsageLimits()` to retrieve API usage limits
 - Add PORTABLE constant to SgmlReader 
 

@@ -2,13 +2,13 @@
 
 **PocketSharp** is a C#.NET portable class library that integrates the [Pocket API v3](http://getpocket.com/developer).
 
-## Install using [NuGet](https://www.nuget.org/packages/PocketSharp/)
+## Install [PocketSharp](https://www.nuget.org/packages/PocketSharp/) using NuGet
 
 ```
 Install-Package PocketSharp
 ```
 
-for the Reader (coming in v3.0):
+for the [PocketSharp.Reader](https://www.nuget.org/packages/PocketSharp.Reader/)
 
 ```
 Install-Package PocketSharp.Reader
@@ -47,7 +47,7 @@ Which will output:
 
 ## Supported platforms
 
-PocketSharp is a **Portable Class Library** (since 1.0.0), therefore it's compatible with multiple platforms:
+PocketSharp is a **Portable Class Library**, therefore it's compatible with multiple platforms:
 
 - **.NET** >= 4.5 (including WPF)
 - **Silverlight** >= 4
@@ -58,7 +58,6 @@ You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Example
 
 ## What's new in the upcoming PocketSharp v3.0?
 
-- [ ] support for new Preferences API
 - [x] `cancellationToken` support for all methods
 - [x] support HTML injection into content from PocketArticle (maybe remove title from Article)
 - [x] make setters for inline objects in PocketItem (images, videos, ...)
