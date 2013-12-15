@@ -165,7 +165,7 @@ namespace PocketSharp.Models
     ///   <c>true</c> if this instance has image; otherwise, <c>false</c>.
     /// </value>
     [JsonProperty("has_image")]
-    private PocketBoolean _HasImage { get; set; }
+    private PocketBoolean? _HasImage { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this instance has video.
@@ -174,7 +174,7 @@ namespace PocketSharp.Models
     ///   <c>true</c> if this instance has video; otherwise, <c>false</c>.
     /// </value>
     [JsonProperty("has_video")]
-    private PocketBoolean _HasVideo { get; set; }
+    private PocketBoolean? _HasVideo { get; set; }
 
     /// <summary>
     /// Gets a value indicating whether [has image].

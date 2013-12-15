@@ -27,15 +27,5 @@ namespace PocketSharp.Tests
 
       Assert.True(Incrementor >= 3);
     }
-
-    [Fact]
-    public async Task TestNotWorkingUri()
-    {
-      //PocketItem item = await client.Add(new Uri("http://dl-ghost.azurewebsites.net/ghost-azure/?xy=2"));
-
-      List<PocketItem> items = await client.Get();
-
-      Assert.True(!items[0].IsArchive);
-    }
   }
 }
