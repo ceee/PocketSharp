@@ -41,6 +41,14 @@ namespace PocketSharp
     /// The access code.
     /// </value>
     string AccessCode { get; set; }
+
+    /// <summary>
+    /// Action which is executed before every request
+    /// </summary>
+    /// <value>
+    /// The pre request callback.
+    /// </value>
+    Action<string> PreRequest { get; set; }
     #endregion
 
     #region account methods
