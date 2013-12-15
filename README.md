@@ -56,16 +56,9 @@ PocketSharp is a **Portable Class Library**, therefore it's compatible with mult
 
 You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Examples` ([@github](https://github.com/ceee/PocketSharp/tree/master/PocketSharp.Examples)) folder.
 
-## What's new in the upcoming PocketSharp v3.0?
+## What's next?
 
-- [x] `cancellationToken` support for all methods
-- [x] support HTML injection into content from PocketArticle (maybe remove title from Article)
-- [x] make setters for inline objects in PocketItem (images, videos, ...)
-- [x] IPocketClient interface
-- [x] PreRequest callback allows injection of `Action<string>` before every request
-- [x] Submit multiple actions in one request
-- [x] Split PocketReader into own NuGet package
-- [x] bugfixes, for sure!
+- [ ] Preferences API, if Pocket will ever release it to the public -.-
 
 ## Dependencies
 
