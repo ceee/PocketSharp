@@ -76,7 +76,7 @@ namespace PocketSharp
     {
       return await Read(new PocketItem()
       {
-        ID = 0,
+        ID = null,
         Uri = uri
       }, bodyOnly, noHeadline);
     }

@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace PocketSharp.Models
 {
@@ -22,7 +22,7 @@ namespace PocketSharp.Models
     /// The ID.
     /// </value>
     [JsonProperty("item_id")]
-    public int ID { get; set; }
+    public string ID { get; set; }
 
     /// <summary>
     /// Gets or sets the resolved identifier.
@@ -34,13 +34,35 @@ namespace PocketSharp.Models
     public string ResolvedId { get; set; }
 
     /// <summary>
+    /// Gets or sets the normal URI.
+    /// </summary>
+    /// <value>
+    /// The normal URI.
+    /// </value>
+    [JsonProperty("normal_url")]
+    private Uri _NormalUri { get; set; }
+
+    /// <summary>
+    /// Gets or sets the resolved URI.
+    /// </summary>
+    /// <value>
+    /// The resolved URI.
+    /// </value>
+    [JsonProperty("resolved_url")]
+    private Uri _ResolvedUri { get; set; }
+
+    /// <summary>
     /// Gets or sets the URI.
     /// </summary>
     /// <value>
     /// The URI.
     /// </value>
-    [JsonProperty("resolved_url")]
-    public Uri Uri { get; set; }
+    [JsonIgnore]
+    public Uri Uri
+    {
+      get { return _ResolvedUri ?? _NormalUri; }
+      set { _NormalUri = value; _ResolvedUri = value; }
+    }
 
     /// <summary>
     /// Gets or sets the title.

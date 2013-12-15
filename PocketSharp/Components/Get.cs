@@ -72,7 +72,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<PocketItem> Get(int itemID, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<PocketItem> Get(string itemID, CancellationToken cancellationToken = default(CancellationToken))
     {
       List<PocketItem> items = await Get(
         cancellationToken: cancellationToken,

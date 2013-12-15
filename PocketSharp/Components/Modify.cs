@@ -31,7 +31,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> Archive(int itemID, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> Archive(string itemID, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await SendDefault(cancellationToken, itemID, "archive");
     }
@@ -57,7 +57,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> Unarchive(int itemID, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> Unarchive(string itemID, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await SendDefault(cancellationToken, itemID, "readd");
     }
@@ -83,7 +83,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> Favorite(int itemID, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> Favorite(string itemID, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await SendDefault(cancellationToken, itemID, "favorite");
     }
@@ -109,7 +109,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> Unfavorite(int itemID, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> Unfavorite(string itemID, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await SendDefault(cancellationToken, itemID, "unfavorite");
     }
@@ -135,7 +135,7 @@ namespace PocketSharp
     /// <param name="itemID">The item ID.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> Delete(int itemID, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> Delete(string itemID, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await SendDefault(cancellationToken, itemID, "delete");
     }
@@ -160,7 +160,7 @@ namespace PocketSharp
     /// <param name="itemID">The item ID.</param>
     /// <param name="action">The action.</param>
     /// <returns></returns>
-    protected async Task<bool> SendDefault(CancellationToken cancellationToken, int itemID, string action)
+    protected async Task<bool> SendDefault(CancellationToken cancellationToken, string itemID, string action)
     {
       return await Send(new PocketAction()
       {

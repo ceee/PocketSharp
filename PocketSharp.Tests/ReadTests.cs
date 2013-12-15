@@ -22,7 +22,7 @@ namespace PocketSharp.Tests
     {
       PocketArticle result = await reader.Read(new PocketItem()
       {
-        ID = 99,
+        ID = "99",
         Uri = new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation")
       });
 
@@ -37,7 +37,7 @@ namespace PocketSharp.Tests
     {
       PocketArticle result = await reader.Read(new PocketItem()
       {
-        ID = 99,
+        ID = "99",
         Uri = new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation")
       }, false, true);
 
@@ -54,7 +54,7 @@ namespace PocketSharp.Tests
       {
         await reader.Read(new PocketItem()
         {
-          ID = 99,
+          ID = "99",
           Uri = new Uri("http://frontendplayyyyy.com")
         });
       });
@@ -66,7 +66,7 @@ namespace PocketSharp.Tests
     {
       PocketArticle result = await reader.Read(new PocketItem()
       {
-        ID = 99,
+        ID = "99",
         Uri = new Uri("http://calebjacob.com/tooltipster/")
       });
 

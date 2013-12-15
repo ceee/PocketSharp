@@ -75,7 +75,7 @@ namespace PocketSharp.Tests
 
       Assert.False(items.Count > 0);
 
-      PocketItem item = await client.Get(99999999);
+      PocketItem item = await client.Get("99999999");
 
       Assert.Null(item);
 

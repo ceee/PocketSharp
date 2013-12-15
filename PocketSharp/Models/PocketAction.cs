@@ -26,7 +26,7 @@ namespace PocketSharp.Models
     /// The ID.
     /// </value>
     [DataMember(Name = "item_id")]
-    public int ID { get; set; }
+    public string ID { get; set; }
 
     /// <summary>
     /// Gets or sets the URI (for adding a new item).
@@ -105,7 +105,7 @@ namespace PocketSharp.Models
         { "action", Action }
       };
 
-      if (ID != 0 && !String.IsNullOrEmpty(ID.ToString()))
+      if (ID != "0" && !String.IsNullOrEmpty(ID.ToString()))
         parameters.Add("item_id", ID.ToString());
       if (Time != null)
         parameters.Add("time", Time != null ? Utilities.GetUnixTimestamp(Time).ToString() : null);

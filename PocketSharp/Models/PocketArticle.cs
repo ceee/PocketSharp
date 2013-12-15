@@ -1,5 +1,5 @@
-﻿using System;
-using PropertyChanged;
+﻿using PropertyChanged;
+using System;
 
 namespace PocketSharp.Models
 {
@@ -15,7 +15,7 @@ namespace PocketSharp.Models
     /// <value>
     /// The pocket item ID.
     /// </value>
-    public int PocketItemID { get; set; }
+    public string PocketItemID { get; set; }
 
     /// <summary>
     /// Gets or sets the content.

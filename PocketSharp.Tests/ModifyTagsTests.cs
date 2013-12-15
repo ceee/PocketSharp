@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using PocketSharp.Models;
+using System;
 using System.Collections.Generic;
-using Xunit;
-using PocketSharp.Models;
 using System.Linq;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace PocketSharp.Tests
 {
@@ -83,7 +83,7 @@ namespace PocketSharp.Tests
     }
 
 
-    private async Task<PocketItem> GetItemById(int id, bool archive = false)
+    private async Task<PocketItem> GetItemById(string id, bool archive = false)
     {
       List<PocketItem> items = await client.Get(state: archive ? State.archive : State.unread);
       PocketItem itemDesired = null;

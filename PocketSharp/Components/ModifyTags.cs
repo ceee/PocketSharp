@@ -17,7 +17,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> AddTags(int itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> AddTags(string itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await SendTags(cancellationToken, itemID, "tags_add", tags);
     }
@@ -45,7 +45,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> RemoveTags(int itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> RemoveTags(string itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await SendTags(cancellationToken, itemID, "tags_remove", tags);
     }
@@ -73,7 +73,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> RemoveTag(int itemID, string tag, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> RemoveTag(string itemID, string tag, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await SendTags(cancellationToken, itemID, "tags_remove", new string[] { tag });
     }
@@ -100,7 +100,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> RemoveTags(int itemID, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> RemoveTags(string itemID, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await SendDefault(cancellationToken, itemID, "tags_clear");
     }
@@ -127,7 +127,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> ReplaceTags(int itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> ReplaceTags(string itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await SendTags(cancellationToken, itemID, "tags_replace", tags);
     }
@@ -156,7 +156,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> RenameTag(int itemID, string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> RenameTag(string itemID, string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await Send(new PocketAction()
       {
@@ -191,7 +191,7 @@ namespace PocketSharp
     /// <param name="action">The action.</param>
     /// <param name="tags">The tags.</param>
     /// <returns></returns>
-    protected async Task<bool> SendTags(CancellationToken cancellationToken, int itemID, string action, string[] tags)
+    protected async Task<bool> SendTags(CancellationToken cancellationToken, string itemID, string action, string[] tags)
     {
       return await Send(new PocketAction()
       {

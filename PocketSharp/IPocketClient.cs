@@ -151,7 +151,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<PocketItem> Get(int itemID, CancellationToken cancellationToken = default(CancellationToken));
+    Task<PocketItem> Get(string itemID, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Retrieves all items by a given filter
@@ -220,7 +220,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> Archive(int itemID, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Archive(string itemID, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Archives the specified item.
@@ -238,7 +238,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> Unarchive(int itemID, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Unarchive(string itemID, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Unarchives the specified item.
@@ -256,7 +256,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> Favorite(int itemID, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Favorite(string itemID, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Favorites the specified item.
@@ -274,7 +274,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> Unfavorite(int itemID, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Unfavorite(string itemID, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Un-favorites the specified item.
@@ -292,7 +292,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> Delete(int itemID, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Delete(string itemID, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Deletes the specified item.
@@ -312,7 +312,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> AddTags(int itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> AddTags(string itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Adds the specified tags to an item.
@@ -332,7 +332,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> RemoveTags(int itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> RemoveTags(string itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Removes the specified tags from an item.
@@ -352,7 +352,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> RemoveTag(int itemID, string tag, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> RemoveTag(string itemID, string tag, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Removes a tag from an item.
@@ -371,7 +371,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> RemoveTags(int itemID, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> RemoveTags(string itemID, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Clears all tags from an item.
@@ -390,7 +390,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> ReplaceTags(int itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> ReplaceTags(string itemID, string[] tags, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Replaces all existing tags with the given new ones in an item.
@@ -411,7 +411,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> RenameTag(int itemID, string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> RenameTag(string itemID, string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Renames a tag in an item.

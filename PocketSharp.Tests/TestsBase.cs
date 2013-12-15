@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
-using PocketSharp.Models;
 
 namespace PocketSharp.Tests
 {
@@ -10,7 +9,7 @@ namespace PocketSharp.Tests
   {
     protected PocketClient client;
 
-    protected List<int> itemsToDelete = new List<int>();
+    protected List<string> itemsToDelete = new List<string>();
 
 
     // setup
@@ -26,7 +25,7 @@ namespace PocketSharp.Tests
 
 
     // teardown
-    public void Dispose() 
+    public void Dispose()
     {
       itemsToDelete.ForEach(async id =>
       {
