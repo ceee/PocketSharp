@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace PocketSharp.Ports.NReadability
@@ -22,5 +22,7 @@ namespace PocketSharp.Ports.NReadability
     public string NextPageUrl { get; set; }
 
     public XDocument RawDocument { get; set; }
+
+    public IEnumerable<XElement> Images { get; set; }
   }
 }

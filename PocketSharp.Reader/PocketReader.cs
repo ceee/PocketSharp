@@ -111,7 +111,7 @@ namespace PocketSharp
       TranscodingResult transcodingResult = transcoder.Transcode(transcodingInput);
 
       // get images from article
-      List<PocketArticleImage> images = transcodingResult.RawDocument.GetElementsByTagName("img").Select<XElement, PocketArticleImage>(image =>
+      List<PocketArticleImage> images = transcodingResult.Images.Select<XElement, PocketArticleImage>(image =>
       {
         Uri imageUri;
         Uri.TryCreate(image.GetAttributeValue("src", null), UriKind.Absolute, out imageUri);

@@ -240,6 +240,8 @@ namespace PocketSharp.Ports.NReadability
           out extractedTitle,
           out nextPageUrl);
 
+      IEnumerable<XElement> images = transcodedXmlDocument.GetElementsByTagName("img");
+
       string transcodedContent =
         _sgmlDomSerializer.SerializeDocument(
           transcodedXmlDocument,
@@ -253,6 +255,7 @@ namespace PocketSharp.Ports.NReadability
             ExtractedContent = transcodedContent,
             ExtractedTitle = extractedTitle,
             NextPageUrl = nextPageUrl,
+            Images = images
           };
     }
 
