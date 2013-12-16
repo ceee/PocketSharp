@@ -20,11 +20,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task ReadArticleTest()
     {
-      PocketArticle result = await reader.Read(new PocketItem()
-      {
-        ID = "99",
-        Uri = new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation")
-      });
+      PocketArticle result = await reader.Read(new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation"));
 
       Assert.DoesNotContain("<!DOCTYPE html>", result.Content);
       Assert.Contains("<h1>", result.Content);
@@ -35,11 +31,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task ReadArticleWithContainerNoHeadlineTest()
     {
-      PocketArticle result = await reader.Read(new PocketItem()
-      {
-        ID = "99",
-        Uri = new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation")
-      }, false, true);
+      PocketArticle result = await reader.Read(new Uri("http://frontendplay.com/story/4/http-caching-demystified-part-2-implementation"), false, true);
 
       Assert.Contains("<!DOCTYPE html>", result.Content);
       Assert.DoesNotContain("<h1>", result.Content);
@@ -52,11 +44,7 @@ namespace PocketSharp.Tests
     {
       await ThrowsAsync<PocketException>(async () =>
       {
-        await reader.Read(new PocketItem()
-        {
-          ID = "99",
-          Uri = new Uri("http://frontendplayyyyy.com")
-        });
+        await reader.Read(new Uri("http://frontendplayyyyy.com"));
       });
     }
 
@@ -64,11 +52,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task IsBodyOnlyProperlyResolved()
     {
-      PocketArticle result = await reader.Read(new PocketItem()
-      {
-        ID = "99",
-        Uri = new Uri("http://calebjacob.com/tooltipster/")
-      });
+      PocketArticle result = await reader.Read(new Uri("http://calebjacob.com/tooltipster/"));
 
       Assert.True(result.Content.Substring(0, 4) == "<div");
     }
