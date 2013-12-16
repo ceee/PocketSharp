@@ -62,40 +62,18 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Reads article content from the given URI.
-    /// This method does not use the official Article View API, which is private.
-    /// The PocketReader is based on a custom PCL port of NReadability and SgmlReader.
-    /// </summary>
-    /// <param name="uri">An URI.</param>
-    /// <param name="bodyOnly">if set to <c>true</c> [only body is returned].</param>
-    /// <param name="noHeadline">if set to <c>true</c> [no headline (h1) is included].</param>
-    /// <returns>
-    /// A Pocket article with extracted content and title.
-    /// </returns>
-    public async Task<PocketArticle> Read(Uri uri, bool bodyOnly = true, bool noHeadline = false)
-    {
-      return await Read(new PocketItem()
-      {
-        ID = null,
-        Uri = uri
-      }, bodyOnly, noHeadline);
-    }
-
-
-
-    /// <summary>
     /// Reads article content from the given PocketItem.
     /// This method does not use the official Article View API, which is private.
     /// The PocketReader is based on a custom PCL port of NReadability and SgmlReader.
     /// </summary>
-    /// <param name="item">The pocket item.</param>
+    /// <param name="uri">An URI to extract the content from.</param>
     /// <param name="bodyOnly">if set to <c>true</c> [only body is returned].</param>
     /// <param name="noHeadline">if set to <c>true</c> [no headline (h1) is included].</param>
     /// <returns>
     /// A Pocket article with extracted content and title.
     /// </returns>
-    /// <exception cref="PocketRequestException"></exception>
-    public async Task<PocketArticle> Read(PocketItem item, bool bodyOnly = true, bool noHeadline = false)
+    /// <exception cref="Exception"></exception>
+    public async Task<PocketArticle> Read(Uri uri, bool bodyOnly = true, bool noHeadline = false)
     {
       // initialize transcoder
       NReadabilityTranscoder transcoder = new NReadabilityTranscoder(
@@ -108,12 +86,12 @@ namespace PocketSharp
       );
 
       // get HTML string from URI
-      string htmlResponse = await Request(item.Uri);
+      string htmlResponse = await Request(uri);
 
       // set properties for processing
       TranscodingInput transcodingInput = new TranscodingInput(htmlResponse)
       {
-        Url = item.Uri.ToString(),
+        Url = uri.ToString(),
         DomSerializationParams = new DomSerializationParams()
         {
           BodyOnly = bodyOnly,
@@ -133,8 +111,7 @@ namespace PocketSharp
       {
         Content = transcodingResult.ExtractedContent,
         Title = transcodingResult.ExtractedTitle,
-        NextPage = transcodingResult.NextPageUrl != null ? new Uri(transcodingResult.NextPageUrl, UriKind.Absolute) : null,
-        PocketItemID = item.ID
+        NextPage = transcodingResult.NextPageUrl != null ? new Uri(transcodingResult.NextPageUrl, UriKind.Absolute) : null
       };
     }
 
@@ -157,7 +134,7 @@ namespace PocketSharp
       }
       catch (HttpRequestException exc)
       {
-        throw new PocketException(exc.Message, exc);
+        throw new Exception(exc.Message, exc);
       }
 
       // validate HTTP response
@@ -165,7 +142,7 @@ namespace PocketSharp
       {
         string exceptionString = String.Format("Request error: {0} ({1})", response.ReasonPhrase, (int)response.StatusCode);
 
-        throw new PocketException(exceptionString);
+        throw new Exception(exceptionString);
       }
 
       // read response
