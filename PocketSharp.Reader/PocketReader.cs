@@ -1,9 +1,12 @@
 ﻿using PocketSharp.Models;
 using PocketSharp.Ports.NReadability;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PocketSharp
 {
@@ -107,9 +110,25 @@ namespace PocketSharp
       // process/transcode HTML
       TranscodingResult transcodingResult = transcoder.Transcode(transcodingInput);
 
+      // get images from article
+      List<PocketArticleImage> images = transcodingResult.RawDocument.GetElementsByTagName("img").Select<XElement, PocketArticleImage>(image =>
+      {
+        Uri imageUri;
+        Uri.TryCreate(image.GetAttributeValue("src", null), UriKind.Absolute, out imageUri);
+
+        return new PocketArticleImage()
+        {
+          Uri = imageUri,
+          Title = image.GetAttributeValue("title", null),
+          AlternativeText = image.GetAttributeValue("alt", null)
+        };
+      }).ToList();
+
+      // create article
       return new PocketArticle()
       {
         Content = transcodingResult.ExtractedContent,
+        Images = images,
         Title = transcodingResult.ExtractedTitle,
         NextPage = transcodingResult.NextPageUrl != null ? new Uri(transcodingResult.NextPageUrl, UriKind.Absolute) : null
       };

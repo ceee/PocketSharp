@@ -40,6 +40,24 @@ namespace PocketSharp.Tests
 
 
     [Fact]
+    public async Task ReadArticleWithImagesTest()
+    {
+      PocketArticle result = await reader.Read(new Uri("https://hacks.mozilla.org/2013/12/application-layout-with-css3-flexible-box-module/"));
+      Assert.True(result.Images.Count >= 3);
+      Assert.True(result.Images[0].Uri.ToString().StartsWith("https://hacks.mozilla.org"));
+      Assert.True(result.Images[1].Uri.ToString().EndsWith(".gif"));
+    }
+
+
+    [Fact]
+    public async Task ReadArticleWithNoImagesTest()
+    {
+      PocketArticle result = await reader.Read(new Uri("http://getpocket.com/hits/awards/2013/"));
+      Assert.True(result.Images == null || result.Images.Count < 1);
+    }
+
+
+    [Fact]
     public async Task ReadArticleWithInvalidUriTest()
     {
       await ThrowsAsync<PocketException>(async () =>

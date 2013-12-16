@@ -42,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPocketReader.cs" />
-    <Compile Include="PocketArticle.cs" />
+    <Compile Include="Models\PocketArticle.cs" />
+    <Compile Include="Models\PocketArticleImage.cs" />
     <Compile Include="PocketReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

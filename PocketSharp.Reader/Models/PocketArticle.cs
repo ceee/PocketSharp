@@ -1,5 +1,6 @@
 ﻿using PropertyChanged;
 using System;
+using System.Collections.Generic;
 
 namespace PocketSharp.Models
 {
@@ -16,6 +17,14 @@ namespace PocketSharp.Models
     /// The content.
     /// </value>
     public string Content { get; set; }
+
+    /// <summary>
+    /// Gets or sets the images.
+    /// </summary>
+    /// <value>
+    /// The images.
+    /// </value>
+    public List<PocketArticleImage> Images { get; set; }
 
     /// <summary>
     /// Gets or sets the title.

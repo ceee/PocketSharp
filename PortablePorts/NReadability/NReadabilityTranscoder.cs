@@ -22,9 +22,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -36,15 +36,15 @@ namespace PocketSharp.Ports.NReadability
   public class NReadabilityTranscoder
   {
     #region Nested types
-    
+
     /// <summary>
     /// Used in FindNextPageLink
     /// </summary>
     private class LinkData
     {
-        public float Score;
-        public string LinkText;
-        public string LinkHref;
+      public float Score;
+      public string LinkText;
+      public string LinkHref;
     }
 
     #endregion
@@ -102,7 +102,7 @@ namespace PocketSharp.Ports.NReadability
 
     private static readonly Regex _UnlikelyCandidatesRegex = new Regex("combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|side|sponsor|ad-break|agegate|pagination|pager|popup|tweet|twitter", RegexOptions.IgnoreCase);
     private static readonly Regex _OkMaybeItsACandidateRegex = new Regex("and|article|body|column|main|shadow", RegexOptions.IgnoreCase);
-    private static readonly Regex _PositiveWeightRegex = new Regex("article|body|content|entry|hentry|main|page|pagination|post|text|blog|story",  RegexOptions.IgnoreCase);
+    private static readonly Regex _PositiveWeightRegex = new Regex("article|body|content|entry|hentry|main|page|pagination|post|text|blog|story", RegexOptions.IgnoreCase);
     private static readonly Regex _NegativeWeightRegex = new Regex("combx|comment|com-|contact|foot|footer|footnote|masthead|media|meta|outbrain|promo|related|scroll|shoutbox|sidebar|side|sponsor|shopping|tags|tool|widget", RegexOptions.IgnoreCase);
     private static readonly Regex _NegativeLinkParentRegex = new Regex("(stories|articles|news|documents|posts|notes|series|historie|artykuly|artykuły|wpisy|dokumenty|serie|geschichten|erzählungen|erzahlungen)", RegexOptions.IgnoreCase);
     private static readonly Regex _Extraneous = new Regex("print|archive|comment|discuss|e[-]?mail|share|reply|all|login|sign|single|also", RegexOptions.IgnoreCase);
@@ -118,7 +118,7 @@ namespace PocketSharp.Ports.NReadability
     private static readonly Regex _ArticleTitleDashRegex2 = new Regex("(.*)[\\|\\-] .*");
     private static readonly Regex _ArticleTitleDashRegex3 = new Regex("[^\\|\\-]*[\\|\\-](.*)");
     private static readonly Regex _ArticleTitleColonRegex1 = new Regex(".*:(.*)");
-    private static readonly Regex _ArticleTitleColonRegex2 = new Regex("[^:]*[:](.*)");    
+    private static readonly Regex _ArticleTitleColonRegex2 = new Regex("[^:]*[:](.*)");
     private static readonly Regex _NextLink = new Regex(@"(next|weiter|continue|dalej|następna|nastepna>([^\|]|$)|�([^\|]|$))", RegexOptions.IgnoreCase);
     private static readonly Regex _NextStoryLink = new Regex("(story|article|news|document|post|note|series|historia|artykul|artykuł|wpis|dokument|seria|geschichte|erzählung|erzahlung|artikel|serie)", RegexOptions.IgnoreCase);
     private static readonly Regex _PrevLink = new Regex("(prev|earl|[^b]old|new|wstecz|poprzednia|<|�)", RegexOptions.IgnoreCase);
@@ -148,7 +148,7 @@ namespace PocketSharp.Ports.NReadability
     private readonly ReadingStyle _readingStyle;
     private readonly ReadingSize _readingSize;
     private readonly ReadingMargin _readingMargin;
-    
+
     #endregion
 
     #region Helper instance fields
@@ -190,7 +190,7 @@ namespace PocketSharp.Ports.NReadability
 
       _sgmlDomBuilder = new SgmlDomBuilder();
       _sgmlDomSerializer = new SgmlDomSerializer();
-      _elementsScores = new Dictionary<XElement, float>();      
+      _elementsScores = new Dictionary<XElement, float>();
     }
 
     /// <summary>
@@ -374,7 +374,7 @@ namespace PocketSharp.Ports.NReadability
           _dontStripUnlikelys = true;
 
           return TranscodeToXml(htmlContent, url, out mainContentExtracted, out extractedTitle, out nextPageUrl);
-        } 
+        }
         finally
         {
           _dontStripUnlikelys = false;
@@ -444,7 +444,7 @@ namespace PocketSharp.Ports.NReadability
 
         /* If the leftovers of the URL after removing the base URL don't contain any digits, it's certainly not a next page link. */
         string linkHrefLeftover = linkHref.Replace(articleBaseUrl, "");
-        
+
         if (!Regex.IsMatch(linkHrefLeftover, @"\d"))
         {
           continue;
@@ -453,7 +453,7 @@ namespace PocketSharp.Ports.NReadability
         if (!possiblePagesByLink.Keys.Contains(linkHref))
         {
           possiblePagesByLink[linkHref] = new LinkData { Score = 0, LinkHref = linkHref, LinkText = linkText };
-        } 
+        }
         else
         {
           possiblePagesByLink[linkHref].LinkText += " | " + linkText;
@@ -541,7 +541,7 @@ namespace PocketSharp.Ports.NReadability
             linkObj.Score += 12.5f;
             positiveDescendantMatch = true;
           }
-          
+
           if (!negativeDescendantMatch && _PrevLink.IsMatch(descendantData))
           {
             linkObj.Score -= 100;
@@ -604,7 +604,7 @@ namespace PocketSharp.Ports.NReadability
 
       if (topPage != null)
       {
-        string nextHref = Regex.Replace(topPage.LinkHref, @"\/$", "");        
+        string nextHref = Regex.Replace(topPage.LinkHref, @"\/$", "");
         var nextHrefUri = new Uri(new Uri(articleBaseUrl), nextHref);
 
         return nextHrefUri.OriginalString;
@@ -612,7 +612,7 @@ namespace PocketSharp.Ports.NReadability
 
       return null;
     }
-    
+
     /// <summary>
     /// Find a cleaned up version of the current URL, to use for comparing links for possible next-pageyness.
     /// </summary>    
@@ -626,13 +626,13 @@ namespace PocketSharp.Ports.NReadability
       }
 
       string protocol = urlUri.Scheme;
-      string hostname = urlUri.Host;        
+      string hostname = urlUri.Host;
       string noUrlParams = urlUri.AbsolutePath + "/";
       List<string> urlSlashes = noUrlParams.Split('/').Reverse().ToList();
       var cleanedSegments = new List<string>();
       int slashLen = urlSlashes.Count();
 
-      for (int i = 0;  i < slashLen; i++)
+      for (int i = 0; i < slashLen; i++)
       {
         string segment = urlSlashes[i];
 
@@ -656,10 +656,10 @@ namespace PocketSharp.Ports.NReadability
         {
           segment = segment.Replace(",00", "");
         }
-            
+
         /* If our first or second segment has anything looking like a page number, remove it. */
         var pageNumRegex = new Regex("((_|-)?p[a-z]*|(_|-))[0-9]{1,2}$", RegexOptions.IgnoreCase);
-        
+
         if (pageNumRegex.IsMatch(segment) && ((i == 1) || (i == 0)))
         {
           segment = pageNumRegex.Replace(segment, "");
@@ -752,7 +752,7 @@ namespace PocketSharp.Ports.NReadability
 
       /* Remove all anchors. */
       elementsToRemove.Clear();
-      
+
       IEnumerable<XElement> anchorElements =
         rootElement.GetElementsByTagName("a")
           .Where(aElement => aElement.Attribute("name") != null && aElement.Attribute("href") == null);
@@ -929,63 +929,63 @@ namespace PocketSharp.Ports.NReadability
 
       new ElementsTraverser(
         element =>
+        {
+          string elementName = GetElementName(element);
+
+          /* Remove unlikely candidates. */
+          string unlikelyMatchString = element.GetClass() + " " + element.GetId();
+
+          if (unlikelyMatchString.Length > 0
+           && !"body".Equals(elementName, StringComparison.OrdinalIgnoreCase)
+           && !"a".Equals(elementName, StringComparison.OrdinalIgnoreCase)
+           && _UnlikelyCandidatesRegex.IsMatch(unlikelyMatchString)
+           && !_OkMaybeItsACandidateRegex.IsMatch(unlikelyMatchString))
           {
-            string elementName = GetElementName(element);
+            XElement parentElement = element.Parent;
 
-            /* Remove unlikely candidates. */
-            string unlikelyMatchString = element.GetClass() + " " + element.GetId();
-
-            if (unlikelyMatchString.Length > 0
-             && !"body".Equals(elementName, StringComparison.OrdinalIgnoreCase)
-             && !"a".Equals(elementName, StringComparison.OrdinalIgnoreCase)
-             && _UnlikelyCandidatesRegex.IsMatch(unlikelyMatchString)
-             && !_OkMaybeItsACandidateRegex.IsMatch(unlikelyMatchString))
+            if (parentElement != null)
             {
-              XElement parentElement = element.Parent;
-
-              if (parentElement != null)
-              {
-                element.Remove();
-              }
-
-              // element has been removed - we can go to the next one
-              return;
+              element.Remove();
             }
 
-            /* Turn all divs that don't have children block level elements into p's or replace text nodes within the div with p's. */
-            if ("div".Equals(elementName, StringComparison.OrdinalIgnoreCase))
+            // element has been removed - we can go to the next one
+            return;
+          }
+
+          /* Turn all divs that don't have children block level elements into p's or replace text nodes within the div with p's. */
+          if ("div".Equals(elementName, StringComparison.OrdinalIgnoreCase))
+          {
+            if (!_DivToPElementsRegex.IsMatch(element.GetInnerHtml()))
             {
-              if (!_DivToPElementsRegex.IsMatch(element.GetInnerHtml()))
-              {
-                // no block elements inside - change to p
-                SetElementName(element, "p");
-              }
-              else
-              {
-                // replace text nodes with p's (experimental)
-                new ChildNodesTraverser(
-                  childNode =>
-                    {
-                      if (childNode.NodeType != XmlNodeType.Text
-                       || GetInnerText(childNode).Length == 0)
-                      {
-                        return;
-                      }
-
-                      XElement paraElement = new XElement("p");
-
-                      // note that we're not using GetInnerText() here; instead we're getting raw InnerText to preserve whitespaces
-                      paraElement.SetInnerHtml(((XText)childNode).Value);
-
-                      paraElement.SetClass(ReadabilityStyledCssClass);
-                      paraElement.SetStyle("display: inline;");
-
-                      childNode.ReplaceWith(paraElement);
-                    }
-                  ).Traverse(element);
-              }
+              // no block elements inside - change to p
+              SetElementName(element, "p");
             }
-          }).Traverse(rootElement);
+            else
+            {
+              // replace text nodes with p's (experimental)
+              new ChildNodesTraverser(
+                childNode =>
+                {
+                  if (childNode.NodeType != XmlNodeType.Text
+                   || GetInnerText(childNode).Length == 0)
+                  {
+                    return;
+                  }
+
+                  XElement paraElement = new XElement("p");
+
+                  // note that we're not using GetInnerText() here; instead we're getting raw InnerText to preserve whitespaces
+                  paraElement.SetInnerHtml(((XText)childNode).Value);
+
+                  paraElement.SetClass(ReadabilityStyledCssClass);
+                  paraElement.SetStyle("display: inline;");
+
+                  childNode.ReplaceWith(paraElement);
+                }
+                ).Traverse(element);
+            }
+          }
+        }).Traverse(rootElement);
     }
 
     internal void CollapseRedundantParagraphDivs(XDocument document)
@@ -994,31 +994,31 @@ namespace PocketSharp.Ports.NReadability
 
       new ElementsTraverser(
         element =>
+        {
+          string elementName = GetElementName(element);
+
+          if ("div".Equals(elementName, StringComparison.OrdinalIgnoreCase))
           {
-            string elementName = GetElementName(element);
+            XNode childNode = element.Nodes().SingleOrNone();
 
-            if ("div".Equals(elementName, StringComparison.OrdinalIgnoreCase))
+            if (childNode != null)
             {
-              XNode childNode = element.Nodes().SingleOrNone();
+              XElement childElement = childNode as XElement;
 
-              if (childNode != null)
+              if (childElement != null && "p".Equals(GetElementName(childElement), StringComparison.OrdinalIgnoreCase))
               {
-                XElement childElement = childNode as XElement;
+                // we have a div with a single child element that is a paragraph - let's remove the div and attach the paragraph to the div's parent
+                XElement parentElement = element.Parent;
 
-                if (childElement != null && "p".Equals(GetElementName(childElement), StringComparison.OrdinalIgnoreCase))
+                if (parentElement != null)
                 {
-                  // we have a div with a single child element that is a paragraph - let's remove the div and attach the paragraph to the div's parent
-                  XElement parentElement = element.Parent;
-
-                  if (parentElement != null)
-                  {
-                    element.AddBeforeSelf(childElement);
-                    element.Remove();
-                  }
+                  element.AddBeforeSelf(childElement);
+                  element.Remove();
                 }
               }
             }
-          }).Traverse(rootElement);
+          }
+        }).Traverse(rootElement);
     }
 
     internal IEnumerable<XElement> FindCandidatesForArticleContent(XDocument document, string articleContentElementHint = null)
@@ -1137,7 +1137,7 @@ namespace PocketSharp.Ports.NReadability
         Math.Max(
           _MaxSiblingScoreTreshold,
           _SiblingScoreTresholdCoefficient * topCandidateElementScore);
-      
+
       string topCandidateClass = topCandidateElement.GetClass();
 
       // iterate through the sibling elements and decide whether append them
@@ -1224,7 +1224,8 @@ namespace PocketSharp.Ports.NReadability
       Clean(articleContentElement, "form");
       Clean(articleContentElement, "object");
 
-      if (articleContentElement.GetElementsByTagName("h1").Count() == 1) {
+      if (articleContentElement.GetElementsByTagName("h1").Count() == 1)
+      {
         Clean(articleContentElement, "h1");
       }
 
@@ -1516,17 +1517,17 @@ namespace PocketSharp.Ports.NReadability
     {
       new ElementsTraverser(
         element =>
+        {
+          string elementClass = element.GetClass();
+
+          if (elementClass.Contains(ReadabilityStyledCssClass))
           {
-            string elementClass = element.GetClass();
+            // don't remove the style if that's we who have styled this element
+            return;
+          }
 
-            if (elementClass.Contains(ReadabilityStyledCssClass))
-            {
-              // don't remove the style if that's we who have styled this element
-              return;
-            }
-
-            element.SetStyle(null);
-          }).Traverse(rootElement);
+          element.SetStyle(null);
+        }).Traverse(rootElement);
     }
 
     internal string GetUserStyleClass(string prefix, String enumStr)
@@ -1650,7 +1651,7 @@ namespace PocketSharp.Ports.NReadability
         return url;
       }
 
-      Uri baseUri;      
+      Uri baseUri;
 
       if (!Uri.TryCreate(articleUrl, UriKind.Absolute, out baseUri))
       {
@@ -1659,8 +1660,8 @@ namespace PocketSharp.Ports.NReadability
 
       /* If the link is simply a query string, then simply attach it to the original URL */
       if (url.StartsWith("?"))
-      {        
-        return baseUri.Scheme + "://" + baseUri.Host + baseUri.AbsolutePath + url;       
+      {
+        return baseUri.Scheme + "://" + baseUri.Host + baseUri.AbsolutePath + url;
       }
 
       Uri absoluteUri;
