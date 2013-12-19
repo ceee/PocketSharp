@@ -2,21 +2,23 @@
 
 **PocketSharp** is a C#.NET portable class library that integrates the [Pocket API v3](http://getpocket.com/developer).
 
-## Install [PocketSharp](https://www.nuget.org/packages/PocketSharp/) using NuGet
+## Install PocketSharp using [NuGet](https://www.nuget.org/packages/PocketSharp/)
 
 ```
 Install-Package PocketSharp
 ```
 
-for the [PocketSharp.Reader](https://www.nuget.org/packages/PocketSharp.Reader/)
-
-```
-Install-Package PocketSharp.Reader
-```
 
 ## Documentation
 
 See [wiki](https://github.com/ceee/PocketSharp/wiki)
+
+## Where's the Article View API?
+
+PocketSharp doesn't include PocketSharp.Reader (an article view implementation) anymore.
+
+**PocketSharp.Reader is now [ReadSharp](https://github.com/ceee/ReadSharp) and hosted without PocketSharp.**
+
 
 ---
 
@@ -66,13 +68,6 @@ You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Example
 - [Microsoft.Net.Http](https://www.nuget.org/packages/Microsoft.Net.Http/) _(used in PocketSharp & PocketSharp.Reader)_
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/) _(only for PocketSharp project)_
 - [PropertyChanged.Fody](https://github.com/Fody/PropertyChanged) _(only for PocketSharp project)_
-
-## Forked Dependencies
-
-_used in PocketSharp.Reader_
-
-- [NReadability](https://github.com/marek-stoj/NReadability) - converted to a PCL with minor adaptations
-- [SgmlReader](https://github.com/MindTouch/SGMLReader) - converted to a PCL
 
 ## Contributors
 | [![ceee](http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70)](https://github.com/ceee "Tobias Klika") | [![ScottIsAFool](http://gravatar.com/avatar/6df656872a87b09a7470feb4867ed927?s=70)](https://github.com/ScottIsAFool "Scott Lovegrove") |
