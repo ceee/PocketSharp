@@ -1,3 +1,11 @@
+### 3.0.2 (2013-12-27)
+
+- assign given_url to `Uri` when item couldn't be resolved by Pocket
+
+### 3.0.1 (2013-12-15)
+
+- added `PreRequest` to interface
+
 ### 3.0.0 (2013-12-15)
 
 - `cancellationToken` support for all methods
