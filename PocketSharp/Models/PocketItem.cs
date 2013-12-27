@@ -43,6 +43,15 @@ namespace PocketSharp.Models
     private Uri _NormalUri { get; set; }
 
     /// <summary>
+    /// Gets or sets the given URI.
+    /// </summary>
+    /// <value>
+    /// The given URI.
+    /// </value>
+    [JsonProperty("given_url")]
+    private Uri _GivenUri { get; set; }
+
+    /// <summary>
     /// Gets or sets the resolved URI.
     /// </summary>
     /// <value>
@@ -60,8 +69,8 @@ namespace PocketSharp.Models
     [JsonIgnore]
     public Uri Uri
     {
-      get { return _ResolvedUri ?? _NormalUri; }
-      set { _NormalUri = value; _ResolvedUri = value; }
+      get { return _ResolvedUri ?? _GivenUri ?? _NormalUri; }
+      set { _NormalUri = value; _ResolvedUri = value; _GivenUri = value; }
     }
 
     /// <summary>

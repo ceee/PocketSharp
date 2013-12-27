@@ -246,5 +246,19 @@ namespace PocketSharp.Tests
 
       Assert.True(items.Count == 1 && items[0].IsDeleted);
     }
+
+    [Fact]
+    public async Task AreUncachedItemsProperlyResolved()
+    {
+      PocketItem item = await client.Add(new Uri("http://de.ign.com/m/feature/21608/die-20-besten-kurzfilme-des-jahres-2013?bust=1"));
+
+      List<PocketItem> items = await client.Get(state: State.all);
+
+      Assert.NotNull(item.Uri);
+      Assert.NotNull(items[0].Uri);
+      Assert.Equal(item.Uri, items[0].Uri);
+
+      itemsToDelete.Add(item.ID);
+    }
   }
 }
