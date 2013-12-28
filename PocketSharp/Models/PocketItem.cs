@@ -100,7 +100,7 @@ namespace PocketSharp.Models
     [JsonIgnore]
     public string Title
     {
-      get { return _InternalTitle ?? _ResolvedTitle; }
+      get { return _InternalTitle ?? _ResolvedTitle ?? FullTitle; }
       set { _InternalTitle = value; _ResolvedTitle = value; }
     }
 
