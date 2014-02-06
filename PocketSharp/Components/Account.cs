@@ -138,7 +138,7 @@ namespace PocketSharp
         throw new FormatException("(2) Invalid username. Please only use letters, numbers, and/or dashes and between 1-20 characters.");
       }
 
-      if (password.Length < 3)
+      if (password.Length < 6)
       {
         throw new FormatException("(3) Invalid password.");
       }

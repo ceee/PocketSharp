@@ -59,7 +59,7 @@ namespace PocketSharp.Tests
     public async Task AreItemsRetrievedProperlyWithoutLimit()
     {
       List<PocketItem> items = await client.Get(state: State.all);
-      Assert.True(items.Count > 0);
+      Assert.True(items.Count > 6000);
     }
 
     [Fact]
