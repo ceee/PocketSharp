@@ -39,7 +39,12 @@ namespace PocketSharp
     /// <summary>
     /// The authentification URL
     /// </summary>
-    protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}&mobile=1";
+    protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}&mobile={2}";
+
+    /// <summary>
+    /// Indicates, whether this client is used for mobile or desktop
+    /// </summary>
+    protected bool isMobileClient = true;
 
     /// <summary>
     /// callback URLi for API calls
@@ -91,10 +96,19 @@ namespace PocketSharp
     /// <param name="callbackUri">The callback URL is called by Pocket after authentication</param>
     /// <param name="handler">The HttpMessage handler.</param>
     /// <param name="timeout">Request timeout (in seconds).</param>
-    public PocketClient(string consumerKey, string accessCode = null, string callbackUri = null, HttpMessageHandler handler = null, int? timeout = null)
+    /// <param name="isMobileClient">Indicates, whether this client is used for mobile or desktop</param>
+    public PocketClient(
+      string consumerKey,
+      string accessCode = null,
+      string callbackUri = null,
+      HttpMessageHandler handler = null,
+      int? timeout = null,
+      bool isMobileClient = true)
     {
       // assign public properties
       ConsumerKey = consumerKey;
+
+      this.isMobileClient = isMobileClient;
 
       // assign access code if submitted
       if (accessCode != null)
