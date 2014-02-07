@@ -58,10 +58,6 @@ PocketSharp is a **Portable Class Library**, therefore it's compatible with mult
 
 You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Examples` ([@github](https://github.com/ceee/PocketSharp/tree/master/PocketSharp.Examples)) folder.
 
-## What's next?
-
-- [  ] Preferences API, if Pocket will ever release it to the public -.-
-
 ## Dependencies
 
 - [Microsoft.Bcl.Async](https://www.nuget.org/packages/Microsoft.Bcl.Async/)

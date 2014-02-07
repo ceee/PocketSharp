@@ -1,3 +1,9 @@
+### 3.1.0 (2014-02-07)
+
+- Use FullTitle if no other title props are available
+- Default mobile authentication screen with toggle for desktop (fixes #17)
+- Use new registration endpoint
+
 ### 3.0.2 (2013-12-27)
 
 - assign given_url to `Uri` when item couldn't be resolved by Pocket
