@@ -39,7 +39,7 @@ namespace PocketSharp
     /// <summary>
     /// The authentification URL
     /// </summary>
-    protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}";
+    protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}&mobile=1";
 
     /// <summary>
     /// callback URLi for API calls
