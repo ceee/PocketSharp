@@ -1,7 +1,6 @@
 ﻿using PocketSharp.Models;
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -61,7 +60,7 @@ namespace PocketSharp
         RequestCode = requestCode;
       }
 
-      return new Uri(string.Format(authentificationUri, RequestCode, CallbackUri));
+      return new Uri(String.Format(authentificationUri, RequestCode, CallbackUri));
     }
 
 
@@ -103,56 +102,27 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Registers a new account.
-    /// Account has to be activated via a activation email sent by Pocket.
+    /// Generate registration URI from requestCode
+    /// Follow the steps as with GenerateAuthenticationUri, but for unregistered users
     /// </summary>
-    /// <param name="username">The username.</param>
-    /// <param name="email">The email.</param>
-    /// <param name="password">The password.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns></returns>
-    /// <exception cref="System.ArgumentNullException">All parameters are required</exception>
-    /// <exception cref="System.FormatException">Invalid email address.
-    /// or
-    /// Invalid username. Please only use letters, numbers, and/or dashes and between 1-20 characters.
-    /// or
-    /// Invalid password.</exception>
-    /// <exception cref="PocketException"></exception>
-    public async Task<bool> RegisterAccount(string username, string email, string password, CancellationToken cancellationToken = default(CancellationToken))
+    /// <param name="requestCode">The requestCode. If no requestCode is supplied, the property from the PocketClient intialization is used.</param>
+    /// <returns>A valid URI to redirect the user to.</returns>
+    /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
+    public Uri GenerateRegistrationUri(string requestCode = null)
     {
-      if (username == null || email == null || password == null)
+      // check if request code is available
+      if (RequestCode == null && requestCode == null)
       {
-        throw new ArgumentNullException("All parameters are required");
+        throw new NullReferenceException("Call GetRequestCode() first to receive a request_code");
       }
 
-      Match matchEmail = Regex.Match(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,10}))$");
-      Match matchUsername = Regex.Match(username, @"^([\w\-_]{1,20})$");
-
-      if (!matchEmail.Success)
+      // override property with given param if available
+      if (requestCode != null)
       {
-        throw new FormatException("(1) Invalid email address.");
+        RequestCode = requestCode;
       }
 
-      if (!matchUsername.Success)
-      {
-        throw new FormatException("(2) Invalid username. Please only use letters, numbers, and/or dashes and between 1-20 characters.");
-      }
-
-      if (password.Length < 6)
-      {
-        throw new FormatException("(3) Invalid password.");
-      }
-
-      RegisterParameters parameters = new RegisterParameters()
-      {
-        Username = username,
-        Email = email,
-        Password = password
-      };
-
-      ResponseBase response = await Request<ResponseBase>("signup", cancellationToken, parameters.Convert(), false);
-
-      return response.Status;
+      return new Uri(String.Format("{0}&force=signup", String.Format(authentificationUri, RequestCode, CallbackUri)));
     }
   }
 }

@@ -84,22 +84,12 @@ namespace PocketSharp
     Task<PocketUser> GetUser(string requestCode = null, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
-    /// Registers a new account.
-    /// Account has to be activated via a activation email sent by Pocket.
+    /// Generate registration URI from requestCode
     /// </summary>
-    /// <param name="username">The username.</param>
-    /// <param name="email">The email.</param>
-    /// <param name="password">The password.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns></returns>
-    /// <exception cref="System.ArgumentNullException">All parameters are required</exception>
-    /// <exception cref="System.FormatException">Invalid email address.
-    /// or
-    /// Invalid username. Please only use letters, numbers, and/or dashes and between 1-20 characters.
-    /// or
-    /// Invalid password.</exception>
-    /// <exception cref="PocketException"></exception>
-    Task<bool> RegisterAccount(string username, string email, string password, CancellationToken cancellationToken = default(CancellationToken));
+    /// <param name="requestCode">The requestCode. If no requestCode is supplied, the property from the PocketClient intialization is used.</param>
+    /// <returns>A valid URI to redirect the user to.</returns>
+    /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
+    Uri GenerateRegistrationUri(string requestCode = null);
     #endregion
 
     #region add methods
