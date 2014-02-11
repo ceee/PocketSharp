@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{19DD45
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.WP7", "PocketSharp.WP7\PocketSharp.WP7.csproj", "{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,16 @@ Global
 		{CA3C491B-A8CA-426C-A0BB-E91636767467}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CA3C491B-A8CA-426C-A0BB-E91636767467}.Release|ARM.ActiveCfg = Release|Any CPU
 		{CA3C491B-A8CA-426C-A0BB-E91636767467}.Release|x86.ActiveCfg = Release|Any CPU
+		{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,5 +103,6 @@ Global
 		{775569C2-987F-4AC4-8BA5-A315A21ED1B7} = {AFD4E3F1-B23C-4924-BA5B-D917FBADB8FA}
 		{656345D2-AF4C-4F88-9C9F-EBF54D7691DB} = {AFD4E3F1-B23C-4924-BA5B-D917FBADB8FA}
 		{47721A56-2128-4C5A-8B92-995FFC353304} = {AFD4E3F1-B23C-4924-BA5B-D917FBADB8FA}
+		{6F542037-C48B-4EC5-A326-DDBEBF5FDFA2} = {AFD4E3F1-B23C-4924-BA5B-D917FBADB8FA}
 	EndGlobalSection
 EndGlobal
