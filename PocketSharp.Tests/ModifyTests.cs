@@ -88,6 +88,21 @@ namespace PocketSharp.Tests
     }
 
 
+    [Fact]
+    public async Task AreMultipleAddActionsSent()
+    {
+      PocketItem item = await Setup();
+
+      bool success = await client.SendActions(new List<PocketAction>()
+      {
+        new PocketAction() { Action = "add", Uri = new Uri("http://msdn.microsoft.com/en-us/library/windows/apps/jj841126.aspx") },
+        new PocketAction() { Action = "add", Uri = new Uri("http://pokiapp.com/changelog") }
+      });
+
+      Assert.True(success);
+    }
+
+
     private async Task<PocketItem> Setup()
     {
       PocketItem item = await client.Add(

@@ -105,7 +105,7 @@ namespace PocketSharp.Models
         { "action", Action }
       };
 
-      if (ID != "0" && !String.IsNullOrEmpty(ID.ToString()))
+      if (!String.IsNullOrEmpty(ID) && ID != "0")
         parameters.Add("item_id", ID.ToString());
       if (Time != null)
         parameters.Add("time", Time != null ? Utilities.GetUnixTimestamp(Time).ToString() : null);
