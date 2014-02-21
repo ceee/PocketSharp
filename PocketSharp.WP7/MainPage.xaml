@@ -29,7 +29,7 @@
 
     <!--ContentPanel contains LongListSelector and LongListSelector ItemTemplate. Place additional content here-->
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-      <ListBox x:Name="MainLongListSelector" Margin="0,0,-12,0" ItemsSource="{Binding Items}" SelectionChanged="MainLongListSelector_SelectionChanged">
+      <ListBox x:Name="MainLongListSelector" Margin="0,0,-12,0" ItemsSource="{Binding Items}">
         <ListBox.ItemTemplate>
           <DataTemplate>
             <StackPanel Margin="0,0,0,17">
