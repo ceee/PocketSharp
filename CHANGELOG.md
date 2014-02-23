@@ -1,3 +1,8 @@
+### 3.1.1 (2014-02-23)
+
+- fix SendActions when sending _add_ requests (fixes #20)
+- try to normalize URIs retrieved in video array
+
 ### 3.1.0 (2014-02-07)
 
 - Use FullTitle if no other title props are available

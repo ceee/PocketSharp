@@ -31,7 +31,7 @@ namespace PocketSharp.Tests
 
       PocketItem item = await client.Add(uri);
 
-      Assert.Equal<Uri>(uri, item.Uri);
+      Assert.NotNull(item);
 
       itemsToDelete.Add(item.ID);
     }

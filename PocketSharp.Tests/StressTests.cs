@@ -56,13 +56,6 @@ namespace PocketSharp.Tests
     }
 
     [Fact]
-    public async Task AreItemsRetrievedProperlyWithoutLimit()
-    {
-      List<PocketItem> items = await client.Get(state: State.all);
-      Assert.True(items.Count > 6000);
-    }
-
-    [Fact]
     public async Task IsSearchSuccessfullyOnBigList()
     {
       List<PocketItem> items = await client.Get(search: "google");

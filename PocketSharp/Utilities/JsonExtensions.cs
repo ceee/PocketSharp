@@ -79,9 +79,24 @@ namespace PocketSharp
   {
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
-      if (reader.TokenType == JsonToken.String && Uri.IsWellFormedUriString(reader.Value.ToString(), UriKind.Absolute))
+      if (reader.TokenType != JsonToken.String)
       {
-        return new Uri(reader.Value.ToString());
+        return null;
+      }
+
+      string value = reader.Value.ToString();
+
+      if (Uri.IsWellFormedUriString(value, UriKind.Absolute))
+      {
+        return new Uri(value);
+      }
+      else if (value.StartsWith("//") && Uri.IsWellFormedUriString("http:" + value, UriKind.Absolute))
+      {
+        return new Uri("http:" + value);
+      }
+      else if (value.StartsWith("www.") && Uri.IsWellFormedUriString("http://" + value, UriKind.Absolute))
+      {
+        return new Uri("http://" + value);
       }
 
       return null;

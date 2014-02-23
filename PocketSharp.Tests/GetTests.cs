@@ -217,7 +217,7 @@ namespace PocketSharp.Tests
 
       await client.Unfavorite(itemToModify);
 
-      since = DateTime.UtcNow;
+      since = DateTime.UtcNow.AddMinutes(-1);
 
       await client.Archive(itemToModify);
 
