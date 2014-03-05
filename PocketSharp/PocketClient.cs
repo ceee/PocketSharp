@@ -227,6 +227,7 @@ namespace PocketSharp
           },
           Converters =
           {
+            new PocketItemConverter(),
             new BoolConverter(),
             new UnixDateTimeConverter(),
             new NullableIntConverter(),

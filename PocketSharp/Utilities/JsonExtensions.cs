@@ -3,6 +3,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using PocketSharp.Models;
 
 namespace PocketSharp
 {
@@ -129,7 +130,6 @@ namespace PocketSharp
       JObject jObject;
       List<T> result = new List<T>();
       T target;
-
       // object is an array
       if (reader.TokenType == JsonToken.StartArray)
       {
@@ -152,8 +152,7 @@ namespace PocketSharp
       // Populate the object properties
       foreach (KeyValuePair<string, JToken> item in jObject)
       {
-        target = new T();
-        serializer.Populate(item.Value.CreateReader(), target);
+        target = serializer.Deserialize<T>(item.Value.CreateReader());
         result.Add(target);
       }
 
@@ -168,6 +167,29 @@ namespace PocketSharp
     public override List<T> Create(Type objectType)
     {
       return new List<T>();
+    }
+
+  }
+
+
+
+  public class PocketItemConverter : CustomCreationConverter<PocketItem>
+  {
+
+    public override object ReadJson(Newtonsoft.Json.JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
+    {
+
+      var jObject = JObject.ReadFrom(reader);
+      var pocketItem = new PocketItem();
+      serializer.Populate(jObject.CreateReader(), pocketItem);
+      pocketItem.Json = jObject.ToString();
+
+      return pocketItem;
+    }
+
+    public override PocketItem Create(Type objectType)
+    {
+      return new PocketItem();
     }
   }
 }
