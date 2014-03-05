@@ -1,4 +1,6 @@
-﻿using PocketSharp.Models;
+﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
+using PocketSharp.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -30,6 +32,23 @@ namespace PocketSharp.Tests
       Assert.True(item.Uri == itemDuplicate.Uri);
     }
 
+    [Fact]
+    public async Task IsItemJsonPopulated()
+    {
+      List<PocketItem> items = await client.Get();
+      string schemaJson = @"{
+                'description': 'PocketItem',
+                'type': 'object'
+                }";
+
+      JsonSchema schema = JsonSchema.Parse(schemaJson);
+      foreach (var pocketItem in items)
+      {
+        Assert.True(!string.IsNullOrWhiteSpace(pocketItem.Json));
+        var jObject = JObject.Parse(pocketItem.Json);
+        Assert.True(jObject.IsValid(schema));
+      }
+    }
 
     [Fact]
     public async Task AreFilteredItemsRetrieved()
