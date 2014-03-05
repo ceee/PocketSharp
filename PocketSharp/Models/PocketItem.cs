@@ -13,6 +13,7 @@ namespace PocketSharp.Models
   [JsonObject]
   [ImplementPropertyChanged]
   [DebuggerDisplay("Uri = {Uri}, Title = {Title}")]
+
   public class PocketItem
   {
     /// <summary>
@@ -352,5 +353,14 @@ namespace PocketSharp.Models
     {
       get { return Images != null && Images.Count > 0 ? Images[0] : null; }
     }
+
+    /// <summary>
+    /// Gets and sets the JSON the model was deserialized from
+    /// </summary>
+    /// <value>
+    /// Model's original JSON representation
+    /// </value>
+    [JsonIgnore]
+    public string Json { get; set; }
   }
 }
