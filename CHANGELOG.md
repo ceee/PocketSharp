@@ -1,3 +1,7 @@
+### 3.2.0 (2014-03-13)
+
+- add raw JSON to each PocketItem (PR #22)
+
 ### 3.1.1 (2014-02-23)
 
 - fix SendActions when sending _add_ requests (fixes #20)
