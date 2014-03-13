@@ -67,9 +67,9 @@ You can find examples for Silverlight 5, WP8 and WPF in the `PocketSharp.Example
 
 ## Contributors
 
-| [![ceee](http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70)](https://github.com/ceee "Tobias Klika") | [![ScottIsAFool](http://gravatar.com/avatar/6df656872a87b09a7470feb4867ed927?s=70)](https://github.com/ScottIsAFool "Scott Lovegrove") |
-|---|---|
-| [ceee](https://github.com/ceee) | [ScottIsAFool](https://github.com/ScottIsAFool) |
+| [![ceee](http://gravatar.com/avatar/9c61b1f4307425f12f05d3adb930ba66?s=70)](https://github.com/ceee "Tobias Klika") | [![ScottIsAFool](http://gravatar.com/avatar/6df656872a87b09a7470feb4867ed927?s=70)](https://github.com/ScottIsAFool "Scott Lovegrove") | [![StephenErstad](http://gravatar.com/avatar/3cfe2c5dbc5bc26697e0fe2c428e46e7?s=70)](https://github.com/StephenErstad "Stephen Erstad") |
+|---|---|---|
+| [ceee](https://github.com/ceee) | [ScottIsAFool](https://github.com/ScottIsAFool) | [StephenErstad](https://github.com/StephenErstad) |
 
 ## License
 
