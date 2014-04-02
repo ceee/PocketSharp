@@ -103,6 +103,27 @@ namespace PocketSharp.Tests
     }
 
 
+    [Fact]
+    public async Task AreMultipleActionsOnOneItemPerformed()
+    {
+      PocketItem item = await Setup();
+
+      bool success = await client.SendActions(new List<PocketAction>()
+      {
+        new PocketAction() { Action = "unarchive", ID = item.ID },
+        new PocketAction() { Action = "archive", ID = item.ID },
+        new PocketAction() { Action = "unfavorite", ID = item.ID }
+      });
+
+      Assert.True(success);
+
+      item = await client.Get(item.ID);
+
+      Assert.False(item.IsFavorite);
+      Assert.True(item.IsArchive);
+    }
+
+
     private async Task<PocketItem> Setup()
     {
       PocketItem item = await client.Add(
