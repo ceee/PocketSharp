@@ -25,6 +25,20 @@ namespace PocketSharp
 
 
     /// <summary>
+    /// Sends an action.
+    /// See: http://getpocket.com/developer/docs/v3/modify
+    /// </summary>
+    /// <param name="action">The action.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    public async Task<bool> SendAction(PocketAction action, CancellationToken cancellationToken = default(CancellationToken))
+    {
+      return await Send(new List<PocketAction>() { action }, cancellationToken);
+    }
+
+
+    /// <summary>
     /// Archives the specified item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>

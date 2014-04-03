@@ -23,16 +23,26 @@ namespace PocketSharp.Models
       Dictionary<string, string> parameterDict = new Dictionary<string, string>();
 
       // get object properties
-      IEnumerable<PropertyInfo> properties = this.GetType()
-        .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-        .Where(p => Attribute.IsDefined(p, typeof(DataMemberAttribute)));
+      IEnumerable<MemberInfo> properties = this.GetType()
+        .GetTypeInfo()
+        .DeclaredMembers
+        .Where(p => p.CustomAttributes.FirstOrDefault(a => a.AttributeType == typeof(DataMemberAttribute)) != null);
 
       // gather attributes of object
-      foreach (PropertyInfo propertyInfo in properties)
+      foreach (MemberInfo memberInfo in properties)
       {
-        DataMemberAttribute attribute = (DataMemberAttribute)propertyInfo.GetCustomAttributes(typeof(DataMemberAttribute‌), false).FirstOrDefault();
-        string name = attribute.Name ?? propertyInfo.Name.ToLower();
-        object value = propertyInfo.GetValue(this, null);
+        DataMemberAttribute attribute = (DataMemberAttribute)memberInfo.GetCustomAttributes(typeof(DataMemberAttribute‌), false).FirstOrDefault();
+        string name = attribute.Name ?? memberInfo.Name.ToLower();
+        object value = null;
+
+        if (memberInfo is FieldInfo)
+        {
+          value = ((FieldInfo)memberInfo).GetValue(this);
+        }
+        else
+        {
+          value = ((PropertyInfo)memberInfo).GetValue(this, null);
+        }
 
         // invalid parameter
         if (value == null)
