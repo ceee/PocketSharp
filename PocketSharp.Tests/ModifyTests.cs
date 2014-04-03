@@ -72,8 +72,7 @@ namespace PocketSharp.Tests
       {
         new PocketAction() { Action = "favorite", ID = item.ID },
         new PocketAction() { Action = "tags_add", ID = item.ID, Tags = new string[] { "new_tag", "another_tag" } },
-        new PocketAction() { Action = "archive", ID = item.ID },
-        new PocketAction() { Action = "tag_rename", ID = item.ID, OldTag = "social", NewTag = "not_social" }
+        new PocketAction() { Action = "archive", ID = item.ID }
       });
 
       Assert.True(success);
@@ -84,7 +83,6 @@ namespace PocketSharp.Tests
       Assert.True(item.IsArchive);
       Assert.NotNull(item.Tags.Single<PocketTag>(tag => tag.Name == "new_tag"));
       Assert.NotNull(item.Tags.Single<PocketTag>(tag => tag.Name == "another_tag"));
-      Assert.NotNull(item.Tags.Single<PocketTag>(tag => tag.Name == "not_social"));
     }
 
 
