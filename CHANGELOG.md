@@ -1,3 +1,7 @@
+### 4.0.0 (2014-04-03)
+
+- Support for Universal apps (dropped SL and WP7 support)
+
 ### 3.2.0 (2014-03-13)
 
 - add raw JSON to each PocketItem (PR #22)
