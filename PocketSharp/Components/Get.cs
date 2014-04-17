@@ -159,6 +159,7 @@ namespace PocketSharp
     public async Task<List<PocketItem>> SearchByTag(string tag, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await Get(
+        state: State.all,
         cancellationToken: cancellationToken,
         tag: tag
       );
@@ -169,37 +170,24 @@ namespace PocketSharp
     /// Retrieves items which match the specified search string in title and URI
     /// </summary>
     /// <param name="searchString">The search string.</param>
-    /// <param name="searchInUri">if set to <c>true</c> [search in URI].</param>
+    /// <param name="tag">Filter by tag.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="System.ArgumentOutOfRangeException">Search string length has to be a minimum of 2 chars</exception>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> Search(string searchString, bool searchInUri = true, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<List<PocketItem>> Search(string searchString, string tag = null, CancellationToken cancellationToken = default(CancellationToken))
     {
-      List<PocketItem> items = await Get(RetrieveFilter.All, cancellationToken);
-      return Search(items, searchString);
-    }
-
-
-    /// <summary>
-    /// Finds the specified search string in title and URI for an available list of items
-    /// </summary>
-    /// <param name="availableItems">The available items.</param>
-    /// <param name="searchString">The search string.</param>
-    /// <returns></returns>
-    /// <exception cref="System.ArgumentOutOfRangeException">Search string length has to be a minimum of 2 chars</exception>
-    /// <exception cref="PocketException"></exception>
-    public List<PocketItem> Search(List<PocketItem> availableItems, string searchString)
-    {
-      if (searchString.Length < 2)
+      if (String.IsNullOrEmpty(searchString) || searchString.Length < 2)
       {
         throw new ArgumentOutOfRangeException("Search string length has to be a minimum of 2 chars");
       }
 
-      return availableItems.Where(item => (
-        (!String.IsNullOrEmpty(item.FullTitle) && item.FullTitle.ToLower().Contains(searchString))
-        || item.Uri.ToString().ToLower().Contains(searchString)
-      )).ToList();
+      return await Get(
+        state: State.all, 
+        search: searchString, 
+        tag: tag, 
+        cancellationToken: cancellationToken
+      );
     }
   }
 
