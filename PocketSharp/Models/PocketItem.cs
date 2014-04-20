@@ -3,6 +3,7 @@ using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace PocketSharp.Models
 {
@@ -301,6 +302,17 @@ namespace PocketSharp.Models
     [JsonProperty("time_favorited")]
     public DateTime? FavoriteTime { get; set; }
 
+    /// <summary>
+    /// Gets or sets the tags as comma-separated strings.
+    /// </summary>
+    /// <value>
+    /// The tags.
+    /// </value>
+    [JsonIgnore]
+    public string TagsString
+    {
+      get { return Tags != null ? String.Join(",", Tags.Select(tag => tag.Name)) : ""; }
+    }
 
     /// <summary>
     /// Gets or sets the tags.
