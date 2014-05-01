@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace PocketSharp.WP8.ViewModels
 {
@@ -74,7 +75,7 @@ namespace PocketSharp.WP8.ViewModels
 
       try
       {
-        items = await client.Get();
+        items = (await client.Get()).ToList();
 
         items.ForEach(item =>
         {

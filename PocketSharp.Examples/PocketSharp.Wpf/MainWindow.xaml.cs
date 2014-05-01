@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
+using System.Linq;
 
 namespace PocketSharp.Wpf
 {
@@ -40,7 +41,7 @@ namespace PocketSharp.Wpf
 
       try
       {
-        items = await client.Get();
+        items = (await client.Get()).ToList();
 
         items.ForEach(item =>
         {

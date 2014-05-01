@@ -29,7 +29,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> Get(
+    public async Task<IEnumerable<PocketItem>> Get(
       State? state = null,
       bool? favorite = null,
       string tag = null,
@@ -58,9 +58,7 @@ namespace PocketSharp
         Offset = offset
       };
 
-      Retrieve response = await Request<Retrieve>("get", cancellationToken, parameters.Convert());
-
-      return response.Items;
+      return (await Request<Retrieve>("get", cancellationToken, parameters.Convert())).Items;
     }
 
 
@@ -74,12 +72,10 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<PocketItem> Get(string itemID, CancellationToken cancellationToken = default(CancellationToken))
     {
-      List<PocketItem> items = await Get(
+      return (await Get(
         cancellationToken: cancellationToken,
         state: State.all
-      );
-
-      return items.SingleOrDefault<PocketItem>(item => item.ID == itemID);
+      )).SingleOrDefault<PocketItem>(item => item.ID == itemID);
     }
 
 
@@ -90,7 +86,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> Get(RetrieveFilter filter, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<IEnumerable<PocketItem>> Get(RetrieveFilter filter, CancellationToken cancellationToken = default(CancellationToken))
     {
       RetrieveParameters parameters = new RetrieveParameters();
 
@@ -121,9 +117,7 @@ namespace PocketSharp
 
       parameters.DetailType = DetailType.complete;
 
-      Retrieve response = await Request<Retrieve>("get", cancellationToken, parameters.Convert());
-
-      return response.Items;
+      return (await Request<Retrieve>("get", cancellationToken, parameters.Convert())).Items;
     }
 
 
@@ -134,18 +128,19 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketTag>> GetTags(CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<IEnumerable<PocketTag>> GetTags(CancellationToken cancellationToken = default(CancellationToken))
     {
-      List<PocketItem> items = await Get(
+      IEnumerable<PocketItem> items = await Get(
         cancellationToken: cancellationToken,
         state: State.all
       );
 
-      return items.Where(item => item.Tags != null)
-                  .SelectMany(item => item.Tags)
-                  .GroupBy(item => item.Name)
-                  .Select(item => item.First())
-                  .ToList<PocketTag>();
+      return items
+        .Where(item => item.Tags != null)
+        .SelectMany(item => item.Tags)
+        .GroupBy(item => item.Name)
+        .Select(item => item.First())
+        .ToList<PocketTag>();
     }
 
 
@@ -156,7 +151,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> SearchByTag(string tag, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<IEnumerable<PocketItem>> SearchByTag(string tag, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await Get(
         state: State.all,
@@ -175,7 +170,7 @@ namespace PocketSharp
     /// <returns></returns>
     /// <exception cref="System.ArgumentOutOfRangeException">Search string length has to be a minimum of 2 chars</exception>
     /// <exception cref="PocketException"></exception>
-    public async Task<List<PocketItem>> Search(string searchString, string tag = null, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<IEnumerable<PocketItem>> Search(string searchString, string tag = null, CancellationToken cancellationToken = default(CancellationToken))
     {
       if (String.IsNullOrEmpty(searchString) || searchString.Length < 2)
       {

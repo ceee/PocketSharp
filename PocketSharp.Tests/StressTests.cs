@@ -30,50 +30,50 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task Are100ItemsRetrievedProperly()
     {
-      List<PocketItem> items = await client.Get(count: 100, state: State.all);
-      Assert.True(items.Count == 100);
+      IEnumerable<PocketItem> items = await client.Get(count: 100, state: State.all);
+      Assert.True(items.Count() == 100);
     }
 
     [Fact]
     public async Task Are1000ItemsRetrievedProperly()
     {
-      List<PocketItem> items = await client.Get(count: 1000, state: State.all);
-      Assert.True(items.Count == 1000);
+      IEnumerable<PocketItem> items = await client.Get(count: 1000, state: State.all);
+      Assert.True(items.Count() == 1000);
     }
 
     [Fact]
     public async Task Are2500ItemsRetrievedProperly()
     {
-      List<PocketItem> items = await client.Get(count: 2500, state: State.all);
-      Assert.True(items.Count == 2500);
+      IEnumerable<PocketItem> items = await client.Get(count: 2500, state: State.all);
+      Assert.True(items.Count() == 2500);
     }
 
     [Fact]
     public async Task Are5000ItemsRetrievedProperly()
     {
-      List<PocketItem> items = await client.Get(count: 5000, state: State.all);
-      Assert.True(items.Count == 5000);
+      IEnumerable<PocketItem> items = await client.Get(count: 5000, state: State.all);
+      Assert.True(items.Count() == 5000);
     }
 
     [Fact]
     public async Task IsSearchSuccessfullyOnBigList()
     {
-      List<PocketItem> items = await client.Get(search: "google");
+      IEnumerable<PocketItem> items = await client.Get(search: "google");
 
-      Assert.True(items.Count > 0);
-      Assert.True(items[0].Title.ToLower().Contains("google") || items[0].Uri.ToString().ToLower().Contains("google"));
+      Assert.True(items.Count() > 0);
+      Assert.True(items.First().Title.ToLower().Contains("google") || items.First().Uri.ToString().ToLower().Contains("google"));
     }
 
     [Fact]
     public async Task IsTagSearchSuccessfullyOnBigList()
     {
-      List<PocketItem> items = await client.SearchByTag(tags[0]);
+      IEnumerable<PocketItem> items = await client.SearchByTag(tags[0]);
 
-      Assert.True(items.Count > 1);
+      Assert.True(items.Count() > 1);
 
       bool found = false;
 
-      items[0].Tags.ForEach(tag =>
+      items.First().Tags.ToList().ForEach(tag =>
       {
         if (tag.Name.Contains(tags[0]))
         {
@@ -87,7 +87,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task RetrieveTagsReturnsResultOnBigList()
     {
-      List<PocketTag> items = await client.GetTags();
+      List<PocketTag> items = (await client.GetTags()).ToList();
 
       items.ForEach(tag =>
       {

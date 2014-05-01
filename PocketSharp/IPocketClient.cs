@@ -127,7 +127,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<List<PocketItem>> Get(
+    Task<IEnumerable<PocketItem>> Get(
       State? state = null,
       bool? favorite = null,
       string tag = null,
@@ -158,7 +158,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<List<PocketItem>> Get(RetrieveFilter filter, CancellationToken cancellationToken = default(CancellationToken));
+    Task<IEnumerable<PocketItem>> Get(RetrieveFilter filter, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Retrieves all available tags.
@@ -167,7 +167,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<List<PocketTag>> GetTags(CancellationToken cancellationToken = default(CancellationToken));
+    Task<IEnumerable<PocketTag>> GetTags(CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Retrieves items by tag
@@ -176,7 +176,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<List<PocketItem>> SearchByTag(string tag, CancellationToken cancellationToken = default(CancellationToken));
+    Task<IEnumerable<PocketItem>> SearchByTag(string tag, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Retrieves items which match the specified search string in title and URI
@@ -187,7 +187,7 @@ namespace PocketSharp
     /// <returns></returns>
     /// <exception cref="System.ArgumentOutOfRangeException">Search string length has to be a minimum of 2 chars</exception>
     /// <exception cref="PocketException"></exception>
-    Task<List<PocketItem>> Search(string searchString, string tag = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<IEnumerable<PocketItem>> Search(string searchString, string tag = null, CancellationToken cancellationToken = default(CancellationToken));
     #endregion
 
     #region modify methods
@@ -199,7 +199,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> SendActions(List<PocketAction> actions, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> SendActions(IEnumerable<PocketAction> actions, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Archives the specified item.

@@ -123,17 +123,17 @@ namespace PocketSharp
 
 
 
-  public class ObjectToArrayConverter<T> : CustomCreationConverter<List<T>> where T : new()
+  public class ObjectToArrayConverter<T> : CustomCreationConverter<IEnumerable<T>> where T : new()
   {
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
       JObject jObject;
-      List<T> result = new List<T>();
-      T target;
+      List<T> results = new List<T>();
+
       // object is an array
       if (reader.TokenType == JsonToken.StartArray)
       {
-        return serializer.Deserialize<List<T>>(reader);
+        return serializer.Deserialize<IEnumerable<T>>(reader);
       }
       else if (reader.TokenType == JsonToken.Null)
       {
@@ -152,11 +152,12 @@ namespace PocketSharp
       // Populate the object properties
       foreach (KeyValuePair<string, JToken> item in jObject)
       {
-        target = serializer.Deserialize<T>(item.Value.CreateReader());
-        result.Add(target);
+        results.Add(
+          serializer.Deserialize<T>(item.Value.CreateReader())
+        );
       }
 
-      return result;
+      return results;
     }
 
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -164,11 +165,10 @@ namespace PocketSharp
       throw new NotImplementedException();
     }
 
-    public override List<T> Create(Type objectType)
+    public override IEnumerable<T> Create(Type objectType)
     {
       return new List<T>();
     }
-
   }
 
 

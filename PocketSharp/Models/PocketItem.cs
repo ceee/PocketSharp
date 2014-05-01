@@ -322,7 +322,7 @@ namespace PocketSharp.Models
     /// </value>
     [JsonProperty("tags")]
     [JsonConverter(typeof(ObjectToArrayConverter<PocketTag>))]
-    public List<PocketTag> Tags { get; set; }
+    public IEnumerable<PocketTag> Tags { get; set; }
 
     /// <summary>
     /// Gets or sets the images.
@@ -332,7 +332,7 @@ namespace PocketSharp.Models
     /// </value>
     [JsonProperty("images")]
     [JsonConverter(typeof(ObjectToArrayConverter<PocketImage>))]
-    public List<PocketImage> Images { get; set; }
+    public IEnumerable<PocketImage> Images { get; set; }
 
     /// <summary>
     /// Gets or sets the videos.
@@ -342,7 +342,7 @@ namespace PocketSharp.Models
     /// </value>
     [JsonProperty("videos")]
     [JsonConverter(typeof(ObjectToArrayConverter<PocketVideo>))]
-    public List<PocketVideo> Videos { get; set; }
+    public IEnumerable<PocketVideo> Videos { get; set; }
 
     /// <summary>
     /// Gets or sets the authors.
@@ -352,7 +352,7 @@ namespace PocketSharp.Models
     /// </value>
     [JsonProperty("authors")]
     [JsonConverter(typeof(ObjectToArrayConverter<PocketAuthor>))]
-    public List<PocketAuthor> Authors { get; set; }
+    public IEnumerable<PocketAuthor> Authors { get; set; }
 
     /// <summary>
     /// Gets the lead image.
@@ -363,7 +363,7 @@ namespace PocketSharp.Models
     [JsonIgnore]
     public PocketImage LeadImage
     {
-      get { return Images != null && Images.Count > 0 ? Images[0] : null; }
+      get { return Images != null && Images.Count() > 0 ? Images.First() : null; }
     }
 
     /// <summary>

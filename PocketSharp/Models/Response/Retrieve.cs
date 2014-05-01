@@ -36,6 +36,6 @@ namespace PocketSharp.Models
     /// </value>
     [JsonProperty("list")]
     [JsonConverter(typeof(ObjectToArrayConverter<PocketItem>))]
-    public List<PocketItem> Items { get; set; }
+    public IEnumerable<PocketItem> Items { get; set; }
   }
 }

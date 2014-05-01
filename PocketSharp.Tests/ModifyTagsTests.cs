@@ -21,7 +21,7 @@ namespace PocketSharp.Tests
 
       item = await GetItemById(item.ID);
 
-      Assert.True(item.Tags.Count >= 2);
+      Assert.True(item.Tags.Count() >= 2);
 
       Assert.NotNull(item.Tags.Single<PocketTag>(tag => tag.Name == "test_tag"));
       Assert.NotNull(item.Tags.Single<PocketTag>(tag => tag.Name == "test_tag2"));
@@ -44,7 +44,7 @@ namespace PocketSharp.Tests
 
       item = await GetItemById(item.ID);
 
-      Assert.True(item.Tags.Count >= 2);
+      Assert.True(item.Tags.Count() >= 2);
 
       Assert.True(await client.RemoveTags(item));
 
@@ -63,7 +63,7 @@ namespace PocketSharp.Tests
 
       item = await GetItemById(item.ID);
 
-      Assert.Equal(item.Tags.Count, 2);
+      Assert.Equal(item.Tags.Count(), 2);
 
       Assert.NotNull(item.Tags.SingleOrDefault<PocketTag>(tag => tag.Name == "test_tag"));
       Assert.NotNull(item.Tags.SingleOrDefault<PocketTag>(tag => tag.Name == "test_tag2"));
@@ -85,7 +85,7 @@ namespace PocketSharp.Tests
 
     private async Task<PocketItem> GetItemById(string id, bool archive = false)
     {
-      List<PocketItem> items = await client.Get(state: archive ? State.archive : State.unread);
+      List<PocketItem> items = (await client.Get(state: archive ? State.archive : State.unread)).ToList();
       PocketItem itemDesired = null;
 
       items.ForEach(itm =>

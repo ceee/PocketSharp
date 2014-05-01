@@ -18,7 +18,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> SendActions(List<PocketAction> actions, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> SendActions(IEnumerable<PocketAction> actions, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await Send(actions, cancellationToken);
     }

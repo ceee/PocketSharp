@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
+using System.Linq;
 
 namespace PocketSharp.Tests
 {
@@ -16,7 +17,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task AreItemsRetrieved()
     {
-      List<PocketItem> items = await client.Get();
+      List<PocketItem> items = (await client.Get()).ToList();
       Assert.True(items.Count > 0);
     }
 
@@ -24,7 +25,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task IsItemRetrievedById()
     {
-      List<PocketItem> items = await client.Get();
+      List<PocketItem> items = (await client.Get()).ToList();
       PocketItem item = items[0];
       PocketItem itemDuplicate = await client.Get(item.ID);
 
@@ -35,7 +36,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task IsItemJsonPopulated()
     {
-      List<PocketItem> items = await client.Get();
+      List<PocketItem> items = (await client.Get()).ToList();
       string schemaJson = @"{
                 'description': 'PocketItem',
                 'type': 'object'
@@ -53,16 +54,16 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task AreFilteredItemsRetrieved()
     {
-      List<PocketItem> items = await client.Get(RetrieveFilter.Favorite);
+      IEnumerable<PocketItem> items = await client.Get(RetrieveFilter.Favorite);
 
-      Assert.True(items.Count > 0);
+      Assert.True(items.Count() > 0);
     }
 
 
     [Fact]
     public async Task RetrieveWithMultipleFilters()
     {
-      List<PocketItem> items = await client.Get(
+      IEnumerable<PocketItem> items = await client.Get(
         state: State.unread,
         tag: "pocket",
         sort: Sort.title,
@@ -70,29 +71,29 @@ namespace PocketSharp.Tests
         count: 2
       );
 
-      Assert.InRange<int>(items.Count, 0, 2);
+      Assert.InRange<int>(items.Count(), 0, 2);
     }
 
 
     [Fact]
     public async Task ItemContainsUri()
     {
-      List<PocketItem> items = await client.Get(count: 1);
+      IEnumerable<PocketItem> items = await client.Get(count: 1);
 
-      Assert.True(items.Count == 1);
-      Assert.True(items[0].Uri.ToString().StartsWith("http"));
+      Assert.True(items.Count() == 1);
+      Assert.True(items.First().Uri.ToString().StartsWith("http"));
     }
 
 
     [Fact]
     public async Task InvalidRetrievalReturnsNoResults()
     {
-      List<PocketItem> items = await client.Get(
+      IEnumerable<PocketItem> items = await client.Get(
         favorite: true,
         search: "xoiu987a#;"
       );
 
-      Assert.False(items.Count > 0);
+      Assert.False(items.Count() > 0);
 
       PocketItem item = await client.Get("99999999");
 
@@ -100,48 +101,48 @@ namespace PocketSharp.Tests
 
       items = await client.Get(RetrieveFilter.Video);
 
-      Assert.False(items.Count > 0);
+      Assert.False(items.Count() > 0);
     }
 
 
     [Fact]
     public async Task SearchReturnsResult()
     {
-      List<PocketItem> items = await client.Search("pocket");
+      IEnumerable<PocketItem> items = await client.Search("pocket");
 
-      Assert.True(items.Count > 0);
-      Assert.True(items[0].FullTitle.ToLower().Contains("pocket"));
+      Assert.True(items.Count() > 0);
+      Assert.True(items.First().FullTitle.ToLower().Contains("pocket"));
     }
 
 
     [Fact]
     public async Task InvalidSearchReturnsNoResult()
     {
-      List<PocketItem> items = await client.Search("adsüasd-opiu2;.398dfyx");
+      IEnumerable<PocketItem> items = await client.Search("adsüasd-opiu2;.398dfyx");
 
-      Assert.False(items.Count > 0);
+      Assert.False(items.Count() > 0);
     }
 
 
     [Fact]
     public async Task RetrieveTagsReturnsResult()
     {
-      List<PocketTag> items = await client.GetTags();
+      IEnumerable<PocketTag> items = await client.GetTags();
 
-      Assert.True(items.Count > 0);
+      Assert.True(items.Count() > 0);
     }
 
 
     [Fact]
     public async Task SearchByTagsReturnsResult()
     {
-      List<PocketItem> items = await client.SearchByTag("pocket");
+      IEnumerable<PocketItem> items = await client.SearchByTag("pocket");
 
-      Assert.True(items.Count == 1);
+      Assert.True(items.Count() == 1);
 
       bool found = false;
 
-      items[0].Tags.ForEach(tag =>
+      items.First().Tags.ToList().ForEach(tag =>
       {
         if (tag.Name.Contains("pocket"))
         {
@@ -156,9 +157,9 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task InvalidSearchByTagsReturnsNoResult()
     {
-      List<PocketItem> items = await client.SearchByTag("adsüasd-opiu2;.398dfyx");
+      IEnumerable<PocketItem> items = await client.SearchByTag("adsüasd-opiu2;.398dfyx");
 
-      Assert.False(items.Count > 0);
+      Assert.False(items.Count() > 0);
     }
 
 
@@ -183,10 +184,10 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task IsNewPocketItemListGeneratorWorking()
     {
-      List<PocketItem> items = await client.Get(count: 1, tag: "pocket");
-      PocketItem item = items[0];
+      IEnumerable<PocketItem> items = await client.Get(count: 1, tag: "pocket");
+      PocketItem item = items.First();
 
-      Assert.True(item.Tags.Find(i => i.Name == "pocket") != null);
+      Assert.True(item.Tags.ToList().Find(i => i.Name == "pocket") != null);
     }
 
 
@@ -195,20 +196,20 @@ namespace PocketSharp.Tests
     {
       DateTime since = DateTime.UtcNow;
 
-      List<PocketItem> items = await client.Get(state: State.all);
-      PocketItem itemToModify = items[0];
+      IEnumerable<PocketItem> items = await client.Get(state: State.all);
+      PocketItem itemToModify = items.First();
 
-      Assert.True(items.Count >= 3);
+      Assert.True(items.Count() >= 3);
 
       items = await client.Get(state: State.all, since: since);
 
-      Assert.True(items == null || items.Count == 0);
+      Assert.True(items == null || items.Count() == 0);
 
       await client.AddTags(itemToModify, new string[] { "pocketsharp" });
 
       items = await client.Get(state: State.all, since: since);
 
-      Assert.True(items.Count > 0);
+      Assert.True(items.Count() > 0);
 
       await client.RemoveTags(itemToModify, new string[] { "pocketsharp" });
     }
@@ -219,20 +220,20 @@ namespace PocketSharp.Tests
     {
       DateTime since = DateTime.UtcNow;
 
-      List<PocketItem> items = await client.Get(state: State.all);
-      PocketItem itemToModify = items[0];
+      IEnumerable<PocketItem> items = await client.Get(state: State.all);
+      PocketItem itemToModify = items.First();
 
-      Assert.True(items.Count >= 3);
+      Assert.True(items.Count() >= 3);
 
       items = await client.Get(state: State.all, since: since);
 
-      Assert.True(items == null || items.Count == 0);
+      Assert.True(items == null || items.Count() == 0);
 
       await client.Favorite(itemToModify);
 
       items = await client.Get(state: State.all, since: since);
 
-      Assert.True(items.Count > 0);
+      Assert.True(items.Count() > 0);
 
       await client.Unfavorite(itemToModify);
 
@@ -242,7 +243,7 @@ namespace PocketSharp.Tests
 
       items = await client.Get(state: State.all, since: since);
 
-      Assert.True(items.Count > 0);
+      Assert.True(items.Count() > 0);
 
       await client.Unarchive(itemToModify);
     }
@@ -255,7 +256,7 @@ namespace PocketSharp.Tests
 
       PocketItem item = await client.Add(new Uri("http://frontendplay.com"));
 
-      List<PocketItem> items = await client.Get(state: State.all, since: since);
+      IEnumerable<PocketItem> items = await client.Get(state: State.all, since: since);
 
       since = DateTime.UtcNow;
 
@@ -263,7 +264,7 @@ namespace PocketSharp.Tests
 
       items = await client.Get(state: State.all, since: since);
 
-      Assert.True(items.Count == 1 && items[0].IsDeleted);
+      Assert.True(items.Count() == 1 && items.First().IsDeleted);
     }
 
     [Fact]
@@ -271,11 +272,11 @@ namespace PocketSharp.Tests
     {
       PocketItem item = await client.Add(new Uri("http://de.ign.com/m/feature/21608/die-20-besten-kurzfilme-des-jahres-2013?bust=1"));
 
-      List<PocketItem> items = await client.Get(state: State.all);
+      IEnumerable<PocketItem> items = await client.Get(state: State.all);
 
       Assert.NotNull(item.Uri);
-      Assert.NotNull(items[0].Uri);
-      Assert.Equal(item.Uri, items[0].Uri);
+      Assert.NotNull(items.First().Uri);
+      Assert.Equal(item.Uri, items.First().Uri);
 
       itemsToDelete.Add(item.ID);
     }

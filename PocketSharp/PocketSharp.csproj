@@ -63,7 +63,6 @@
   <ItemGroup>
     <Compile Include="Components\Statistics.cs" />
     <Compile Include="IPocketClient.cs" />
-    <Compile Include="Models\Parameters\RegisterParameters.cs" />
     <Compile Include="Models\PocketBoolean.cs" />
     <Compile Include="Models\PocketLimits.cs" />
     <Compile Include="Models\PocketStatistics.cs" />

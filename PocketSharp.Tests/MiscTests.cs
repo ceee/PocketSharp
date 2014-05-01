@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
+using System.Linq;
 
 namespace PocketSharp.Tests
 {
@@ -19,8 +20,8 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task CheckPreRequestAction()
     {
-      List<PocketItem> items = await client.Get(count: 1);
-      PocketItem item = items[0];
+      IEnumerable<PocketItem> items = await client.Get(count: 1);
+      PocketItem item = items.First();
 
       await client.Favorite(item);
       await client.Unfavorite(item);

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace PocketSharp
 {
@@ -245,22 +246,13 @@ namespace PocketSharp
     /// </summary>
     /// <param name="actionParameters">The action parameters.</param>
     /// <returns></returns>
-    internal async Task<bool> Send(List<PocketAction> actionParameters, CancellationToken cancellationToken)
+    internal async Task<bool> Send(IEnumerable<PocketAction> actionParameters, CancellationToken cancellationToken)
     {
-      List<Dictionary<string, object>> actionParamList = new List<Dictionary<string, object>>();
-
-      foreach (var action in actionParameters)
-      {
-        actionParamList.Add(action.Convert());
-      }
-
       Dictionary<string, string> parameters = new Dictionary<string, string>() {{
-        "actions", JsonConvert.SerializeObject(actionParamList)                                                                    
+        "actions", JsonConvert.SerializeObject(actionParameters.Select(action => action.Convert()))                                                                    
       }};
 
-      Modify response = await Request<Modify>("send", cancellationToken, parameters);
-
-      return response.Status;
+      return (await Request<Modify>("send", cancellationToken, parameters)).Status;
     }
 
 

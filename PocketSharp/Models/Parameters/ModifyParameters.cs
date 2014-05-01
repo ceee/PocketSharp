@@ -16,6 +16,6 @@ namespace PocketSharp.Models
     /// The actions.
     /// </value>
     [DataMember(Name = "actions")]
-    public List<Dictionary<string, string>> Actions { get; set; }
+    public IEnumerable<Dictionary<string, string>> Actions { get; set; }
   }
 }

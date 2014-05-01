@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
+using System.Linq;
 
 namespace PocketSharp.Tests
 {
@@ -47,7 +48,7 @@ namespace PocketSharp.Tests
         tweetID: "380051788172632065"
       );
 
-      List<PocketItem> items = await client.Get();
+      List<PocketItem> items = (await client.Get()).ToList();
       PocketItem itemDesired = null;
 
       items.ForEach(itm =>
@@ -60,7 +61,7 @@ namespace PocketSharp.Tests
 
       Assert.NotNull(itemDesired);
       Assert.Equal(itemDesired.ID, item.ID);
-      Assert.Equal(itemDesired.Tags.Count, 3);
+      Assert.Equal(itemDesired.Tags.Count(), 3);
 
       itemsToDelete.Add(item.ID);
     }

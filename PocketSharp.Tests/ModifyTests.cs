@@ -137,7 +137,7 @@ namespace PocketSharp.Tests
 
     private async Task<PocketItem> GetItemById(string id, bool archive = false)
     {
-      List<PocketItem> items = await client.Get(state: archive ? State.archive : State.unread);
+      List<PocketItem> items = (await client.Get(state: archive ? State.archive : State.unread)).ToList();
       PocketItem itemDesired = null;
 
       items.ForEach(itm =>
