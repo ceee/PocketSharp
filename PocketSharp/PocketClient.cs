@@ -215,11 +215,24 @@ namespace PocketSharp
       // cache response
       lastResponseData = responseString;
 
-      responseString = responseString.Replace("[]", "{}");
+      return DeserializeJson<T>(responseString);
+    }
+
+
+    /// <summary>
+    /// Converts JSON to Pocket objects
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="json">Raw JSON response</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException">Parse error.</exception>
+    protected T DeserializeJson<T>(string json) where T : class, new()
+    {
+      json = json.Replace("[]", "{}");
 
       // deserialize object
       T parsedResponse = JsonConvert.DeserializeObject<T>(
-        responseString,
+        json,
         new JsonSerializerSettings
         {
           Error = (object sender, ErrorEventArgs args) =>

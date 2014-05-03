@@ -122,6 +122,18 @@ namespace PocketSharp
 
 
     /// <summary>
+    /// Converts a raw JSON response to a PocketItem list
+    /// </summary>
+    /// <param name="itemsJSON">The raw JSON response.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    public IEnumerable<PocketItem> ConvertJsonToList(string itemsJSON)
+    {
+      return DeserializeJson<Retrieve>(itemsJSON).Items;
+    }
+
+
+    /// <summary>
     /// Retrieves all available tags.
     /// Note: The Pocket API contains no method, which allows to retrieve all tags, so all items are retrieved and the associated tags extracted.
     /// </summary>
