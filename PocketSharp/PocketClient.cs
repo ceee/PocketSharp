@@ -43,6 +43,11 @@ namespace PocketSharp
     protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}&mobile={2}";
 
     /// <summary>
+    /// The parser API URL
+    /// </summary>
+    protected Uri parserUri = null;
+
+    /// <summary>
     /// Indicates, whether this client is used for mobile or desktop
     /// </summary>
     protected bool isMobileClient = true;
@@ -98,13 +103,15 @@ namespace PocketSharp
     /// <param name="handler">The HttpMessage handler.</param>
     /// <param name="timeout">Request timeout (in seconds).</param>
     /// <param name="isMobileClient">Indicates, whether this client is used for mobile or desktop</param>
+    /// <param name="parserUri">Enables the wrapper for the private Text Parser API</param>
     public PocketClient(
       string consumerKey,
       string accessCode = null,
       string callbackUri = null,
       HttpMessageHandler handler = null,
       int? timeout = null,
-      bool isMobileClient = true)
+      bool isMobileClient = true,
+      Uri parserUri = null)
     {
       // assign public properties
       ConsumerKey = consumerKey;
@@ -121,6 +128,12 @@ namespace PocketSharp
       if (callbackUri != null)
       {
         CallbackUri = Uri.EscapeUriString(callbackUri.ToString());
+      }
+
+      // assign text parser uri if submitted
+      if (parserUri != null)
+      {
+        this.parserUri = parserUri;
       }
 
       // initialize REST client
@@ -159,11 +172,27 @@ namespace PocketSharp
       string method,
       CancellationToken cancellationToken,
       Dictionary<string, string> parameters = null,
-      bool requireAuth = true) where T : class, new()
+      bool requireAuth = true,
+      bool isReaderRequest = false) where T : class, new()
     {
       if (requireAuth && AccessCode == null)
       {
         throw new PocketException("SDK error: No access token available. Use authentication first.");
+      }
+
+      // rewrite base if it is a request to the Parser API
+      if (isReaderRequest)
+      {
+        if (parserUri == null)
+        {
+          throw new PocketException("Please pass the parserUri in the PocketClient ctor.");
+        }
+
+        _restClient.BaseAddress = parserUri;
+      }
+      else
+      {
+        _restClient.BaseAddress = baseUri;
       }
 
       // every single Pocket API endpoint requires HTTP POST data
@@ -179,7 +208,7 @@ namespace PocketSharp
       parameters.Add("consumer_key", ConsumerKey);
 
       // add access token (necessary for all requests except authentification)
-      if (AccessCode != null)
+      if (AccessCode != null && requireAuth)
       {
         parameters.Add("access_token", AccessCode);
       }

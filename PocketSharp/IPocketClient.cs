@@ -196,6 +196,21 @@ namespace PocketSharp
     /// <exception cref="System.ArgumentOutOfRangeException">Search string length has to be a minimum of 2 chars</exception>
     /// <exception cref="PocketException"></exception>
     Task<IEnumerable<PocketItem>> Search(string searchString, string tag = null, CancellationToken cancellationToken = default(CancellationToken));
+
+    /// <summary>
+    /// Retrieves the article content from an URI
+    /// WARNING: 
+    /// You have to pass the parseUri in the PocketClient ctor for this method to work.
+    /// This is a private API and can only be used by authenticated users.
+    /// </summary>
+    /// <param name="tag">The article URI.</param>
+    /// <param name="includeImages">Include images into content or use placeholder.</param>
+    /// <param name="includeVideos">Include videos into content or use placeholder.</param>
+    /// <param name="forceRefresh">Force refresh of the content (don't use cache).</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<PocketArticle> GetArticle(Uri uri, bool includeImages = true, bool includeVideos = true, bool forceRefresh = false, CancellationToken cancellationToken = default(CancellationToken));
     #endregion
 
     #region modify methods
