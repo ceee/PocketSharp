@@ -23,6 +23,11 @@ namespace PocketSharp
     protected readonly HttpClient _restClient;
 
     /// <summary>
+    /// REST client used for the API communication with the Text Parser API
+    /// </summary>
+    protected readonly HttpClient _restParserClient;
+
+    /// <summary>
     /// Caches HTTP headers from last response
     /// </summary>
     public HttpResponseHeaders lastHeaders;
@@ -41,11 +46,6 @@ namespace PocketSharp
     /// The authentification URL
     /// </summary>
     protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}&mobile={2}";
-
-    /// <summary>
-    /// The parser API URL
-    /// </summary>
-    protected Uri parserUri = null;
 
     /// <summary>
     /// Indicates, whether this client is used for mobile or desktop
@@ -130,10 +130,21 @@ namespace PocketSharp
         CallbackUri = Uri.EscapeUriString(callbackUri.ToString());
       }
 
-      // assign text parser uri if submitted
+      // assign text parser if parserUri submitted
       if (parserUri != null)
       {
-        this.parserUri = parserUri;
+        _restParserClient = new HttpClient(handler ?? new HttpClientHandler()
+        {
+          AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
+        });
+        _restParserClient.BaseAddress = parserUri;
+        _restParserClient.DefaultRequestHeaders.Add("Accept", "*/*");
+        _restParserClient.DefaultRequestHeaders.Add("X-Accept", "application/json");
+
+        if (timeout.HasValue)
+        {
+          _restParserClient.Timeout = TimeSpan.FromSeconds(timeout.Value);
+        }
       }
 
       // initialize REST client
@@ -183,16 +194,10 @@ namespace PocketSharp
       // rewrite base if it is a request to the Parser API
       if (isReaderRequest)
       {
-        if (parserUri == null)
+        if (_restParserClient == null)
         {
           throw new PocketException("Please pass the parserUri in the PocketClient ctor.");
         }
-
-        _restClient.BaseAddress = parserUri;
-      }
-      else
-      {
-        _restClient.BaseAddress = baseUri;
       }
 
       // every single Pocket API endpoint requires HTTP POST data
@@ -225,7 +230,14 @@ namespace PocketSharp
       // make async request
       try
       {
-        response = await _restClient.SendAsync(request, cancellationToken);
+        if (isReaderRequest)
+        {
+          response = await _restParserClient.SendAsync(request, cancellationToken);
+        }
+        else
+        {
+          response = await _restClient.SendAsync(request, cancellationToken);
+        }
       }
       catch (HttpRequestException exc)
       {
