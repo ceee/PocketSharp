@@ -45,6 +45,11 @@ namespace PocketSharp
         return null;
       }
 
+      if (reader.Value.ToString().StartsWith("-"))
+      {
+        return null;
+      }
+
       return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Convert.ToDouble(reader.Value)).ToLocalTime();
     }
   }
