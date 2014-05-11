@@ -455,5 +455,10 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     Task<PocketLimits> GetUsageLimits(CancellationToken cancellationToken = default(CancellationToken));
     #endregion
+
+    /// <summary>
+    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    void Dispose();
   }
 }

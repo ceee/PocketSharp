@@ -15,7 +15,7 @@ namespace PocketSharp
   /// <summary>
   /// PocketClient
   /// </summary>
-  public partial class PocketClient : IPocketClient
+  public partial class PocketClient : IPocketClient, IDisposable
   {
     /// <summary>
     /// REST client used for the API communication
@@ -203,6 +203,7 @@ namespace PocketSharp
       // every single Pocket API endpoint requires HTTP POST data
       HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, method);
       HttpResponseMessage response = null;
+      string responseString = null;
 
       if (parameters == null)
       {
@@ -238,20 +239,29 @@ namespace PocketSharp
         {
           response = await _restClient.SendAsync(request, cancellationToken);
         }
+
+        // validate HTTP response
+        ValidateResponse(response);
+
+        // cache headers
+        lastHeaders = response.Headers;
+
+        // read response
+        responseString = await response.Content.ReadAsStringAsync();
       }
       catch (HttpRequestException exc)
       {
         throw new PocketException(exc.Message, exc);
       }
-
-      // validate HTTP response
-      ValidateResponse(response);
-
-      // cache headers
-      lastHeaders = response.Headers;
-
-      // read response
-      var responseString = await response.Content.ReadAsStringAsync();
+      catch (PocketException exc)
+      {
+        throw exc;
+      }
+      finally
+      {
+        request.Dispose();
+        response.Dispose();
+      }
 
       // cache response
       lastResponseData = responseString;
@@ -400,6 +410,21 @@ namespace PocketSharp
       }
 
       return result;
+    }
+
+
+    /// <summary>
+    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    public void Dispose()
+    {
+      _restClient.Dispose();
+      lastHeaders = null;
+
+      if (_restParserClient != null)
+      {
+        _restParserClient.Dispose();
+      }
     }
   }
 }
