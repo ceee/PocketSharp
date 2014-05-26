@@ -144,6 +144,10 @@ namespace PocketSharp
       {
         return null;
       }
+      else if (reader.TokenType == JsonToken.String)
+      {
+        return null;
+      }
 
       try
       {
