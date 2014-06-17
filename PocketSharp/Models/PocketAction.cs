@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -120,7 +121,7 @@ namespace PocketSharp.Models
       if (!String.IsNullOrEmpty(TweetID))
         parameters.Add("ref_id", TweetID);
       if (Uri != null)
-        parameters.Add("uri", Uri.ToString());
+        parameters.Add("url", Uri.OriginalString);
 
       return parameters;
     }

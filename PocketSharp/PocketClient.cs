@@ -316,9 +316,7 @@ namespace PocketSharp
         "actions", JsonConvert.SerializeObject(actionParameters.Select(action => action.Convert()))                                                                    
       }};
 
-      Modify result = (await Request<Modify>("send", cancellationToken, parameters));
-
-      return result.ActionResults != null ? !result.ActionResults.Contains(false) : result.Status;
+      return (await Request<Modify>("send", cancellationToken, parameters)).Status;
     }
 
 

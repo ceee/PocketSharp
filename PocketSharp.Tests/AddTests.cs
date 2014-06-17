@@ -70,25 +70,56 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task ItemViaActionsIsAdded()
     {
-      var uri = new Uri("http://frontendplay.com/story/4015/string-indexer-for-text-resources-in-nancy");
+      List<PocketAction> actions = new List<PocketAction>();
 
-      PocketAction action = new PocketAction()
+      actions.Add(new PocketAction()
       {
-        Uri = uri,
+        Uri = new Uri("http://frontendplay.com/story/4015/string-indexer-for-text-resources-in-nancy"),
         Action = "add",
         Time = DateTime.Now
-      };
+      });
 
-      bool success = await client.SendAction(action);
+      bool success = await client.SendActions(actions);
 
       Assert.True(success);
 
-      IEnumerable<PocketItem> items = await client.Search("String Indexer");
+      IEnumerable<PocketItem> items = await client.Search("in nancy");
 
       Assert.NotNull(items);
       Assert.True(items.Count() > 0);
 
       itemsToDelete.Add(items.First().ID);
+    }
+
+
+    [Fact]
+    public async Task ItemsViaActionsIsAdded()
+    {
+      List<PocketAction> actions = new List<PocketAction>();
+
+      actions.Add(new PocketAction()
+      {
+        Uri = new Uri("http://frontendplay.com/story/4015/string-indexer-for-text-resources-in-nancy"),
+        Action = "add",
+        Time = DateTime.Now
+      });
+      actions.Add(new PocketAction()
+      {
+        Uri = new Uri("http://frontendplay.com/story/4013/build-a-custom-razor-viewbase-in-nancy"),
+        Action = "add",
+        Time = DateTime.Now
+      });
+
+      bool success = await client.SendActions(actions);
+
+      Assert.True(success);
+
+      IEnumerable<PocketItem> items = await client.Search("in nancy");
+
+      Assert.NotNull(items);
+      Assert.True(items.Count() == 2);
+
+      itemsToDelete.AddRange(items.Select(item => item.ID));
     }
   }
 }
