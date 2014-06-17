@@ -204,7 +204,7 @@ namespace PocketSharp
     /// You have to pass the parseUri in the PocketClient ctor for this method to work.
     /// This is a private API and can only be used by authenticated users.
     /// </summary>
-    /// <param name="tag">The article URI.</param>
+    /// <param name="uri">The article URI.</param>
     /// <param name="includeImages">Include images into content or use placeholder.</param>
     /// <param name="includeVideos">Include videos into content or use placeholder.</param>
     /// <param name="forceRefresh">Force refresh of the content (don't use cache).</param>

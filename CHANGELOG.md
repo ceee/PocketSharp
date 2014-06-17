@@ -1,3 +1,12 @@
+### 4.1.1 (2014-06-17)
+
+- Fix batch adding bug
+
+
+### 4.1.0 (2014-06-16)
+
+- Include access to the Article View API
+
 ### 4.0.0 (2014-04-03)
 
 - Support for Universal apps (dropped SL and WP7 support)

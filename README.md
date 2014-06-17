@@ -15,9 +15,8 @@ See [wiki](https://github.com/ceee/PocketSharp/wiki)
 
 ## Where's the Article View API?
 
-PocketSharp doesn't include PocketSharp.Reader (an article view implementation) anymore.
-
-**PocketSharp.Reader is now [ReadSharp](https://github.com/ceee/ReadSharp) and hosted without PocketSharp.**
+You can either use the open source [ReadSharp](https://github.com/ceee/ReadSharp) parser or if you want to use the official API by Pocket, you have to request access to it.<br>
+Afterwards you can use the access information to query the endpoint with PocketSharp. Instructions [here](https://github.com/ceee/PocketSharp/wiki/Article-parser).
 
 
 ---
