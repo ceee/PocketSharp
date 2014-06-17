@@ -65,5 +65,30 @@ namespace PocketSharp.Tests
 
       itemsToDelete.Add(item.ID);
     }
+
+
+    [Fact]
+    public async Task ItemViaActionsIsAdded()
+    {
+      var uri = new Uri("http://frontendplay.com/story/4015/string-indexer-for-text-resources-in-nancy");
+
+      PocketAction action = new PocketAction()
+      {
+        Uri = uri,
+        Action = "add",
+        Time = DateTime.Now
+      };
+
+      bool success = await client.SendAction(action);
+
+      Assert.True(success);
+
+      IEnumerable<PocketItem> items = await client.Search("String Indexer");
+
+      Assert.NotNull(items);
+      Assert.True(items.Count() > 0);
+
+      itemsToDelete.Add(items.First().ID);
+    }
   }
 }
