@@ -1,3 +1,7 @@
+### 4.1.2 (2014-06-18)
+
+- Add force param to login+registration
+
 ### 4.1.1 (2014-06-17)
 
 - Fix batch adding bug

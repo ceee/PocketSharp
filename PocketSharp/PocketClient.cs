@@ -45,7 +45,7 @@ namespace PocketSharp
     /// <summary>
     /// The authentification URL
     /// </summary>
-    protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}&mobile={2}";
+    protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}&mobile={2}&force={3}";
 
     /// <summary>
     /// Indicates, whether this client is used for mobile or desktop

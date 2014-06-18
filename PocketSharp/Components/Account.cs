@@ -60,7 +60,7 @@ namespace PocketSharp
         RequestCode = requestCode;
       }
 
-      return new Uri(String.Format(authentificationUri, RequestCode, CallbackUri, isMobileClient ? "1" : "0"));
+      return new Uri(String.Format(authentificationUri, RequestCode, CallbackUri, isMobileClient ? "1" : "0", "login"));
     }
 
 
@@ -122,7 +122,7 @@ namespace PocketSharp
         RequestCode = requestCode;
       }
 
-      return new Uri(String.Format("{0}&force=signup", String.Format(authentificationUri, RequestCode, CallbackUri, isMobileClient ? "1" : "0")));
+      return new Uri(String.Format(authentificationUri, RequestCode, CallbackUri, isMobileClient ? "1" : "0", "signup"));
     }
   }
 }
