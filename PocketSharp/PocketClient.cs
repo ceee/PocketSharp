@@ -260,7 +260,11 @@ namespace PocketSharp
       finally
       {
         request.Dispose();
-        response.Dispose();
+
+        if (response != null)
+        {
+          response.Dispose();
+        }
       }
 
       // cache response

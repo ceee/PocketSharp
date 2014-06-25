@@ -1,3 +1,7 @@
+### 4.1.3 (2014-06-25)
+
+- Only dispose response if available
+
 ### 4.1.2 (2014-06-18)
 
 - Add force param to login+registration
