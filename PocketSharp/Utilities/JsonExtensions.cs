@@ -187,7 +187,6 @@ namespace PocketSharp
 
     public override object ReadJson(Newtonsoft.Json.JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
     {
-
       var jObject = JObject.ReadFrom(reader);
       var pocketItem = new PocketItem();
       serializer.Populate(jObject.CreateReader(), pocketItem);

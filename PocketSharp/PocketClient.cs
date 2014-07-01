@@ -53,6 +53,11 @@ namespace PocketSharp
     protected bool isMobileClient = true;
 
     /// <summary>
+    /// Indicates, whether the last HTTP response is cached
+    /// </summary>
+    protected bool cacheHTTPResponseData;
+
+    /// <summary>
     /// callback URLi for API calls
     /// </summary>
     /// <value>
@@ -104,6 +109,7 @@ namespace PocketSharp
     /// <param name="timeout">Request timeout (in seconds).</param>
     /// <param name="isMobileClient">Indicates, whether this client is used for mobile or desktop</param>
     /// <param name="parserUri">Enables the wrapper for the private Text Parser API</param>
+    /// <param name="cacheHTTPResponseData">Caches the last HTTP response in public properties</param>
     public PocketClient(
       string consumerKey,
       string accessCode = null,
@@ -111,12 +117,14 @@ namespace PocketSharp
       HttpMessageHandler handler = null,
       int? timeout = null,
       bool isMobileClient = true,
-      Uri parserUri = null)
+      Uri parserUri = null,
+      bool cacheHTTPResponseData = true)
     {
       // assign public properties
       ConsumerKey = consumerKey;
 
       this.isMobileClient = isMobileClient;
+      this.cacheHTTPResponseData = cacheHTTPResponseData;
 
       // assign access code if submitted
       if (accessCode != null)
@@ -244,7 +252,10 @@ namespace PocketSharp
         ValidateResponse(response);
 
         // cache headers
-        lastHeaders = response.Headers;
+        if (cacheHTTPResponseData)
+        {
+          lastHeaders = response.Headers;
+        }
 
         // read response
         responseString = await response.Content.ReadAsStringAsync();
@@ -268,7 +279,10 @@ namespace PocketSharp
       }
 
       // cache response
-      lastResponseData = responseString;
+      if (cacheHTTPResponseData)
+      {
+        lastResponseData = responseString;
+      }
 
       return DeserializeJson<T>(responseString);
     }

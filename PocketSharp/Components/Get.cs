@@ -58,7 +58,7 @@ namespace PocketSharp
         Offset = offset
       };
 
-      return (await Request<Retrieve>("get", cancellationToken, parameters.Convert())).Items;
+      return (await Request<Retrieve>("get", cancellationToken, parameters.Convert())).Items ?? new List<PocketItem>();
     }
 
 
