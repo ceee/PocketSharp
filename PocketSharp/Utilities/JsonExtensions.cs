@@ -190,7 +190,7 @@ namespace PocketSharp
       var jObject = JObject.ReadFrom(reader);
       var pocketItem = new PocketItem();
       serializer.Populate(jObject.CreateReader(), pocketItem);
-      pocketItem.Json = jObject.ToString();
+      //pocketItem.Json = jObject.ToString();
 
       return pocketItem;
     }
