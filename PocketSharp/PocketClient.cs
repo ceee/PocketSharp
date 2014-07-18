@@ -45,12 +45,17 @@ namespace PocketSharp
     /// <summary>
     /// The authentification URL
     /// </summary>
-    protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}&mobile={2}&force={3}";
+    protected string authentificationUri = "https://getpocket.com/auth/authorize?request_token={0}&redirect_uri={1}&mobile={2}&force={3}&webauthenticationbroker={4}";
 
     /// <summary>
     /// Indicates, whether this client is used for mobile or desktop
     /// </summary>
     protected bool isMobileClient = true;
+
+    /// <summary>
+    /// Indicates, whether this client is used inside a broker (on Windows 8)
+    /// </summary>
+    protected bool useInsideWebAuthenticationBroker = true;
 
     /// <summary>
     /// Indicates, whether the last HTTP response is cached
@@ -108,6 +113,7 @@ namespace PocketSharp
     /// <param name="handler">The HttpMessage handler.</param>
     /// <param name="timeout">Request timeout (in seconds).</param>
     /// <param name="isMobileClient">Indicates, whether this client is used for mobile or desktop</param>
+    /// <param name="useInsideWebAuthenticationBroker">Indicates, whether this client is used inside a broker (on Windows 8), see: http://getpocket.com/developer/docs/getstarted/windows8 </param>
     /// <param name="parserUri">Enables the wrapper for the private Text Parser API</param>
     /// <param name="cacheHTTPResponseData">Caches the last HTTP response in public properties</param>
     public PocketClient(
@@ -117,6 +123,7 @@ namespace PocketSharp
       HttpMessageHandler handler = null,
       int? timeout = null,
       bool isMobileClient = true,
+      bool useInsideWebAuthenticationBroker = false,
       Uri parserUri = null,
       bool cacheHTTPResponseData = true)
     {
@@ -124,6 +131,7 @@ namespace PocketSharp
       ConsumerKey = consumerKey;
 
       this.isMobileClient = isMobileClient;
+      this.useInsideWebAuthenticationBroker = useInsideWebAuthenticationBroker;
       this.cacheHTTPResponseData = cacheHTTPResponseData;
 
       // assign access code if submitted

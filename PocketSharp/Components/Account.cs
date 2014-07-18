@@ -60,7 +60,32 @@ namespace PocketSharp
         RequestCode = requestCode;
       }
 
-      return new Uri(String.Format(authentificationUri, RequestCode, CallbackUri, isMobileClient ? "1" : "0", "login"));
+      return new Uri(String.Format(authentificationUri, RequestCode, CallbackUri, isMobileClient ? "1" : "0", "login", useInsideWebAuthenticationBroker ? "1" : "0"));
+    }
+
+
+    /// <summary>
+    /// Generate registration URI from requestCode
+    /// Follow the steps as with GenerateAuthenticationUri, but for unregistered users
+    /// </summary>
+    /// <param name="requestCode">The requestCode. If no requestCode is supplied, the property from the PocketClient intialization is used.</param>
+    /// <returns>A valid URI to redirect the user to.</returns>
+    /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
+    public Uri GenerateRegistrationUri(string requestCode = null)
+    {
+      // check if request code is available
+      if (RequestCode == null && requestCode == null)
+      {
+        throw new NullReferenceException("Call GetRequestCode() first to receive a request_code");
+      }
+
+      // override property with given param if available
+      if (requestCode != null)
+      {
+        RequestCode = requestCode;
+      }
+
+      return new Uri(String.Format(authentificationUri, RequestCode, CallbackUri, isMobileClient ? "1" : "0", "signup", useInsideWebAuthenticationBroker ? "1" : "0"));
     }
 
 
@@ -98,31 +123,6 @@ namespace PocketSharp
       AccessCode = response.Code;
 
       return response;
-    }
-
-
-    /// <summary>
-    /// Generate registration URI from requestCode
-    /// Follow the steps as with GenerateAuthenticationUri, but for unregistered users
-    /// </summary>
-    /// <param name="requestCode">The requestCode. If no requestCode is supplied, the property from the PocketClient intialization is used.</param>
-    /// <returns>A valid URI to redirect the user to.</returns>
-    /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
-    public Uri GenerateRegistrationUri(string requestCode = null)
-    {
-      // check if request code is available
-      if (RequestCode == null && requestCode == null)
-      {
-        throw new NullReferenceException("Call GetRequestCode() first to receive a request_code");
-      }
-
-      // override property with given param if available
-      if (requestCode != null)
-      {
-        RequestCode = requestCode;
-      }
-
-      return new Uri(String.Format(authentificationUri, RequestCode, CallbackUri, isMobileClient ? "1" : "0", "signup"));
     }
   }
 }

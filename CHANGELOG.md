@@ -1,3 +1,7 @@
+### 4.1.4 (2014-07-18)
+
+- Implement WebAuthenticationBroker-view toggle
+
 ### 4.1.3 (2014-06-25)
 
 - Only dispose response if available
