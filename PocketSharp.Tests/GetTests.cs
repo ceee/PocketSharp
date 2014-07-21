@@ -194,7 +194,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task IsSinceParameterWorkingOnAddTags()
     {
-      DateTime since = DateTime.UtcNow;
+      DateTime since = DateTime.UtcNow.AddSeconds(-5);
 
       IEnumerable<PocketItem> items = await client.Get(state: State.all);
       PocketItem itemToModify = items.First();
@@ -218,7 +218,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task IsSinceParameterWorkingOnFavoriteAndArchiveModification()
     {
-      DateTime since = DateTime.UtcNow;
+      DateTime since = DateTime.UtcNow.AddSeconds(-5);
 
       IEnumerable<PocketItem> items = await client.Get(state: State.all);
       PocketItem itemToModify = items.First();
@@ -252,7 +252,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task IsSinceParameterWorkingOnAddAndDelete()
     {
-      DateTime since = DateTime.UtcNow;
+      DateTime since = DateTime.UtcNow.AddSeconds(-5);
 
       PocketItem item = await client.Add(new Uri("http://frontendplay.com"));
 

@@ -50,7 +50,7 @@ namespace PocketSharp
         return null;
       }
 
-      return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Convert.ToDouble(reader.Value)).ToLocalTime();
+      return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Convert.ToDouble(reader.Value));
     }
   }
 
