@@ -65,7 +65,7 @@ namespace PocketSharp.Models
         // convert DateTime to UNIX timestamp
         if (value is DateTime)
         {
-          value = (int)((DateTime)value - new DateTime(1970, 1, 1)).TotalSeconds;
+          value = (int)((DateTime)value - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
         }
 
         parameterDict.Add(name, value.ToString());
