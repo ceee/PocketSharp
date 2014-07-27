@@ -1,3 +1,7 @@
+### 4.1.5 (2014-07-27)
+
+- Fix StackOverflow bug in PocketItem equality overload (fixes #28)
+
 ### 4.1.4 (2014-07-18)
 
 - Implement WebAuthenticationBroker-view toggle
