@@ -368,7 +368,7 @@ namespace PocketSharp.Models
     {
       if (Object.ReferenceEquals(a, b))
       {
-        return false;
+        return true;
       }
 
       PocketItem itemA = (PocketItem)a;
