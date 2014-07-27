@@ -169,6 +169,15 @@ namespace PocketSharp.Models
     public bool IsArticle { get; set; }
 
     /// <summary>
+    /// Gets or sets a value indicating whether this instance has image.
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if this instance has image; otherwise, <c>false</c>.
+    /// </value>
+    [JsonProperty("has_image")]
+    private PocketBoolean? _HasImage { get; set; }
+
+    /// <summary>
     /// Gets or sets a value indicating whether this instance has video.
     /// </summary>
     /// <value>
@@ -176,6 +185,21 @@ namespace PocketSharp.Models
     /// </value>
     [JsonProperty("has_video")]
     private PocketBoolean? _HasVideo { get; set; }
+
+    /// <summary>
+    /// Gets a value indicating whether [has image].
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if [has image]; otherwise, <c>false</c>.
+    /// </value>
+    [JsonIgnore]
+    public bool HasImage
+    {
+      get
+      {
+        return _HasImage == PocketBoolean.Yes || _HasImage == PocketBoolean.IsType;
+      }
+    }
 
     /// <summary>
     /// Gets a value indicating whether [has video].
@@ -204,6 +228,21 @@ namespace PocketSharp.Models
       get
       {
         return _HasVideo == PocketBoolean.IsType;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether [is image].
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if [is image]; otherwise, <c>false</c>.
+    /// </value>
+    [JsonIgnore]
+    public bool IsImage
+    {
+      get
+      {
+        return _HasImage == PocketBoolean.IsType;
       }
     }
 
@@ -243,6 +282,24 @@ namespace PocketSharp.Models
     /// </value>
     [JsonProperty("time_updated")]
     public DateTime? UpdateTime { get; set; }
+
+    /// <summary>
+    /// Gets or sets the read time.
+    /// </summary>
+    /// <value>
+    /// The read time.
+    /// </value>
+    [JsonProperty("time_read")]
+    public DateTime? ReadTime { get; set; }
+
+    /// <summary>
+    /// Gets or sets the favorite time.
+    /// </summary>
+    /// <value>
+    /// The favorite time.
+    /// </value>
+    [JsonProperty("time_favorited")]
+    public DateTime? FavoriteTime { get; set; }
 
     /// <summary>
     /// Gets or sets the tags as comma-separated strings.
@@ -307,6 +364,15 @@ namespace PocketSharp.Models
     {
       get { return Images != null && Images.Count() > 0 ? Images.First() : null; }
     }
+
+    /// <summary>
+    /// Gets and sets the JSON the model was deserialized from
+    /// </summary>
+    /// <value>
+    /// Model's original JSON representation
+    /// </value>
+    [JsonIgnore]
+    public string Json { get; set; }
 
     /// <summary>
     /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.

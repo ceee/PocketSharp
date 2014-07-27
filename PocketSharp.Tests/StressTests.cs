@@ -105,27 +105,13 @@ namespace PocketSharp.Tests
       string[] tag;
       Random rnd = new Random();
 
-      var items = urls.Skip(offset).Take(count)
-          .Select((value, idx) => new { Value = value, Index = idx })
-          .GroupBy(item => item.Index / 100, item => item.Value)
-          .Cast<IEnumerable<string>>();
-
-      foreach (IEnumerable<string> urlGroup in items)
+      foreach (string url in urls.Skip(offset).Take(count))
       {
-        await Task.WhenAll(urlGroup.Select(url =>
-        {
-          r = rnd.Next(tags.Length);
-          r2 = rnd.Next(tags.Length);
-          tag = new string[] { tags[r], tags[r2] };
-          return client.Add(new Uri("http://" + url), tag);
-        }));
+        r = rnd.Next(tags.Length);
+        r2 = rnd.Next(tags.Length);
+        tag = new string[] { tags[r], tags[r2] };
+        await client.Add(new Uri("http://" + url), tag);
       }
-    }
-
-    [Fact]
-    public async Task Fillll()
-    {
-      await FillAccount(11000, 89999);
     }
   }
 }
