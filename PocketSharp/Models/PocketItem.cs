@@ -366,7 +366,7 @@ namespace PocketSharp.Models
     /// </returns>
     public static bool operator ==(PocketItem a, PocketItem b)
     {
-      if (a == null || b == null)
+      if (Object.ReferenceEquals(a, b))
       {
         return false;
       }
