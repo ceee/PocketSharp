@@ -338,6 +338,11 @@ namespace PocketSharp
     /// <returns></returns>
     internal async Task<bool> Send(IEnumerable<PocketAction> actionParameters, CancellationToken cancellationToken)
     {
+      foreach (PocketAction action in actionParameters)
+      {
+        action.Time = action.Time.HasValue ? ((DateTime)action.Time).ToUniversalTime() : action.Time;
+      }
+
       Dictionary<string, string> parameters = new Dictionary<string, string>() {{
         "actions", JsonConvert.SerializeObject(actionParameters.Select(action => action.Convert()))                                                                    
       }};
