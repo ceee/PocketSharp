@@ -1,3 +1,7 @@
+### 4.1.6 (2014-08-28)
+
+- Fix DateTime conversion issue (from local to UTC)
+
 ### 4.1.5 (2014-07-27)
 
 - Fix StackOverflow bug in PocketItem equality overload (fixes #28)
