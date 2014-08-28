@@ -53,7 +53,7 @@ namespace PocketSharp
         DetailType = DetailType.complete,
         Search = search,
         Domain = domain,
-        Since = since,
+        Since = since.HasValue ? ((DateTime)since).ToUniversalTime() : since,
         Count = count,
         Offset = offset
       };

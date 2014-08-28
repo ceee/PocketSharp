@@ -33,23 +33,23 @@ namespace PocketSharp.Tests
       Assert.True(item.Uri == itemDuplicate.Uri);
     }
 
-    [Fact]
-    public async Task IsItemJsonPopulated()
-    {
-      List<PocketItem> items = (await client.Get()).ToList();
-      string schemaJson = @"{
-                'description': 'PocketItem',
-                'type': 'object'
-                }";
+//    [Fact]
+//    public async Task IsItemJsonPopulated()
+//    {
+//      List<PocketItem> items = (await client.Get()).ToList();
+//      string schemaJson = @"{
+//                'description': 'PocketItem',
+//                'type': 'object'
+//                }";
 
-      JsonSchema schema = JsonSchema.Parse(schemaJson);
-      foreach (var pocketItem in items)
-      {
-        Assert.True(!string.IsNullOrWhiteSpace(pocketItem.Json));
-        var jObject = JObject.Parse(pocketItem.Json);
-        Assert.True(jObject.IsValid(schema));
-      }
-    }
+//      JsonSchema schema = JsonSchema.Parse(schemaJson);
+//      foreach (var pocketItem in items)
+//      {
+//        Assert.True(!string.IsNullOrWhiteSpace(pocketItem.Json));
+//        var jObject = JObject.Parse(pocketItem.Json);
+//        Assert.True(jObject.IsValid(schema));
+//      }
+//    }
 
     [Fact]
     public async Task AreFilteredItemsRetrieved()
@@ -194,7 +194,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task IsSinceParameterWorkingOnAddTags()
     {
-      DateTime since = DateTime.UtcNow.AddSeconds(-5);
+      DateTime since = DateTime.Now;
 
       IEnumerable<PocketItem> items = await client.Get(state: State.all);
       PocketItem itemToModify = items.First();
@@ -218,7 +218,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task IsSinceParameterWorkingOnFavoriteAndArchiveModification()
     {
-      DateTime since = DateTime.UtcNow.AddSeconds(-5);
+      DateTime since = DateTime.Now;//1409221736
 
       IEnumerable<PocketItem> items = await client.Get(state: State.all);
       PocketItem itemToModify = items.First();
@@ -237,7 +237,7 @@ namespace PocketSharp.Tests
 
       await client.Unfavorite(itemToModify);
 
-      since = DateTime.UtcNow.AddMinutes(-1);
+      since = DateTime.Now;
 
       await client.Archive(itemToModify);
 
@@ -250,9 +250,31 @@ namespace PocketSharp.Tests
 
 
     [Fact]
+    public async Task IsUTCSinceParameterWorking()
+    {
+      DateTime since = DateTime.UtcNow;
+
+      IEnumerable<PocketItem> items = await client.Get(state: State.all);
+      PocketItem itemToModify = items.First();
+
+      items = await client.Get(state: State.all, since: since);
+
+      Assert.True(items == null || items.Count() == 0);
+
+      await client.Favorite(itemToModify);
+
+      items = await client.Get(state: State.all, since: since);
+
+      Assert.True(items.Count() > 0);
+
+      await client.Unfavorite(itemToModify);
+    }
+
+
+    [Fact]
     public async Task IsSinceParameterWorkingOnAddAndDelete()
     {
-      DateTime since = DateTime.UtcNow.AddSeconds(-5);
+      DateTime since = DateTime.UtcNow;
 
       PocketItem item = await client.Add(new Uri("http://frontendplay.com"));
 

@@ -32,11 +32,11 @@ namespace PocketSharp
   {
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-      DateTime date = (DateTime)value;
+      DateTime date = ((DateTime)value).ToUniversalTime();
       DateTime epoc = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-      var delta = date - epoc;
+      var delta = date.Subtract(epoc);
 
-      writer.WriteValue((long)delta.TotalSeconds);
+      writer.WriteValue((int)Math.Truncate(delta.TotalSeconds));
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -191,7 +191,7 @@ namespace PocketSharp
       var jObject = JObject.ReadFrom(reader);
       var pocketItem = new PocketItem();
       serializer.Populate(jObject.CreateReader(), pocketItem);
-      pocketItem.Json = jObject.ToString();
+      //pocketItem.Json = jObject.ToString();
 
       return pocketItem;
     }

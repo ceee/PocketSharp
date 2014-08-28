@@ -435,7 +435,7 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     Task<bool> RenameTag(PocketItem item, string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken));
     #endregion
-
+     
     #region statistics methods
     /// <summary>
     /// Statistics from the user account.
