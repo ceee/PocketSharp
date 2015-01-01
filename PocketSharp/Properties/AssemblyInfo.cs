@@ -8,7 +8,7 @@
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("cee")]
 [assembly: AssemblyProduct("PocketSharp")]
-[assembly: AssemblyCopyright("Copyright © cee 2014")]
+[assembly: AssemblyCopyright("Copyright © cee 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
