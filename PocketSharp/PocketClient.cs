@@ -149,10 +149,7 @@ namespace PocketSharp
       // assign text parser if parserUri submitted
       if (parserUri != null)
       {
-        _restParserClient = new HttpClient(handler ?? new HttpClientHandler()
-        {
-          AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
-        });
+        _restParserClient = new HttpClient(handler ?? new HttpClientHandler());
         _restParserClient.BaseAddress = parserUri;
         _restParserClient.DefaultRequestHeaders.Add("Accept", "*/*");
         _restParserClient.DefaultRequestHeaders.Add("X-Accept", "application/json");
@@ -164,10 +161,7 @@ namespace PocketSharp
       }
 
       // initialize REST client
-      _restClient = new HttpClient(handler ?? new HttpClientHandler()
-      {
-        AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
-      });
+      _restClient = new HttpClient(handler ?? new HttpClientHandler());
 
       if (timeout.HasValue)
       {
