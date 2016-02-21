@@ -4,13 +4,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PocketSharp.Examples", "PocketSharp.Examples", "{AFD4E3F1-B23C-4924-BA5B-D917FBADB8FA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{19DD45B5-B849-49E7-89D6-16C89B9B96C7}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp", "PocketSharp\PocketSharp.csproj", "{817200C3-A327-4E35-9B5F-63A51C088577}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.Wpf", "PocketSharp.Examples\PocketSharp.Wpf\PocketSharp.Wpf.csproj", "{775569C2-987F-4AC4-8BA5-A315A21ED1B7}"
