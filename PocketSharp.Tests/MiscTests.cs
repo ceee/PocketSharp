@@ -35,6 +35,7 @@ namespace PocketSharp.Tests
       PocketItem item1 = new PocketItem() { ID = "12872" };
       PocketItem item2 = new PocketItem() { ID = "12872" };
       PocketItem item3 = new PocketItem() { ID = "12800" };
+      PocketArticle article = new PocketArticle();
 
       Assert.True(item1.Equals(item2));
       Assert.False(item1.Equals(item3));
@@ -48,6 +49,7 @@ namespace PocketSharp.Tests
       Assert.True(item1 != item3);
       Assert.True(item1 != null);
 
+      Assert.False(item1.Equals(article));
 
       Assert.True(new List<PocketItem>() { item1 }.IndexOf(item2) > -1);
     }
