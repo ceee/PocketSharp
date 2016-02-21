@@ -28,5 +28,28 @@ namespace PocketSharp.Tests
 
       Assert.True(Incrementor >= 3);
     }
+
+    [Fact]
+    public void ItemEqualityChecks()
+    {
+      PocketItem item1 = new PocketItem() { ID = "12872" };
+      PocketItem item2 = new PocketItem() { ID = "12872" };
+      PocketItem item3 = new PocketItem() { ID = "12800" };
+
+      Assert.True(item1.Equals(item2));
+      Assert.False(item1.Equals(item3));
+      Assert.False(item1.Equals(null));
+
+      Assert.True(item1 == item2);
+      Assert.False(item1 == item3);
+      Assert.False(item1 == null);
+
+      Assert.False(item1 != item2);
+      Assert.True(item1 != item3);
+      Assert.True(item1 != null);
+
+
+      Assert.True(new List<PocketItem>() { item1 }.IndexOf(item2) > -1);
+    }
   }
 }
