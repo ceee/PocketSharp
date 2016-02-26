@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +11,6 @@ namespace PocketSharp.Models
   /// see: http://getpocket.com/developer/docs/v3/retrieve
   /// </summary>
   [JsonObject]
-  [ImplementPropertyChanged]
   [DebuggerDisplay("Uri = {Uri}, Title = {Title}")]
   public class PocketItem : IComparable
   {

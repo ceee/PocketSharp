@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using PropertyChanged;
 
 namespace PocketSharp.Models
 {
@@ -7,7 +6,6 @@ namespace PocketSharp.Models
   /// Tag
   /// </summary>
   [JsonObject]
-  [ImplementPropertyChanged]
   public class PocketTag
   {
     /// <summary>

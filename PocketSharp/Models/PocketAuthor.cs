@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using PropertyChanged;
 using System;
 
 namespace PocketSharp.Models
@@ -8,7 +7,6 @@ namespace PocketSharp.Models
   /// Author
   /// </summary>
   [JsonObject]
-  [ImplementPropertyChanged]
   public class PocketAuthor
   {
     /// <summary>
