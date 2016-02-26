@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using PropertyChanged;
 using System;
 
 namespace PocketSharp.Models
@@ -8,7 +7,6 @@ namespace PocketSharp.Models
   /// Image
   /// </summary>
   [JsonObject]
-  [ImplementPropertyChanged]
   public class PocketImage
   {
     /// <summary>
@@ -19,6 +17,15 @@ namespace PocketSharp.Models
     /// </value>
     [JsonProperty("image_id")]
     public string ID { get; set; }
+
+    /// <summary>
+    /// Gets or sets the Item ID.
+    /// </summary>
+    /// <value>
+    /// The Item ID.
+    /// </value>
+    [JsonProperty("item_id")]
+    public string ItemID { get; set; }
 
     /// <summary>
     /// Gets or sets the caption.
