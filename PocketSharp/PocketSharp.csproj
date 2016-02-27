@@ -63,6 +63,7 @@
     <Compile Include="Models\PocketBoolean.cs" />
     <Compile Include="Models\PocketLimits.cs" />
     <Compile Include="Models\PocketStatistics.cs" />
+    <Compile Include="Models\PocketVideoType.cs" />
     <Compile Include="Utilities\PocketAuthException.cs" />
     <Compile Include="Utilities\PocketException.cs" />
     <Compile Include="Components\Add.cs" />

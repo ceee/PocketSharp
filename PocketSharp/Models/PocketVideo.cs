@@ -44,5 +44,15 @@ namespace PocketSharp.Models
     /// </value>
     [JsonProperty("src")]
     public Uri Uri { get; set; }
+
+    /// <summary>
+    /// Gets or sets the URI.
+    /// </summary>
+    /// <value>
+    /// The URI.
+    /// </value>
+    [JsonProperty("type")]
+    [JsonConverter(typeof(VideoTypeConverter))]
+    public PocketVideoType Type { get; set; }
   }
 }
