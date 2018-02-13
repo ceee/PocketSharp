@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PropertyChanged;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PocketSharp.Models
 {
@@ -12,7 +8,6 @@ namespace PocketSharp.Models
   /// Article
   /// </summary>
   [JsonObject]
-  [ImplementPropertyChanged]
   public class PocketArticle
   {
     /// <summary>

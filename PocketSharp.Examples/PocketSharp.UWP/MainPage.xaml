@@ -1,0 +1,38 @@
+﻿<Page
+  x:Class="PocketSharp.UWP.MainPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:PocketSharp.UWP"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d"
+  DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <!--TitlePanel contains the name of the application and page title-->
+      <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <Button Click="Button_Click">Load Data</Button>
+      </StackPanel>
+
+      <!--ContentPanel contains LongListSelector and LongListSelector ItemTemplate. Place additional content here-->
+      <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <ListView ItemsSource="{Binding Items}">
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Margin="0,0,0,17">
+                <TextBlock Text="{Binding Title}" TextWrapping="Wrap" />
+                <TextBlock Text="{Binding Uri}" TextWrapping="Wrap" Margin="12,-6,12,0" />
+              </StackPanel>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+      </Grid>
+    </Grid>
+  </Grid>
+</Page>

@@ -201,4 +201,48 @@ namespace PocketSharp
       return new PocketItem();
     }
   }
+
+
+
+  public class VideoTypeConverter : JsonConverter
+  {
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    {
+      writer.WriteValue(((PocketVideoType)value).ToString());
+    }
+
+    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    {
+      if (reader.Value == null)
+      {
+        return PocketVideoType.Unknown;
+      }
+
+      string nr = reader.Value.ToString();
+
+      if (nr == "1")
+      {
+        return PocketVideoType.YouTube;
+      }
+      if (nr == "2" || nr == "3" || nr == "4")
+      {
+        return PocketVideoType.Vimeo;
+      }
+      if (nr == "5")
+      {
+        return PocketVideoType.HTML;
+      }
+      if (nr == "6")
+      {
+        return PocketVideoType.Flash;
+      }
+
+      return PocketVideoType.Unknown;
+    }
+
+    public override bool CanConvert(Type objectType)
+    {
+      return objectType == typeof(int) || objectType == typeof(string);
+    }
+  }
 }

@@ -51,12 +51,13 @@ Which will output:
 PocketSharp is a **Portable Class Library**, therefore it's compatible with multiple platforms and Universal Apps:
 
 - **.NET** >= 4.5 (including WPF)
+- **UWP**
 - **Windows Phone** (Silverlight + WinPRT) >= 8
 - **Windows Store** >= 8
 - **Xamarin** iOS + Android
 - _WP7 and Silverlight are dropped in 4.0, use PocketSharp < 4.0, if you want to support them_
 
-You can find examples for WP8 and WPF in the `PocketSharp.Examples` ([@github](https://github.com/ceee/PocketSharp/tree/master/PocketSharp.Examples)) folder.
+You can find examples for UWP, WP8 & WPF in the `PocketSharp.Examples` ([@github](https://github.com/ceee/PocketSharp/tree/master/PocketSharp.Examples)) folder.
 
 ## Dependencies
 

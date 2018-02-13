@@ -1,5 +1,10 @@
 <<<<<<< HEAD
 =======
+### 4.2.0 (2015-12-05)
+
+- Update packages
+- Remove decompression from HttpClient so it works with UWP
+
 ### 4.1.6 (2014-08-28)
 
 - Fix DateTime conversion issue (from local to UTC)
