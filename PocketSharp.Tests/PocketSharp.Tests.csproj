@@ -109,12 +109,6 @@
     <Compile Include="TestsBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PocketSharp\PocketSharp.csproj">
-      <Project>{817200c3-a327-4e35-9b5f-63a51c088577}</Project>
-      <Name>PocketSharp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="url-10000.csv" />
