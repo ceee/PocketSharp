@@ -1,11 +1,11 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "Newtonsoft.Json": "7.0.1",
-    "PropertyChanged.Fody": "1.50.3"
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.8",
+    "Newtonsoft.Json": "11.0.2",
+    "PropertyChanged.Fody": "2.4.0"
   },
   "frameworks": {
-    "uap10.0": {}
+    "uap10.0.15063": {}
   },
   "runtimes": {
     "win10-arm": {},
