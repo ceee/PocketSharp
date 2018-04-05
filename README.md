@@ -1,6 +1,6 @@
 ![PocketSharp](https://raw.github.com/ceee/PocketSharp/master/Assets/github-header.png)
 
-**PocketSharp** is a C#.NET portable class library that integrates the [Pocket API v3](http://getpocket.com/developer).
+**PocketSharp** is a .NET Standard library that integrates the [Pocket API v3](http://getpocket.com/developer).
 
 ## Install PocketSharp using [NuGet](https://www.nuget.org/packages/PocketSharp/)
 
@@ -45,26 +45,9 @@ Which will output:
 
 ---
 
-
-## Supported platforms
-
-PocketSharp is a **Portable Class Library**, therefore it's compatible with multiple platforms and Universal Apps:
-
-- **.NET** >= 4.5 (including WPF)
-- **UWP**
-- **Windows Phone** (Silverlight + WinPRT) >= 8
-- **Windows Store** >= 8
-- **Xamarin** iOS + Android
-- _WP7 and Silverlight are dropped in 4.0, use PocketSharp < 4.0, if you want to support them_
-
-You can find examples for UWP, WP8 & WPF in the `PocketSharp.Examples` ([@github](https://github.com/ceee/PocketSharp/tree/master/PocketSharp.Examples)) folder.
-
 ## Dependencies
 
-- [Microsoft.Bcl.Async](https://www.nuget.org/packages/Microsoft.Bcl.Async/)
-- [Microsoft.Net.Http](https://www.nuget.org/packages/Microsoft.Net.Http/)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
-- [PropertyChanged.Fody](https://github.com/Fody/PropertyChanged)
 
 ## Contributors
 
