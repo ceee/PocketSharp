@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -16,8 +16,8 @@ namespace PocketSharp.Tests
 
       Uri uri = client.GenerateRegistrationUri(requestCode);
 
-      Assert.True(uri.OriginalString.Contains(requestCode));
-      Assert.True(uri.OriginalString.Contains("force=signup"));
+      Assert.Contains(requestCode, uri.OriginalString);
+      Assert.Contains("force=signup", uri.OriginalString);
     }
   }
 }

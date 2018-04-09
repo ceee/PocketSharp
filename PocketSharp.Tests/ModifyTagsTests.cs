@@ -1,4 +1,4 @@
-﻿using PocketSharp.Models;
+using PocketSharp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,7 +63,7 @@ namespace PocketSharp.Tests
 
       item = await GetItemById(item.ID);
 
-      Assert.Equal(item.Tags.Count(), 2);
+      Assert.Equal(2, item.Tags.Count());
 
       Assert.NotNull(item.Tags.SingleOrDefault<PocketTag>(tag => tag.Name == "test_tag"));
       Assert.NotNull(item.Tags.SingleOrDefault<PocketTag>(tag => tag.Name == "test_tag2"));

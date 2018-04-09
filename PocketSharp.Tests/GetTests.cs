@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using PocketSharp.Models;
 using System;
@@ -80,8 +80,8 @@ namespace PocketSharp.Tests
     {
       IEnumerable<PocketItem> items = await client.Get(count: 1);
 
-      Assert.True(items.Count() == 1);
-      Assert.True(items.First().Uri.ToString().StartsWith("http"));
+      Assert.True(1 == items.Count());
+      Assert.StartsWith("http", items.First().Uri.OriginalString);
     }
 
 
@@ -111,7 +111,7 @@ namespace PocketSharp.Tests
       IEnumerable<PocketItem> items = await client.Search("pocket");
 
       Assert.True(items.Count() > 0);
-      Assert.True(items.First().FullTitle.ToLower().Contains("pocket"));
+      Assert.Contains("pocket", items.First().FullTitle.ToLower());
     }
 
 

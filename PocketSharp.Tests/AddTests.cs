@@ -1,4 +1,4 @@
-﻿using PocketSharp.Models;
+using PocketSharp.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -61,7 +61,7 @@ namespace PocketSharp.Tests
 
       Assert.NotNull(itemDesired);
       Assert.Equal(itemDesired.ID, item.ID);
-      Assert.Equal(itemDesired.Tags.Count(), 3);
+      Assert.Equal(3, itemDesired.Tags.Count());
 
       itemsToDelete.Add(item.ID);
     }

@@ -1,4 +1,4 @@
-﻿using PocketSharp.Models;
+using PocketSharp.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -91,7 +91,7 @@ namespace PocketSharp.Tests
 
       items.ForEach(tag =>
       {
-        Assert.True(tags.Contains(tag.Name));
+        Assert.Contains(tag.Name, tags);
       });
 
       Assert.Equal(items.Count, tags.Length);
