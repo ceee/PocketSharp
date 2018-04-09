@@ -1,4 +1,4 @@
-﻿using PocketSharp.Models;
+using PocketSharp.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -90,6 +90,15 @@ namespace PocketSharp
     /// <returns>A valid URI to redirect the user to.</returns>
     /// <exception cref="System.NullReferenceException">Call GetRequestCode() first to receive a request_code</exception>
     Uri GenerateRegistrationUri(string requestCode = null);
+
+    /// <summary>
+    /// Get a new GUID from the Pocket API.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>
+    /// The GUID
+    /// </returns>
+    Task<string> GetGuid(CancellationToken cancellationToken = default(CancellationToken));
     #endregion
 
     #region add methods

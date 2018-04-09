@@ -1,4 +1,4 @@
-﻿using PocketSharp.Models;
+using PocketSharp.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -123,6 +123,20 @@ namespace PocketSharp
       AccessCode = response.Code;
 
       return response;
+    }
+
+
+    /// <summary>
+    /// Get a new GUID from the Pocket API.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>
+    /// The GUID
+    /// </returns>
+    public async Task<string> GetGuid(CancellationToken cancellationToken = default(CancellationToken))
+    {
+      GuidResponse response = await Request<GuidResponse>("guid", cancellationToken, requireAuth: false);
+      return response.Guid;
     }
   }
 }
