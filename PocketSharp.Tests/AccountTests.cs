@@ -1,3 +1,4 @@
+using PocketSharp.Models;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -8,6 +9,14 @@ namespace PocketSharp.Tests
   {
     public AccountTests() : base() { }
 
+
+    [Fact]
+    public async Task IsAuthenticationSuccessful()
+    {
+      string requestCode = await client.GetRequestCode();
+
+      PocketUser user = await client.GetUser(requestCode);
+    }
 
     [Fact]
     public async Task IsRegistrationURLSuccessfullyCreated()

@@ -114,15 +114,32 @@ namespace PocketSharp
       }
 
       // do request
-      PocketUser response = await Request<PocketUser>("oauth/authorize", cancellationToken, new Dictionary<string, string>()
+      GetUserResponse response = await Request<GetUserResponse>("oauth/authorize", cancellationToken, new Dictionary<string, string>()
       {
-        {"code", RequestCode}
+        { "code", RequestCode },
+        { "account", "1" }
       }, false);
 
-      // save code to client
-      AccessCode = response.Code;
+      string avatar = response.Account?.Profile?.Avatar_url;
 
-      return response;
+      PocketUser user = new PocketUser()
+      {
+        Username = response.Username,
+        Code = response.Access_token,
+        Id = response.Account?.User_id,
+        Email = response.Account?.Email,
+        FirstName = response.Account?.First_name,
+        LastName = response.Account?.Last_name,
+        Followers = response.Account?.Profile?.Follower_count ?? 0,
+        Follows = response.Account?.Profile?.Follow_count ?? 0,
+        Avatar = avatar != null ? new Uri(avatar, UriKind.Absolute) : null,
+        IsDefaultAvatar = avatar == null || avatar.Contains("pocket-profile-images.")
+      };
+
+      // save code to client
+      AccessCode = user.Code;
+
+      return user;
     }
 
 
