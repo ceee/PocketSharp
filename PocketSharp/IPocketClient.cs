@@ -465,9 +465,29 @@ namespace PocketSharp
     Task<PocketLimits> GetUsageLimits(CancellationToken cancellationToken = default(CancellationToken));
     #endregion
 
-    Task<IEnumerable<PocketItem>> GetTrendingArticles(string guid, string languageCode = "en", int count = 20, CancellationToken cancellationToken = default(CancellationToken));
+    #region trending methods
+    /// <summary>
+    /// Get trending articles on Pocket.
+    /// Requires an active GUID from GetGuid() and will therefore make two HTTP requests.
+    /// </summary>
+    /// <param name="count">Article count.</param>
+    /// <param name="languageCode">Two-letter language code for language-specific results.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<IEnumerable<PocketItem>> GetTrendingArticles(int count = 20, string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken));
 
-    Task<IEnumerable<PocketTopic>> GetTrendingTopics(string guid, string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken));
+
+    /// <summary>
+    /// Get trending topics on Pocket.
+    /// Requires an active GUID from GetGuid() and will therefore make two HTTP requests.
+    /// </summary>
+    /// <param name="languageCode">Two-letter language code for language-specific results.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<IEnumerable<PocketTopic>> GetTrendingTopics(string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken));
+    #endregion
 
     /// <summary>
     /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.

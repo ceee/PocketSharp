@@ -11,13 +11,18 @@ namespace PocketSharp
   public partial class PocketClient
   {
     /// <summary>
-    /// Statistics from the user account.
+    /// Get trending articles on Pocket.
+    /// Requires an active GUID from GetGuid() and will therefore make two HTTP requests.
     /// </summary>
+    /// <param name="count">Article count.</param>
+    /// <param name="languageCode">Two-letter language code for language-specific results.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<IEnumerable<PocketItem>> GetTrendingArticles(string guid, string languageCode = "en", int count = 20, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<IEnumerable<PocketItem>> GetTrendingArticles(int count = 20, string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken))
     {
+      string guid = await GetGuid(cancellationToken);
+
       return (await Request<Retrieve>("getGlobalRecs", cancellationToken, new Dictionary<string, string>()
       {
         { "guid", guid },
@@ -29,13 +34,17 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Statistics from the user account.
+    /// Get trending topics on Pocket.
+    /// Requires an active GUID from GetGuid() and will therefore make two HTTP requests.
     /// </summary>
+    /// <param name="languageCode">Two-letter language code for language-specific results.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<IEnumerable<PocketTopic>> GetTrendingTopics(string guid, string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<IEnumerable<PocketTopic>> GetTrendingTopics(string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken))
     {
+      string guid = await GetGuid(cancellationToken);
+
       return (await Request<TopicsResponse>("getTrendingTopics", cancellationToken, new Dictionary<string, string>()
       {
         { "guid", guid },

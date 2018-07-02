@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -298,6 +298,15 @@ namespace PocketSharp.Models
     /// </value>
     [JsonProperty("time_favorited")]
     public DateTime? FavoriteTime { get; set; }
+
+    /// <summary>
+    /// Gets or sets the published time.
+    /// </summary>
+    /// <value>
+    /// The time when the article was published.
+    /// </value>
+    [JsonProperty("date_published")]
+    public DateTime? PublishedTime { get; set; }
 
     /// <summary>
     /// Gets or sets the tags as comma-separated strings.
