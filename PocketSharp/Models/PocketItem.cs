@@ -373,15 +373,6 @@ namespace PocketSharp.Models
     }
 
     /// <summary>
-    /// Gets and sets the JSON the model was deserialized from
-    /// </summary>
-    /// <value>
-    /// Model's original JSON representation
-    /// </value>
-    [JsonIgnore]
-    public string Json { get; set; }
-
-    /// <summary>
     /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
     /// </summary>
     /// <param name="obj">An object to compare with this instance.</param>
