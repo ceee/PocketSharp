@@ -6687,8 +6687,7 @@
     "UAP,Version=v10.0.16299": []
   },
   "packageFolders": {
-    "C:\\Users\\cee\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
+    "C:\\Users\\cee\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
@@ -6699,14 +6698,10 @@
       "packagesPath": "C:\\Users\\cee\\.nuget\\packages\\",
       "outputPath": "O:\\PocketSharp\\PocketSharp.Examples\\PocketSharp.UWP\\obj\\",
       "projectStyle": "ProjectJson",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
-      ],
       "configFilePaths": [
         "O:\\PocketSharp\\.nuget\\NuGet.Config",
         "C:\\Users\\cee\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},

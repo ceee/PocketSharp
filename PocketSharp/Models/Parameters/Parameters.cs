@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -70,6 +70,8 @@ namespace PocketSharp.Models
 
         parameterDict.Add(name, value.ToString());
       }
+
+      parameterDict.Add("version", "2");
 
       return parameterDict;
     }

@@ -1,4 +1,4 @@
-﻿using PocketSharp.Models;
+using PocketSharp.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -10,8 +10,7 @@ namespace PocketSharp.Tests
   {
     private int Incrementor = 0;
 
-    public MiscTests()
-      : base()
+    public MiscTests() : base()
     {
       client.PreRequest = method => Incrementor++;
     }

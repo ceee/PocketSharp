@@ -465,6 +465,10 @@ namespace PocketSharp
     Task<PocketLimits> GetUsageLimits(CancellationToken cancellationToken = default(CancellationToken));
     #endregion
 
+    Task<IEnumerable<PocketItem>> GetTrendingArticles(string guid, string languageCode = "en", int count = 20, CancellationToken cancellationToken = default(CancellationToken));
+
+    Task<IEnumerable<PocketTopic>> GetTrendingTopics(string guid, string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken));
+
     /// <summary>
     /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
     /// </summary>
