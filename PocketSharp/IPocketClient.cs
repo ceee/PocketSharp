@@ -220,6 +220,17 @@ namespace PocketSharp
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
     Task<PocketArticle> GetArticle(Uri uri, bool includeImages = true, bool includeVideos = true, bool forceRefresh = false, CancellationToken cancellationToken = default(CancellationToken));
+
+    /// <summary>
+    /// Get article suggestions for an existing Pocket item.
+    /// </summary>
+    /// <param name="itemId">Get suggestions based on this item.</param>
+    /// <param name="count">Requested item count.</param>
+    /// <param name="languageCode">Two-letter language code for language-specific results.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<IEnumerable<PocketItem>> GetSuggestions(string itemId, int count = 3, string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken));
     #endregion
 
     #region modify methods

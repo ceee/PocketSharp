@@ -10,9 +10,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task AreTrendingArticlesReturned()
     {
-      string guid = await client.GetGuid();
-      var articles = await client.GetTrendingArticles(guid);
-
+      var articles = await client.GetTrendingArticles();
       Assert.NotEmpty(articles);
     }
 
@@ -20,9 +18,7 @@ namespace PocketSharp.Tests
     [Fact]
     public async Task AreTrendingTopicsReturned()
     {
-      string guid = await client.GetGuid();
-      var topics = await client.GetTrendingTopics(guid);
-
+      var topics = await client.GetTrendingTopics();
       Assert.NotEmpty(topics);
     }
   }

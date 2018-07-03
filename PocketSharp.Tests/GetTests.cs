@@ -33,23 +33,34 @@ namespace PocketSharp.Tests
       Assert.True(item.Uri == itemDuplicate.Uri);
     }
 
-//    [Fact]
-//    public async Task IsItemJsonPopulated()
-//    {
-//      List<PocketItem> items = (await client.Get()).ToList();
-//      string schemaJson = @"{
-//                'description': 'PocketItem',
-//                'type': 'object'
-//                }";
 
-//      JsonSchema schema = JsonSchema.Parse(schemaJson);
-//      foreach (var pocketItem in items)
-//      {
-//        Assert.True(!string.IsNullOrWhiteSpace(pocketItem.Json));
-//        var jObject = JObject.Parse(pocketItem.Json);
-//        Assert.True(jObject.IsValid(schema));
-//      }
-//    }
+    [Fact]
+    public async Task AreSuggestionsRetrieved()
+    {
+      var articles = await client.GetTrendingArticles();
+      string itemId = articles.First().ID;
+
+      List<PocketItem> suggestions = (await client.GetSuggestions(itemId)).ToList();
+      Assert.True(suggestions.Count > 0);
+    }
+
+    //    [Fact]
+    //    public async Task IsItemJsonPopulated()
+    //    {
+    //      List<PocketItem> items = (await client.Get()).ToList();
+    //      string schemaJson = @"{
+    //                'description': 'PocketItem',
+    //                'type': 'object'
+    //                }";
+
+    //      JsonSchema schema = JsonSchema.Parse(schemaJson);
+    //      foreach (var pocketItem in items)
+    //      {
+    //        Assert.True(!string.IsNullOrWhiteSpace(pocketItem.Json));
+    //        var jObject = JObject.Parse(pocketItem.Json);
+    //        Assert.True(jObject.IsValid(schema));
+    //      }
+    //    }
 
     [Fact]
     public async Task AreFilteredItemsRetrieved()

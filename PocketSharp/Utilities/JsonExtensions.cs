@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System;
@@ -51,7 +51,19 @@ namespace PocketSharp
         return null;
       }
 
-      return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Convert.ToDouble(reader.Value));
+      double value;
+      if (!Double.TryParse((string)reader.Value, out value))
+      {
+        DateTime date;
+        if (DateTime.TryParse((string)reader.Value, out date))
+        {
+          return date;
+        }
+
+        return null;
+      }
+
+      return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(value);
     }
   }
 
