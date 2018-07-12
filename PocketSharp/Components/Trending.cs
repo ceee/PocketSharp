@@ -12,7 +12,6 @@ namespace PocketSharp
   {
     /// <summary>
     /// Get trending articles on Pocket.
-    /// Requires an active GUID from GetGuid() and will therefore make two HTTP requests.
     /// </summary>
     /// <param name="count">Article count.</param>
     /// <param name="languageCode">Two-letter language code for language-specific results.</param>
@@ -21,11 +20,8 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<IEnumerable<PocketItem>> GetTrendingArticles(int count = 20, string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken))
     {
-      string guid = await GetGuid(cancellationToken);
-
       return (await Request<Retrieve>("getGlobalRecs", cancellationToken, new Dictionary<string, string>()
       {
-        { "guid", guid },
         { "locale_lang", languageCode },
         { "count", count.ToString() },
         { "version", "2" }
@@ -35,7 +31,6 @@ namespace PocketSharp
 
     /// <summary>
     /// Get trending topics on Pocket.
-    /// Requires an active GUID from GetGuid() and will therefore make two HTTP requests.
     /// </summary>
     /// <param name="languageCode">Two-letter language code for language-specific results.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
@@ -43,11 +38,8 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     public async Task<IEnumerable<PocketTopic>> GetTrendingTopics(string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken))
     {
-      string guid = await GetGuid(cancellationToken);
-
       return (await Request<TopicsResponse>("getTrendingTopics", cancellationToken, new Dictionary<string, string>()
       {
-        { "guid", guid },
         { "locale_lang", languageCode },
         { "version", "2" }
       }, false)).Items ?? new List<PocketTopic>();
