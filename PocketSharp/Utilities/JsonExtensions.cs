@@ -52,10 +52,10 @@ namespace PocketSharp
       }
 
       double value;
-      if (!Double.TryParse((string)reader.Value, out value))
+      if (!Double.TryParse(reader.Value.ToString(), out value))
       {
         DateTime date;
-        if (DateTime.TryParse((string)reader.Value, out date))
+        if (DateTime.TryParse(reader.Value.ToString(), out date))
         {
           return date;
         }

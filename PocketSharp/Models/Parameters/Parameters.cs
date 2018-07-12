@@ -71,8 +71,6 @@ namespace PocketSharp.Models
         parameterDict.Add(name, value.ToString());
       }
 
-      parameterDict.Add("version", "2");
-
       return parameterDict;
     }
   }

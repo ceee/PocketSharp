@@ -55,7 +55,8 @@ namespace PocketSharp
         Domain = domain,
         Since = since.HasValue ? ((DateTime)since).ToUniversalTime() : since,
         Count = count,
-        Offset = offset
+        Offset = offset,
+        Version = 2
       };
 
       return (await Request<Retrieve>("get", cancellationToken, parameters.Convert())).Items ?? new List<PocketItem>();
