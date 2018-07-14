@@ -6687,7 +6687,7 @@
     "UAP,Version=v10.0.16299": []
   },
   "packageFolders": {
-    "C:\\Users\\cee\\.nuget\\packages\\": {},
+    "C:\\Users\\tobi\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
   },
   "project": {
@@ -6696,7 +6696,7 @@
       "projectName": "PocketSharp.UWP",
       "projectPath": "O:\\PocketSharp\\PocketSharp.Examples\\PocketSharp.UWP\\PocketSharp.UWP.csproj",
       "projectJsonPath": "O:\\PocketSharp\\PocketSharp.Examples\\PocketSharp.UWP\\project.json",
-      "packagesPath": "C:\\Users\\cee\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\tobi\\.nuget\\packages\\",
       "outputPath": "O:\\PocketSharp\\PocketSharp.Examples\\PocketSharp.UWP\\obj\\",
       "projectStyle": "ProjectJson",
       "fallbackFolders": [
@@ -6704,7 +6704,7 @@
       ],
       "configFilePaths": [
         "O:\\PocketSharp\\.nuget\\NuGet.Config",
-        "C:\\Users\\cee\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tobi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
