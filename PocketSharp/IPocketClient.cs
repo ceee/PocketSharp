@@ -420,7 +420,7 @@ namespace PocketSharp
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> DeleteTag(string tag, CancellationToken cancellationToken = default(CancellationToken))
+    Task<bool> DeleteTag(string tag, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// Replaces all existing tags with the given tags in an item.
