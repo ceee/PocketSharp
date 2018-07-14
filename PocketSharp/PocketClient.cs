@@ -20,12 +20,7 @@ namespace PocketSharp
     /// <summary>
     /// REST client used for the API communication
     /// </summary>
-    protected readonly HttpClient _restClient;
-
-    /// <summary>
-    /// REST client used for the API communication with the Text Parser API
-    /// </summary>
-    protected readonly HttpClient _restParserClient;
+    protected readonly HttpClient httpClient;
 
     /// <summary>
     /// Caches HTTP headers from last response
@@ -40,7 +35,12 @@ namespace PocketSharp
     /// <summary>
     /// The base URL for the Pocket API
     /// </summary>
-    protected static Uri baseUri = new Uri("https://getpocket.com/v3/");
+    protected static string baseUri = "https://getpocket.com/v3/";
+
+    /// <summary>
+    /// The base URL for Pocket reader requests
+    /// </summary>
+    protected static string parserUri = null;
 
     /// <summary>
     /// The authentification URL
@@ -141,6 +141,7 @@ namespace PocketSharp
       this.isMobileClient = isMobileClient;
       this.useInsideWebAuthenticationBroker = useInsideWebAuthenticationBroker;
       this.cacheHTTPResponseData = cacheHTTPResponseData;
+      PocketClient.parserUri = parserUri.OriginalString;
 
       // assign access code if submitted
       if (accessCode != null)
@@ -154,36 +155,19 @@ namespace PocketSharp
         CallbackUri = Uri.EscapeUriString(callbackUri.ToString());
       }
 
-      // assign text parser if parserUri submitted
-      if (parserUri != null)
-      {
-        _restParserClient = new HttpClient(handler ?? new HttpClientHandler());
-        _restParserClient.BaseAddress = parserUri;
-        _restParserClient.DefaultRequestHeaders.Add("Accept", "*/*");
-        _restParserClient.DefaultRequestHeaders.Add("X-Accept", "application/json");
-
-        if (timeout.HasValue)
-        {
-          _restParserClient.Timeout = TimeSpan.FromSeconds(timeout.Value);
-        }
-      }
-
       // initialize REST client
-      _restClient = new HttpClient(handler ?? new HttpClientHandler());
+      httpClient = new HttpClient(handler ?? new HttpClientHandler());
 
       if (timeout.HasValue)
       {
-        _restClient.Timeout = TimeSpan.FromSeconds(timeout.Value);
+        httpClient.Timeout = TimeSpan.FromSeconds(timeout.Value);
       }
 
-      // set base uri
-      _restClient.BaseAddress = baseUri;
-
       // Pocket needs this specific Accept header :-S
-      _restClient.DefaultRequestHeaders.Add("Accept", "*/*");
+      httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
 
       // defines the response format (according to the Pocket docs)
-      _restClient.DefaultRequestHeaders.Add("X-Accept", "application/json");
+      httpClient.DefaultRequestHeaders.Add("X-Accept", "application/json");
     }
 
 
@@ -209,17 +193,15 @@ namespace PocketSharp
         throw new PocketException("SDK error: No access token available. Use authentication first.");
       }
 
-      // rewrite base if it is a request to the Parser API
-      if (isReaderRequest)
+      string httpBase = isReaderRequest ? parserUri : baseUri;
+
+      if (isReaderRequest && String.IsNullOrEmpty(parserUri))
       {
-        if (_restParserClient == null)
-        {
-          throw new PocketException("Please pass the parserUri in the PocketClient ctor.");
-        }
+        throw new PocketException("Please pass a valid parserUri in the PocketClient ctor.");
       }
 
       // every single Pocket API endpoint requires HTTP POST data
-      HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, method);
+      HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, httpBase + method);
       HttpResponseMessage response = null;
       string responseString = null;
 
@@ -246,14 +228,7 @@ namespace PocketSharp
       // make async request
       try
       {
-        if (isReaderRequest)
-        {
-          response = await _restParserClient.SendAsync(request, cancellationToken);
-        }
-        else
-        {
-          response = await _restClient.SendAsync(request, cancellationToken);
-        }
+        response = await httpClient.SendAsync(request, cancellationToken);
 
         // validate HTTP response
         ValidateResponse(response);
@@ -295,6 +270,71 @@ namespace PocketSharp
       }
 
       return DeserializeJson<T>(responseString);
+    }
+
+
+    /// <summary>
+    /// Fetches a string from a resource
+    /// </summary>
+    /// <param name="uri">URI</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    protected async Task<string> RequestAsString(string uri, CancellationToken cancellationToken)
+    {
+      // every single Pocket API endpoint requires HTTP POST data
+      HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
+      HttpResponseMessage response = null;
+      string responseString = null;
+
+      // call pre request action
+      PreRequest?.Invoke(uri);
+
+      // make async request
+      try
+      {
+        response = await httpClient.GetAsync(uri, cancellationToken);
+
+        // validate HTTP response
+        ValidateResponse(response);
+
+        // cache headers
+        if (cacheHTTPResponseData)
+        {
+          lastHeaders = response.Headers;
+        }
+
+        // read response
+        responseString = await response.Content.ReadAsStringAsync();
+      }
+      catch (HttpRequestException exc)
+      {
+        throw new PocketException(exc.Message, exc);
+      }
+      catch (PocketException exc)
+      {
+        throw exc;
+      }
+      finally
+      {
+        request.Dispose();
+
+        if (response != null)
+        {
+          response.Dispose();
+        }
+      }
+
+      // call after request action
+      AfterRequest?.Invoke(responseString);
+
+      // cache response
+      if (cacheHTTPResponseData)
+      {
+        lastResponseData = responseString;
+      }
+
+      return responseString;
     }
 
 
@@ -451,13 +491,8 @@ namespace PocketSharp
     /// </summary>
     public void Dispose()
     {
-      _restClient.Dispose();
+      httpClient.Dispose();
       lastHeaders = null;
-
-      if (_restParserClient != null)
-      {
-        _restParserClient.Dispose();
-      }
     }
   }
 }

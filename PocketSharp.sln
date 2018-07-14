@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27428.2027
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PocketSharp.Examples", "PocketSharp.Examples", "{AFD4E3F1-B23C-4924-BA5B-D917FBADB8FA}"
 EndProject
@@ -15,7 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.UWP", "PocketSh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocketSharp", "PocketSharp\PocketSharp.csproj", "{0E22926C-7244-4A17-923C-84B46F5149C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.Tests", "PocketSharp.Tests\PocketSharp.Tests.csproj", "{3BAA93AD-3B5C-47C4-816B-F29A1E6D1C2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocketSharp.Tests", "PocketSharp.Tests\PocketSharp.Tests.csproj", "{3BAA93AD-3B5C-47C4-816B-F29A1E6D1C2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketSharp.Explore", "PocketSharp.Explore\PocketSharp.Explore.csproj", "{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,22 @@ Global
 		{3BAA93AD-3B5C-47C4-816B-F29A1E6D1C2D}.Release|x64.Build.0 = Release|Any CPU
 		{3BAA93AD-3B5C-47C4-816B-F29A1E6D1C2D}.Release|x86.ActiveCfg = Release|Any CPU
 		{3BAA93AD-3B5C-47C4-816B-F29A1E6D1C2D}.Release|x86.Build.0 = Release|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Debug|ARM.Build.0 = Debug|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Debug|x64.Build.0 = Debug|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Debug|x86.Build.0 = Debug|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Release|ARM.Build.0 = Release|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Release|x64.ActiveCfg = Release|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Release|x64.Build.0 = Release|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A72F701-72B5-4400-AE9B-2814FE5FCBB1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
