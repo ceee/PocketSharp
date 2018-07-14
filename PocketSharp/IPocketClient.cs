@@ -414,6 +414,15 @@ namespace PocketSharp
     Task<bool> RemoveTags(PocketItem item, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
+    /// Deletes a tag. This will remove it from all affected items too.
+    /// </summary>
+    /// <param name="tag">The tag.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    Task<bool> DeleteTag(string tag, CancellationToken cancellationToken = default(CancellationToken))
+
+    /// <summary>
     /// Replaces all existing tags with the given tags in an item.
     /// </summary>
     /// <param name="itemID">The item ID.</param>

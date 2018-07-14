@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -94,6 +94,15 @@ namespace PocketSharp.Models
     [DataMember(Name = "new_tag")]
     public string NewTag { get; set; }
 
+    /// <summary>
+    /// Gets or sets the tag.
+    /// </summary>
+    /// <value>
+    /// The old tag.
+    /// </value>
+    [DataMember(Name = "tag")]
+    public string Tag { get; set; }
+
 
     /// <summary>
     /// Converts this instance to a parameter list.
@@ -116,6 +125,8 @@ namespace PocketSharp.Models
         parameters.Add("old_tag", OldTag);
       if (NewTag != null)
         parameters.Add("new_tag", NewTag);
+      if (Tag != null)
+        parameters.Add("tag", Tag);
       if (!String.IsNullOrEmpty(Title))
         parameters.Add("title", Title);
       if (!String.IsNullOrEmpty(TweetID))
