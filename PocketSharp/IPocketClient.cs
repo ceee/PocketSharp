@@ -434,28 +434,16 @@ namespace PocketSharp
     Task<bool> ReplaceTags(PocketItem item, string[] tags, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
-    /// Renames a tag in an item.
+    /// Renames a tag. This affects all items with this tag.
     /// </summary>
-    /// <param name="itemID">The item ID.</param>
     /// <param name="oldTag">The old tag.</param>
     /// <param name="newTag">The new tag name.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    Task<bool> RenameTag(string itemID, string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken));
-
-    /// <summary>
-    /// Renames a tag in an item.
-    /// </summary>
-    /// <param name="item">The item.</param>
-    /// <param name="oldTag">The old tag.</param>
-    /// <param name="newTag">The new tag name.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns></returns>
-    /// <exception cref="PocketException"></exception>
-    Task<bool> RenameTag(PocketItem item, string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> RenameTag(string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken));
     #endregion
-     
+
     #region statistics methods
     /// <summary>
     /// Statistics from the user account.

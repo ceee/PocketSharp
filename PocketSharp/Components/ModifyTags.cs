@@ -1,4 +1,4 @@
-﻿using PocketSharp.Models;
+using PocketSharp.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -148,38 +148,21 @@ namespace PocketSharp
 
 
     /// <summary>
-    /// Renames a tag in an item.
+    /// Renames a tag. This affects all items with this tag.
     /// </summary>
-    /// <param name="itemID">The item ID.</param>
     /// <param name="oldTag">The old tag.</param>
     /// <param name="newTag">The new tag name.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
-    public async Task<bool> RenameTag(string itemID, string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> RenameTag(string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await Send(new PocketAction()
       {
         Action = "tag_rename",
-        ID = itemID,
         OldTag = oldTag,
         NewTag = newTag
       }, cancellationToken);
-    }
-
-
-    /// <summary>
-    /// Renames a tag in an item.
-    /// </summary>
-    /// <param name="item">The item.</param>
-    /// <param name="oldTag">The old tag.</param>
-    /// <param name="newTag">The new tag name.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns></returns>
-    /// <exception cref="PocketException"></exception>
-    public async Task<bool> RenameTag(PocketItem item, string oldTag, string newTag, CancellationToken cancellationToken = default(CancellationToken))
-    {
-      return await RenameTag(item.ID, oldTag, newTag, cancellationToken);
     }
 
 
