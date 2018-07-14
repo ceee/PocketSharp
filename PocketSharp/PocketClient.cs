@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using PocketSharp.Models;
 using System;
@@ -102,6 +102,14 @@ namespace PocketSharp
     /// The pre request callback.
     /// </value>
     public Action<string> PreRequest { get; set; }
+
+    /// <summary>
+    /// Action which is executed after every request
+    /// </summary>
+    /// <value>
+    /// The after request callback.
+    /// </value>
+    public Action<string> AfterRequest { get; set; }
 
 
     /// <summary>
@@ -233,10 +241,7 @@ namespace PocketSharp
       request.Content = new FormUrlEncodedContent(parameters);
 
       // call pre request action
-      if (PreRequest != null)
-      {
-        PreRequest(method);
-      }
+      PreRequest?.Invoke(method);
 
       // make async request
       try
@@ -279,6 +284,9 @@ namespace PocketSharp
           response.Dispose();
         }
       }
+
+      // call after request action
+      AfterRequest?.Invoke(responseString);
 
       // cache response
       if (cacheHTTPResponseData)

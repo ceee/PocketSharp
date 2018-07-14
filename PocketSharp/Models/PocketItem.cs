@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -300,6 +300,15 @@ namespace PocketSharp.Models
     public DateTime? FavoriteTime { get; set; }
 
     /// <summary>
+    /// Gets or sets the published time.
+    /// </summary>
+    /// <value>
+    /// The time when the article was published.
+    /// </value>
+    [JsonProperty("date_published")]
+    public DateTime? PublishedTime { get; set; }
+
+    /// <summary>
     /// Gets or sets the tags as comma-separated strings.
     /// </summary>
     /// <value>
@@ -362,15 +371,6 @@ namespace PocketSharp.Models
     {
       get { return Images != null && Images.Count() > 0 ? Images.First() : null; }
     }
-
-    /// <summary>
-    /// Gets and sets the JSON the model was deserialized from
-    /// </summary>
-    /// <value>
-    /// Model's original JSON representation
-    /// </value>
-    [JsonIgnore]
-    public string Json { get; set; }
 
     /// <summary>
     /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.

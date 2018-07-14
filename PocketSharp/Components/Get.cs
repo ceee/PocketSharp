@@ -1,4 +1,4 @@
-﻿using PocketSharp.Models;
+using PocketSharp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +55,8 @@ namespace PocketSharp
         Domain = domain,
         Since = since.HasValue ? ((DateTime)since).ToUniversalTime() : since,
         Count = count,
-        Offset = offset
+        Offset = offset,
+        Version = 2
       };
 
       return (await Request<Retrieve>("get", cancellationToken, parameters.Convert())).Items ?? new List<PocketItem>();
@@ -223,6 +224,29 @@ namespace PocketSharp
       };
 
       return await Request<PocketArticle>("", cancellationToken, parameters, false, true);
+    }
+
+
+    /// <summary>
+    /// Get article suggestions for an existing Pocket item.
+    /// </summary>
+    /// <param name="itemId">Get suggestions based on this item.</param>
+    /// <param name="count">Requested item count.</param>
+    /// <param name="languageCode">Two-letter language code for language-specific results.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    /// <exception cref="PocketException"></exception>
+    public async Task<IEnumerable<PocketItem>> GetSuggestions(string itemId, int count = 3, string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken))
+    {
+      Dictionary<string, string> parameters = new Dictionary<string, string>()
+      {
+        { "resolved_id", itemId },
+        { "version", "1" },
+        { "locale_lang", languageCode },
+        { "count", count.ToString() }
+      };
+
+      return (await Request<Retrieve>("getSuggestedItems", cancellationToken, parameters)).Items ?? new List<PocketItem>();
     }
   }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.Serialization;
 
 namespace PocketSharp.Models
@@ -107,6 +107,15 @@ namespace PocketSharp.Models
     /// </value>
     [DataMember(Name = "offset")]
     public int? Offset { get; set; }
+
+    /// <summary>
+    /// Gets or sets the version.
+    /// </summary>
+    /// <value>
+    /// The version.
+    /// </value>
+    [DataMember(Name = "version")]
+    public int? Version { get; set; }
   }
 
 
