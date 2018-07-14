@@ -361,6 +361,15 @@ namespace PocketSharp.Models
     public IEnumerable<PocketAuthor> Authors { get; set; }
 
     /// <summary>
+    /// Gets or sets a value indicating whether this instance is trending.
+    /// </summary>
+    /// <value>
+    /// <c>true</c> if this instance is trending; otherwise, <c>false</c>.
+    /// </value>
+    [JsonProperty("trending")]
+    public bool IsTrending { get; set; }
+
+    /// <summary>
     /// Gets the lead image.
     /// </summary>
     /// <value>

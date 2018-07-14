@@ -141,7 +141,7 @@ namespace PocketSharp
       this.isMobileClient = isMobileClient;
       this.useInsideWebAuthenticationBroker = useInsideWebAuthenticationBroker;
       this.cacheHTTPResponseData = cacheHTTPResponseData;
-      PocketClient.parserUri = parserUri.OriginalString;
+      PocketClient.parserUri = parserUri?.OriginalString;
 
       // assign access code if submitted
       if (accessCode != null)

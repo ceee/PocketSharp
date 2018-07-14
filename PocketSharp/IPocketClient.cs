@@ -473,7 +473,7 @@ namespace PocketSharp
     Task<PocketLimits> GetUsageLimits(CancellationToken cancellationToken = default(CancellationToken));
     #endregion
 
-    #region trending methods
+    #region explore/trending methods
     /// <summary>
     /// Get trending articles on Pocket.
     /// Requires an active GUID from GetGuid() and will therefore make two HTTP requests.
@@ -485,7 +485,6 @@ namespace PocketSharp
     /// <exception cref="PocketException"></exception>
     Task<IEnumerable<PocketItem>> GetTrendingArticles(int count = 20, string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken));
 
-
     /// <summary>
     /// Get trending topics on Pocket.
     /// Requires an active GUID from GetGuid() and will therefore make two HTTP requests.
@@ -495,6 +494,14 @@ namespace PocketSharp
     /// <returns></returns>
     /// <exception cref="PocketException"></exception>
     Task<IEnumerable<PocketTopic>> GetTrendingTopics(string languageCode = "en", CancellationToken cancellationToken = default(CancellationToken));
+
+    /// <summary>
+    /// Explore Pocket and find interesting articles by a certain topic
+    /// </summary>
+    /// <param name="topic">Term or topic to get articles for</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<IEnumerable<PocketItem>> Explore(string topic, CancellationToken cancellationToken = default(CancellationToken));
     #endregion
 
     /// <summary>
