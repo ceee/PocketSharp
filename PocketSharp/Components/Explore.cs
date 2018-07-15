@@ -39,20 +39,20 @@ namespace PocketSharp
       var document = new HtmlDocument();
       document.LoadHtml(html);
 
-      HtmlNodeCollection nodes = document.DocumentNode.SelectNodesByClass("media_item", true);
+      IEnumerable<HtmlNode> nodes = document.DocumentNode.SelectNodesByClass("media_item");
 
-      if (nodes == null || nodes.Count == 0)
+      if (nodes == null || !nodes.Any())
       {
         return items;
       }
 
-      for (int i = 0; i < nodes.Count; i++)
+      for (int i = 0; i < nodes.Count(); i++)
       {
-        HtmlNode node = nodes[i];
+        HtmlNode node = nodes.ElementAt(i);
         PocketItem item = new PocketItem();
         item.ID = node.Id;
 
-        HtmlNode title = node.Descendants().FirstOrDefault(x => x.HasClass("title"))?.FirstChild;
+        HtmlNode title = node.SelectNodeByClass("title")?.FirstChild;
 
         if (title == null)
         {
