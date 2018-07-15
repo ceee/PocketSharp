@@ -501,7 +501,7 @@ namespace PocketSharp
     /// <param name="topic">Term or topic to get articles for</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<IEnumerable<PocketItem>> Explore(string topic, CancellationToken cancellationToken = default(CancellationToken));
+    Task<IEnumerable<PocketExploreItem>> Explore(string topic, CancellationToken cancellationToken = default(CancellationToken));
     #endregion
 
     /// <summary>

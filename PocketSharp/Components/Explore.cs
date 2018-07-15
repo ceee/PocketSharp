@@ -31,9 +31,9 @@ namespace PocketSharp
     /// <param name="topic">Term or topic to get articles for</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<IEnumerable<PocketItem>> Explore(string topic, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<IEnumerable<PocketExploreItem>> Explore(string topic, CancellationToken cancellationToken = default(CancellationToken))
     {
-      List<PocketItem> items = new List<PocketItem>();
+      List<PocketExploreItem> items = new List<PocketExploreItem>();
       string html = await RequestAsString("https://getpocket.com/explore/" + HttpUtility.UrlEncode(topic) , cancellationToken);
 
       var document = new HtmlDocument();
@@ -49,7 +49,7 @@ namespace PocketSharp
       for (int i = 0; i < nodes.Count(); i++)
       {
         HtmlNode node = nodes.ElementAt(i);
-        PocketItem item = new PocketItem();
+        PocketExploreItem item = new PocketExploreItem();
         item.ID = node.Id;
 
         HtmlNode title = node.SelectNodeByClass("title")?.FirstChild;
@@ -77,7 +77,13 @@ namespace PocketSharp
         // get basic infos
         item.Title = title.InnerText;
         item.Excerpt = node.SelectNodeByClass("excerpt")?.InnerText;
-        item.IsTrending = node.SelectNodeByClass("flag_trending") != null;
+        item.IsTrending = node.SelectNodeByClass("flag-trending") != null;
+
+        // save count
+        string saveCountStr = node.SelectNodeByClass("save_count")?.InnerText?.Split(' ')?.FirstOrDefault();
+        int saveCount = 0;
+        Int32.TryParse(saveCountStr, out saveCount);
+        item.SaveCount = saveCount;
 
         // add published date
         DateTime publishedDate = DateTime.Now;
