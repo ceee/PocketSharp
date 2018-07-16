@@ -133,7 +133,8 @@ namespace PocketSharp
         Followers = response.Account?.Profile?.Follower_count ?? 0,
         Follows = response.Account?.Profile?.Follow_count ?? 0,
         Avatar = avatar != null ? new Uri(avatar, UriKind.Absolute) : null,
-        IsDefaultAvatar = avatar == null || avatar.Contains("pocket-profile-images.")
+        IsDefaultAvatar = avatar == null || avatar.Contains("pocket-profile-images."),
+        Description = response.Account?.Profile?.Description
       };
 
       // save code to client

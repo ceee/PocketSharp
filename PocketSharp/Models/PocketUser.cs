@@ -58,5 +58,10 @@ namespace PocketSharp.Models
     /// Follow count.
     /// </summary>
     public int Follows { get; set; }
+
+    /// <summary>
+    /// Profile text.
+    /// </summary>
+    public string Description { get; set; }
   }
 }
