@@ -17,12 +17,12 @@ namespace PocketSharp
     /// <summary>
     /// Term to use for trending articles in the Explore() method
     /// </summary>
-    public const string EXPLORE_TRENDING = "trending";
+    const string EXPLORE_TRENDING = "trending";
 
     /// <summary>
     /// Term to use for must-read articles in the Explore() method
     /// </summary>
-    public const string EXPLORE_MUST_READS = "must-reads";
+    const string EXPLORE_MUST_READS = "must-reads";
 
 
     /// <summary>
@@ -31,7 +31,7 @@ namespace PocketSharp
     /// <param name="topic">Term or topic to get articles for</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<IEnumerable<PocketExploreItem>> Explore(string topic, CancellationToken cancellationToken = default(CancellationToken))
+    async Task<IEnumerable<PocketExploreItem>> Explore(string topic, CancellationToken cancellationToken = default(CancellationToken))
     {
       List<PocketExploreItem> items = new List<PocketExploreItem>();
       string html = await RequestAsString("https://getpocket.com/explore/" + HttpUtility.UrlEncode(topic) , cancellationToken);
