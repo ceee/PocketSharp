@@ -14,12 +14,12 @@ namespace PocketSharp.Tests
     }
 
 
-    [Fact]
-    public async Task CheckPreRequestAction()
-    {
-      var results = await client.Explore(".net");
+    //[Fact]
+    //public async Task CheckPreRequestAction()
+    //{
+    //  var results = await client.Explore(".net");
 
-      Assert.NotEmpty(results);
-    }
+    //  Assert.NotEmpty(results);
+    //}
   }
 }
