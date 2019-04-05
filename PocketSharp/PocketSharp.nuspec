@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <package >
   <metadata>
     <id>$id$</id>
@@ -6,18 +6,14 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>https://raw.github.com/ceee/PocketSharp/master/LICENSE-MIT</licenseUrl>
+    <license type="expression">MIT</license>
     <projectUrl>https://github.com/ceee/PocketSharp</projectUrl>
     <iconUrl>https://raw.github.com/ceee/PocketSharp/master/Assets/pocketsharp.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>PocketSharp is a .NET Standard library that integrates the Pocket API v3.</description>
+    <description>$description$</description>
     <language>en-US</language>
-    <releaseNotes>
-      <![CDATA[
-        For full release notes see https://github.com/ceee/PocketSharp/blob/master/CHANGELOG.md
-      ]]>
-    </releaseNotes>
-    <copyright>Copyright by brothers, 2018</copyright>
-    <tags>PocketAPI Pocket API PocketSharp Tobias Klika cee Scott Lovegrove scottisafool NReadability SgmlReader Reader Article SDK Pockem</tags>
+    <releaseNotes>$releaseNotes$</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>$tags$</tags>
   </metadata>
 </package>
