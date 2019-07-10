@@ -418,7 +418,7 @@ namespace PocketSharp.Models
         return false;
       }
 
-      PocketItem item = obj as PocketItem;
+      PocketItem item = (PocketItem)obj;
 
       if (item == null)
       {
