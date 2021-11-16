@@ -372,7 +372,13 @@ namespace PocketSharp
         }
       );
 
-      if (errors.Count > 0)
+      if (errors.Count == 1)
+      {
+        PocketException firstException = errors[0];
+        firstException.Data["json"] = json;
+        throw firstException;
+      }
+      else if (errors.Count > 1)
       {
         AggregateException ex = new AggregateException("Unable to parse json. See innner exceptions and exception.Data[\"json\"] for details", errors);
         ex.Data["json"] = json;
