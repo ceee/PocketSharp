@@ -350,13 +350,16 @@ namespace PocketSharp
       json = json.Replace("[]", "{}");
 
       // deserialize object
+      List<PocketException> errors = new List<PocketException>();
+
       T parsedResponse = JsonConvert.DeserializeObject<T>(
         json,
         new JsonSerializerSettings
         {
           Error = (object sender, ErrorEventArgs args) =>
           {
-            throw new PocketException(String.Format("Parse error: {0}", args.ErrorContext.Error.Message));
+            errors.Add(new PocketException(String.Format("Parse error: {0}", args.ErrorContext.Error.Message), args.ErrorContext.Error));
+            args.ErrorContext.Handled = true;
           },
           Converters =
           {
@@ -368,6 +371,13 @@ namespace PocketSharp
           }
         }
       );
+
+      if (errors.Count > 0)
+      {
+        AggregateException ex = new AggregateException("Unable to parse json. See innner exceptions and exception.Data[\"json\"] for details", errors);
+        ex.Data["json"] = json;
+        throw ex;
+      }
 
       return parsedResponse;
     }
