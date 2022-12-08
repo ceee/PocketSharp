@@ -16,7 +16,7 @@ For full release notes see https://github.com/ceee/PocketSharp/blob/master/CHANG
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
 </Project>
